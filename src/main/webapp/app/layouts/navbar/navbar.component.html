@@ -1,4 +1,14 @@
 <nav class="navbar navbar-dark navbar-expand-md jh-navbar">
+     <div *ngIf="isAuthenticated()" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+        <button class="btn btn-outline-light fa fa-cubes" id="dropdownManual" aria-hidden="true" ngbDropdownToggle > Modules</button>
+        <div ngbDropdownMenu aria-labelledby="dropdownManual">
+            <button class="dropdown-item fa fa-trello" routerLink="pm"> Project Management</button>
+            <!-- you could add other modules here
+            <button class="dropdown-item">Another Action</button>
+            <button class="dropdown-item">Something else is here</button>
+            -->
+        </div>
+    </div>
     <div class="jh-logo-container float-left">
         <a class="jh-navbar-toggler d-lg-none float-right" href="javascript:void(0);" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation" (click)="toggleNavbar()">
             <i class="fa fa-bars"></i>
@@ -19,7 +29,8 @@
                 </a>
             </li>
             <!-- Adding ERP Modules here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <!--
+                <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="modules-menu">
                     <span>
                         <i class="fa fa-cubes" aria-hidden="true"></i>
@@ -39,6 +50,8 @@
                     </li>
                 </ul>
             </li>
+            -->
+
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
             <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">

@@ -1,3 +1,4 @@
+import { issuesRoute } from './pm/issues/issues.route';
 import { Routes } from '@angular/router';
 
 import {
@@ -5,7 +6,8 @@ import {
 } from './';
 
 const FEATURES_ROUTES = [
-    PmRoute
+    PmRoute,
+    issuesRoute
 ];
 
 export const featuresState: Routes = [{

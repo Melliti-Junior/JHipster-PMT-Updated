@@ -1,27 +1,2 @@
-<div id="drag1" draggable="true" (dragstart)="dragStart($event)">
-    <p-card title="User Story" [style]="{width: '360px'}" styleClass="ui-card-shadow">
-        <p-header>
-            Issue
-        </p-header>
-        This is a basic issue
-        <p>
-            <img src="../../../content/images/logo-softparadigm.png">
-        </p>
-        <p-footer>
-            Lead : Melliti Zied
-        </p-footer>
-    </p-card>
-</div>
-
-<div>
-    <p-panel header="New" [style]="{'width':'400px'}" id="div1" (dragover)="allowDrop($event)" (drop)="drop($event)">
-
-    </p-panel>
-    <p-panel header="New" [style]="{'width':'400px'}" id="div1" (dragover)="allowDrop($event)" (drop)="drop($event)">
-
-    </p-panel>
-    <p-panel header="New" [style]="{'width':'400px'}" id="div1" (dragover)="allowDrop($event)" (drop)="drop($event)">
-
-    </p-panel>
-</div>
-
+<p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+<button #btn type="button" pButton icon="fa fa-list" label="Show" (click)="menu.toggle($event)"></button>

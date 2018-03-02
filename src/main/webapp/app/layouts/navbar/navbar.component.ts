@@ -6,6 +6,7 @@ import { ProfileService } from '../profiles/profile.service';
 import { Principal, LoginModalService, LoginService } from '../../shared';
 
 import { VERSION } from '../../app.constants';
+import { MenuItem } from 'primeng/components/common/api';
 
 @Component({
     selector: 'jhi-navbar',
@@ -21,6 +22,9 @@ export class NavbarComponent implements OnInit {
     swaggerEnabled: boolean;
     modalRef: NgbModalRef;
     version: string;
+    items: MenuItem[];
+
+    isPM: boolean;
 
     constructor(
         private loginService: LoginService,

@@ -1,3 +1,4 @@
+import { IssuesComponent } from './issues/issues.component';
 import { PmComponent } from './pm.component';
 import { Route } from '@angular/router';
 
@@ -9,5 +10,5 @@ export const PmRoute: Route = {
     data: {
         pageTitle: 'Project Management'
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
 };

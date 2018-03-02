@@ -14,6 +14,8 @@ import { customHttpProvider } from './blocks/interceptor/http.provider';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
 import { FeaturesModule } from './features/features.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
+import { TieredMenuModule } from 'primeng/tieredmenu';
+
 import {
     JhiMainComponent,
     NavbarComponent,
@@ -34,7 +36,8 @@ import {
         DashBoardAccountModule,
         DashBoardEntityModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
-        FeaturesModule
+        FeaturesModule,
+        TieredMenuModule
     ],
     declarations: [
         JhiMainComponent,
