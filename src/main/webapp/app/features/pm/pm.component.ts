@@ -63,4 +63,22 @@ export class PmComponent implements OnInit {
         ];
     }
 
+    dragStart(ev) {
+        ev.dataTransfer.setData('text', ev.target.id);
+      }
+
+      allowDrop($event) {
+        $event.preventDefault();
+      }
+
+     drag(ev) {
+        ev.dataTransfer.setData('text', ev.target.id);
+    }
+
+     drop(ev) {
+        ev.preventDefault();
+        // tslint:disable-next-line:prefer-const
+        let data = ev.dataTransfer.getData('text');
+        ev.target.appendChild(document.getElementById(data));
+    }
 }

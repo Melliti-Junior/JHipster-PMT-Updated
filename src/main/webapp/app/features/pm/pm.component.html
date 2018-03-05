@@ -1,2 +1,33 @@
-<p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
+<!--
+    <p-tieredMenu #menu [model]="items" [popup]="true"></p-tieredMenu>
 <button #btn type="button" pButton icon="fa fa-list" label="Show" (click)="menu.toggle($event)"></button>
+-->
+<div id="drag1" draggable="true" (dragstart)="dragStart($event)">
+    <p-card title="User Story" [style]="{width: '360px'}" styleClass="ui-card-shadow">
+        <p-header>
+            Issue
+        </p-header>
+        This is a basic issue
+        <p>
+            <img src="../../../content/images/task.png">
+        </p>
+        <p-footer>
+            Lead : Melliti Zied
+        </p-footer>
+    </p-card>
+</div>
+
+<div>
+    <p-panel id="div1"  [style]="{'width':'400px'}" (dragover)="allowDrop($event)" (drop)="drop($event)">
+        <p-header>
+            New
+        </p-header>
+    </p-panel>
+</div>
+<div>
+    <p-panel id="div1"  [style]="{'width':'400px'}" (dragover)="allowDrop($event)" (drop)="drop($event)">
+        <p-header>
+            New
+        </p-header>
+    </p-panel>
+</div>
