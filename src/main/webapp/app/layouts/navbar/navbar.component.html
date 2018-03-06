@@ -2,7 +2,7 @@
      <div *ngIf="isAuthenticated()" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
         <button class="btn btn-outline-light fa fa-cubes" id="dropdownManual" aria-hidden="true" ngbDropdownToggle > Modules</button>
         <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button class="dropdown-item fa fa-trello" routerLink="pm"> Project Management</button>
+            <button class="dropdown-item fa fa-trello" routerLink="pm" (click)="pmChosen()"> Project Management</button>
             <!-- you could add other modules here
             <button class="dropdown-item">Another Action</button>
             <button class="dropdown-item">Something else is here</button>
@@ -19,7 +19,8 @@
         </a>
     </div>
     <div class="navbar-collapse collapse" id="navbarResponsive" [ngbCollapse]="isNavbarCollapsed" [ngSwitch]="isAuthenticated()">
-        <ul class="navbar-nav ml-auto">
+        <div *ngIf="!isPMSelected()">
+            <ul class="navbar-nav ml-auto">
             <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
                     <span>
@@ -165,5 +166,63 @@
                 </ul>
             </li>
         </ul>
+        </div>
+
+        <div *ngIf="isPMSelected()">
+                <ul class="navbar-nav ml-auto">
+                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle routerLink="/">
+                        <span>
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            <span>Projects</span>
+                        </span>
+                    </a>
+                </li>
+                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+                        <span>
+                            <i class="fa fa-bug" aria-hidden="true"></i>
+                            <span>Issues</span>
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li>
+                            <a class="dropdown-item" routerLink="issues" routerLinkActive="active">
+                                <i class="fa fa-tags" aria-hidden="true"></i>
+                                <span>Show Issues</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/issuetypes" routerLinkActive="active">
+                                <i class="fa fa-cogs" aria-hidden="true"></i>
+                                <span>Types</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/issuepriorities" routerLinkActive="active">
+                                <i class="fa fa-angle-double-up" aria-hidden="true"></i>
+                                <span>Priorities</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/epics" routerLinkActive="active">
+                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                <span>Epics</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a class="nav-link dropdown-toggle" ngbDropdownToggle routerLink="/">
+                            <span>
+                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <span>Agile</span>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
     </div>
+
 </nav>

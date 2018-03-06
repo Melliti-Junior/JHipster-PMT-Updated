@@ -4,6 +4,9 @@ import { NgModule } from '@angular/core';
 import { PmComponent } from './pm.component';
 import { RouterModule } from '@angular/router';
 import { IssuesComponent } from './issues/issues.component';
+import { IssuetypesComponent } from './issuetypes/issuetypes.component';
+import { IssueprioritiesComponent } from './issuepriorities/issuepriorities.component';
+import { EpicsComponent } from './epics/epics.component';
 
 @NgModule({
   imports: [
@@ -11,7 +14,10 @@ import { IssuesComponent } from './issues/issues.component';
     RouterModule.forChild([ PmRoute ])
   ],
   declarations: [PmComponent,
-    IssuesComponent
+    IssuesComponent,
+    IssuetypesComponent,
+    IssueprioritiesComponent,
+    EpicsComponent
 ]
 })
 export class PmModule { }

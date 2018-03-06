@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     version: string;
     items: MenuItem[];
 
-    isPM: boolean;
+    PMChosen: boolean;
 
     constructor(
         private loginService: LoginService,
@@ -42,10 +42,14 @@ export class NavbarComponent implements OnInit {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
+
+        this.PMChosen = false;
     }
 
     collapseNavbar() {
         this.isNavbarCollapsed = true;
+        // Here you can choose if you want to hide PM components
+        this.PMChosen = false;
     }
 
     isAuthenticated() {
@@ -68,5 +72,16 @@ export class NavbarComponent implements OnInit {
 
     getImageUrl() {
         return this.isAuthenticated() ? this.principal.getImageUrl() : null;
+    }
+
+    pmChosen() {
+        console.log(this.PMChosen);
+        this.PMChosen = true;
+        console.log(this.PMChosen);
+    }
+
+    isPMSelected(): boolean {
+        console.log(this.PMChosen);
+        return this.PMChosen;
     }
 }
