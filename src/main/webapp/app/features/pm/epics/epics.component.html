@@ -7,10 +7,10 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>Tiger Nixon</td>
-            <td>System Architect</td>
-            <td>Edinburgh</td>
+        <tr *ngFor="let ep of epics">
+            <td>{{ep.code}}</td>
+            <td>{{ep.name}}</td>
+            <td>{{ep.summary}}</td>
         </tr>
     </tbody>
 </table>

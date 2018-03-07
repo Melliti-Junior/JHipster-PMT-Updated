@@ -1,21 +1,24 @@
+import { Epic } from './../../../entities/epic/epic.model';
+import { EpicService } from './../../../entities/epic/epic.service';
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
+import { SERVER_API_URL } from '../../../app.constants';
 
 @Injectable()
 export class EpicsService {
 
-    private baseUrl = 'http://localhost:8080';
+    private baseUrl = SERVER_API_URL;
 
-    constructor( private http: Http ) { }
+    constructor( private http: Http, private epicSce: EpicService ) { }
 
-    /*
-    getTodos(): Promise<Todo[]> {
-        return this.http.get( this.baseUrl + '/api/todos/' )
+    getEpics(): Promise<Epic[]> {
+        return this.http.get( this.baseUrl + 'api/epics' )
             .toPromise()
-            .then( response => response.json() as Todo[] )
+            .then( (response) => response.json() as Epic[] )
             .catch( this.handleError );
     }
 
+    /*
     createTodo( todoData: Todo ): Promise<Todo> {
         return this.http.post( this.baseUrl + '/api/todos/', todoData )
             .toPromise().then( response => response.json() as Todo )
@@ -35,9 +38,10 @@ export class EpicsService {
             .catch( this.handleError );
     }
 
+    */
+
     private handleError( error: any ): Promise<any> {
         console.error( 'Some error occured', error );
         return Promise.reject( error.message || error );
     }
-    */
 }

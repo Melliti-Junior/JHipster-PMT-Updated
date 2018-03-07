@@ -18,6 +18,6 @@ import { featuresState } from './features.route';
   ],
   declarations: [
       FeaturesComponent,
-]
+    ]
 })
 export class FeaturesModule { }

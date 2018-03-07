@@ -1,0 +1,42 @@
+
+<div *ngIf="issue">
+    <h2><span>Issue</span> {{issue.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{issue.code}}</span>
+        </dd>
+        <dt><span>Summary</span></dt>
+        <dd>
+            <span>{{issue.summary}}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+            <span>{{issue.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Due Date</span></dt>
+        <dd>
+            <span>{{issue.dueDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Estimation</span></dt>
+        <dd>
+            <span>{{issue.estimation}}</span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'issue/'+ issue.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

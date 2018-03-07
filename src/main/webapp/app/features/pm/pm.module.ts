@@ -7,6 +7,7 @@ import { IssuesComponent } from './issues/issues.component';
 import { IssuetypesComponent } from './issuetypes/issuetypes.component';
 import { IssueprioritiesComponent } from './issuepriorities/issuepriorities.component';
 import { EpicsComponent } from './epics/epics.component';
+import { EpicsService } from './epics/epics.service';
 
 @NgModule({
   imports: [
@@ -18,6 +19,9 @@ import { EpicsComponent } from './epics/epics.component';
     IssuetypesComponent,
     IssueprioritiesComponent,
     EpicsComponent
+],
+providers: [
+    EpicsService
 ]
 })
 export class PmModule { }
