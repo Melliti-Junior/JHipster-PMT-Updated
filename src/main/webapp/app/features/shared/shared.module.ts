@@ -14,6 +14,7 @@ import { MegaMenuModule } from 'primeng/megamenu';
 import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { TieredMenuModule } from 'primeng/tieredmenu';
+import { Http } from '@angular/http';
 
 @NgModule({
   imports: [
