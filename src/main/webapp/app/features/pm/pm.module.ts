@@ -18,7 +18,7 @@ import { EpicsService } from './epics/epics.service';
     IssuesComponent,
     IssuetypesComponent,
     IssueprioritiesComponent,
-    EpicsComponent
+    EpicsComponent,
 ],
 providers: [
     EpicsService

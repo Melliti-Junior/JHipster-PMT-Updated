@@ -15,6 +15,8 @@ import { MenuItem } from 'primeng/api';
 import { MenubarModule } from 'primeng/menubar';
 import { TieredMenuModule } from 'primeng/tieredmenu';
 import { Http } from '@angular/http';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { DashBoardEntityModule } from '../../entities/entity.module';
 
 @NgModule({
   imports: [
@@ -31,7 +33,9 @@ import { Http } from '@angular/http';
     PanelModule,
     MegaMenuModule,
     MenubarModule,
-    TieredMenuModule
+    TieredMenuModule,
+    TabMenuModule,
+    DashBoardEntityModule,
   ],
   exports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { Http } from '@angular/http';
     PanelModule,
     MegaMenuModule,
     MenubarModule,
-    TieredMenuModule
+    TieredMenuModule,
+    TabMenuModule,
+    DashBoardEntityModule,
   ],
   declarations: [SharedComponent]
 })
