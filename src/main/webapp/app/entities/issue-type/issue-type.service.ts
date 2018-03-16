@@ -12,6 +12,8 @@ export class IssueTypeService {
     private resourceUrl =  SERVER_API_URL + 'api/issue-types';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/issue-types';
 
+    ObjReturned: IssueType;
+
     constructor(private http: Http) { }
 
     create(issueType: IssueType): Observable<IssueType> {
@@ -53,6 +55,27 @@ export class IssueTypeService {
             .map((res: any) => this.convertResponse(res));
     }
 
+    /**
+     *
+     * this function return an entity by request
+     *
+     * @param {*} [req]
+     * @returns {IssueType}
+     * @memberof IssueTypeService
+     */
+    findByRequest(req?: any): IssueType {
+        const result = this.search({ query: req });
+        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
+        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
+        return this.ObjReturned;
+    }
+
+    getTypes():  Promise<IssueType[]> {
+        return this.http.get(this.resourceUrl)
+          .toPromise()
+          .then((response) => response.json() as IssueType[])
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
@@ -66,8 +89,8 @@ export class IssueTypeService {
      * Convert a returned JSON object to IssueType.
      */
     private convertItemFromServer(json: any): IssueType {
-        const entity: IssueType = Object.assign(new IssueType(), json);
-        return entity;
+        this.ObjReturned = Object.assign(new IssueType(), json);
+        return this.ObjReturned;
     }
 
     /**

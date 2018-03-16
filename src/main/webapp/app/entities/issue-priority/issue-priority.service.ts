@@ -12,6 +12,8 @@ export class IssuePriorityService {
     private resourceUrl =  SERVER_API_URL + 'api/issue-priorities';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/issue-priorities';
 
+    ObjReturned: IssuePriority;
+
     constructor(private http: Http) { }
 
     create(issuePriority: IssuePriority): Observable<IssuePriority> {
@@ -53,6 +55,26 @@ export class IssuePriorityService {
             .map((res: any) => this.convertResponse(res));
     }
 
+    /**
+     * this function return an entity by request
+     *
+     * @param {*} [req]
+     * @returns {IssuePriority}
+     * @memberof IssuePriorityService
+     */
+    findByRequest(req?: any): IssuePriority {
+        const result = this.search({ query: req });
+        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
+        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
+        return this.ObjReturned;
+    }
+
+    getPriorities():  Promise<IssuePriority[]> {
+        return this.http.get(this.resourceUrl)
+          .toPromise()
+          .then((response) => response.json() as IssuePriority[])
+    }
+
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
@@ -66,8 +88,8 @@ export class IssuePriorityService {
      * Convert a returned JSON object to IssuePriority.
      */
     private convertItemFromServer(json: any): IssuePriority {
-        const entity: IssuePriority = Object.assign(new IssuePriority(), json);
-        return entity;
+        this.ObjReturned = Object.assign(new IssuePriority(), json);
+        return this.ObjReturned;
     }
 
     /**

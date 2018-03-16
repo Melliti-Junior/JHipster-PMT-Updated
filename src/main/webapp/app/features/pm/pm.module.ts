@@ -3,25 +3,18 @@ import { PmRoute } from './pm.route';
 import { NgModule } from '@angular/core';
 import { PmComponent } from './pm.component';
 import { RouterModule } from '@angular/router';
-import { IssuesComponent } from './issues/issues.component';
-import { IssuetypesComponent } from './issuetypes/issuetypes.component';
-import { IssueprioritiesComponent } from './issuepriorities/issuepriorities.component';
-import { EpicsComponent } from './epics/epics.component';
-import { EpicsService } from './epics/epics.service';
+import { IssueCustomComponent } from './issue-custom';
+import { DashBoardIssueCustomModule } from './issue-custom/issue-custom.module';
 
 @NgModule({
   imports: [
     SharedModule,
+    DashBoardIssueCustomModule,
     RouterModule.forChild([ PmRoute ])
   ],
-  declarations: [PmComponent,
-    IssuesComponent,
-    IssuetypesComponent,
-    IssueprioritiesComponent,
-    EpicsComponent,
+  declarations: [PmComponent
 ],
 providers: [
-    EpicsService
 ]
 })
 export class PmModule { }

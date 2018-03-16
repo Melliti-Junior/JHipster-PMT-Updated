@@ -7,23 +7,22 @@ import com.erp.app.domain.Epic;
 import com.erp.app.domain.Issue;
 import com.erp.app.domain.IssuePriority;
 import com.erp.app.domain.IssueType;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class IssueCustom extends Issue {
 
 	/**
-	 * 
+	 *
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	@DBRef
 	@Field("type")
     private IssueType type;
-	
+
 	@DBRef
 	@Field("priority")
     private IssuePriority priority;
-	
+
 	@DBRef
 	@Field("epic")
     private Epic epic;
@@ -35,7 +34,7 @@ public class IssueCustom extends Issue {
 		this.epic = epic;
 	}
 
-	
+
 	public IssueCustom() {
 		super();
 	}

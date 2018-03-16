@@ -17,6 +17,7 @@ import { TieredMenuModule } from 'primeng/tieredmenu';
 import { Http } from '@angular/http';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { DashBoardEntityModule } from '../../entities/entity.module';
+import { AutoCompleteModule } from 'primeng/autocomplete';
 
 @NgModule({
   imports: [
