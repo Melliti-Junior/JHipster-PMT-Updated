@@ -45,6 +45,20 @@ export class IssueTypeDialogComponent implements OnInit {
         }
     }
 
+    fileUpload() {
+        // tslint:disable-next-line:prefer-const
+        let val = <HTMLInputElement> document.getElementById('field_icon');
+        val.addEventListener('change', function(event){
+            // tslint:disable-next-line:prefer-const
+            let file = this.files[0];
+            val.src = URL.createObjectURL(file);
+            // This code is only for demo ...
+            console.log('name : ' + file.webkitRelativePath);
+            console.log('size : ' + file.size);
+            console.log('type : ' + file.type);
+        }, false);
+    }
+
     private subscribeToSaveResponse(result: Observable<IssueType>) {
         result.subscribe((res: IssueType) =>
             this.onSaveSuccess(res), (res: Response) => this.onSaveError());

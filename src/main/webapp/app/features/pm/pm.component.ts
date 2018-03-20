@@ -4,7 +4,7 @@ import { MenuItem } from 'primeng/components/common/api';
 @Component({
   selector: 'jhi-pm',
   templateUrl: './pm.component.html',
-  styles: ['./pm.component.css']
+  styleUrls: ['./pm.component.css']
 })
 export class PmComponent implements OnInit {
 

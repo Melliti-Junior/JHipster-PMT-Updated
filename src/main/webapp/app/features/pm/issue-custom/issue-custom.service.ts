@@ -60,6 +60,12 @@ export class IssueCustomService {
             .map((res: any) => this.convertResponse(res));
     }
 
+    getIssueCustoms():  Promise<IssueCustom[]> {
+        return this.http.get(this.resourceUrl)
+          .toPromise()
+          .then((response) => response.json() as IssueCustom[])
+      }
+
     /**
      *
      * this function return an entity by request

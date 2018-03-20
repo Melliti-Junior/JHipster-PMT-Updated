@@ -18,7 +18,40 @@ import { Http } from '@angular/http';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { DashBoardEntityModule } from '../../entities/entity.module';
 import { AutoCompleteModule } from 'primeng/autocomplete';
-
+import {
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatStepperModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+  } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -37,6 +70,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     TieredMenuModule,
     TabMenuModule,
     DashBoardEntityModule,
+    AutoCompleteModule,
+    MatAutocompleteModule,
   ],
   exports: [
     CommonModule,
@@ -55,6 +90,8 @@ import { AutoCompleteModule } from 'primeng/autocomplete';
     TieredMenuModule,
     TabMenuModule,
     DashBoardEntityModule,
+    AutoCompleteModule,
+    MatAutocompleteModule,
   ],
   declarations: [SharedComponent]
 })

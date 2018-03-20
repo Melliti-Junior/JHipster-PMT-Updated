@@ -1,9 +1,110 @@
 
 <div *ngIf="issuecustom">
+    <h4><span>{{issuecustom.code}}</span> </h4>
+    <h2><span>{{issuecustom.summary}}</span></h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+<div class="container">
+  <div class="panel-group row ">
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info">
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Type :</div>
+            <div class="col-8">{{issuecustom.type.name}}</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Priority :</div>
+            <div class="col-8">{{issuecustom.priority.name}}</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Epic :</div>
+            <div class="col-8">{{issuecustom.epic.summary}} ({{issuecustom.epic.name}})</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Estimation :</div>
+            <div class="col-8">{{issuecustom.estimation}} Hours</div>
+          </div>
+
+      </div>
+    </div>
+    <hr style="border-color:transparent;">
+    <div class="panel panel-info">
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-10">Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info" >
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>People</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Assignee :</div>
+            <div class="col-8">Melliti Zied</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Reporter :</div>
+            <div class="col-8">Melliti Zied</div>
+          </div>
+
+      </div>
+    </div>
+    <hr style="border-color:transparent;">
+    <div class="panel panel-info" >
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Dates</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Created :</div>
+            <div class="col-8">{{issuecustom.createdDate | date:'mediumDate'}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Updated :</div>
+            <div class="col-8">{{issuecustom.dueDate | date:'mediumDate'}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+</div>
+<hr style="border-color:transparent;">
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'issuecustoms/'+ issuecustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+
+    <!--
+<div *ngIf="issuecustom">
     <h2><span>Issue</span> {{issuecustom.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
-    <dl class="row-md jh-entity-details">
+
+
+        <dl class="row-md jh-entity-details">
         <dt><span>Code</span></dt>
         <dd>
             <span>{{issuecustom.code}}</span>
@@ -38,6 +139,16 @@
         </dd>
     </dl>
 
+
+
+    <div class="container">
+        <h4>Details</h4>
+        <div class="panel panel-default">
+          <div class="panel-heading">Panel Heading</div>
+          <div class="panel-body">Panel Content</div>
+        </div>
+    </div>
+
     <button type="submit"
             (click)="previousState()"
             class="btn btn-info">
@@ -52,3 +163,4 @@
         <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
     </button>
 </div>
+-->

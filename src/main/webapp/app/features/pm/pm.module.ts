@@ -5,6 +5,7 @@ import { PmComponent } from './pm.component';
 import { RouterModule } from '@angular/router';
 import { IssueCustomComponent } from './issue-custom';
 import { DashBoardIssueCustomModule } from './issue-custom/issue-custom.module';
+import { BacklogComponent } from './backlog/backlog.component';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import { DashBoardIssueCustomModule } from './issue-custom/issue-custom.module';
     DashBoardIssueCustomModule,
     RouterModule.forChild([ PmRoute ])
   ],
-  declarations: [PmComponent
+  declarations: [PmComponent,
+    BacklogComponent
 ],
 providers: [
 ]

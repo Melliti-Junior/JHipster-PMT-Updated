@@ -1,0 +1,20 @@
+<section>
+  <div class="container py-3">
+    <div class="card" draggable="true" *ngFor="let item of issues">
+
+        <div class="row " style="border-style: groove;">
+            <div style="width:1%;" [style.background] = "item.priority.color"></div>
+            <img src="../../../../content/images/Bug.png"/>
+            <div class="col-md-10 px-3">
+                <div class="row">
+                    <div class="code" style="width:15%;">{{item.code}}</div>
+                    <div class="summary" style="width:70%;">{{item.summary}}</div>
+                    <div class="epic" style="width:5%;">{{item.epic.name}}</div>
+                    <img src="../../../../content/images/Task.png" alt="assignee img"/>
+                </div>
+            </div>
+        </div>
+
+      </div>
+    </div>
+</section>

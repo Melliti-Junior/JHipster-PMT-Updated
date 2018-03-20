@@ -5,7 +5,7 @@ import {
 } from './';
 
 const FEATURES_ROUTES = [
-    PmRoute,
+    PmRoute
 ];
 
 export const featuresState: Routes = [{
