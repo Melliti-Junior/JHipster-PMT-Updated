@@ -92,7 +92,7 @@ export class IssueCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturnedect to IssueCustom.
+     * Convert a returned JSON ObjReturned to IssueCustom.
      */
     private convertItemFromServer(json: any): IssueCustom {
         this.ObjReturned = Object.assign(new IssueCustom(), json);
@@ -100,6 +100,8 @@ export class IssueCustomService {
             .convertLocalDateFromServer(json.createdDate);
         this.ObjReturned.dueDate = this.dateUtils
             .convertLocalDateFromServer(json.dueDate);
+        this.ObjReturned.updatedDate = this.dateUtils
+            .convertLocalDateFromServer(json.updatedDate);
         return this.ObjReturned;
     }
 
@@ -107,11 +109,19 @@ export class IssueCustomService {
      * Convert a Issue to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(issuecustom: IssueCustom): IssueCustom {
+        // Start Conversion
+        console.log('Start Conversion');
+        // issuecustom.createdDate = new Date().getDate;
+        // issuecustom.updatedDate = new Date().getDate;
+        // issuecustom.dueDate = new Date().getDate;
         const copy: IssueCustom = Object.assign({}, issuecustom);
         copy.createdDate = this.dateUtils
             .convertLocalDateToServer(issuecustom.createdDate);
         copy.dueDate = this.dateUtils
             .convertLocalDateToServer(issuecustom.dueDate);
+        copy.updatedDate = this.dateUtils
+            .convertLocalDateToServer(issuecustom.updatedDate);
         return copy;
     }
+
 }

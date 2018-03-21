@@ -7,6 +7,8 @@ export class Issue implements BaseEntity {
         public summary?: string,
         public createdDate?: any,
         public dueDate?: any,
+        public updatedDate?: any,
+        public description?: string,
         public estimation?: number,
     ) {
     }

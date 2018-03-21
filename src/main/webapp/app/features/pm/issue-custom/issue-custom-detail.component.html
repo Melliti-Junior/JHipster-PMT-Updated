@@ -12,15 +12,15 @@
       <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
       <div class="panel-body" >
 
-          <div class="row">
+          <div *ngIf ="issuecustom.type" class="row">
             <div class="col-3">Type :</div>
             <div class="col-8">{{issuecustom.type.name}}</div>
           </div>
-          <div class="row">
+          <div *ngIf ="issuecustom.priority" class="row">
             <div class="col-3">Priority :</div>
             <div class="col-8">{{issuecustom.priority.name}}</div>
           </div>
-          <div class="row">
+          <div *ngIf ="issuecustom.epic" class="row">
             <div class="col-3">Epic :</div>
             <div class="col-8">{{issuecustom.epic.summary}} ({{issuecustom.epic.name}})</div>
           </div>
@@ -37,7 +37,7 @@
       <div class="panel-body" >
 
           <div class="row">
-            <div class="col-10">Lorem Ipsum est un générateur de faux textes aléatoires. Vous choisissez le nombre de paragraphes, de mots ou de listes. Vous obtenez alors un texte aléatoire que vous pourrez ensuite utiliser librement dans vos maquettes.</div>
+            <div class="col-10">{{issuecustom.description}}</div>
           </div>
 
       </div>
@@ -72,8 +72,13 @@
           </div>
 
           <div class="row">
-            <div class="col-3">Updated :</div>
+            <div class="col-3">Due :</div>
             <div class="col-8">{{issuecustom.dueDate | date:'mediumDate'}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Updated :</div>
+            <div class="col-8">{{issuecustom.updatedDate | date:'mediumDate'}}</div>
           </div>
 
       </div>

@@ -6,6 +6,9 @@ import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
 import { IssueCustom } from './issue-custom.model';
 import { IssueCustomService } from './issue-custom.service';
 import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../../shared';
+import { IssueType } from '../../../entities/issue-type';
+import { IssuePriority } from '../../../entities/issue-priority';
+import { Epic } from '../../../entities/epic';
 
 @Component({
     selector: 'jhi-issue-custom',

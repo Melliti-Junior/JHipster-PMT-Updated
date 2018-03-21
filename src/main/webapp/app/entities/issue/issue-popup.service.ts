@@ -40,6 +40,13 @@ export class IssuePopupService {
                             day: issue.dueDate.getDate()
                         };
                     }
+                    if (issue.updatedDate) {
+                        issue.updatedDate = {
+                            year: issue.updatedDate.getFullYear(),
+                            month: issue.updatedDate.getMonth() + 1,
+                            day: issue.updatedDate.getDate()
+                        };
+                    }
                     this.ngbModalRef = this.issueModalRef(component, issue);
                     resolve(this.ngbModalRef);
                 });

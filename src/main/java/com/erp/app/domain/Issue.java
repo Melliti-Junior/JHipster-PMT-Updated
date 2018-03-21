@@ -37,6 +37,12 @@ public class Issue implements Serializable {
     @Field("estimation")
     private Integer estimation;
 
+    @Field("description")
+    private String description;
+
+    @Field("updated_date")
+    private LocalDate updatedDate;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -110,6 +116,32 @@ public class Issue implements Serializable {
     public void setEstimation(Integer estimation) {
         this.estimation = estimation;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Issue description(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public Issue updatedDate(LocalDate updatedDate) {
+        this.updatedDate = updatedDate;
+        return this;
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+        this.updatedDate = updatedDate;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -141,6 +173,8 @@ public class Issue implements Serializable {
             ", createdDate='" + getCreatedDate() + "'" +
             ", dueDate='" + getDueDate() + "'" +
             ", estimation=" + getEstimation() +
+            ", description='" + getDescription() + "'" +
+            ", updatedDate='" + getUpdatedDate() + "'" +
             "}";
     }
 }

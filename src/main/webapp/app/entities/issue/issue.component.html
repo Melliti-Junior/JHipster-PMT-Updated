@@ -32,8 +32,6 @@
             <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="summary"><span>Summary</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="createdDate"><span>Created Date</span> <span class="fa fa-sort"></span></th>
-            <th jhiSortBy="dueDate"><span>Due Date</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="estimation"><span>Estimation</span> <span class="fa fa-sort"></span></th>
             <th></th>
             </tr>
@@ -43,8 +41,6 @@
                 <td><a [routerLink]="['../issue', issue.id ]">{{issue.id}}</a></td>
                 <td>{{issue.code}}</td>
                 <td>{{issue.summary}}</td>
-                <td>{{issue.createdDate | date:'mediumDate'}}</td>
-                <td>{{issue.dueDate | date:'mediumDate'}}</td>
                 <td>{{issue.estimation}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

@@ -10,10 +10,12 @@ import { IssueCustom } from '../issue-custom';
 export class BacklogComponent implements OnInit {
 
     issues: IssueCustom[];
+    logoPath: string;
   constructor(private issuecustomSce: IssueCustomService) { }
 
   ngOnInit() {
       this.getAllIssues();
+      this.logoPath = '../../../../content/images';
   }
 
   getAllIssues() {

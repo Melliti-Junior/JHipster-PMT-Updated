@@ -10,5 +10,8 @@ export class IssueCustom extends Issue {
         public epic?: Epic,
     ) {
         super();
+        priority = new IssuePriority();
+        type = new IssueType();
+        epic = new Epic();
     }
 }

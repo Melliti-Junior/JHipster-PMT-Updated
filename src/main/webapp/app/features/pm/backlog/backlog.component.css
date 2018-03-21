@@ -4,6 +4,16 @@ body {
   }
 
 .epic {
+    background-color:rgb(46, 46, 189);
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 8px;
+    border: 1px solid rgb(100, 102, 95);
+    height: 27px;
+}
+
+.version {
     color:rgb(93, 93, 95);
     font-weight: bold;
     text-align: center;
@@ -11,4 +21,16 @@ body {
     border-radius: 8px;
     border: 1px solid rgb(100, 102, 95);
     height: 27px;
+}
+
+#issue {
+    border: 1px solid rgb(100, 102, 95);
+}
+
+img {
+    height: auto;
+    width: auto;
+    max-width: 24px;
+    max-height: 24px;
+    vertical-align: middle;
 }

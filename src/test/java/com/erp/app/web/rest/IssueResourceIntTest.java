@@ -54,6 +54,12 @@ public class IssueResourceIntTest {
     private static final Integer DEFAULT_ESTIMATION = 1;
     private static final Integer UPDATED_ESTIMATION = 2;
 
+    private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
+    private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
+
+    private static final LocalDate DEFAULT_UPDATED_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+
     @Autowired
     private IssueRepository issueRepository;
 
@@ -96,7 +102,9 @@ public class IssueResourceIntTest {
             .summary(DEFAULT_SUMMARY)
             .createdDate(DEFAULT_CREATED_DATE)
             .dueDate(DEFAULT_DUE_DATE)
-            .estimation(DEFAULT_ESTIMATION);
+            .estimation(DEFAULT_ESTIMATION)
+            .description(DEFAULT_DESCRIPTION)
+            .updatedDate(DEFAULT_UPDATED_DATE);
         return issue;
     }
 
@@ -126,6 +134,8 @@ public class IssueResourceIntTest {
         assertThat(testIssue.getCreatedDate()).isEqualTo(DEFAULT_CREATED_DATE);
         assertThat(testIssue.getDueDate()).isEqualTo(DEFAULT_DUE_DATE);
         assertThat(testIssue.getEstimation()).isEqualTo(DEFAULT_ESTIMATION);
+        assertThat(testIssue.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
+        assertThat(testIssue.getUpdatedDate()).isEqualTo(DEFAULT_UPDATED_DATE);
 
         // Validate the Issue in Elasticsearch
         Issue issueEs = issueSearchRepository.findOne(testIssue.getId());
@@ -181,7 +191,9 @@ public class IssueResourceIntTest {
             .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].dueDate").value(hasItem(DEFAULT_DUE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].estimation").value(hasItem(DEFAULT_ESTIMATION)));
+            .andExpect(jsonPath("$.[*].estimation").value(hasItem(DEFAULT_ESTIMATION)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE.toString())));
     }
 
     @Test
@@ -198,7 +210,9 @@ public class IssueResourceIntTest {
             .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()))
             .andExpect(jsonPath("$.createdDate").value(DEFAULT_CREATED_DATE.toString()))
             .andExpect(jsonPath("$.dueDate").value(DEFAULT_DUE_DATE.toString()))
-            .andExpect(jsonPath("$.estimation").value(DEFAULT_ESTIMATION));
+            .andExpect(jsonPath("$.estimation").value(DEFAULT_ESTIMATION))
+            .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION.toString()))
+            .andExpect(jsonPath("$.updatedDate").value(DEFAULT_UPDATED_DATE.toString()));
     }
 
     @Test
@@ -222,7 +236,9 @@ public class IssueResourceIntTest {
             .summary(UPDATED_SUMMARY)
             .createdDate(UPDATED_CREATED_DATE)
             .dueDate(UPDATED_DUE_DATE)
-            .estimation(UPDATED_ESTIMATION);
+            .estimation(UPDATED_ESTIMATION)
+            .description(UPDATED_DESCRIPTION)
+            .updatedDate(UPDATED_UPDATED_DATE);
 
         restIssueMockMvc.perform(put("/api/issues")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -238,6 +254,8 @@ public class IssueResourceIntTest {
         assertThat(testIssue.getCreatedDate()).isEqualTo(UPDATED_CREATED_DATE);
         assertThat(testIssue.getDueDate()).isEqualTo(UPDATED_DUE_DATE);
         assertThat(testIssue.getEstimation()).isEqualTo(UPDATED_ESTIMATION);
+        assertThat(testIssue.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
+        assertThat(testIssue.getUpdatedDate()).isEqualTo(UPDATED_UPDATED_DATE);
 
         // Validate the Issue in Elasticsearch
         Issue issueEs = issueSearchRepository.findOne(testIssue.getId());
@@ -297,7 +315,9 @@ public class IssueResourceIntTest {
             .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
             .andExpect(jsonPath("$.[*].createdDate").value(hasItem(DEFAULT_CREATED_DATE.toString())))
             .andExpect(jsonPath("$.[*].dueDate").value(hasItem(DEFAULT_DUE_DATE.toString())))
-            .andExpect(jsonPath("$.[*].estimation").value(hasItem(DEFAULT_ESTIMATION)));
+            .andExpect(jsonPath("$.[*].estimation").value(hasItem(DEFAULT_ESTIMATION)))
+            .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION.toString())))
+            .andExpect(jsonPath("$.[*].updatedDate").value(hasItem(DEFAULT_UPDATED_DATE.toString())));
     }
 
     @Test

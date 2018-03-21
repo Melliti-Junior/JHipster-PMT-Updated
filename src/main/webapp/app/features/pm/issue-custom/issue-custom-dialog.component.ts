@@ -15,6 +15,16 @@ import { IssueTypeService, IssueType } from '../../../entities/issue-type';
 import { IssueCustomComponent } from './issue-custom.component';
 import 'rxjs/add/observable/throw';
 
+import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
+import {Subject} from 'rxjs/Subject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/merge';
+import 'rxjs/add/operator/filter';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
+
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+
 @Component({
     selector: 'jhi-issue-custom-dialog',
     templateUrl: './issue-custom-dialog.component.html',
@@ -33,6 +43,11 @@ export class IssueCustomDialogComponent implements OnInit {
     priorityname: string;
     epicname: string;
 
+    epicnames: string[];
+
+    theDate: NgbDateStruct;
+    now = new Date();
+
     constructor(
         public activeModal: NgbActiveModal,
         private issuecustomService: IssueCustomService,
@@ -47,6 +62,10 @@ export class IssueCustomDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.loadAttributes();
+        this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
+        // this.issuecustom.dueDate = this.theDate;
+        console.log(this.theDate);
+        // this.getEpicNames();
     }
 
     clear() {
@@ -108,9 +127,11 @@ export class IssueCustomDialogComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.issuecustom.id !== undefined) {
+            this.issuecustom.updatedDate = this.theDate;
             this.subscribeToSaveResponse(
                 this.issuecustomService.update(this.issuecustom));
         } else {
+            this.issuecustom.createdDate = this.theDate;
             this.subscribeToSaveResponse(
                 this.issuecustomService.create(this.issuecustom));
         }

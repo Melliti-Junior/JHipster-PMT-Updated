@@ -15,6 +15,7 @@ import {
     issuecustomPopupRoute,
     IssueCustomResolvePagingParams,
 } from './';
+import { SharedModule } from '../../shared/shared.module';
 
 const ENTITY_STATES = [
     ...issuecustomRoute,
@@ -24,6 +25,7 @@ const ENTITY_STATES = [
 @NgModule({
     imports: [
         DashBoardSharedModule,
+        SharedModule,
         RouterModule.forChild(ENTITY_STATES)
     ],
     declarations: [

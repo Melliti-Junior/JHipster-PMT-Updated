@@ -20,6 +20,7 @@ export class IssueDialogComponent implements OnInit {
     isSaving: boolean;
     createdDateDp: any;
     dueDateDp: any;
+    updatedDateDp: any;
 
     constructor(
         public activeModal: NgbActiveModal,

@@ -28,20 +28,11 @@
             <input type="text" class="form-control" name="summary" id="field_summary"
                 [(ngModel)]="issuecustom.summary" />
         </div>
-        <div class="form-group">
-            <label class="form-control-label" for="field_createdDate">Created Date</label>
-            <div class="input-group">
-                <input id="field_createdDate" type="text" class="form-control" name="createdDate" ngbDatepicker  #createdDateDp="ngbDatepicker" [(ngModel)]="issuecustom.createdDate"
-                />
-                <span class="input-group-btn">
-                    <button type="button" class="btn btn-secondary" (click)="createdDateDp.toggle()"><i class="fa fa-calendar"></i></button>
-                </span>
-            </div>
-        </div>
+
         <div class="form-group">
             <label class="form-control-label" for="field_dueDate">Due Date</label>
             <div class="input-group">
-                <input id="field_dueDate" type="text" class="form-control" name="dueDate" ngbDatepicker  #dueDateDp="ngbDatepicker" [(ngModel)]="issuecustom.dueDate"
+                <input id="field_dueDate" type="text" class="form-control" name="dueDate" ngbDatepicker #dueDateDp="ngbDatepicker" [(ngModel)]="issuecustom.dueDate"
                 />
                 <span class="input-group-btn">
                     <button type="button" class="btn btn-secondary" (click)="dueDateDp.toggle()"><i class="fa fa-calendar"></i></button>
@@ -58,7 +49,7 @@
             <div class="form-group">
               <label class="form-control-label" for="field_type">Type</label>
               <select class="form-control" name="type" id="field_type" [(ngModel)]="typename" (change) = "findType()">
-                <option *ngFor="let type of types" [selected]="type.name">{{type.name}}</option>
+                <option *ngFor="let type of types" [value]="type.name">{{type.name}}</option>
               </select>
             </div>
         </div>
@@ -66,7 +57,7 @@
             <div class="form-group">
               <label class="form-control-label" for="field_priority">Priority</label>
               <select class="form-control" name="priority" id="field_priority" [(ngModel)]="priorityname" (change) = "findPriority()">
-                <option  *ngFor="let priority of priorities" [selected]="priority.name">{{priority.name}}</option>
+                <option  *ngFor="let priority of priorities" [value]="priority.name">{{priority.name}}</option>
               </select>
             </div>
         </div>
@@ -74,7 +65,7 @@
             <div class="form-group">
               <label class="form-control-label" for="field_priority">Epic</label>
               <select class="form-control" name="epic" id="field_epic" [(ngModel)]="epicname" (change) = "findEpic()">
-                <option  *ngFor="let epic of epics" [selected]="epic.name">{{epic.name}}</option>
+                <option  *ngFor="let epic of epics" [value]="epic.name">{{epic.name}}</option>
               </select>
             </div>
         </div>

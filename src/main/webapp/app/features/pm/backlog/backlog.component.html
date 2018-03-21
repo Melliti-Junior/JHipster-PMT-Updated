@@ -1,20 +1,23 @@
 <section>
   <div class="container py-3">
-    <div class="card" draggable="true" *ngFor="let item of issues">
+    <div *ngIf="issues">
+        <div class="card" draggable="true" *ngFor="let issue of issues">
 
-        <div class="row " style="border-style: groove;">
-            <div style="width:1%;" [style.background] = "item.priority.color"></div>
+        <div class="row" id="issue">
+            <div *ngIf="issue.priority" style="width:1%;" [style.background] = "issue.priority.color"></div>
             <img src="../../../../content/images/Bug.png"/>
             <div class="col-md-10 px-3">
-                <div class="row">
-                    <div class="code" style="width:15%;">{{item.code}}</div>
-                    <div class="summary" style="width:70%;">{{item.summary}}</div>
-                    <div class="epic" style="width:5%;">{{item.epic.name}}</div>
-                    <img src="../../../../content/images/Task.png" alt="assignee img"/>
+                <div class="row" id="content">
+                    <div class="code" style="width:15%;">{{issue.code}}</div>
+                    <div class="summary" style="width:70%;">{{issue.summary}}</div>
+                    <div *ngIf="issue.epic" class="epic" style="width:5%;">{{issue.epic.name}}</div>
+                    <div class="version" style="width:5%;">V1</div>
+                    <img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/>
                 </div>
             </div>
         </div>
 
       </div>
+    </div>
     </div>
 </section>

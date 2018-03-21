@@ -73,6 +73,8 @@ export class IssueService {
             .convertLocalDateFromServer(json.createdDate);
         entity.dueDate = this.dateUtils
             .convertLocalDateFromServer(json.dueDate);
+        entity.updatedDate = this.dateUtils
+            .convertLocalDateFromServer(json.updatedDate);
         return entity;
     }
 
@@ -85,6 +87,8 @@ export class IssueService {
             .convertLocalDateToServer(issue.createdDate);
         copy.dueDate = this.dateUtils
             .convertLocalDateToServer(issue.dueDate);
+        copy.updatedDate = this.dateUtils
+            .convertLocalDateToServer(issue.updatedDate);
         return copy;
     }
 }
