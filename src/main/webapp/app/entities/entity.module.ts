@@ -4,6 +4,8 @@ import { DashBoardEpicModule } from './epic/epic.module';
 import { DashBoardIssuePriorityModule } from './issue-priority/issue-priority.module';
 import { DashBoardIssueTypeModule } from './issue-type/issue-type.module';
 import { DashBoardIssueModule } from './issue/issue.module';
+import { DashBoardProjectModule } from './project/project.module';
+import { DashBoardProgramModule } from './program/program.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -12,6 +14,8 @@ import { DashBoardIssueModule } from './issue/issue.module';
         DashBoardIssuePriorityModule,
         DashBoardIssueTypeModule,
         DashBoardIssueModule,
+        DashBoardProjectModule,
+        DashBoardProgramModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],
