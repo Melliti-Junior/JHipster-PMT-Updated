@@ -11,6 +11,7 @@ export class EpicService {
 
     private resourceUrl =  SERVER_API_URL + 'api/epics';
     private resourceSearchUrl = SERVER_API_URL + 'api/_search/epics';
+    // tslint:disable-next-line:no-trailing-whitespace
 
     ObjReturned: Epic;
 
@@ -66,9 +67,7 @@ export class EpicService {
     findByRequest(req?: any): Epic {
         const result = this.search({ query: req });
         // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        // result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = JSON.parse(JSON.stringify(val.json)));
-        console.log(JSON.stringify(this.ObjReturned));
+        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
         return this.ObjReturned;
     }
 
@@ -76,7 +75,7 @@ export class EpicService {
         return this.http.get(this.resourceUrl)
           .toPromise()
           .then((response) => response.json() as Epic[])
-      }
+    }
 
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
@@ -91,8 +90,8 @@ export class EpicService {
      * Convert a returned JSON object to Epic.
      */
     private convertItemFromServer(json: any): Epic {
-        this.ObjReturned = Object.assign(new Epic(), json);
-        return this.ObjReturned;
+        const entity: Epic = Object.assign(new Epic(), json);
+        return entity;
     }
 
     /**

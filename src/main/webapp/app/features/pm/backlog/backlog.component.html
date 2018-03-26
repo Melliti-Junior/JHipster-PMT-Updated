@@ -5,12 +5,12 @@
 
         <div class="row" id="issue">
             <div *ngIf="issue.priority" style="width:1%;" [style.background] = "issue.priority.color"></div>
-            <img src="../../../../content/images/Bug.png"/>
+            <img [src] = "issue.type.icon" />
             <div class="col-md-10 px-3">
                 <div class="row" id="content">
                     <div class="code" style="width:15%;">{{issue.code}}</div>
                     <div class="summary" style="width:70%;">{{issue.summary}}</div>
-                    <div *ngIf="issue.epic" class="epic" style="width:5%;">{{issue.epic.name}}</div>
+                    <div *ngIf="issue.epic" [style.background-color] = "issue.epic.color" class="epic" style="width:5%;">{{issue.epic.name}}</div>
                     <div class="version" style="width:5%;">V1</div>
                     <img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/>
                 </div>

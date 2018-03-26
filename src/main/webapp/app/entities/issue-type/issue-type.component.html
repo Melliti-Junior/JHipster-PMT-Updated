@@ -43,7 +43,8 @@
                 <td>{{issueType.code}}</td>
                 <td>{{issueType.name}}</td>
                 <td>{{issueType.description}}</td>
-                <td>{{issueType.icon}}</td>
+                <td><img  class="img-responsive" [attr.src] = "issueType.icon"  style="max-width: 35px; max-height: 35px"/></td>
+                <!-- "../../../content/images/IssueTypes/Bug.png" -->
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

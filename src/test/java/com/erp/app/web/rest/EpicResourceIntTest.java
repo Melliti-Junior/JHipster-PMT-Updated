@@ -46,6 +46,9 @@ public class EpicResourceIntTest {
     private static final String DEFAULT_SUMMARY = "AAAAAAAAAA";
     private static final String UPDATED_SUMMARY = "BBBBBBBBBB";
 
+    private static final String DEFAULT_COLOR = "AAAAAAAAAA";
+    private static final String UPDATED_COLOR = "BBBBBBBBBB";
+
     @Autowired
     private EpicRepository epicRepository;
 
@@ -86,7 +89,8 @@ public class EpicResourceIntTest {
         Epic epic = new Epic()
             .code(DEFAULT_CODE)
             .name(DEFAULT_NAME)
-            .summary(DEFAULT_SUMMARY);
+            .summary(DEFAULT_SUMMARY)
+            .color(DEFAULT_COLOR);
         return epic;
     }
 
@@ -114,6 +118,7 @@ public class EpicResourceIntTest {
         assertThat(testEpic.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testEpic.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testEpic.getSummary()).isEqualTo(DEFAULT_SUMMARY);
+        assertThat(testEpic.getColor()).isEqualTo(DEFAULT_COLOR);
 
         // Validate the Epic in Elasticsearch
         Epic epicEs = epicSearchRepository.findOne(testEpic.getId());
@@ -167,7 +172,8 @@ public class EpicResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(epic.getId())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())));
+            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
+            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR.toString())));
     }
 
     @Test
@@ -182,7 +188,8 @@ public class EpicResourceIntTest {
             .andExpect(jsonPath("$.id").value(epic.getId()))
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
-            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()));
+            .andExpect(jsonPath("$.summary").value(DEFAULT_SUMMARY.toString()))
+            .andExpect(jsonPath("$.color").value(DEFAULT_COLOR.toString()));
     }
 
     @Test
@@ -204,7 +211,8 @@ public class EpicResourceIntTest {
         updatedEpic
             .code(UPDATED_CODE)
             .name(UPDATED_NAME)
-            .summary(UPDATED_SUMMARY);
+            .summary(UPDATED_SUMMARY)
+            .color(UPDATED_COLOR);
 
         restEpicMockMvc.perform(put("/api/epics")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -218,6 +226,7 @@ public class EpicResourceIntTest {
         assertThat(testEpic.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testEpic.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testEpic.getSummary()).isEqualTo(UPDATED_SUMMARY);
+        assertThat(testEpic.getColor()).isEqualTo(UPDATED_COLOR);
 
         // Validate the Epic in Elasticsearch
         Epic epicEs = epicSearchRepository.findOne(testEpic.getId());
@@ -275,7 +284,8 @@ public class EpicResourceIntTest {
             .andExpect(jsonPath("$.[*].id").value(hasItem(epic.getId())))
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
-            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())));
+            .andExpect(jsonPath("$.[*].summary").value(hasItem(DEFAULT_SUMMARY.toString())))
+            .andExpect(jsonPath("$.[*].color").value(hasItem(DEFAULT_COLOR.toString())));
     }
 
     @Test

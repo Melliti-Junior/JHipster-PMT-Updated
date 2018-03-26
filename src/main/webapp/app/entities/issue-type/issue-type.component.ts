@@ -28,6 +28,7 @@ currentAccount: any;
     predicate: any;
     previousPage: any;
     reverse: any;
+    BaseTypeImgPath: string;
 
     constructor(
         private issueTypeService: IssueTypeService,
@@ -47,6 +48,8 @@ currentAccount: any;
         });
         this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search'] ?
             this.activatedRoute.snapshot.params['search'] : '';
+
+        this.BaseTypeImgPath = '../../../content/images/IssueTypes/';
     }
 
     loadAll() {

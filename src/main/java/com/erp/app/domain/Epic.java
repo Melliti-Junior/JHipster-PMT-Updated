@@ -30,6 +30,9 @@ public class Epic implements Serializable {
     @Field("summary")
     private String summary;
 
+    @Field("color")
+    private String color;
+
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public String getId() {
         return id;
@@ -77,6 +80,19 @@ public class Epic implements Serializable {
     public void setSummary(String summary) {
         this.summary = summary;
     }
+
+    public String getColor() {
+        return color;
+    }
+
+    public Epic color(String color) {
+        this.color = color;
+        return this;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -106,6 +122,7 @@ public class Epic implements Serializable {
             ", code='" + getCode() + "'" +
             ", name='" + getName() + "'" +
             ", summary='" + getSummary() + "'" +
+            ", color='" + getColor() + "'" +
             "}";
     }
 }

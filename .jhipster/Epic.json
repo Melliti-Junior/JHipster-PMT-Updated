@@ -16,6 +16,10 @@
         {
             "fieldName": "summary",
             "fieldType": "String"
+        },
+        {
+            "fieldName": "color",
+            "fieldType": "String"
         }
     ],
     "dto": "no",

@@ -6,6 +6,7 @@ export class Epic implements BaseEntity {
         public code?: string,
         public name?: string,
         public summary?: string,
+        public color?: string,
     ) {
     }
 }

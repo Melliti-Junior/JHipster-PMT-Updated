@@ -4,8 +4,7 @@ body {
   }
 
 .epic {
-    background-color:rgb(46, 46, 189);
-    font-weight: bold;
+    color: white;
     text-align: center;
     vertical-align: middle;
     border-radius: 8px;
