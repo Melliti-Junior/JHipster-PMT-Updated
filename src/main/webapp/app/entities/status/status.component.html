@@ -43,7 +43,7 @@
                 <td>{{status.code}}</td>
                 <td>{{status.name}}</td>
                 <td>{{status.description}}</td>
-                <td>{{status.icon}}</td>
+                <td><img  class="img-responsive" [attr.src] = "status.icon"  style="max-width: 35px; max-height: 35px"/></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"
