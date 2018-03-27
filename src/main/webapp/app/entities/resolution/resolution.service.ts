@@ -3,34 +3,35 @@ import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import { SERVER_API_URL } from '../../app.constants';
 
-import { Status } from './status.model';
+import { Resolution } from './resolution.model';
 import { ResponseWrapper, createRequestOption } from '../../shared';
 
 @Injectable()
-export class StatusService {
+export class ResolutionService {
 
-    private resourceUrl =  SERVER_API_URL + 'api/statuses';
-    private resourceSearchUrl = SERVER_API_URL + 'api/_search/statuses';
-    ObjReturned: Status;
+    private resourceUrl =  SERVER_API_URL + 'api/resolutions';
+    private resourceSearchUrl = SERVER_API_URL + 'api/_search/resolutions';
+
+    ObjReturned: Resolution;
     constructor(private http: Http) { }
 
-    create(status: Status): Observable<Status> {
-        const copy = this.convert(status);
+    create(resolution: Resolution): Observable<Resolution> {
+        const copy = this.convert(resolution);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
     }
 
-    update(status: Status): Observable<Status> {
-        const copy = this.convert(status);
+    update(resolution: Resolution): Observable<Resolution> {
+        const copy = this.convert(resolution);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
         });
     }
 
-    find(id: string): Observable<Status> {
+    find(id: string): Observable<Resolution> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
             return this.convertItemFromServer(jsonResponse);
@@ -53,25 +54,25 @@ export class StatusService {
             .map((res: any) => this.convertResponse(res));
     }
 
-    /**
+     /**
      *
      * this function return an entity by request
      *
      * @param {*} [req]
-     * @returns {Status}
-     * @memberof StatusService
+     * @returns {Resolution}
+     * @memberof ResolutionService
      */
-    findByRequest(req?: any): Status {
+    findByRequest(req?: any): Resolution {
         const result = this.search({ query: req });
         // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
         result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
         return this.ObjReturned;
     }
 
-    getStatuses():  Promise<Status[]> {
+    getResolutions():  Promise<Resolution[]> {
         return this.http.get(this.resourceUrl)
           .toPromise()
-          .then((response) => response.json() as Status[])
+          .then((response) => response.json() as Resolution[])
     }
 
     private convertResponse(res: Response): ResponseWrapper {
@@ -84,18 +85,18 @@ export class StatusService {
     }
 
     /**
-     * Convert a returned JSON object to Status.
+     * Convert a returned JSON object to Resolution.
      */
-    private convertItemFromServer(json: any): Status {
-        this.ObjReturned = Object.assign(new Status(), json);
+    private convertItemFromServer(json: any): Resolution {
+        this.ObjReturned = Object.assign(new Resolution(), json);
         return this.ObjReturned;
     }
 
     /**
-     * Convert a Status to a JSON which can be sent to the server.
+     * Convert a Resolution to a JSON which can be sent to the server.
      */
-    private convert(status: Status): Status {
-        const copy: Status = Object.assign({}, status);
+    private convert(resolution: Resolution): Resolution {
+        const copy: Resolution = Object.assign({}, resolution);
         return copy;
     }
 }

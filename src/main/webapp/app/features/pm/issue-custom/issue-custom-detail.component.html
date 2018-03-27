@@ -12,17 +12,30 @@
       <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
       <div class="panel-body" >
 
-          <div *ngIf ="issuecustom.type" class="row">
+          <div class="row">
             <div class="col-3">Type :</div>
-            <div class="col-8">{{issuecustom.type.name}}</div>
+            <div *ngIf ="issuecustom.type" class="col-8">{{issuecustom.type.name}}</div>
+            <div *ngIf ="!issuecustom.type" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
-          <div *ngIf ="issuecustom.priority" class="row">
+          <div class="row">
             <div class="col-3">Priority :</div>
-            <div class="col-8">{{issuecustom.priority.name}}</div>
+            <div *ngIf ="issuecustom.priority" class="col-8">{{issuecustom.priority.name}}</div>
+            <div *ngIf ="!issuecustom.priority" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
           <div *ngIf ="issuecustom.epic" class="row">
             <div class="col-3">Epic :</div>
-            <div class="col-8">{{issuecustom.epic.summary}} ({{issuecustom.epic.name}})</div>
+            <div *ngIf ="issuecustom.epic" class="col-8">{{issuecustom.epic.summary}} ({{issuecustom.epic.name}})</div>
+            <div *ngIf ="!issuecustom.epic" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Status :</div>
+            <div *ngIf ="issuecustom.status"  class="col-8">{{issuecustom.status.name}}</div>
+            <div *ngIf ="!issuecustom.status"  class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Resolution :</div>
+            <div *ngIf ="issuecustom.resolution" class="col-8">{{issuecustom.resolution.name}}</div>
+            <div *ngIf ="!issuecustom.resolution" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
           <div class="row">
             <div class="col-3">Estimation :</div>

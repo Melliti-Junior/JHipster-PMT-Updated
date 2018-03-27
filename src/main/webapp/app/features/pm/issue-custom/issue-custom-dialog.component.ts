@@ -24,6 +24,10 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import { Status } from '../../../entities/status/status.model';
+import { Resolution } from '../../../entities/resolution/resolution.model';
+import { StatusService } from '../../../entities/status/status.service';
+import { ResolutionService } from '../../../entities/resolution';
 
 @Component({
     selector: 'jhi-issue-custom-dialog',
@@ -36,12 +40,18 @@ export class IssueCustomDialogComponent implements OnInit {
     isSaving: boolean;
     createdDateDp: any;
     dueDateDp: any;
+
     types: IssueType[];
     priorities: IssuePriority[];
     epics: Epic[];
+    statuses: Status[];
+    resolutions: Resolution[];
+
     typename: string;
     priorityname: string;
     epicname: string;
+    statusname: string;
+    resolutionname: string;
 
     epicnames: string[];
 
@@ -55,6 +65,8 @@ export class IssueCustomDialogComponent implements OnInit {
         private typeSce: IssueTypeService,
         private prioritySce: IssuePriorityService,
         private epicSce: EpicService,
+        private statusSce: StatusService,
+        private resolutionSce: ResolutionService,
         // private comp: IssueCustomComponent
     ) {
     }
@@ -66,6 +78,7 @@ export class IssueCustomDialogComponent implements OnInit {
         // this.issuecustom.dueDate = this.theDate;
         console.log(this.theDate);
         // this.getEpicNames();
+        // this.setDefaultAttributes();
     }
 
     clear() {
@@ -124,6 +137,89 @@ export class IssueCustomDialogComponent implements OnInit {
         console.log('aff' + this.issuecustom.priority.name);
     }
 
+    findStatus() {
+        let index = 0;
+        let found = false;
+        while (index < this.statuses.length && found === false)  {
+            if ((this.statuses[index]).name === this.statusname) {
+                found = true;
+                this.issuecustom.status = this.statuses[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.status.name);
+    }
+
+    findResolution() {
+        let index = 0;
+        let found = false;
+        while (index < this.resolutions.length && found === false)  {
+            if ((this.resolutions[index]).name === this.resolutionname) {
+                found = true;
+                this.issuecustom.resolution = this.resolutions[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.resolution.name);
+    }
+
+    /**
+     * This function retrieves all existing Epics, Types and Priorities
+     *
+     * @private
+     * @memberof IssueCustomDialogComponent
+     */
+    private loadAttributes() {
+        this.epicSce.getEpics()
+        .then((epics) => this.epics = epics );
+        this.typeSce.getTypes()
+        .then((types) => this.types = types );
+        this.prioritySce.getPriorities()
+        .then((priorities) => this.priorities = priorities );
+        this.resolutionSce.getResolutions()
+        .then((resolutions) => this.resolutions = resolutions );
+        this.statusSce.getStatuses()
+        .then((statuses) => this.statuses = statuses );
+    }
+
+    /**
+     * Use ElasticSearch to find element by request
+     *
+     * @param {string} req
+     * @memberof IssueCustomDialogComponent
+     */
+    findByname(name: string) {
+        this.issuecustomService.findByRequest(name);
+        // console.log(this.comp.issuecustoms);
+    }
+
+    setDefaultAttributes() {
+        let index = 0;
+        let found = false;
+        while (index < this.statuses.length && found === false)  {
+            if ((this.statuses[index]).name === 'Open') {
+                found = true;
+                this.issuecustom.status = this.statuses[index];
+            } else {
+                index = index + 1;
+            }
+        }
+
+        index = 0;
+        found = false;
+        while (index < this.resolutions.length && found === false)  {
+            if ((this.resolutions[index]).name === 'Unresolved') {
+                found = true;
+                this.issuecustom.resolution = this.resolutions[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.resolution.name);
+    }
+
     save() {
         this.isSaving = true;
         if (this.issuecustom.id !== undefined) {
@@ -150,32 +246,6 @@ export class IssueCustomDialogComponent implements OnInit {
 
     private onSaveError() {
         this.isSaving = false;
-    }
-
-    /**
-     * This function retrieves all existing Epics, Types and Priorities
-     *
-     * @private
-     * @memberof IssueCustomDialogComponent
-     */
-    private loadAttributes() {
-        this.epicSce.getEpics()
-        .then((epics) => this.epics = epics );
-        this.typeSce.getTypes()
-        .then((types) => this.types = types );
-        this.prioritySce.getPriorities()
-        .then((priorities) => this.priorities = priorities );
-    }
-
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof IssueCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.issuecustomService.findByRequest(name);
-        // console.log(this.comp.issuecustoms);
     }
 
 }
