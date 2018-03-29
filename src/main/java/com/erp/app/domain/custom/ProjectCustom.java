@@ -3,6 +3,8 @@ package com.erp.app.domain.custom;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.util.List;
+
 import com.erp.app.domain.Program;
 import com.erp.app.domain.Project;
 
@@ -20,8 +22,7 @@ public class  ProjectCustom extends Project {
 	public ProjectCustom(Program program) {
 		super();
 		this.program = program;
-	}
-
+    }
 
 	public ProjectCustom() {
 		super();
@@ -29,9 +30,9 @@ public class  ProjectCustom extends Project {
 
 	public Program getProgram() {
 		return program;
-	}
+    }
 
-	public void setProgram(Program program) {
+    public void setProgram(Program program) {
 		this.program = program;
 	}
 

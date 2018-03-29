@@ -30,7 +30,7 @@ export class IssueCustomDeleteDialogComponent {
     confirmDelete(id: string) {
         this.issuecustomService.delete(id).subscribe((response) => {
             this.eventManager.broadcast({
-                name: 'issueListModification',
+                name: 'issuecustomsListModification',
                 content: 'Deleted an issue'
             });
             this.activeModal.dismiss(true);

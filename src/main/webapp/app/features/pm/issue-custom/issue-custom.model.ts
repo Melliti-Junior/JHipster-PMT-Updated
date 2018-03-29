@@ -4,6 +4,7 @@ import { IssueType } from '../../../entities/issue-type/issue-type.model';
 import { Epic } from '../../../entities/epic/epic.model';
 import { Status } from '../../../entities/status';
 import { Resolution } from '../../../entities/resolution';
+import { ProjectCustom } from '../project-custom';
 
 export class IssueCustom extends Issue {
     constructor(
@@ -12,6 +13,7 @@ export class IssueCustom extends Issue {
         public epic?: Epic,
         public status?: Status,
         public resolution?: Resolution,
+        public project?: ProjectCustom,
     ) {
         super();
         priority = new IssuePriority();
@@ -19,5 +21,6 @@ export class IssueCustom extends Issue {
         epic = new Epic();
         status = new Status();
         resolution = new Resolution();
+        project = new ProjectCustom();
     }
 }

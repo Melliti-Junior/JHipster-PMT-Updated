@@ -28,6 +28,8 @@ import { Status } from '../../../entities/status/status.model';
 import { Resolution } from '../../../entities/resolution/resolution.model';
 import { StatusService } from '../../../entities/status/status.service';
 import { ResolutionService } from '../../../entities/resolution';
+import { ProjectCustom } from '../project-custom';
+import { ProjectCustomService } from '../project-custom/project-custom.service';
 
 @Component({
     selector: 'jhi-issue-custom-dialog',
@@ -46,14 +48,22 @@ export class IssueCustomDialogComponent implements OnInit {
     epics: Epic[];
     statuses: Status[];
     resolutions: Resolution[];
+    projects: ProjectCustom[];
+    issueCustoms: IssueCustom[];
 
     typename: string;
     priorityname: string;
     epicname: string;
     statusname: string;
     resolutionname: string;
+    // Get the project related to this issue
+    parentProject: ProjectCustom;
+    // Get the projectname chosen from list (combobox)
+    projectname: string;
+    // projectcode: string;
 
     epicnames: string[];
+    numIssuesParentProj: number;
 
     theDate: NgbDateStruct;
     now = new Date();
@@ -67,6 +77,7 @@ export class IssueCustomDialogComponent implements OnInit {
         private epicSce: EpicService,
         private statusSce: StatusService,
         private resolutionSce: ResolutionService,
+        private projectSce: ProjectCustomService,
         // private comp: IssueCustomComponent
     ) {
     }
@@ -79,6 +90,7 @@ export class IssueCustomDialogComponent implements OnInit {
         console.log(this.theDate);
         // this.getEpicNames();
         // this.setDefaultAttributes();
+        // this.countParentProjectIssues();
     }
 
     clear() {
@@ -165,6 +177,31 @@ export class IssueCustomDialogComponent implements OnInit {
         console.log('aff' + this.issuecustom.resolution.name);
     }
 
+    findProject() {
+        let index = 0;
+        let found = false;
+        while (index < this.projects.length && found === false)  {
+            if ((this.projects[index]).name === this.projectname) {
+                found = true;
+                this.parentProject = this.projects[index];
+                // this.projectcode = this.projects[index].code;
+                this.issuecustom.project = this.projects[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.project.name);
+
+        this.numIssuesParentProj = 0;
+        // tslint:disable-next-line:prefer-const
+        for (let issue of this.issueCustoms) {
+            if ((issue.project !== null) && (issue.project.code === this.parentProject.code)) {
+                this.numIssuesParentProj++;
+            }
+        }
+        console.log('Num' + this.numIssuesParentProj + this.parentProject.code);
+    }
+
     /**
      * This function retrieves all existing Epics, Types and Priorities
      *
@@ -182,6 +219,10 @@ export class IssueCustomDialogComponent implements OnInit {
         .then((resolutions) => this.resolutions = resolutions );
         this.statusSce.getStatuses()
         .then((statuses) => this.statuses = statuses );
+        this.projectSce.getProjects()
+        .then((projects) => this.projects = projects );
+        this.issuecustomService.getIssueCustoms()
+        .then((issueCustoms) => this.issueCustoms = issueCustoms );
     }
 
     /**
@@ -224,10 +265,15 @@ export class IssueCustomDialogComponent implements OnInit {
         this.isSaving = true;
         if (this.issuecustom.id !== undefined) {
             this.issuecustom.updatedDate = this.theDate;
+            // this.issuecustom.code = this.projectname + '-' + this.issuecustom.code;
+            // console.log('New Code : ' + this.issuecustom.code);
             this.subscribeToSaveResponse(
                 this.issuecustomService.update(this.issuecustom));
         } else {
             this.issuecustom.createdDate = this.theDate;
+            console.log(this.numIssuesParentProj + 1);
+            this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
+            console.log('New Code : ' + this.issuecustom.code);
             this.subscribeToSaveResponse(
                 this.issuecustomService.create(this.issuecustom));
         }
@@ -239,7 +285,7 @@ export class IssueCustomDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: IssueCustom) {
-        this.eventManager.broadcast({ name: 'issuecustomListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'issuecustomsListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }

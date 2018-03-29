@@ -7,6 +7,9 @@ import com.erp.app.domain.Epic;
 import com.erp.app.domain.Issue;
 import com.erp.app.domain.IssuePriority;
 import com.erp.app.domain.IssueType;
+import com.erp.app.domain.Resolution;
+import com.erp.app.domain.Status;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 public class IssueCustom extends Issue {
 
@@ -27,11 +30,35 @@ public class IssueCustom extends Issue {
 	@Field("epic")
     private Epic epic;
 
-	public IssueCustom(IssueType type, IssuePriority priority, Epic epic) {
+    @DBRef
+	@Field("status")
+    private Status status;
+
+    @DBRef
+	@Field("resolution")
+    private Resolution resolution;
+
+    @DBRef
+    // @JsonBackReference
+	@Field("project")
+    private ProjectCustom project;
+
+	public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project) {
 		super();
 		this.type = type;
 		this.priority = priority;
 		this.epic = epic;
+		this.project = project;
+    }
+
+    public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution) {
+		super();
+		this.type = type;
+		this.priority = priority;
+		this.epic = epic;
+		this.project = project;
+		this.status = status;
+		this.resolution = resolution;
 	}
 
 
@@ -61,6 +88,30 @@ public class IssueCustom extends Issue {
 
 	public void setEpic(Epic epic) {
 		this.epic = epic;
+	}
+
+	public ProjectCustom getProject() {
+		return project;
+	}
+
+	public void setProject(ProjectCustom project) {
+		this.project = project;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public Resolution getResolution() {
+		return resolution;
+	}
+
+	public void setResolution(Resolution resolution) {
+		this.resolution = resolution;
 	}
 
 }

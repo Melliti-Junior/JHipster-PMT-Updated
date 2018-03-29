@@ -7,7 +7,7 @@
             <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
             <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
             <div class="issue-info row" id="attributes">
-                <div class="code">{{issue.code}}</div>
+                <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
                 <div class="summary">{{issue.summary}}</div>
                 <div class="external-info">
                     <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>

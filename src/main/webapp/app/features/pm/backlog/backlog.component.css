@@ -12,7 +12,7 @@ body {
 
 #issue {
     border: 1px solid rgb(182, 182, 179);
-    height: 35px;
+    height: 30px;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
@@ -30,6 +30,10 @@ body {
 
 .issue-info {
     width: 94%;
+    color: #333;
+    cursor: move;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
 }
 
 .code {
@@ -47,6 +51,7 @@ body {
     flex-direction: row;
     text-align: center;
     align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
     width: 20%;
 }
 
@@ -60,26 +65,29 @@ body {
     color: white;
     text-align: center;
     vertical-align: middle;
-    font-size: small;
-    font-weight: bold;
-    padding: 3px;
-    margin: 3px;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 1px;
+    margin: 2px;
     border-radius: 8px;
     border: 1px solid rgb(100, 102, 95);
     width: 50%;
+    height: 80%;
 }
 
 .version {
+    display: inline-block;
     color:rgb(93, 93, 95);
     text-align: center;
     vertical-align: middle;
-    font-size: small;
-    font-weight: bold;
-    padding: 3px;
-    margin: 3px;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 1px;
+    margin: 2px;
     border-radius: 8px;
     border: 1px solid rgb(100, 102, 95);
     width: 50%;
+    height: 80%;
 }
 
 img {
@@ -88,4 +96,12 @@ img {
     max-width: 24px;
     max-height: 24px;
     vertical-align: middle;
+}
+
+a {
+    color: #3b73af;
+}
+
+a:hover {
+    color: #cc6;
 }
