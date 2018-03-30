@@ -1,23 +1,25 @@
+
 <section>
-  <div class="container py-3">
-    <div *ngIf="issues">
-        <!-- <div class="card" > -->
+    <div class="container py-3">
+        <h5>Backlog</h5>
+        <div *ngIf="issues">
+            <!-- <div class="card" > -->
 
-        <div class="row" id="issue" draggable="true" *ngFor="let issue of issues">
-            <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
-            <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
-            <div class="issue-info row" id="attributes">
-                <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
-                <div class="summary">{{issue.summary}}</div>
-                <div class="external-info">
-                    <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
-                    <div class="version">V1</div>
+            <div class="row" id="issue" draggable="true" *ngFor="let issue of issues">
+                <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
+                <div class="issue-info row" id="attributes">
+                    <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
+                    <div class="summary">{{issue.summary}}</div>
+                    <div class="external-info">
+                        <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
+                        <div class="version">V1</div>
+                    </div>
+                    <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
                 </div>
-                <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
             </div>
-        </div>
 
-     <!-- </div> -->
-    </div>
+            <!-- </div> -->
+        </div>
     </div>
 </section>

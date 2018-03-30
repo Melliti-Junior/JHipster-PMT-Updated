@@ -1,6 +1,9 @@
 package com.erp.app.domain.custom;
 
+import com.erp.app.domain.util.validations.CascadeSave;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import com.erp.app.domain.Epic;
@@ -11,7 +14,13 @@ import com.erp.app.domain.Resolution;
 import com.erp.app.domain.Status;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
-public class IssueCustom extends Issue {
+import javax.persistence.*;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.Serializable;
+
+@Entity
+// @Document(collection = "issue")
+public class IssueCustom extends Issue implements Serializable {
 
 	/**
 	 *
@@ -39,8 +48,10 @@ public class IssueCustom extends Issue {
     private Resolution resolution;
 
     @DBRef
-    // @JsonBackReference
+    @CascadeSave
+    @ManyToOne(fetch = FetchType.EAGER)
 	@Field("project")
+    // @JsonManagedReference
     private ProjectCustom project;
 
 	public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project) {

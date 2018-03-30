@@ -64,6 +64,14 @@ spring:
         locator:
             discovery:
                 enabled: true
+hibernate:
+    ogm:
+        datastore:
+            provider: mongodb
+    mongodb:
+        host: 127.0.0.1
+        port: 27017
+        database: DashBoard
 
 # ===================================================================
 # To enable SSL, generate a certificate using:
