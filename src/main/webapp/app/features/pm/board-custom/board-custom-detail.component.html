@@ -1,0 +1,224 @@
+<div *ngIf="boardcustom">
+
+    <div class="row" id="boardspec">
+        <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
+        <div class="board-choices">
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary" (click)="getProjectIssues()">Backlog</button>
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Board</button>
+        </div>
+    </div>
+
+    <section>
+        <div class="container py-3">
+            <div *ngIf="relatedissuecustoms">
+                <!-- <div class="card" > -->
+
+                <div class="row" id="issue" draggable="true" *ngFor="let issue of relatedissuecustoms">
+                    <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                    <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
+                    <div class="issue-info row" id="attributes">
+                        <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
+                        <div class="summary">{{issue.summary}}</div>
+                        <div class="external-info">
+                            <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
+                            <div class="version">V1</div>
+                        </div>
+                        <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                    </div>
+                </div>
+
+                <!-- </div> -->
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+<!--
+<div *ngIf="boardcustom">
+    <h4><span>{{boardcustom.code}}</span> </h4>
+    <h2><span>{{boardcustom.summary}}</span></h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+<div class="container">
+  <div class="panel-group row ">
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info">
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Type :</div>
+            <div *ngIf ="boardcustom.type" class="col-8">{{boardcustom.type.name}}</div>
+            <div *ngIf ="!boardcustom.type" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Priority :</div>
+            <div *ngIf ="boardcustom.priority" class="col-8">{{boardcustom.priority.name}}</div>
+            <div *ngIf ="!boardcustom.priority" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div *ngIf ="boardcustom.epic" class="row">
+            <div class="col-3">Epic :</div>
+            <div *ngIf ="boardcustom.epic" class="col-8">{{boardcustom.epic.summary}} ({{boardcustom.epic.name}})</div>
+            <div *ngIf ="!boardcustom.epic" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Status :</div>
+            <div *ngIf ="boardcustom.status"  class="col-8">{{boardcustom.status.name}}</div>
+            <div *ngIf ="!boardcustom.status"  class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Resolution :</div>
+            <div *ngIf ="boardcustom.resolution" class="col-8">{{boardcustom.resolution.name}}</div>
+            <div *ngIf ="!boardcustom.resolution" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+          </div>
+          <div class="row">
+            <div class="col-3">Estimation :</div>
+            <div class="col-8">{{boardcustom.estimation}} Hours</div>
+          </div>
+
+      </div>
+    </div>
+    <hr style="border-color:transparent;">
+    <div class="panel panel-info">
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-10">{{boardcustom.description}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info" >
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>People</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Assignee :</div>
+            <div class="col-8">Melliti Zied</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Reporter :</div>
+            <div class="col-8">Melliti Zied</div>
+          </div>
+
+      </div>
+    </div>
+    <hr style="border-color:transparent;">
+    <div class="panel panel-info" >
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Dates</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Created :</div>
+            <div class="col-8">{{boardcustom.createdDate | date:'mediumDate'}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Due :</div>
+            <div class="col-8">{{boardcustom.dueDate | date:'mediumDate'}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Updated :</div>
+            <div class="col-8">{{boardcustom.updatedDate | date:'mediumDate'}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+</div>
+<hr style="border-color:transparent;">
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ boardcustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+
+
+<div *ngIf="boardcustom">
+    <h2><span>Board</span> {{boardcustom.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+
+
+        <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{boardcustom.code}}</span>
+        </dd>
+        <dt><span>Summary</span></dt>
+        <dd>
+            <span>{{boardcustom.summary}}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+            <span>{{boardcustom.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Due Date</span></dt>
+        <dd>
+            <span>{{boardcustom.dueDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Estimation</span></dt>
+        <dd>
+            <span>{{boardcustom.estimation}}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{boardcustom.type.name}}</span>
+        </dd>
+        <dt><span>Priority</span></dt>
+        <dd>
+            <span>{{boardcustom.priority.name}}</span>
+        </dd>
+        <dt><span>Epic</span></dt>
+        <dd>
+            <span>{{boardcustom.epic.name}}</span>
+        </dd>
+    </dl>
+
+
+
+    <div class="container">
+        <h4>Details</h4>
+        <div class="panel panel-default">
+          <div class="panel-heading">Panel Heading</div>
+          <div class="panel-body">Panel Content</div>
+        </div>
+    </div>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ boardcustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+-->

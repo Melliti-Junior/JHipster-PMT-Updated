@@ -1,0 +1,62 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myBoardCustomLabel">Create or edit a Board</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!boardcustom.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="boardcustom.id" readonly />
+        </div>
+
+        <div ng-if="">
+            <div class="form-group">
+              <label class="form-control-label" for="field_project">Project</label>
+              <select class="form-control" name="project" id="field_project" [(ngModel)]="projectname" (change) = "findProject();">
+                <option  *ngFor="let project of projects" [value]="project.name">{{project.name}}</option>
+              </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                [(ngModel)]="boardcustom.code" required/>
+            <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.code?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="summary" id="field_name"
+                [(ngModel)]="boardcustom.name" />
+        </div>
+
+        <div ng-if="">
+            <div class="form-group">
+              <label class="form-control-label" for="field_type">Type</label>
+              <select class="form-control" name="type" id="field_type" [(ngModel)]="boardcustom.type">
+                <option> Scrum </option>
+                <option> Kanban </option>
+              </select>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

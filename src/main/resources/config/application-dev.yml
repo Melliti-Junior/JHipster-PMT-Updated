@@ -64,10 +64,14 @@ spring:
         locator:
             discovery:
                 enabled: true
+
+#OGM Configuration
 hibernate:
     ogm:
         datastore:
             provider: mongodb
+            document:
+                association_storage: IN_ENTITY
     mongodb:
         host: 127.0.0.1
         port: 27017

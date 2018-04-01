@@ -1,6 +1,9 @@
 
 <div *ngIf="issuecustom">
-    <h4><span>{{issuecustom.code}}</span> </h4>
+    <div class="panel-group row ">
+        <h5><span><a [routerLink]="['/projectcustoms', issuecustom.project.id ]">{{issuecustom.project.name}} &nbsp; </a>/</span> &nbsp; </h5>
+        <h5><span>{{issuecustom.code}}</span> </h5>
+    </div>
     <h2><span>{{issuecustom.summary}}</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>

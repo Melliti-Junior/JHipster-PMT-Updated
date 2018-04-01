@@ -1,5 +1,6 @@
 package com.erp.app.config;
 
+import com.erp.app.domain.util.CascadingMongoEventListener;
 import io.github.jhipster.config.JHipsterConstants;
 import com.github.mongobee.Mongobee;
 import com.mongodb.MongoClient;
@@ -66,5 +67,11 @@ public class DatabaseConfiguration {
         mongobee.setChangeLogsScanPackage("com.erp.app.config.dbmigrations");
         mongobee.setEnabled(true);
         return mongobee;
+    }
+
+
+    @Bean
+    public CascadingMongoEventListener cascadingMongoEventListener() {
+        return new CascadingMongoEventListener();
     }
 }

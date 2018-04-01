@@ -88,7 +88,7 @@
             "check-separator",
             "check-type"
         ],
-        "prefer-const": true,
+        "prefer-const": false,
         "arrow-parens": [true],
         "arrow-return-shorthand": [true],
         "import-spacing": true,

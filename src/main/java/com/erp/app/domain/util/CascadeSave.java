@@ -1,4 +1,4 @@
-package com.erp.app.domain.util.validations;
+package com.erp.app.domain.util;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

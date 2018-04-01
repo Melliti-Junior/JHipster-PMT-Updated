@@ -29,7 +29,7 @@
         <table class="table table-striped">
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
-            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th>
@@ -41,8 +41,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let project of projects ;trackBy: trackId">
-                <td><a [routerLink]="['../project', project.id ]">{{project.id}}</a></td>
-                <td>{{project.code}}</td>
+                <!--<td><a [routerLink]="['../project', project.id ]">{{project.id}}</a></td>-->
+                <td><a [routerLink]="['../project', project.id ]">{{project.code}}</a></td>
                 <td>{{project.name}}</td>
                 <td>{{project.description}}</td>
                 <td>{{project.startDate | date:'mediumDate'}}</td>

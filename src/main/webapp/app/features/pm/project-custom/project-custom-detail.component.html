@@ -1,4 +1,4 @@
-
+<!--
 <div *ngIf="projectcustom">
     <h2><span>Project</span> {{projectcustom.id}}</h2>
     <hr>
@@ -29,7 +29,34 @@
             <span>{{projectcustom.url}}</span>
         </dd>
     </dl>
+-->
 
+
+<div *ngIf="projectcustom">
+    <h2><span>{{projectcustom.name}}</span> </h2>
+
+    <div class="container">
+        <div class="panel-group row ">
+            <div style="width: 10%; font-weight: bold;"><span style="color: #888888">Code : </span> {{projectcustom.code.toUpperCase()}}</div>
+            <div style="width: 15%; font-weight: bold;"><span style="color: #888888">Lead : </span> Melliti Zied</div>
+            <div style="width: 20%; font-weight: bold;"><span style="color: #888888">Category : </span> {{projectcustom.program.name}}</div>
+            <div style="width: 25%; font-weight: bold;"><span style="color: #888888">URL : </span> <a href= {{projectcustom.url}}>{{projectcustom.url}} </a></div>
+        </div>
+        <div class="panel-group row">
+            <div style="width: 20%; font-weight: bold;"><span style="color: #888888">Start Date : </span> {{projectcustom.startDate | date:'mediumDate'}}</div>
+            <div style="width: 20%; font-weight: bold;"><span style="color: #888888">Due Date : </span> {{projectcustom.endDate | date:'mediumDate'}}</div>
+        </div>
+    </div>
+
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <div class="container">
+        <div class="panel-group row ">
+
+        </div>
+    </div>
+
+    <hr style="border-color:transparent;">
     <button type="submit"
             (click)="previousState()"
             class="btn btn-info">
@@ -37,10 +64,11 @@
     </button>
 
     <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'projectcustom/'+ projectcustom.id + '/edit'} }]"
+            [routerLink]="['/', { outlets: { popup: 'projectcustoms/'+ projectcustom.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
     </button>
 </div>
+

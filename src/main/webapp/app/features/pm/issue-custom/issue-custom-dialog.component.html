@@ -38,7 +38,13 @@
         <div class="form-group">
             <label class="form-control-label" for="field_summary">Summary</label>
             <input type="text" class="form-control" name="summary" id="field_summary"
-                [(ngModel)]="issuecustom.summary" />
+                [(ngModel)]="issuecustom.summary" required/>
+            <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.code?.errors?.required">
+                    This field is required.
+                </small>
+            </div>
         </div>
 
         <div class="form-group">

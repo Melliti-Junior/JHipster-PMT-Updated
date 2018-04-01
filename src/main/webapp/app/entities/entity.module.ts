@@ -8,6 +8,7 @@ import { DashBoardProjectModule } from './project/project.module';
 import { DashBoardProgramModule } from './program/program.module';
 import { DashBoardStatusModule } from './status/status.module';
 import { DashBoardResolutionModule } from './resolution/resolution.module';
+import { DashBoardBoardModule } from './board/board.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -20,6 +21,7 @@ import { DashBoardResolutionModule } from './resolution/resolution.module';
         DashBoardProgramModule,
         DashBoardStatusModule,
         DashBoardResolutionModule,
+        DashBoardBoardModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

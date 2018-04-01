@@ -1,0 +1,122 @@
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+.card {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin: 0px;
+}
+
+#boardspec {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.board-name {
+    width:70%;
+}
+
+.board-choices {
+    width:30%;
+}
+
+#issue {
+    border: 1px solid rgb(182, 182, 179);
+    height: 30px;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+}
+
+.issue-priority-color {
+    width:1%;
+}
+
+.issue-type-icon {
+    width: 5%;
+    align-items: center;
+    text-align: center;
+}
+
+.issue-info {
+    width: 94%;
+    color: #333;
+    cursor: move;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+.code {
+    width:10%;
+    align-items: center;
+    text-align: center;
+}
+
+.summary {
+    width:60%;
+}
+
+.external-info {
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+    width: 20%;
+}
+
+.assignee-img {
+    width: 10%;
+    align-items: center;
+    text-align: center;
+}
+
+.epic {
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 1px;
+    margin: 2px;
+    border-radius: 8px;
+    border: 1px solid rgb(100, 102, 95);
+    width: 50%;
+    height: 80%;
+}
+
+.version {
+    display: inline-block;
+    color:rgb(93, 93, 95);
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+    font-weight: normal;
+    padding: 1px;
+    margin: 2px;
+    border-radius: 8px;
+    border: 1px solid rgb(100, 102, 95);
+    width: 50%;
+    height: 80%;
+}
+
+img {
+    height: auto;
+    width: auto;
+    max-width: 24px;
+    max-height: 24px;
+    vertical-align: middle;
+}
+
+a {
+    color: #3b73af;
+}
+
+a:hover {
+    color: #cc6;
+}

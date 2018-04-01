@@ -1,12 +1,6 @@
 package com.erp.app.domain.custom;
 
-import com.erp.app.domain.Issue;
-import com.erp.app.domain.util.validations.CascadeSave;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
@@ -20,7 +14,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.OneToMany;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 // @Document(collection = "project")
@@ -35,7 +28,7 @@ public class  ProjectCustom extends Project implements Serializable {
 	@Field("program")
     private Program program;
 
-    @DBRef
+    // @DBRef
     // @CascadeSave
     // @JsonBackReference
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

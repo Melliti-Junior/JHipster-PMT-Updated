@@ -177,6 +177,17 @@ export class IssueCustomDialogComponent implements OnInit {
         console.log('aff' + this.issuecustom.resolution.name);
     }
 
+    countParentProjectIssues() {
+        this.numIssuesParentProj = 0;
+        // tslint:disable-next-line:prefer-const
+        for (let issue of this.issueCustoms) {
+            if ((issue.project !== null) && (issue.project.code === this.parentProject.code)) {
+                this.numIssuesParentProj++;
+            }
+        }
+        console.log('Num' + this.numIssuesParentProj + this.parentProject.code);
+    }
+
     findProject() {
         let index = 0;
         let found = false;
@@ -191,15 +202,7 @@ export class IssueCustomDialogComponent implements OnInit {
             }
         }
         console.log('aff' + this.issuecustom.project.name);
-
-        this.numIssuesParentProj = 0;
-        // tslint:disable-next-line:prefer-const
-        for (let issue of this.issueCustoms) {
-            if ((issue.project !== null) && (issue.project.code === this.parentProject.code)) {
-                this.numIssuesParentProj++;
-            }
-        }
-        console.log('Num' + this.numIssuesParentProj + this.parentProject.code);
+        this.countParentProjectIssues();
     }
 
     /**
@@ -264,16 +267,25 @@ export class IssueCustomDialogComponent implements OnInit {
     save() {
         this.isSaving = true;
         if (this.issuecustom.id !== undefined) {
+            // Add the update Date
             this.issuecustom.updatedDate = this.theDate;
-            // this.issuecustom.code = this.projectname + '-' + this.issuecustom.code;
-            // console.log('New Code : ' + this.issuecustom.code);
+            // Configure the Issue Code
+            if (this.parentProject !== undefined) {
+                console.log(this.numIssuesParentProj + 1);
+                this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
+                console.log('New Code : ' + this.issuecustom.code);
+            }
             this.subscribeToSaveResponse(
                 this.issuecustomService.update(this.issuecustom));
         } else {
+            // Add the creation Date
             this.issuecustom.createdDate = this.theDate;
-            console.log(this.numIssuesParentProj + 1);
-            this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
-            console.log('New Code : ' + this.issuecustom.code);
+            // Configure the Issue Code
+            if (this.parentProject !== undefined) {
+                console.log(this.numIssuesParentProj + 1);
+                this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
+                console.log('New Code : ' + this.issuecustom.code);
+            }
             this.subscribeToSaveResponse(
                 this.issuecustomService.create(this.issuecustom));
         }
