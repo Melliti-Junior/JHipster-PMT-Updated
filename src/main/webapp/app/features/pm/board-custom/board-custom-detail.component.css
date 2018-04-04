@@ -1,14 +1,50 @@
 
-body {
-    margin: 0;
-    font-family: Roboto, sans-serif;
-}
-
 .card {
     display: flex;
     flex-wrap: nowrap;
     flex-direction: column;
     margin: 0px;
+}
+
+.DropZone {
+    border: 2px dashed blueviolet;
+    min-height: 25px;
+    padding: inherit;
+    height: content-box;
+    width: content-box;
+}
+
+.backlog-option {
+    width: 75%;
+    padding-left: 1%;
+}
+
+.NewSprint {
+    padding-left: 14%;
+}
+
+.product-backlog-info {
+    font-size: 14px;
+    padding-bottom: 1%;
+}
+
+.product-backlog {
+    font-weight: bold;
+    padding-right: 1%;
+    padding-left: inherit;
+}
+
+.totIssues {
+    font-size: 14px;
+    font-weight: normal;
+    color: #888888;
+}
+
+
+.PartialBacklog {
+    font-size: 14px;
+    font-weight: bold;
+    padding: inherit;
 }
 
 #boardspec {
@@ -18,14 +54,15 @@ body {
 }
 
 .board-name {
-    width:70%;
+    width:75%;
 }
 
 .board-choices {
     width:30%;
+    padding-left: 7%;
 }
 
-#issue {
+.issue {
     border: 1px solid rgb(182, 182, 179);
     height: 30px;
     display: flex;

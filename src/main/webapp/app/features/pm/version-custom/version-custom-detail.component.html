@@ -1,0 +1,135 @@
+
+<div *ngIf="versioncustom">
+    <h6><span><a [routerLink]="['/projectcustoms', versioncustom.project.id ]">{{versioncustom.project.name}}</a></span></h6>
+
+    <h3><span>{{versioncustom.name}} ({{versioncustom.code}})</span> </h3>
+    <div *ngIf="versioncustom.isReleased" class="row" style="margin-left: 3%">
+        <div class="col-2" style="font-weight: bold;"><span style="color: #888888;">Release Status : </span></div>
+        <div class="col-3">Released</div>
+    </div>
+
+    <div *ngIf="!versioncustom.isReleased" class="row" style="margin-left: 3%">
+        <div class="col-2" style="font-weight: bold;"><span style="color: #888888;">Release Status : </span></div>
+        <div class="col-3">Unreleased</div>
+    </div>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+<div class="container">
+  <div class="panel-group row ">
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info">
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-10">{{versioncustom.description}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info" >
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Dates</h4></div>
+      <div class="panel-body" >
+
+          <div class="row">
+            <div class="col-3">Start Date :</div>
+            <div class="col-8">{{versioncustom.startDate | date:'mediumDate'}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Release Date :</div>
+            <div class="col-8">{{versioncustom.releaseDate | date:'mediumDate'}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+</div>
+<hr style="border-color:transparent;">
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'versioncustoms/'+ versioncustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+
+    <!--
+<div *ngIf="versioncustom">
+    <h2><span>Version</span> {{versioncustom.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+
+
+        <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{versioncustom.code}}</span>
+        </dd>
+        <dt><span>Summary</span></dt>
+        <dd>
+            <span>{{versioncustom.summary}}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+            <span>{{versioncustom.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Due Date</span></dt>
+        <dd>
+            <span>{{versioncustom.dueDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Estimation</span></dt>
+        <dd>
+            <span>{{versioncustom.estimation}}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{versioncustom.type.name}}</span>
+        </dd>
+        <dt><span>Priority</span></dt>
+        <dd>
+            <span>{{versioncustom.priority.name}}</span>
+        </dd>
+        <dt><span>Epic</span></dt>
+        <dd>
+            <span>{{versioncustom.epic.name}}</span>
+        </dd>
+    </dl>
+
+
+
+    <div class="container">
+        <h4>Details</h4>
+        <div class="panel panel-default">
+          <div class="panel-heading">Panel Heading</div>
+          <div class="panel-body">Panel Content</div>
+        </div>
+    </div>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'versioncustoms/'+ versioncustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+-->

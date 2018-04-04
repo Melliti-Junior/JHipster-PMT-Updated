@@ -1,31 +1,53 @@
-<div *ngIf="boardcustom">
+<div *ngIf="boardcustom" (load)="document.getElementById('backlog').click()">
 
-    <div class="row" id="boardspec">
+    <div class="row" id="boardspec" >
         <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
         <div class="board-choices">
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary" (click)="getProjectIssues()">Backlog</button>
+            <button id="backlog" type="button" class="btn btn-primary" (click)="getProjectIssues()">Backlog</button>
             <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
             <button *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Board</button>
         </div>
     </div>
 
     <section>
-        <div class="container py-3">
+        <div class="container pl-0 py-3">
+            <div class="PartialBacklog">
+                <div *ngIf="boardcustom.type.toUpperCase() === 'KANBAN'">Selected for Development</div>
+                <div *ngIf="boardcustom.type.toUpperCase() === 'SCRUM'">Sprint Issues</div>
+            </div>
+
+            <div class="DropZone container px-5" id="WIP" (dragover)="allowDrop($event)" (drop)="drop($event)">
+
+            </div>
+        </div>
+
+        <div class="container pl-0 py-3">
             <div *ngIf="relatedissuecustoms">
                 <!-- <div class="card" > -->
-
-                <div class="row" id="issue" draggable="true" *ngFor="let issue of relatedissuecustoms">
-                    <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
-                    <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
-                    <div class="issue-info row" id="attributes">
-                        <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
-                        <div class="summary">{{issue.summary}}</div>
-                        <div class="external-info">
-                            <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
-                            <div class="version">V1</div>
-                        </div>
-                        <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                <div *ngIf="relatedissuecustoms.length" class="product-backlog-info row">
+                    <div class="backlog-option row">
+                        <div class="product-backlog"><span>Product Backlog</span></div>
+                        <div class="totIssues">{{relatedissuecustoms.length}} issues</div>
                     </div>
+                    <div class="NewSprint"><button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-info">Create Sprint</button></div>
+                </div>
+
+                <div *ngFor="let issue of relatedissuecustoms">
+
+                    <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" >
+                        <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                        <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
+                        <div class="issue-info row" id="attributes">
+                            <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
+                            <div class="summary">{{issue.summary}}</div>
+                            <div class="external-info">
+                                <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
+                                <div class="version" *ngIf="issue.version">{{issue.version.name}}</div>
+                            </div>
+                            <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                        </div>
+                    </div>
+
                 </div>
 
                 <!-- </div> -->

@@ -48,6 +48,13 @@
         </div>
 
         <div class="form-group">
+            <label class="form-control-label" for="field_version">Fix version</label>
+            <select class="form-control" name="version" id="field_version" [(ngModel)]="versionname" (change) = "findFixVersion()">
+                <option *ngFor="let version of possibleVersions" [value]="version"> {{version.name}}</option>
+            </select>
+        </div>
+
+        <div class="form-group">
             <label class="form-control-label" for="field_dueDate">Due Date</label>
             <div class="input-group">
                 <input id="field_dueDate" type="text" class="form-control" name="dueDate" ngbDatepicker #dueDateDp="ngbDatepicker" [(ngModel)]="issuecustom.dueDate"

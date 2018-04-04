@@ -38,12 +38,20 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.PMChosen = false;
+
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
 
-        this.PMChosen = false;
+        /*
+        if (this.isPMSelected) {
+            this.PMChosen = true;
+        } else {
+            this.PMChosen = false;
+        }
+        */
     }
 
     collapseNavbar() {

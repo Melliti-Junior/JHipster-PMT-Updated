@@ -44,6 +44,10 @@ public class IssueCustom extends Issue implements Serializable {
     private Resolution resolution;
 
     @DBRef
+    @Field("version")
+    private VersionCustom version;
+
+    @DBRef
     @CascadeSave
     //@ManyToOne(fetch = FetchType.EAGER)
     @ManyToOne
@@ -59,7 +63,7 @@ public class IssueCustom extends Issue implements Serializable {
 		this.project = project;
     }
 
-    public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution) {
+    public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution, VersionCustom version) {
 		super();
 		this.type = type;
 		this.priority = priority;
@@ -67,6 +71,7 @@ public class IssueCustom extends Issue implements Serializable {
 		this.project = project;
 		this.status = status;
 		this.resolution = resolution;
+		this.version = version;
 	}
 
 
@@ -122,4 +127,11 @@ public class IssueCustom extends Issue implements Serializable {
 		this.resolution = resolution;
 	}
 
+    public VersionCustom getVersion() {
+        return version;
+    }
+
+    public void setVersion(VersionCustom version) {
+        this.version = version;
+    }
 }

@@ -19,6 +19,8 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
     issueCustoms: IssueCustom[] = new Array<IssueCustom>();
     relatedissuecustoms: IssueCustom[] = new Array<IssueCustom>();
 
+    chosenIssues: IssueCustom[] = new Array<IssueCustom>();
+
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -42,6 +44,7 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
     ngAfterViewInit() {
         console.log('finish');
         this.getProjectIssues();
+        // let BacklogBtnID = document.getElementById('backlog').click();
     }
 
     load(id) {
@@ -99,6 +102,54 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
         }
         */
         console.log('Actual : ' + this.relatedissuecustoms.length);
+    }
+
+    dragStart(ev) {
+        ev.dataTransfer.setData('text', ev.target.id);
+        console.log(ev.target.id);
+    }
+
+    allowDrop($event) {
+        $event.preventDefault();
+    }
+
+    drag(ev) {
+        ev.dataTransfer.setData('text', ev.target.id);
+    }
+
+    drop(ev) {
+        ev.preventDefault();
+        // tslint:disable-next-line:prefer-const
+        let data = ev.dataTransfer.getData('text');
+        ev.target.appendChild(document.getElementById(data));
+        // console.log(document.getElementById(data).id);
+
+        for (let issue of this.issueCustoms) {
+            if (issue.id === document.getElementById(data).id) {
+                this.chosenIssues.push(issue);
+                console.log(issue.code);
+                console.log(this.chosenIssues.length);
+            }
+        }
+
+        /*
+        // Return the elt by ID and use it to add it to the selected Issues
+        let x = this.issuecustomSce.find(document.getElementById(data).id);
+
+        console.log('before ' + this.chosenIssues.length);
+
+        // let issue: IssueCustom;
+        // this.chosenIssues.push(issue);
+
+        this.issuecustomSce.find(document.getElementById(data).id)
+            .subscribe((res) => this.chosenIssues.push(res));
+
+        console.log('after ' + this.chosenIssues.length);
+
+        for (let index = 0; index < this.chosenIssues.length; index++) {
+            console.log(this.chosenIssues[index].code);
+        }
+        */
     }
 
 }

@@ -9,6 +9,7 @@ import { BacklogComponent } from './backlog/backlog.component';
 import { ProjectCustomComponent } from './project-custom/project-custom.component';
 import { DashBoardProjectCustomModule } from './project-custom/project-custom.module';
 import { DashBoardBoardCustomModule } from './board-custom/board-custom.module';
+import {DashBoardVersionCustomModule} from './version-custom/version-custom.module';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { DashBoardBoardCustomModule } from './board-custom/board-custom.module';
     DashBoardIssueCustomModule,
     DashBoardProjectCustomModule,
     DashBoardBoardCustomModule,
+    DashBoardVersionCustomModule,
     RouterModule.forChild([ PmRoute ])
   ],
   declarations: [PmComponent,

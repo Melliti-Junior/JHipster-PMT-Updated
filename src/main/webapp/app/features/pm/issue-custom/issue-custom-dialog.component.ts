@@ -30,6 +30,7 @@ import { StatusService } from '../../../entities/status/status.service';
 import { ResolutionService } from '../../../entities/resolution';
 import { ProjectCustom } from '../project-custom';
 import { ProjectCustomService } from '../project-custom/project-custom.service';
+import {VersionCustom, VersionCustomService} from '../version-custom';
 
 @Component({
     selector: 'jhi-issue-custom-dialog',
@@ -49,6 +50,8 @@ export class IssueCustomDialogComponent implements OnInit {
     statuses: Status[];
     resolutions: Resolution[];
     projects: ProjectCustom[];
+    versions: VersionCustom[];
+    possibleVersions: VersionCustom[];
     issueCustoms: IssueCustom[];
 
     typename: string;
@@ -61,6 +64,7 @@ export class IssueCustomDialogComponent implements OnInit {
     // Get the projectname chosen from list (combobox)
     projectname: string;
     // projectcode: string;
+    versionname: string;
 
     epicnames: string[];
     numIssuesParentProj: number;
@@ -78,6 +82,7 @@ export class IssueCustomDialogComponent implements OnInit {
         private statusSce: StatusService,
         private resolutionSce: ResolutionService,
         private projectSce: ProjectCustomService,
+        private versionSce: VersionCustomService,
         // private comp: IssueCustomComponent
     ) {
     }
@@ -188,6 +193,18 @@ export class IssueCustomDialogComponent implements OnInit {
         console.log('Num' + this.numIssuesParentProj + this.parentProject.code);
     }
 
+    getProjectrelatedVersions() {
+        // console.log('poss prj ver' + this.possibleVersions.length);
+        for (let Ver of this.versions) {
+            console.log(Ver.project.name);
+            console.log(this.parentProject.name);
+            if ((Ver.project.name === this.parentProject.name) ) {
+                this.possibleVersions.push(Ver);
+            }
+        }
+        console.log('poss ver' + this.possibleVersions.length);
+    }
+
     findProject() {
         let index = 0;
         let found = false;
@@ -195,14 +212,33 @@ export class IssueCustomDialogComponent implements OnInit {
             if ((this.projects[index]).name === this.projectname) {
                 found = true;
                 this.parentProject = this.projects[index];
-                // this.projectcode = this.projects[index].code;
                 this.issuecustom.project = this.projects[index];
+                // this.projectcode = this.projects[index].code;
+                this.possibleVersions = new Array<VersionCustom>()
+                this.getProjectrelatedVersions();
             } else {
                 index = index + 1;
             }
         }
         console.log('aff' + this.issuecustom.project.name);
+        // console.log('poss ver' + this.possibleVersions.length);
+
         this.countParentProjectIssues();
+        // this.getProjectrelatedVersions();
+    }
+
+    findFixVersion() {
+        let index = 0;
+        let found = false;
+        while (index < this.possibleVersions.length && found === false)  {
+            if ((this.possibleVersions[index]).name === this.versionname) {
+                found = true;
+                this.issuecustom.version = this.possibleVersions[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.version.name);
     }
 
     /**
@@ -226,6 +262,8 @@ export class IssueCustomDialogComponent implements OnInit {
         .then((projects) => this.projects = projects );
         this.issuecustomService.getIssueCustoms()
         .then((issueCustoms) => this.issueCustoms = issueCustoms );
+        this.versionSce.getVersionCustoms()
+            .then((versions) => this.versions = versions );
     }
 
     /**
@@ -269,12 +307,13 @@ export class IssueCustomDialogComponent implements OnInit {
         if (this.issuecustom.id !== undefined) {
             // Add the update Date
             this.issuecustom.updatedDate = this.theDate;
-            // Configure the Issue Code
-            if (this.parentProject !== undefined) {
+            // Configure the Issue Code on update if parent project is changed
+            if ((this.parentProject !== undefined) && (this.parentProject.name !== this.issuecustom.project.name)) {
                 console.log(this.numIssuesParentProj + 1);
                 this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
-                console.log('New Code : ' + this.issuecustom.code);
             }
+            console.log('New Code : ' + this.issuecustom.code);
+
             this.subscribeToSaveResponse(
                 this.issuecustomService.update(this.issuecustom));
         } else {
