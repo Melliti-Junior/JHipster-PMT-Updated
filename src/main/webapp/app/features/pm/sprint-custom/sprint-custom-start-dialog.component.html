@@ -1,0 +1,119 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="confirmStart(sprintcustom)" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="mySprintCustomLabel">Start a Sprint</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="danger" style="background-color: #ffdddd; align-content: center;">
+        <p ><strong> Note : </strong> you can only start a sprint, if you haven't started one already. </p>
+    </div>
+
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="form-group" [hidden]="!sprintcustom.board">
+            <label for="board">Board</label>
+            <input type="text" class="form-control" id="board" name="board"
+                   [(ngModel)]="sprintcustom.board.name" readonly />
+        </div>
+
+        <div class="form-group" [hidden]="!sprintcustom.code">
+            <label for="code">Code</label>
+            <input type="text" class="form-control" id="code" name="code"
+                   [(ngModel)]="sprintcustom.code" readonly />
+        </div>
+
+<!--
+        <div class="form-group">
+            <label class="form-control-label" for="field_duration">Duration</label>
+            <input type="number" class="form-control" name="duration" id="field_duration"
+                   [(ngModel)]="sprintcustom.duration" min="1" max="4"/>
+            <div [hidden]="!(editForm.controls.duration?.dirty && editForm.controls.duration?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.duration?.errors?.min">
+                    A sprint should last at least 1 Week.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.duration?.errors?.max">
+                    A sprint should last at least 4 Week.
+                </small>
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.duration?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+-->
+        <div class="form-group">
+            <label class="form-control-label" for="field_startDate">Start Date</label>
+            <div class="input-group">
+                <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" [(ngModel)]="sprintcustom.startDate"
+                required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle();"><i class="fa fa-calendar"></i></button>
+                </span>
+                <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.startDate?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_endDate">End Date</label>
+            <div class="input-group">
+                <input id="field_endDate" type="text" class="form-control" name="endDate" ngbDatepicker  #endDateDp="ngbDatepicker" [(ngModel)]="sprintcustom.endDate"
+                required />
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+                <div [hidden]="!(editForm.controls.endDate?.dirty && editForm.controls.endDate?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.endDate?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_goal">Goal</label>
+            <input type="text" class="form-control" name="goal" id="field_goal"
+                   [(ngModel)]="sprintcustom.goal" />
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-success">
+            <span class="fa fa-check"></span>&nbsp;<span>Start</span>
+        </button>
+    </div>
+</form>
+
+<!--
+<form name="deleteForm" (ngSubmit)="confirmActivate(sprintcustom)">
+    <div class="modal-header">
+        <h4 class="modal-title">Confirm activate operation</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <p>Are you sure you want to make this sprint-custom active ?</p>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-danger">
+            <span class="fa fa-remove"></span>&nbsp;<span>Activate</span>
+        </button>
+    </div>
+</form>
+-->

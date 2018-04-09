@@ -1,60 +1,36 @@
-<div *ngIf="boardcustom" (load)="document.getElementById('backlog').click()">
+<div *ngIf="sprintcustom"> {{sprintcustom.isActive}}</div>
+<!--
+<div *ngIf="sprintcustom" (load)="document.getElementById('backlog').click()">
 
-    <div class="row" id="boardspec" >
-        <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
-        <div class="board-choices">
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-info" (click)="getProjectIssues()">Backlog</button>
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Board</button>
-
-            <div class="btn-group" role="group">
-                <button
-                    type="button"
-                    class="btn btn-success dropdown-toggle"
-                    data-toggle="dropdown"
-                    [routerLink]="['../boardcustomsprints', boardcustom.id ]">
-                    Configure
-                    <span class="caret"></span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0">Sprints</a>
-                    <a class="dropdown-item">Smartphone</a>
-                </div>
-            </div>
-
+    <div class="row" id="sprintspec" >
+        <div class="sprint-name"><h4>{{sprintcustom.name}}</h4></div>
+        <div class="sprint-choices">
+            <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-primary" (click)="getProjectIssues()">Backlog</button>
+            <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
+            <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Sprint</button>
         </div>
     </div>
 
     <section>
-        <div class="container pl-0 py-3" id="currentIssues" *ngIf="activesprint">
-            <div class="PartialBacklog row">
-                <div class="WIP">
-                    <div class="Selected" *ngIf="boardcustom.type.toUpperCase() === 'KANBAN'">Selected for Development</div>
-                    <div class="sprintName" *ngIf="boardcustom.type.toUpperCase() === 'SCRUM'">{{activesprint.name}}</div>
-                </div>
-                <div class="StartSprint" *ngIf="!activesprint.isActive">
-                    <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
-                    <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="startSprintBtn" (click)="startSprint(activesprint)" [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activesprint.id + '/start'} }]">Start Sprint</button>
-                </div>
+        <div class="container pl-0 py-3">
+            <div class="PartialBacklog">
+                <div *ngIf="sprintcustom.type.toUpperCase() === 'KANBAN'">Selected for Development</div>
+                <div *ngIf="sprintcustom.type.toUpperCase() === 'SCRUM'">Sprint Issues</div>
             </div>
 
-            <div class="DropZone container px-5" (dragover)="allowDrop($event)" (drop)="drop($event)">
+            <div class="DropZone container px-5" id="WIP" (dragover)="allowDrop($event)" (drop)="drop($event)">
 
             </div>
         </div>
 
         <div class="container pl-0 py-3">
             <div *ngIf="relatedissuecustoms">
-                <!-- <div class="card" > -->
                 <div *ngIf="relatedissuecustoms.length" class="product-backlog-info row">
                     <div class="backlog-option row">
                         <div class="product-backlog"><span>Product Backlog</span></div>
                         <div class="totIssues">{{relatedissuecustoms.length}} issues</div>
                     </div>
-                    <div class="NewSprint">
-                        <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
-                        <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="createSprintBtn" (click)="prepareSprint()" >Create Sprint</button>
-                    </div>
+                    <div class="NewSprint"><button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-info">Create Sprint</button></div>
                 </div>
 
                 <div *ngFor="let issue of relatedissuecustoms">
@@ -75,20 +51,19 @@
 
                 </div>
 
-                <!-- </div> -->
             </div>
         </div>
     </section>
 </div>
 
-
+-->
 
 
 
 <!--
-<div *ngIf="boardcustom">
-    <h4><span>{{boardcustom.code}}</span> </h4>
-    <h2><span>{{boardcustom.summary}}</span></h2>
+<div *ngIf="sprintcustom">
+    <h4><span>{{sprintcustom.code}}</span> </h4>
+    <h2><span>{{sprintcustom.summary}}</span></h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
 <div class="container">
@@ -101,32 +76,32 @@
 
           <div class="row">
             <div class="col-3">Type :</div>
-            <div *ngIf ="boardcustom.type" class="col-8">{{boardcustom.type.name}}</div>
-            <div *ngIf ="!boardcustom.type" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+            <div *ngIf ="sprintcustom.type" class="col-8">{{sprintcustom.type.name}}</div>
+            <div *ngIf ="!sprintcustom.type" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
           <div class="row">
             <div class="col-3">Priority :</div>
-            <div *ngIf ="boardcustom.priority" class="col-8">{{boardcustom.priority.name}}</div>
-            <div *ngIf ="!boardcustom.priority" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+            <div *ngIf ="sprintcustom.priority" class="col-8">{{sprintcustom.priority.name}}</div>
+            <div *ngIf ="!sprintcustom.priority" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
-          <div *ngIf ="boardcustom.epic" class="row">
+          <div *ngIf ="sprintcustom.epic" class="row">
             <div class="col-3">Epic :</div>
-            <div *ngIf ="boardcustom.epic" class="col-8">{{boardcustom.epic.summary}} ({{boardcustom.epic.name}})</div>
-            <div *ngIf ="!boardcustom.epic" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+            <div *ngIf ="sprintcustom.epic" class="col-8">{{sprintcustom.epic.summary}} ({{sprintcustom.epic.name}})</div>
+            <div *ngIf ="!sprintcustom.epic" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
           <div class="row">
             <div class="col-3">Status :</div>
-            <div *ngIf ="boardcustom.status"  class="col-8">{{boardcustom.status.name}}</div>
-            <div *ngIf ="!boardcustom.status"  class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+            <div *ngIf ="sprintcustom.status"  class="col-8">{{sprintcustom.status.name}}</div>
+            <div *ngIf ="!sprintcustom.status"  class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
           <div class="row">
             <div class="col-3">Resolution :</div>
-            <div *ngIf ="boardcustom.resolution" class="col-8">{{boardcustom.resolution.name}}</div>
-            <div *ngIf ="!boardcustom.resolution" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
+            <div *ngIf ="sprintcustom.resolution" class="col-8">{{sprintcustom.resolution.name}}</div>
+            <div *ngIf ="!sprintcustom.resolution" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
           <div class="row">
             <div class="col-3">Estimation :</div>
-            <div class="col-8">{{boardcustom.estimation}} Hours</div>
+            <div class="col-8">{{sprintcustom.estimation}} Hours</div>
           </div>
 
       </div>
@@ -137,7 +112,7 @@
       <div class="panel-body" >
 
           <div class="row">
-            <div class="col-10">{{boardcustom.description}}</div>
+            <div class="col-10">{{sprintcustom.description}}</div>
           </div>
 
       </div>
@@ -168,17 +143,17 @@
 
           <div class="row">
             <div class="col-3">Created :</div>
-            <div class="col-8">{{boardcustom.createdDate | date:'mediumDate'}}</div>
+            <div class="col-8">{{sprintcustom.createdDate | date:'mediumDate'}}</div>
           </div>
 
           <div class="row">
             <div class="col-3">Due :</div>
-            <div class="col-8">{{boardcustom.dueDate | date:'mediumDate'}}</div>
+            <div class="col-8">{{sprintcustom.dueDate | date:'mediumDate'}}</div>
           </div>
 
           <div class="row">
             <div class="col-3">Updated :</div>
-            <div class="col-8">{{boardcustom.updatedDate | date:'mediumDate'}}</div>
+            <div class="col-8">{{sprintcustom.updatedDate | date:'mediumDate'}}</div>
           </div>
 
       </div>
@@ -194,7 +169,7 @@
     </button>
 
     <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ boardcustom.id + '/edit'} }]"
+            [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprintcustom.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
             class="btn btn-primary">
@@ -203,8 +178,8 @@
 </div>
 
 
-<div *ngIf="boardcustom">
-    <h2><span>Board</span> {{boardcustom.id}}</h2>
+<div *ngIf="sprintcustom">
+    <h2><span>Sprint</span> {{sprintcustom.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
 
@@ -212,35 +187,35 @@
         <dl class="row-md jh-entity-details">
         <dt><span>Code</span></dt>
         <dd>
-            <span>{{boardcustom.code}}</span>
+            <span>{{sprintcustom.code}}</span>
         </dd>
         <dt><span>Summary</span></dt>
         <dd>
-            <span>{{boardcustom.summary}}</span>
+            <span>{{sprintcustom.summary}}</span>
         </dd>
         <dt><span>Created Date</span></dt>
         <dd>
-            <span>{{boardcustom.createdDate | date:'mediumDate'}}</span>
+            <span>{{sprintcustom.createdDate | date:'mediumDate'}}</span>
         </dd>
         <dt><span>Due Date</span></dt>
         <dd>
-            <span>{{boardcustom.dueDate | date:'mediumDate'}}</span>
+            <span>{{sprintcustom.dueDate | date:'mediumDate'}}</span>
         </dd>
         <dt><span>Estimation</span></dt>
         <dd>
-            <span>{{boardcustom.estimation}}</span>
+            <span>{{sprintcustom.estimation}}</span>
         </dd>
         <dt><span>Type</span></dt>
         <dd>
-            <span>{{boardcustom.type.name}}</span>
+            <span>{{sprintcustom.type.name}}</span>
         </dd>
         <dt><span>Priority</span></dt>
         <dd>
-            <span>{{boardcustom.priority.name}}</span>
+            <span>{{sprintcustom.priority.name}}</span>
         </dd>
         <dt><span>Epic</span></dt>
         <dd>
-            <span>{{boardcustom.epic.name}}</span>
+            <span>{{sprintcustom.epic.name}}</span>
         </dd>
     </dl>
 
@@ -261,7 +236,7 @@
     </button>
 
     <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ boardcustom.id + '/edit'} }]"
+            [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprintcustom.id + '/edit'} }]"
             replaceUrl="true"
             queryParamsHandling="merge"
             class="btn btn-primary">

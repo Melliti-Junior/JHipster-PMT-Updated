@@ -20,11 +20,7 @@
 }
 
 .NewSprint {
-    padding-left: 17%;
-}
-
-.StartSprint {
-    width: 8%;
+    padding-left: 14%;
 }
 
 .product-backlog-info {
@@ -51,11 +47,6 @@
     padding: inherit;
 }
 
-.WIP {
-    width: 92%;
-    padding-left: 1%;
-}
-
 #boardspec {
     display: flex;
     flex-wrap: nowrap;
@@ -63,12 +54,11 @@
 }
 
 .board-name {
-    width:70%;
-    padding-left: 2%;
+    width:75%;
 }
 
 .board-choices {
-    width:40%;
+    width:30%;
     padding-left: 7%;
 }
 

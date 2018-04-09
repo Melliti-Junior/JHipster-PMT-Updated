@@ -1,0 +1,99 @@
+<div>
+    <h2>
+        <span>Sprints</span>
+        <button class="btn btn-primary float-right jh-create-entity create-sprint-custom" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Sprint
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="sprintcustoms">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
+            <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span>Start Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="name"><span>End Date</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="type"><span>Goal</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="project"><span>Board</span> <span class="fa fa-sort"></span></th>
+
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let sprint of sprintcustoms ;trackBy: trackId">
+                <!--<td><a [routerLink]="['../sprintcustoms', sprint.id ]">{{sprint.id}}</a></td>-->
+                <td><a [routerLink]="['../sprintcustoms', sprint.id ]">{{sprint.code}}</a></td>
+                <td>{{sprint.name}}</td>
+                <td>{{sprint.startDate | date:'mediumDate'}}</td>
+                <td>{{sprint.endDate | date:'mediumDate'}}</td>
+                <td>{{sprint.goal}}</td>
+                <td *ngIf="sprint.board">{{sprint.board.name}}</td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+
+                        <button type="submit" *ngIf="!sprint.isActive"
+                                [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprint.id + '/start'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-success btn-sm">
+                            <span class="fa fa-check"></span>
+                            <span class="d-none d-md-inline">Start</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['../sprintcustoms', sprint.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprint.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprint.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="sprintcustoms && sprintcustoms.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

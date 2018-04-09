@@ -10,6 +10,7 @@ import { ProjectCustomComponent } from './project-custom/project-custom.componen
 import { DashBoardProjectCustomModule } from './project-custom/project-custom.module';
 import { DashBoardBoardCustomModule } from './board-custom/board-custom.module';
 import {DashBoardVersionCustomModule} from './version-custom/version-custom.module';
+import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import {DashBoardVersionCustomModule} from './version-custom/version-custom.modu
     DashBoardProjectCustomModule,
     DashBoardBoardCustomModule,
     DashBoardVersionCustomModule,
+    DashBoardSprintCustomModule,
     RouterModule.forChild([ PmRoute ])
   ],
   declarations: [PmComponent,

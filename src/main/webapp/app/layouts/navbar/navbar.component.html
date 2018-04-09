@@ -124,6 +124,12 @@
                             <span>Version</span>
                         </a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="sprint" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span>Sprint</span>
+                        </a>
+                    </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
             </li>
@@ -246,6 +252,16 @@
                         <li>
                             <a class="dropdown-item" routerLink="/projectcustoms" routerLinkActive="active">
                                 <span>View All Projects</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/boardcustoms" routerLinkActive="active">
+                                <span>View All Boards</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/sprintcustoms" routerLinkActive="active">
+                                <span>View All Sprints</span>
                             </a>
                         </li>
                     </ul>

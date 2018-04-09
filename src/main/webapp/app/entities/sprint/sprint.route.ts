@@ -2,14 +2,14 @@ import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
 import { JhiPaginationUtil } from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { BoardCustomComponent } from './board-custom.component';
-import { BoardCustomDetailComponent } from './board-custom-detail.component';
-import { BoardCustomPopupComponent } from './board-custom-dialog.component';
-import { BoardCustomDeletePopupComponent } from './board-custom-delete-dialog.component';
+import { UserRouteAccessService } from '../../shared';
+import { SprintComponent } from './sprint.component';
+import { SprintDetailComponent } from './sprint-detail.component';
+import { SprintPopupComponent } from './sprint-dialog.component';
+import { SprintDeletePopupComponent } from './sprint-delete-dialog.component';
 
 @Injectable()
-export class BoardCustomResolvePagingParams implements Resolve<any> {
+export class SprintResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: JhiPaginationUtil) {}
 
@@ -24,56 +24,56 @@ export class BoardCustomResolvePagingParams implements Resolve<any> {
     }
 }
 
-export const boardcustomRoute: Routes = [
+export const sprintRoute: Routes = [
     {
-        path: 'boardcustoms',
-        component: BoardCustomComponent,
+        path: 'sprint',
+        component: SprintComponent,
         resolve: {
-            'pagingParams': BoardCustomResolvePagingParams
+            'pagingParams': SprintResolvePagingParams
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'BoardCustoms'
+            pageTitle: 'Sprints'
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'boardcustoms/:id',
-        component: BoardCustomDetailComponent,
+        path: 'sprint/:id',
+        component: SprintDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'BoardCustoms'
+            pageTitle: 'Sprints'
         },
         canActivate: [UserRouteAccessService]
-    },
+    }
 ];
 
-export const boardcustomPopupRoute: Routes = [
+export const sprintPopupRoute: Routes = [
     {
-        path: 'boardcustom-new',
-        component: BoardCustomPopupComponent,
+        path: 'sprint-new',
+        component: SprintPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'BoardCustoms'
+            pageTitle: 'Sprints'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'boardcustoms/:id/edit',
-        component: BoardCustomPopupComponent,
+        path: 'sprint/:id/edit',
+        component: SprintPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Boards'
+            pageTitle: 'Sprints'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'boardcustoms/:id/delete',
-        component: BoardCustomDeletePopupComponent,
+        path: 'sprint/:id/delete',
+        component: SprintDeletePopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'BoardCustoms'
+            pageTitle: 'Sprints'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
