@@ -48,6 +48,10 @@ public class IssueCustom extends Issue implements Serializable {
     private VersionCustom version;
 
     @DBRef
+    @Field("sprint")
+    private SprintCustom sprint;
+
+    @DBRef
     @CascadeSave
     //@ManyToOne(fetch = FetchType.EAGER)
     @ManyToOne
@@ -55,15 +59,7 @@ public class IssueCustom extends Issue implements Serializable {
     // @JsonManagedReference
     private ProjectCustom project;
 
-	public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project) {
-		super();
-		this.type = type;
-		this.priority = priority;
-		this.epic = epic;
-		this.project = project;
-    }
-
-    public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution, VersionCustom version) {
+    public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution, VersionCustom version, SprintCustom sprint) {
 		super();
 		this.type = type;
 		this.priority = priority;
@@ -72,6 +68,7 @@ public class IssueCustom extends Issue implements Serializable {
 		this.status = status;
 		this.resolution = resolution;
 		this.version = version;
+		this.sprint = sprint;
 	}
 
 
@@ -133,5 +130,13 @@ public class IssueCustom extends Issue implements Serializable {
 
     public void setVersion(VersionCustom version) {
         this.version = version;
+    }
+
+    public SprintCustom getSprint() {
+        return sprint;
+    }
+
+    public void setSprint(SprintCustom sprint) {
+        this.sprint = sprint;
     }
 }

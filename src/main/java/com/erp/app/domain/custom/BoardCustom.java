@@ -21,7 +21,7 @@ public class BoardCustom extends Board implements Serializable {
 	@Field("project")
     private ProjectCustom project;
 
-    public BoardCustom(ProjectCustom project, SprintCustom activeSprint) {
+    public BoardCustom(ProjectCustom project) {
 		super();
 		this.project = project;
     }

@@ -11,8 +11,7 @@ export class IssueCustomPopupService {
     constructor(
         private modalService: NgbModal,
         private router: Router,
-        private issuecustomService: IssueCustomService
-
+        private issuecustomService: IssueCustomService,
     ) {
         this.ngbModalRef = null;
     }
@@ -31,6 +30,13 @@ export class IssueCustomPopupService {
                             year: issuecustom.createdDate.getFullYear(),
                             month: issuecustom.createdDate.getMonth() + 1,
                             day: issuecustom.createdDate.getDate()
+                        };
+                    }
+                    if (issuecustom.updatedDate) {
+                        issuecustom.updatedDate = {
+                            year: issuecustom.updatedDate.getFullYear(),
+                            month: issuecustom.updatedDate.getMonth() + 1,
+                            day: issuecustom.updatedDate.getDate()
                         };
                     }
                     if (issuecustom.dueDate) {

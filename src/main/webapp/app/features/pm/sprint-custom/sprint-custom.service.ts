@@ -131,10 +131,12 @@ export class SprintCustomService {
         const copy: SprintCustom = Object.assign({}, sprintcustom);
         copy.startDate = this.dateUtils
             .convertLocalDateToServer(sprintcustom.startDate);
+        console.log('start : ' + copy.startDate);
+
         copy.endDate = this.dateUtils
             .convertLocalDateToServer(sprintcustom.endDate);
+        console.log('end : ' + copy.endDate);
 
-        console.log(sprintcustom.id + ' created');
         return copy;
     }
 

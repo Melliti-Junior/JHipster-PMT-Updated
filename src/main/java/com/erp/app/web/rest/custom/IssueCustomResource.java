@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,7 +40,7 @@ import io.github.jhipster.web.util.ResponseUtil;
 @RestController
 @RequestMapping("/api/custom")
 public class IssueCustomResource {
-	
+
 	private final Logger log = LoggerFactory.getLogger(IssueCustomResource.class);
 
     private static final String ENTITY_NAME = "issuecustom";

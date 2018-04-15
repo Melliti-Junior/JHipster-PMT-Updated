@@ -6,6 +6,7 @@ import { Status } from '../../../entities/status';
 import { Resolution } from '../../../entities/resolution';
 import { ProjectCustom } from '../project-custom';
 import {VersionCustom} from '../version-custom';
+import {SprintCustom} from '../sprint-custom';
 
 export class IssueCustom extends Issue {
     constructor(
@@ -16,6 +17,7 @@ export class IssueCustom extends Issue {
         public resolution?: Resolution,
         public project?: ProjectCustom,
         public version?: VersionCustom,
+        public sprint?: SprintCustom,
     ) {
         super();
         priority = new IssuePriority();
@@ -25,5 +27,6 @@ export class IssueCustom extends Issue {
         resolution = new Resolution();
         project = new ProjectCustom();
         version = new VersionCustom();
+        sprint = new SprintCustom();
     }
 }

@@ -95,14 +95,14 @@ export class IssueCustomService {
      * Convert a returned JSON ObjReturned to IssueCustom.
      */
     private convertItemFromServer(json: any): IssueCustom {
-        this.ObjReturned = Object.assign(new IssueCustom(), json);
-        this.ObjReturned.createdDate = this.dateUtils
+        const entity: IssueCustom = Object.assign(new IssueCustom(), json);
+        entity.createdDate = this.dateUtils
             .convertLocalDateFromServer(json.createdDate);
-        this.ObjReturned.dueDate = this.dateUtils
+        entity.dueDate = this.dateUtils
             .convertLocalDateFromServer(json.dueDate);
-        this.ObjReturned.updatedDate = this.dateUtils
+        entity.updatedDate = this.dateUtils
             .convertLocalDateFromServer(json.updatedDate);
-        return this.ObjReturned;
+        return entity;
     }
 
     /**
@@ -115,12 +115,53 @@ export class IssueCustomService {
         // issuecustom.updatedDate = new Date().getDate;
         // issuecustom.dueDate = new Date().getDate;
         const copy: IssueCustom = Object.assign({}, issuecustom);
+       if (copy.id === undefined) {
+            console.log('creation');
+           // copy.updatedDate = Object.assign(copy.updatedDate);
+       } else {
+            console.log('update');
+       }
+        console.log('Created : ' + copy.createdDate);
         copy.createdDate = this.dateUtils
             .convertLocalDateToServer(issuecustom.createdDate);
-        copy.dueDate = this.dateUtils
-            .convertLocalDateToServer(issuecustom.dueDate);
+
+        console.log('Updated : ' + copy.updatedDate);
         copy.updatedDate = this.dateUtils
             .convertLocalDateToServer(issuecustom.updatedDate);
+
+        console.log('Due : ' + copy.dueDate);
+        copy.dueDate = this.dateUtils
+            .convertLocalDateToServer(issuecustom.dueDate);
+            /*
+        if (copy.createdDate !== undefined) {
+            if (copy.createdDate.valid) {
+                console.log('Created : ' + issuecustom.createdDate);
+                copy.createdDate = this.dateUtils
+                    .convertLocalDateToServer(issuecustom.createdDate);
+            }
+        } else {
+            console.error('Invalid Date : createdDate')
+        }
+        if (copy.dueDate !== undefined) {
+            if (copy.dueDate.valid) {
+                console.log('Due : ' + issuecustom.dueDate);
+                copy.dueDate = this.dateUtils
+                    .convertLocalDateToServer(issuecustom.dueDate);
+            }
+        } else {
+            console.error('Invalid Date : dueDate')
+        }
+        if (copy.updatedDate !== undefined) {
+            if (copy.updatedDate.valid) {
+                console.log('Updated : ' + issuecustom.updatedDate);
+                copy.updatedDate = this.dateUtils
+                    .convertLocalDateToServer(issuecustom.updatedDate);
+                return copy;
+            }
+        } else {
+            console.error('Invalid Date : updatedDate')
+        }
+        */
         return copy;
     }
 

@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
 
-import { BoardCustom } from './board-custom.model';
+import {BoardCustom} from './board-custom.model';
 import { BoardCustomPopupService } from './board-custom-popup.service';
 import { BoardCustomService } from './board-custom.service';
 import { BoardCustomComponent } from './board-custom.component';
@@ -53,6 +53,8 @@ export class BoardCustomDialogComponent implements OnInit {
         private projectSce: ProjectCustomService,
         // private comp: BoardCustomComponent
     ) {
+        // To check ----
+        // this.boardcustom = new BoardCustom();
     }
 
     ngOnInit() {

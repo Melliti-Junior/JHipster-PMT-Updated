@@ -1,6 +1,6 @@
 <nav class="navbar navbar-dark navbar-expand-md jh-navbar">
      <div *ngIf="isAuthenticated()" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-        <button class="btn btn-outline-light fa fa-cubes" id="dropdownManual" aria-hidden="true" ngbDropdownToggle > Modules</button>
+        <button class="btn btn-outline-light fa fa-cubes" style="font-size:24px;" id="dropdownManual" aria-hidden="true" ngbDropdownToggle ></button>
         <div ngbDropdownMenu aria-labelledby="dropdownManual">
             <button class="dropdown-item fa fa-trello" routerLink="pm" (click)="pmChosen()"> Project Management</button>
             <!-- you could add other modules here
@@ -254,16 +254,6 @@
                                 <span>View All Projects</span>
                             </a>
                         </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="/boardcustoms" routerLinkActive="active">
-                                <span>View All Boards</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" routerLink="/sprintcustoms" routerLinkActive="active">
-                                <span>View All Sprints</span>
-                            </a>
-                        </li>
                     </ul>
                 </li>
                 <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
@@ -292,6 +282,11 @@
                         <li>
                             <a class="dropdown-item" routerLink="/boardcustoms" routerLinkActive="active">
                                 <span>Manage Boards</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/sprintcustoms" routerLinkActive="active">
+                                <span>Manage Sprints</span>
                             </a>
                         </li>
                     </ul>

@@ -125,8 +125,7 @@ currentAccount: any;
         return item.id;
     }
     registerChangeInBoardCustoms() {
-        this.eventSubscriber = this.eventManager.subscribe('boardcustomsListModification', (response) => this.loadAll());
-    }
+        this.eventSubscriber = this.eventManager.subscribe('boardcustomsListModification', (response) => this.loadAll());     }
 
     sort() {
         const result = [this.predicate + ',' + (this.reverse ? 'asc' : 'desc')];

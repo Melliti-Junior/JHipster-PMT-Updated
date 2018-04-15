@@ -23,8 +23,10 @@
     padding-left: 17%;
 }
 
-.StartSprint {
-    width: 8%;
+.startSprintBtn {
+    display: flex;
+    width: 80%;
+    justify-content: flex-end;
 }
 
 .product-backlog-info {
@@ -38,12 +40,44 @@
     padding-left: inherit;
 }
 
-.totIssues {
+.backlogIssues {
     font-size: 14px;
     font-weight: normal;
     color: #888888;
 }
 
+.sprintIssues {
+    font-size: 14px;
+    font-weight: normal;
+    color: #888888;
+}
+
+.sprintInfo {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}
+
+.sprintDates {
+    padding-left: 1%;
+    display: flex;
+    flex-flow: row wrap;
+    color: #888888;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.sprintStart {
+    margin-right: 1%;
+}
+
+.sprintEnd {
+    margin-left: 1%;
+}
+
+.separateDates {
+    font-weight: bold;
+}
 
 .PartialBacklog {
     font-size: 14px;
@@ -52,8 +86,8 @@
 }
 
 .WIP {
-    width: 92%;
     padding-left: 1%;
+    padding-right: 1%;
 }
 
 #boardspec {

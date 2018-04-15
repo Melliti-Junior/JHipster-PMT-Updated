@@ -5,7 +5,7 @@
     <div class="row" id="sprintspec" >
         <div class="sprint-name"><h4>{{sprintcustom.name}}</h4></div>
         <div class="sprint-choices">
-            <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-primary" (click)="getProjectIssues()">Backlog</button>
+            <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-primary" (click)="getBacklogIssues()">Backlog</button>
             <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
             <button *ngIf="sprintcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Sprint</button>
         </div>
@@ -24,16 +24,16 @@
         </div>
 
         <div class="container pl-0 py-3">
-            <div *ngIf="relatedissuecustoms">
-                <div *ngIf="relatedissuecustoms.length" class="product-backlog-info row">
+            <div *ngIf="relatedIssuesPerBoard">
+                <div *ngIf="relatedIssuesPerBoard.length" class="product-backlog-info row">
                     <div class="backlog-option row">
                         <div class="product-backlog"><span>Product Backlog</span></div>
-                        <div class="totIssues">{{relatedissuecustoms.length}} issues</div>
+                        <div class="totIssues">{{relatedIssuesPerBoard.length}} issues</div>
                     </div>
                     <div class="NewSprint"><button *ngIf="sprintcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-info">Create Sprint</button></div>
                 </div>
 
-                <div *ngFor="let issue of relatedissuecustoms">
+                <div *ngFor="let issue of relatedIssuesPerBoard">
 
                     <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" >
                         <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>

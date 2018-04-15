@@ -45,13 +45,11 @@ export class NavbarComponent implements OnInit {
             this.swaggerEnabled = profileInfo.swaggerEnabled;
         });
 
-        /*
         if (this.isPMSelected) {
             this.PMChosen = true;
         } else {
             this.PMChosen = false;
         }
-        */
     }
 
     collapseNavbar() {

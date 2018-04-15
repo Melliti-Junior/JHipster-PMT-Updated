@@ -3,8 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {JhiDateUtils, JhiEventManager} from 'ng-jhipster';
 
 import { IssueCustom } from './issue-custom.model';
 import { IssueCustomPopupService } from './issue-custom-popup.service';
@@ -71,6 +71,7 @@ export class IssueCustomDialogComponent implements OnInit {
 
     theDate: NgbDateStruct;
     now = new Date();
+    myDate: any;
 
     constructor(
         public activeModal: NgbActiveModal,
@@ -83,6 +84,8 @@ export class IssueCustomDialogComponent implements OnInit {
         private resolutionSce: ResolutionService,
         private projectSce: ProjectCustomService,
         private versionSce: VersionCustomService,
+        private dateUtils: JhiDateUtils,
+        private ngbDateParserFormatter: NgbDateParserFormatter,
         // private comp: IssueCustomComponent
     ) {
     }
@@ -90,12 +93,16 @@ export class IssueCustomDialogComponent implements OnInit {
     ngOnInit() {
         this.isSaving = false;
         this.loadAttributes();
+        // this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         // this.issuecustom.dueDate = this.theDate;
-        console.log(this.theDate);
+        console.log('ngB : ' + this.theDate);
         // this.getEpicNames();
         // this.setDefaultAttributes();
         // this.countParentProjectIssues();
+        // let myDate = new Date(this.theDate.year, this.theDate.month-1, this.theDate.day);
+        this.myDate = this.ngbDateParserFormatter.format(this.theDate);
+        console.log('ngBParse : ' + this.myDate);
     }
 
     clear() {

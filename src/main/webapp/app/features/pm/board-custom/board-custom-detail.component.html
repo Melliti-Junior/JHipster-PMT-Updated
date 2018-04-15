@@ -3,16 +3,27 @@
     <div class="row" id="boardspec" >
         <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
         <div class="board-choices">
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-info" (click)="getProjectIssues()">Backlog</button>
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-info" (click)="getBacklogIssues(); getSprintIssues();">Backlog</button>
             <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
             <button *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Board</button>
 
+            <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
+                <button class="btn btn-success" id="dropdownManual" aria-hidden="true" ngbDropdownToggle >Board</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownManual">
+                    <button class="dropdown-item">Configure</button>
+                    <!-- you could add other modules here
+                    <button class="dropdown-item">Another Action</button>
+                    <button class="dropdown-item">Something else is here</button>
+                    -->
+                </div>
+            </div>
+<!--
             <div class="btn-group" role="group">
                 <button
                     type="button"
                     class="btn btn-success dropdown-toggle"
                     data-toggle="dropdown"
-                    [routerLink]="['../boardcustomsprints', boardcustom.id ]">
+                    >
                     Configure
                     <span class="caret"></span>
                 </button>
@@ -21,58 +32,102 @@
                     <a class="dropdown-item">Smartphone</a>
                 </div>
             </div>
-
+-->
         </div>
     </div>
 
     <section>
-        <div class="container pl-0 py-3" id="currentIssues" *ngIf="activesprint">
+        <div class="container pl-0 py-3" id="currentIssues" *ngIf="activeSprint">
             <div class="PartialBacklog row">
-                <div class="WIP">
-                    <div class="Selected" *ngIf="boardcustom.type.toUpperCase() === 'KANBAN'">Selected for Development</div>
-                    <div class="sprintName" *ngIf="boardcustom.type.toUpperCase() === 'SCRUM'">{{activesprint.name}}</div>
+                <div class="sprintInfo">
+                    <div class="WIP">
+                        <div class="Selected" *ngIf="boardcustom.type.toUpperCase() === 'KANBAN'">Selected for Development</div>
+                        <div class="sprintName" *ngIf="boardcustom.type.toUpperCase() === 'SCRUM'">{{activeSprint.name}}</div>
+                    </div>
+                    <div class="sprintIssues">{{relatedIssuesPerSprint.length}} issues</div>
                 </div>
-                <div class="StartSprint" *ngIf="!activesprint.isActive">
+                <!--<div class="StartSprint" *ngIf="!activeSprint.isActive">-->
+                <div class="startSprintBtn">
                     <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
-                    <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="startSprintBtn" (click)="startSprint(activesprint)" [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activesprint.id + '/start'} }]">Start Sprint</button>
+                    <button disabled="disabled" *ngIf="(boardcustom.type.toUpperCase().localeCompare('SCRUM')===0) && (!activeSprint.isActive)" class="btn btn-warning" id="startSprintBtn" (click)="startSprint()" [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activeSprint.id + '/start'} }]">Start Sprint</button>
                 </div>
             </div>
 
-            <div class="DropZone container px-5" (dragover)="allowDrop($event)" (drop)="drop($event)">
+            <div class="sprintDates row pb-3" *ngIf="activeSprint.startDate && activeSprint.endDate">
+                <div class="sprintStart">{{activeSprint.startDate | date:'mediumDate'}}</div>
+                <div class="separateDates"> | </div>
+                <div class="sprintEnd">{{activeSprint.endDate | date:'mediumDate'}}</div>
+            </div>
 
+            <div class="DropZone container px-5" (dragover)="allowDrop($event)" (drop)="drop($event)" *ngIf="relatedIssuesPerSprint">
+                <div *ngIf="activeSprint.isActive">
+                    <div *ngFor="let sp_issue of relatedIssuesPerSprint">
+                        <div class="issue row" id={{sp_issue.id}}>
+                            <div class="issue-priority-color" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
+                            <div class="issue-type-icon"><img  [src] = "sp_issue.type.icon" /></div>
+                            <div class="issue-info row" id="attributessp">
+                                <div class="code"><a href="#/issuecustoms/{{sp_issue.id}}">{{sp_issue.code}}</a></div>
+                                <div class="summary">{{sp_issue.summary}}</div>
+                                <div class="external-info">
+                                    <div class="epic" *ngIf="sp_issue.epic" [style.background-color] = "sp_issue.epic.color">{{sp_issue.epic.name}}</div>
+                                    <div class="version" *ngIf="sp_issue.version">{{sp_issue.version.name}}</div>
+                                </div>
+                                <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--
+                <div *ngFor="let sp_issue of chosenIssues">
+                    <div class="issue row" id={{sp_issue.id}}>
+                        <div class="issue-priority-color" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
+                        <div class="issue-type-icon"><img  [src] = "sp_issue.type.icon" /></div>
+                        <div class="issue-info row" id="attributessp">
+                            <div class="code"><a href="#/issuecustoms/{{sp_issue.id}}">{{sp_issue.code}}</a></div>
+                            <div class="summary">{{sp_issue.summary}}</div>
+                            <div class="external-info">
+                                <div class="epic" *ngIf="sp_issue.epic" [style.background-color] = "sp_issue.epic.color">{{sp_issue.epic.name}}</div>
+                                <div class="version" *ngIf="sp_issue.version">{{sp_issue.version.name}}</div>
+                            </div>
+                            <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                        </div>
+                    </div>
+                </div>
+                -->
             </div>
         </div>
 
         <div class="container pl-0 py-3">
-            <div *ngIf="relatedissuecustoms">
+            <div *ngIf="relatedIssuesPerBoard">
                 <!-- <div class="card" > -->
-                <div *ngIf="relatedissuecustoms.length" class="product-backlog-info row">
+                <div *ngIf="relatedIssuesPerBoard.length" class="product-backlog-info row">
                     <div class="backlog-option row">
                         <div class="product-backlog"><span>Product Backlog</span></div>
-                        <div class="totIssues">{{relatedissuecustoms.length}} issues</div>
+                        <div class="backlogIssues">{{relatedIssuesPerBoard.length}} issues</div>
                     </div>
-                    <div class="NewSprint">
+                    <div class="NewSprint" *ngIf="activeSprint === undefined">
                         <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
                         <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="createSprintBtn" (click)="prepareSprint()" >Create Sprint</button>
                     </div>
                 </div>
 
-                <div *ngFor="let issue of relatedissuecustoms">
-
-                    <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" >
-                        <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
-                        <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
-                        <div class="issue-info row" id="attributes">
-                            <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
-                            <div class="summary">{{issue.summary}}</div>
-                            <div class="external-info">
-                                <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
-                                <div class="version" *ngIf="issue.version">{{issue.version.name}}</div>
+                <div *ngFor="let issue of relatedIssuesPerBoard">
+                    <div *ngIf="issue.sprint === null">
+                        <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                            <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                            <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
+                            <div class="issue-info row" id="attributes">
+                                <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
+                                <div class="summary">{{issue.summary}}</div>
+                                <div class="external-info">
+                                    <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
+                                    <div class="version" *ngIf="issue.version">{{issue.version.name}}</div>
+                                </div>
+                                <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
                             </div>
-                            <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
                         </div>
                     </div>
-
                 </div>
 
                 <!-- </div> -->
