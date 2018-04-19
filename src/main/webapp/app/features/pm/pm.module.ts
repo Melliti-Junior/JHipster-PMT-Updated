@@ -11,6 +11,7 @@ import { DashBoardProjectCustomModule } from './project-custom/project-custom.mo
 import { DashBoardBoardCustomModule } from './board-custom/board-custom.module';
 import {DashBoardVersionCustomModule} from './version-custom/version-custom.module';
 import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module';
+import {AgileComponent} from './agile';
 
 @NgModule({
   imports: [
@@ -24,6 +25,7 @@ import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module'
   ],
   declarations: [PmComponent,
     BacklogComponent,
+      AgileComponent,
     // ProjectCustomComponent
 ],
 providers: [

@@ -1,0 +1,57 @@
+<!--
+<div class="container-fluid">
+    <div id="agileColumns" class="row">
+        <div class="panel panel-primary col" *ngFor="let col of cols">
+            <div class="agileColumn">
+                <div class="panel-heading columnName">
+                    {{col}}
+                </div>
+                <div class="panel-body">
+                    <div class="column-content" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)" *ngFor="let issue of issues">
+                        <div *ngIf="((issue.status) && (issue.status.name === col))" class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)">
+                            <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="info row pl-3">
+                                        <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
+                                        <div class="issue-code"><div class="card-title"><a [routerLink]="['../issuecustoms', issue.id ]">{{issue.code}}</a></div></div>
+                                        <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                    </div>
+                                    <div class="issue-summary pl-3">{{issue.summary}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+-->
+
+<div class="container-fluid">
+    <div id="agileColumns" class="row">
+        <div class="panel panel-primary col" *ngFor="let col of cols">
+            <div class="agileColumn">
+                <div class="panel-heading column-name"> {{col}} </div>
+                <div class="panel-body column-content" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)" (dragleave)="dragleave($event)">
+                    <div *ngFor="let issue of issues">
+                        <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                            <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                            <div class="card-content">
+                                <div class="card-body">
+                                    <div class="info row pl-3">
+                                        <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
+                                        <div class="issue-code"><div class="card-title"><a [routerLink]="['../issuecustoms', issue.id ]">{{issue.code}}</a></div></div>
+                                        <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                    </div>
+                                    <div class="issue-summary pl-3">{{issue.summary}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

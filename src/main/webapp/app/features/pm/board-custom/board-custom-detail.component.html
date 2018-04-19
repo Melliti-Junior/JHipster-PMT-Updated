@@ -11,28 +11,8 @@
                 <button class="btn btn-success" id="dropdownManual" aria-hidden="true" ngbDropdownToggle >Board</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownManual">
                     <button class="dropdown-item">Configure</button>
-                    <!-- you could add other modules here
-                    <button class="dropdown-item">Another Action</button>
-                    <button class="dropdown-item">Something else is here</button>
-                    -->
                 </div>
             </div>
-<!--
-            <div class="btn-group" role="group">
-                <button
-                    type="button"
-                    class="btn btn-success dropdown-toggle"
-                    data-toggle="dropdown"
-                    >
-                    Configure
-                    <span class="caret"></span>
-                </button>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0">Sprints</a>
-                    <a class="dropdown-item">Smartphone</a>
-                </div>
-            </div>
--->
         </div>
     </div>
 
@@ -59,9 +39,9 @@
                 <div class="sprintEnd">{{activeSprint.endDate | date:'mediumDate'}}</div>
             </div>
 
-            <div class="DropZone container px-5" (dragover)="allowDrop($event)" (drop)="drop($event)" *ngIf="relatedIssuesPerSprint">
-                <div *ngIf="activeSprint.isActive">
-                    <div *ngFor="let sp_issue of relatedIssuesPerSprint">
+            <div class="dropZone container px-5" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)" *ngIf="relatedIssuesPerSprint">
+                <div class="a" *ngIf="activeSprint.isActive">
+                    <div class="b" *ngFor="let sp_issue of relatedIssuesPerSprint">
                         <div class="issue row" id={{sp_issue.id}}>
                             <div class="issue-priority-color" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
                             <div class="issue-type-icon"><img  [src] = "sp_issue.type.icon" /></div>

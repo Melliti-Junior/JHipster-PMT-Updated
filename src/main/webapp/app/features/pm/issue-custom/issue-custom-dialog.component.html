@@ -50,7 +50,7 @@
         <div class="form-group">
             <label class="form-control-label" for="field_version">Fix version</label>
             <select class="form-control" name="version" id="field_version" [(ngModel)]="versionname" (change) = "findFixVersion()">
-                <option *ngFor="let version of possibleVersions" [value]="version"> {{version.name}}</option>
+                <option *ngFor="let version of possibleVersions" [value]="version.name"> {{version.name}}</option>
             </select>
         </div>
 

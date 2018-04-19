@@ -9,6 +9,7 @@ import { MenuItem } from 'primeng/components/common/api';
 export class PmComponent implements OnInit {
 
     items: MenuItem[];
+    cols: string[] = ['1', '2', '3'];
 
   constructor() { }
 

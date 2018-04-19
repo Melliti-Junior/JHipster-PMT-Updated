@@ -31,6 +31,7 @@ import { ResolutionService } from '../../../entities/resolution';
 import { ProjectCustom } from '../project-custom';
 import { ProjectCustomService } from '../project-custom/project-custom.service';
 import {VersionCustom, VersionCustomService} from '../version-custom';
+import {ResponseWrapper} from "../../../shared";
 
 @Component({
     selector: 'jhi-issue-custom-dialog',
@@ -103,6 +104,15 @@ export class IssueCustomDialogComponent implements OnInit {
         // let myDate = new Date(this.theDate.year, this.theDate.month-1, this.theDate.day);
         this.myDate = this.ngbDateParserFormatter.format(this.theDate);
         console.log('ngBParse : ' + this.myDate);
+
+        this.statusSce.search({query : 'Open'})
+            .subscribe(
+                (res: ResponseWrapper) => this.getInitialStatus(res.json, res.headers),
+                (error) => console.log(error))
+        this.resolutionSce.search({query : 'Unresolved'})
+            .subscribe(
+                (res: ResponseWrapper) => this.getInitialResolution(res.json, res.headers),
+                (error) => console.log(error))
     }
 
     clear() {
@@ -235,6 +245,7 @@ export class IssueCustomDialogComponent implements OnInit {
     }
 
     findFixVersion() {
+        // this.issuecustom.version = new VersionCustom();
         let index = 0;
         let found = false;
         while (index < this.possibleVersions.length && found === false)  {
@@ -282,6 +293,20 @@ export class IssueCustomDialogComponent implements OnInit {
     findByname(name: string) {
         this.issuecustomService.findByRequest(name);
         // console.log(this.comp.issuecustoms);
+    }
+
+    getInitialStatus(data, header) {
+        for (let status of data) {
+            this.issuecustom.status = status;
+        }
+        // console.log(this.relatedSprintsBoard);
+
+    }
+
+    getInitialResolution(data, headers) {
+        for (let resolution of data) {
+            this.issuecustom.resolution = resolution;
+        }
     }
 
     setDefaultAttributes() {

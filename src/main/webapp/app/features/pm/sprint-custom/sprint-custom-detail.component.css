@@ -6,7 +6,7 @@
     margin: 0px;
 }
 
-.DropZone {
+.dropZone {
     border: 2px dashed blueviolet;
     min-height: 25px;
     padding: inherit;

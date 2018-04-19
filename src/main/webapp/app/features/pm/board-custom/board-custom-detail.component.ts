@@ -331,7 +331,8 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
     }
 
     allowDrop($event) {
-        if (!this.activeSprint.isActive) {
+        // alert($event.target.id)
+        if ((!this.activeSprint.isActive) && ($event.target.id.localeCompare('droppable') !== -1)) {
             $event.preventDefault();
         }
     }
