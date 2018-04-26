@@ -3,13 +3,13 @@ import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@a
 import { JhiPaginationUtil } from 'ng-jhipster';
 
 import { UserRouteAccessService } from '../../../shared';
-import { ColumnCustomComponent } from './column-custom.component';
-import { ColumnCustomDetailComponent } from './column-custom-detail.component';
-import { ColumnCustomPopupComponent } from './column-custom-dialog.component';
-import { ColumnCustomDeletePopupComponent } from './column-custom-delete-dialog.component';
+import { StepCustomComponent } from './step-custom.component';
+import { StepCustomDetailComponent } from './step-custom-detail.component';
+import { StepCustomPopupComponent } from './step-custom-dialog.component';
+import { StepCustomDeletePopupComponent } from './step-custom-delete-dialog.component';
 
 @Injectable()
-export class ColumnCustomResolvePagingParams implements Resolve<any> {
+export class StepCustomResolvePagingParams implements Resolve<any> {
 
     constructor(private paginationUtil: JhiPaginationUtil) {}
 
@@ -24,56 +24,56 @@ export class ColumnCustomResolvePagingParams implements Resolve<any> {
     }
 }
 
-export const columnCustomRoute: Routes = [
+export const stepCustomRoute: Routes = [
     {
-        path: 'columncustoms',
-        component: ColumnCustomComponent,
+        path: 'stepcustoms',
+        component: StepCustomComponent,
         resolve: {
-            'pagingParams': ColumnCustomResolvePagingParams
+            'pagingParams': StepCustomResolvePagingParams
         },
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'ColumnCustoms'
+            pageTitle: 'StepCustoms'
         },
         canActivate: [UserRouteAccessService]
     }, {
-        path: 'columncustoms/:id',
-        component: ColumnCustomDetailComponent,
+        path: 'stepcustoms/:id',
+        component: StepCustomDetailComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'ColumnCustoms'
+            pageTitle: 'StepCustoms'
         },
         canActivate: [UserRouteAccessService]
     }
 ];
 
-export const columncustomPopupRoute: Routes = [
+export const stepcustomPopupRoute: Routes = [
     {
-        path: 'columncustom-new',
-        component: ColumnCustomPopupComponent,
+        path: 'stepcustom-new',
+        component: StepCustomPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'ColumnCustoms'
+            pageTitle: 'StepCustoms'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'columncustoms/:id/edit',
-        component: ColumnCustomPopupComponent,
+        path: 'stepcustoms/:id/edit',
+        component: StepCustomPopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'Columns'
+            pageTitle: 'Steps'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'
     },
     {
-        path: 'columncustoms/:id/delete',
-        component: ColumnCustomDeletePopupComponent,
+        path: 'stepcustoms/:id/delete',
+        component: StepCustomDeletePopupComponent,
         data: {
             authorities: ['ROLE_USER'],
-            pageTitle: 'ColumnCustoms'
+            pageTitle: 'StepCustoms'
         },
         canActivate: [UserRouteAccessService],
         outlet: 'popup'

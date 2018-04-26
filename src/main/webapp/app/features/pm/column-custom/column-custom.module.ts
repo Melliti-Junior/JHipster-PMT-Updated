@@ -16,10 +16,6 @@ import {
     ColumnCustomResolvePagingParams,
 } from './';
 import { SharedModule } from '../../shared/shared.module';
-import {
-    ColumnCustomStartDialogComponent,
-    ColumnCustomStartPopupComponent
-} from './column-custom-start-dialog.component';
 
 const ENTITY_STATES = [
     ...columnCustomRoute,
@@ -39,8 +35,6 @@ const ENTITY_STATES = [
         ColumnCustomDeleteDialogComponent,
         ColumnCustomPopupComponent,
         ColumnCustomDeletePopupComponent,
-        ColumnCustomStartDialogComponent,
-        ColumnCustomStartPopupComponent,
     ],
     entryComponents: [
         ColumnCustomComponent,
@@ -48,8 +42,6 @@ const ENTITY_STATES = [
         ColumnCustomPopupComponent,
         ColumnCustomDeleteDialogComponent,
         ColumnCustomDeletePopupComponent,
-        ColumnCustomStartDialogComponent,
-        ColumnCustomStartPopupComponent,
     ],
     providers: [
         ColumnCustomService,

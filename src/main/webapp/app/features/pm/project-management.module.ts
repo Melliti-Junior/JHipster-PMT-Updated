@@ -13,6 +13,7 @@ import {DashBoardVersionCustomModule} from './version-custom/version-custom.modu
 import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module';
 import {DashBoardColumnCustomModule} from './column-custom/column-custom.module';
 import {AgileComponent} from './agile';
+import {DashBoardStepCustomModule} from './step-custom/step-custom.module';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import {AgileComponent} from './agile';
     DashBoardVersionCustomModule,
     DashBoardSprintCustomModule,
     DashBoardColumnCustomModule,
+    DashBoardStepCustomModule,
     RouterModule.forChild([ ProjectManagementRoute ])
   ],
   declarations: [ProjectManagementComponent,
