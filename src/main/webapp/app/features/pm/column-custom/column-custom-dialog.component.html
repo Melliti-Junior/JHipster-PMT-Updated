@@ -1,0 +1,74 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myColumnCustomLabel">Create or edit a Column</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!columncustom.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="columncustom.id" readonly />
+        </div>
+
+        <div ng-if="">
+            <div class="form-group">
+              <label class="form-control-label" for="field_board">Board</label>
+              <select class="form-control" name="board" id="field_board" [(ngModel)]="boardname" (change)="findBoard();">
+                <option *ngFor="let board of boards" [value]="board.name">
+                    {{board.name}}
+                </option>
+              </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                [(ngModel)]="columncustom.code" required/>
+            <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.code?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                   [(ngModel)]="columncustom.name" required/>
+            <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                       [hidden]="!editForm.controls.name?.errors?.required">
+                    This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div *ngIf="boards && boardname && columncustom.board.type.toLowerCase()==='kanban'">
+            <div class="form-group">
+                <label class="form-control-label" for="field_min">Min</label>
+                <input type="number" class="form-control" name="min" id="field_min" placeholder="Type here the minimum number of issues for this column"
+                       [(ngModel)]="columncustom.min" />
+            </div>
+
+            <div class="form-group">
+                <label class="form-control-label" for="field_max">Max</label>
+                <input type="number" class="form-control" name="max" id="field_max" placeholder="Type here the maximum number of issues for this column"
+                       [(ngModel)]="columncustom.max"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

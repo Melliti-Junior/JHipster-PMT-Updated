@@ -1,11 +1,11 @@
 import { Routes } from '@angular/router';
 
 import {
-    PmRoute
+    ProjectManagementRoute
 } from './';
 
 const FEATURES_ROUTES = [
-    PmRoute
+    ProjectManagementRoute
 ];
 
 export const featuresState: Routes = [{

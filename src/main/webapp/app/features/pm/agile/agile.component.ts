@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueCustomService } from '../issue-custom/issue-custom.service';
 import { IssueCustom } from '../issue-custom';
-import {ResponseWrapper} from "../../../shared";
-import {_document} from "@angular/platform-browser/src/browser";
+import {ResponseWrapper} from '../../../shared';
 
 @Component({
   selector: 'jhi-agile',
@@ -55,7 +54,7 @@ export class AgileComponent implements OnInit {
 
         let parent = ev.target.parentElement;
 
-        for(let i = 0; i < parent.children.length; i++) {
+        for (let i = 0; i < parent.children.length; i++) {
             parent.children[i].hidden = false;
         }
         console.log('cls' + parent.className);
@@ -69,11 +68,11 @@ export class AgileComponent implements OnInit {
     dragleave(ev) {
         console.error('dragleave starts here');
         // let parent = ev.target.parentElement;
-        if(ev.target.children !== undefined) {
+        if (ev.target.children !== undefined) {
             console.log('curr' + ev.target.className);
-            for(let i = 0; i < ev.target.children.length; i++) {
+            for (let i = 0; i < ev.target.children.length; i++) {
                 console.log(ev.target.children.length);
-                if(ev.target.children[i].hidden) {
+                if (ev.target.children[i].hidden) {
                     ev.target.children[i].hidden = false;
                     ev.target.style.border = '0px';
                 }
@@ -94,12 +93,10 @@ export class AgileComponent implements OnInit {
           elt.style.border = '2px dashed blueviolet';
           console.log('count ' + elt.children.length)
 
-          for(let i = 0; i < elt.children.length; i++) {
+          for (let i = 0; i < elt.children.length; i++) {
               elt.children[i].hidden = true;
           }
       }
-
-
 
 /*
             console.log($event.target.className);

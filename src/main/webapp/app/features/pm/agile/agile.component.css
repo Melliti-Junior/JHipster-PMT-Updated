@@ -19,13 +19,13 @@ body {
     border: 1px solid rgb(182, 182, 179);
 }
 
-.issue-priority-color {
-    width:2%;
-}
-
 .panel-body {
     padding-top: 5%;
     background-color: #f5f5f5;;
+}
+
+.issue-priority-color {
+    width:2%;
 }
 
 .column-content {

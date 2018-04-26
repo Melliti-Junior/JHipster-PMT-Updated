@@ -1,7 +1,7 @@
 import { SharedModule } from './../shared/shared.module';
-import { PmRoute } from './pm.route';
+import { ProjectManagementRoute } from './project-management.route';
 import { NgModule } from '@angular/core';
-import { PmComponent } from './pm.component';
+import { ProjectManagementComponent } from './project-management.component';
 import { RouterModule } from '@angular/router';
 import { IssueCustomComponent } from './issue-custom';
 import { DashBoardIssueCustomModule } from './issue-custom/issue-custom.module';
@@ -11,6 +11,7 @@ import { DashBoardProjectCustomModule } from './project-custom/project-custom.mo
 import { DashBoardBoardCustomModule } from './board-custom/board-custom.module';
 import {DashBoardVersionCustomModule} from './version-custom/version-custom.module';
 import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module';
+import {DashBoardColumnCustomModule} from './column-custom/column-custom.module';
 import {AgileComponent} from './agile';
 
 @NgModule({
@@ -21,9 +22,10 @@ import {AgileComponent} from './agile';
     DashBoardBoardCustomModule,
     DashBoardVersionCustomModule,
     DashBoardSprintCustomModule,
-    RouterModule.forChild([ PmRoute ])
+    DashBoardColumnCustomModule,
+    RouterModule.forChild([ ProjectManagementRoute ])
   ],
-  declarations: [PmComponent,
+  declarations: [ProjectManagementComponent,
     BacklogComponent,
       AgileComponent,
     // ProjectCustomComponent
@@ -31,4 +33,6 @@ import {AgileComponent} from './agile';
 providers: [
 ]
 })
-export class PmModule { }
+export class ProjectManagementModule {
+    private static DashBoardColumnCustomModule: any;
+}

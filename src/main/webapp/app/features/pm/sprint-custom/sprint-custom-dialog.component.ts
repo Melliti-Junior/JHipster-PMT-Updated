@@ -54,7 +54,7 @@ export class SprintCustomDialogComponent implements OnInit {
         private sprintcustomService: SprintCustomService,
         private eventManager: JhiEventManager,
         private boardSce: BoardCustomService,
-        // private comp: SprintCustomComponent
+        // private comp: ColumnCustomComponent
     ) {
         this.scrumboards = new Array<BoardCustom>();
     }

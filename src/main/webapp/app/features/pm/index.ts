@@ -1,3 +1,3 @@
-export * from './pm.component';
-export * from './pm.module';
-export * from './pm.route';
+export * from './project-management.component';
+export * from './project-management.module';
+export * from './project-management.route';

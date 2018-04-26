@@ -80,7 +80,7 @@ export class SprintCustomService {
      *
      * @param {*} [req]
      * @returns {Observable<SprintCustom>}
-     * @memberof SprintCustomService
+     * @memberof ColumnCustomService
      */
     findByRequest(req?: any): SprintCustom {
         const result = this.search({ query: req });

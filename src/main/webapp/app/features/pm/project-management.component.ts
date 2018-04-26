@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from 'primeng/components/common/api';
 
 @Component({
-  selector: 'jhi-pm',
-  templateUrl: './pm.component.html',
-  styleUrls: ['./pm.component.css']
+  selector: 'jhi-project-management',
+  templateUrl: './project-management.component.html',
+  styleUrls: ['./project-management.component.css']
 })
-export class PmComponent implements OnInit {
+export class ProjectManagementComponent implements OnInit {
 
     items: MenuItem[];
     cols: string[] = ['1', '2', '3'];

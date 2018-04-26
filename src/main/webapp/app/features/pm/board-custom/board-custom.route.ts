@@ -7,6 +7,7 @@ import { BoardCustomComponent } from './board-custom.component';
 import { BoardCustomDetailComponent } from './board-custom-detail.component';
 import { BoardCustomPopupComponent } from './board-custom-dialog.component';
 import { BoardCustomDeletePopupComponent } from './board-custom-delete-dialog.component';
+import {BoardCustomConfigurationComponent} from './board-custom-configuration.component';
 
 @Injectable()
 export class BoardCustomResolvePagingParams implements Resolve<any> {
@@ -39,6 +40,14 @@ export const boardcustomRoute: Routes = [
     }, {
         path: 'boardcustoms/:id',
         component: BoardCustomDetailComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'BoardCustoms'
+        },
+        canActivate: [UserRouteAccessService]
+    }, {
+        path: 'boardcustoms/configure/:id',
+        component: BoardCustomConfigurationComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'BoardCustoms'

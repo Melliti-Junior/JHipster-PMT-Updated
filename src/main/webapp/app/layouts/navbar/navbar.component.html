@@ -2,7 +2,7 @@
      <div *ngIf="isAuthenticated()" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
         <button class="btn btn-outline-light fa fa-cubes" style="font-size:24px;" id="dropdownManual" aria-hidden="true" ngbDropdownToggle ></button>
         <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button class="dropdown-item fa fa-trello" routerLink="pm" (click)="pmChosen()"> Project Management</button>
+            <button class="dropdown-item fa fa-trello" routerLink="project-management" (click)="pmChosen()"> Project Management</button>
             <!-- you could add other modules here
             <button class="dropdown-item">Another Action</button>
             <button class="dropdown-item">Something else is here</button>
@@ -42,7 +42,7 @@
                 </a>
                 <ul class="dropdown-menu" ngbDropdownMenu>
                     <li *ngSwitchCase="true">
-                        <a class="nav-link" routerLink="pm" (click)="collapseNavbar()">
+                        <a class="nav-link" routerLink="project-management" (click)="collapseNavbar()">
                             <span class="dropdown-item">
                                 <i class="fa fa-trello" aria-hidden="true"></i>
                                 <span>Project Management</span>
@@ -128,6 +128,18 @@
                         <a class="dropdown-item" routerLink="sprint" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
                             <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
                             <span>Sprint</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="column" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span>Column</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" routerLink="step" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="collapseNavbar()">
+                            <i class="fa fa-fw fa-asterisk" aria-hidden="true"></i>
+                            <span>Step</span>
                         </a>
                     </li>
                     <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->

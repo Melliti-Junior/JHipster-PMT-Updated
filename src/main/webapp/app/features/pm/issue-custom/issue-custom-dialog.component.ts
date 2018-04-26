@@ -31,7 +31,7 @@ import { ResolutionService } from '../../../entities/resolution';
 import { ProjectCustom } from '../project-custom';
 import { ProjectCustomService } from '../project-custom/project-custom.service';
 import {VersionCustom, VersionCustomService} from '../version-custom';
-import {ResponseWrapper} from "../../../shared";
+import {ResponseWrapper} from '../../../shared';
 
 @Component({
     selector: 'jhi-issue-custom-dialog',

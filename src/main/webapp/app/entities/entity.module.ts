@@ -11,6 +11,8 @@ import { DashBoardResolutionModule } from './resolution/resolution.module';
 import { DashBoardBoardModule } from './board/board.module';
 import { DashBoardVersionModule } from './version/version.module';
 import { DashBoardSprintModule } from './sprint/sprint.module';
+import { DashBoardColumnModule } from './column/column.module';
+import { DashBoardStepModule } from './step/step.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -26,6 +28,8 @@ import { DashBoardSprintModule } from './sprint/sprint.module';
         DashBoardBoardModule,
         DashBoardVersionModule,
         DashBoardSprintModule,
+        DashBoardColumnModule,
+        DashBoardStepModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

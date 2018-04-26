@@ -1,11 +1,11 @@
-import { PmComponent } from './pm.component';
+import { ProjectManagementComponent } from './project-management.component';
 import { Route } from '@angular/router';
 
 import { UserRouteAccessService } from '../../shared';
 
-export const PmRoute: Route = {
-    path: 'pm',
-    component: PmComponent,
+export const ProjectManagementRoute: Route = {
+    path: 'project-management',
+    component: ProjectManagementComponent,
     data: {
         pageTitle: 'Project Management'
     },

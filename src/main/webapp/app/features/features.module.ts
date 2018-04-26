@@ -1,6 +1,6 @@
-import { PmModule } from './pm/pm.module';
+import { ProjectManagementModule } from './pm/project-management.module';
 import { HttpModule } from '@angular/http';
-import { PmComponent } from './pm/pm.component';
+import { ProjectManagementComponent } from './pm/project-management.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FeaturesComponent } from './features.component';
@@ -14,7 +14,7 @@ import { featuresState } from './features.route';
       FormsModule,
       HttpModule,
       RouterModule.forChild(featuresState),
-      PmModule
+      ProjectManagementModule
   ],
   declarations: [
       FeaturesComponent,
