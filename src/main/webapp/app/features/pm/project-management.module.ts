@@ -36,5 +36,4 @@ providers: [
 ]
 })
 export class ProjectManagementModule {
-    private static DashBoardColumnCustomModule: any;
 }

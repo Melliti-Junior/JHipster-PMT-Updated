@@ -101,14 +101,14 @@
         <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
             <div class="agileColumn">
                 <div class="panel-heading column-name"> <strong>{{col.name}}</strong></div>
-                <div class="panel-body column-content" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)">
+                <div class="panel-body-active column-content-active" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)">
 
                 </div>
             </div>
         </div>
         <div class="panel panel-primary col"  *ngIf="allStatuses">
             <div class="panel-heading column-status">Unmapped Statuses</div>
-            <div class="panel-body column-content">
+            <div class="panel-body-active column-content-active">
                 <div *ngFor="let status of allStatuses">
                     <div class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
                         <div class="unmapped-status-content">

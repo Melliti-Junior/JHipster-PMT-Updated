@@ -13,6 +13,9 @@ import {Observable} from 'rxjs/Observable';
 import {Response} from '@angular/http';
 import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {ResponseWrapper} from '../../../shared';
+import {ColumnCustom} from '../column-custom/column-custom.model';
+import {ColumnCustomService} from '../column-custom/column-custom.service';
+import {MenuItem} from "primeng/api";
 
 @Component({
     selector: 'jhi-board-custom-detail',
@@ -29,9 +32,11 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
     issueCustoms: IssueCustom[] = new Array<IssueCustom>();
     relatedIssuesPerBoard: IssueCustom[] = new Array<IssueCustom>();
     relatedIssuesPerSprint: IssueCustom[] = new Array<IssueCustom>();
+    relatedColumns: ColumnCustom[];
 
     chosenIssues: IssueCustom[] = new Array<IssueCustom>();
     sprintCustoms: SprintCustom[];
+    columnCustoms: ColumnCustom[];
 
     relatedSprintsBoard: SprintCustom[];
 
@@ -51,12 +56,20 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
     theDate: NgbDateStruct;
     now = new Date();
 
+    scrumItems: MenuItem[];
+    kanbanItems: MenuItem[];
+
+    Backlog = false;
+    ActiveSprint = false;
+    KanbanBoard = false;
+
     constructor(
         private eventManager: JhiEventManager,
         private boardcustomSce: BoardCustomService,
         private route: ActivatedRoute,
         private issuecustomSce: IssueCustomService,
         private sprintcustomSce: SprintCustomService,
+        private columncustomSce: ColumnCustomService,
     ) {
     }
 
@@ -68,6 +81,16 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
         this.loadAttributes();
         this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         // this.getBacklogIssues();
+        this.scrumItems = [
+            {label: 'Backlog', icon: 'fa-tasks', command: (onclick) =>
+                { this.Backlog = true; this.ActiveSprint = false; this.getBacklogIssues(); this.getSprintIssues();}},
+            {label: 'ActiveSprint', icon: 'fa-table', command: (onclick) =>
+                { this.Backlog = false; this.ActiveSprint = true; this.searchRelatedColumns()}},
+        ];
+        this.kanbanItems = [
+            {label: 'KanbanBoard', icon: 'fa-bar-table', command: (onclick) =>
+                { this.Backlog = false; this.ActiveSprint = true; this.searchRelatedColumns()}},
+        ];
     }
 
     ngAfterViewInit() {
@@ -104,6 +127,7 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
         console.log('Total : ' + this.issueCustoms.length);
         this.getAllSprints();
         // this.getSprintIssues();
+        this.getAllColumns();
     }
 
     searchOnlyRelatedSprints() {
@@ -117,9 +141,28 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterViewI
 
     }
 
+    searchRelatedColumns() {
+        this.getBacklogIssues();
+        this.getSprintIssues();
+        this.relatedColumns = new Array<ColumnCustom>();
+        for (let col of this.columnCustoms) {
+            if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
+                if (this.relatedColumns.indexOf(col) === -1) {
+                    this.relatedColumns.push(col);
+                }
+            }
+        }
+        console.log(this.relatedColumns.length)
+    }
+
     getAllSprints() {
         this.sprintcustomSce.getSprintCustoms()
             .then((sprintCustoms) => this.sprintCustoms = sprintCustoms );
+    }
+
+    getAllColumns() {
+        this.columncustomSce.getColumnCustoms()
+            .then((columnCustoms) => this.columnCustoms = columnCustoms );
     }
 
     lookForActiveSprint() {

@@ -11,50 +11,49 @@ body {
     margin: 0px;
 }
 
-.card-content {
+.card-content-active {
     width:98%;
 }
-.card-body {
+.card-body-active {
     padding: 1px 0 0;
     border: 1px solid rgb(182, 182, 179);
 }
 
-.panel-body {
+.panel-body-active {
     padding-top: 5%;
     background-color: #f5f5f5;;
 }
 
-.issue-priority-color {
+.issue-priority-color-active {
     width:2%;
 }
 
-.column-content {
+.column-content-active {
     /* border: 1px solid #888888; */
     min-height: 320px;
     border: 1px solid #888888;
 
 }
 
-
-.issue {
+.issue-active {
     background-color: #fcfcfc;
     margin-left: inherit;
     margin-right: inherit;
 }
 
-.card-title {
+.card-title-active {
     padding-top: 1%;
 }
 
-.issue-code {
+.issue-code-active {
     width: 80%;
 }
 
-.issue-type-icon {
+.issue-type-icon-active {
     width: 10%;
 }
 
-.assignee-img {
+.assignee-img-active {
     width: 10%;
 }
 

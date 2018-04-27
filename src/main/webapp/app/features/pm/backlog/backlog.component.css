@@ -19,7 +19,7 @@ body {
     flex-direction: row;
 }
 
-.issue-priority-color {
+.issue-priority-color-active {
     width:1%;
 }
 

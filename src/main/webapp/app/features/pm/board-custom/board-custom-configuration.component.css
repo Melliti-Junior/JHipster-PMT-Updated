@@ -18,7 +18,7 @@ body {
     margin: 0px;
 }
 
-.card-content {
+.card-content-active {
     width:98%;
 }
 
@@ -26,7 +26,7 @@ body {
     width: 98%;
 }
 
-.card-body {
+.card-body-active {
     padding: 1px 0 0;
     border: 1px solid rgb(182, 182, 179);
 }
@@ -36,12 +36,12 @@ body {
     border: 1px solid rgb(182, 182, 179);
 }
 
-.panel-body {
+.panel-body-active {
     padding-top: 5%;
     background-color: #f5f5f5;;
 }
 
-.column-content {
+.column-content-active {
     /* border: 1px solid #888888; */
     min-height: 320px;
     border: 1px solid #888888;

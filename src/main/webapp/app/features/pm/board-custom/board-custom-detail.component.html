@@ -1,12 +1,29 @@
 <div *ngIf="boardcustom" (load)="document.getElementById('backlog').click()">
 
+
     <div class="row" id="boardspec" >
         <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
-        <div class="board-choices">
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-info" (click)="getBacklogIssues(); getSprintIssues();">Backlog</button>
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Sprint</button>
-            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Board</button>
 
+        <div class="board-choices">
+            <!--
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-info" (click)="getBacklogIssues(); getSprintIssues();">Backlog</button>
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary" (click)="searchRelatedColumns()">Active Sprint</button>
+            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Board</button>
+            -->
+
+
+        </div>
+
+    </div>
+
+
+    <div class="boardAgile row pl-3">
+        <div class="boardCh">
+            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumItems"></p-tabMenu>
+            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" [model]="kanbanItems"></p-tabMenu>
+        </div>
+
+        <div class="boardConf">
             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
                 <button class="btn btn-success" id="dropdownManual" aria-hidden="true" ngbDropdownToggle >Board</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownManual">
@@ -15,10 +32,12 @@
                 </div>
             </div>
         </div>
+
     </div>
 
+
     <section>
-        <div class="container pl-0 py-3" id="currentIssues" *ngIf="activeSprint">
+        <div class="container pl-0 py-3" id="currentIssues" *ngIf="activeSprint && Backlog">
             <div class="PartialBacklog row">
                 <div class="sprintInfo">
                     <div class="WIP">
@@ -43,8 +62,8 @@
             <div class="dropZone container px-5" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)" *ngIf="relatedIssuesPerSprint">
                 <div class="a" *ngIf="activeSprint.isActive">
                     <div class="b" *ngFor="let sp_issue of relatedIssuesPerSprint">
-                        <div class="issue row" id={{sp_issue.id}}>
-                            <div class="issue-priority-color" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
+                        <div class="issue-active row" id={{sp_issue.id}}>
+                            <div class="issue-priority-color-active" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
                             <div class="issue-type-icon"><img  [src] = "sp_issue.type.icon" /></div>
                             <div class="issue-info row" id="attributessp">
                                 <div class="code"><a href="#/issuecustoms/{{sp_issue.id}}">{{sp_issue.code}}</a></div>
@@ -95,8 +114,8 @@
 
                 <div *ngFor="let issue of relatedIssuesPerBoard">
                     <div *ngIf="issue.sprint === null">
-                        <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
-                            <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                        <div class="issue-active row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                            <div class="issue-priority-color-active" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
                             <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
                             <div class="issue-info row" id="attributes">
                                 <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
@@ -120,188 +139,32 @@
 
 
 
-
-<!--
-<div *ngIf="boardcustom">
-    <h4><span>{{boardcustom.code}}</span> </h4>
-    <h2><span>{{boardcustom.summary}}</span></h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-<div class="container">
-  <div class="panel-group row ">
-
-    <div class="panel-group"  style="width:50%;">
-    <div class="panel panel-info">
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
-      <div class="panel-body" >
-
-          <div class="row">
-            <div class="col-3">Type :</div>
-            <div *ngIf ="boardcustom.type" class="col-8">{{boardcustom.type.name}}</div>
-            <div *ngIf ="!boardcustom.type" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Priority :</div>
-            <div *ngIf ="boardcustom.priority" class="col-8">{{boardcustom.priority.name}}</div>
-            <div *ngIf ="!boardcustom.priority" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div *ngIf ="boardcustom.epic" class="row">
-            <div class="col-3">Epic :</div>
-            <div *ngIf ="boardcustom.epic" class="col-8">{{boardcustom.epic.summary}} ({{boardcustom.epic.name}})</div>
-            <div *ngIf ="!boardcustom.epic" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Status :</div>
-            <div *ngIf ="boardcustom.status"  class="col-8">{{boardcustom.status.name}}</div>
-            <div *ngIf ="!boardcustom.status"  class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Resolution :</div>
-            <div *ngIf ="boardcustom.resolution" class="col-8">{{boardcustom.resolution.name}}</div>
-            <div *ngIf ="!boardcustom.resolution" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Estimation :</div>
-            <div class="col-8">{{boardcustom.estimation}} Hours</div>
-          </div>
-
-      </div>
-    </div>
-    <hr style="border-color:transparent;">
-    <div class="panel panel-info">
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
-      <div class="panel-body" >
-
-          <div class="row">
-            <div class="col-10">{{boardcustom.description}}</div>
-          </div>
-
-      </div>
-    </div>
-    </div>
-
-    <div class="panel-group"  style="width:50%;">
-    <div class="panel panel-info" >
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>People</h4></div>
-      <div class="panel-body" >
-
-          <div class="row">
-            <div class="col-3">Assignee :</div>
-            <div class="col-8">Melliti Zied</div>
-          </div>
-
-          <div class="row">
-            <div class="col-3">Reporter :</div>
-            <div class="col-8">Melliti Zied</div>
-          </div>
-
-      </div>
-    </div>
-    <hr style="border-color:transparent;">
-    <div class="panel panel-info" >
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Dates</h4></div>
-      <div class="panel-body" >
-
-          <div class="row">
-            <div class="col-3">Created :</div>
-            <div class="col-8">{{boardcustom.createdDate | date:'mediumDate'}}</div>
-          </div>
-
-          <div class="row">
-            <div class="col-3">Due :</div>
-            <div class="col-8">{{boardcustom.dueDate | date:'mediumDate'}}</div>
-          </div>
-
-          <div class="row">
-            <div class="col-3">Updated :</div>
-            <div class="col-8">{{boardcustom.updatedDate | date:'mediumDate'}}</div>
-          </div>
-
-      </div>
-    </div>
-    </div>
-
-</div>
-<hr style="border-color:transparent;">
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ boardcustom.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
-    </button>
-</div>
-
-
-<div *ngIf="boardcustom">
-    <h2><span>Board</span> {{boardcustom.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-
-
-        <dl class="row-md jh-entity-details">
-        <dt><span>Code</span></dt>
-        <dd>
-            <span>{{boardcustom.code}}</span>
-        </dd>
-        <dt><span>Summary</span></dt>
-        <dd>
-            <span>{{boardcustom.summary}}</span>
-        </dd>
-        <dt><span>Created Date</span></dt>
-        <dd>
-            <span>{{boardcustom.createdDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span>Due Date</span></dt>
-        <dd>
-            <span>{{boardcustom.dueDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span>Estimation</span></dt>
-        <dd>
-            <span>{{boardcustom.estimation}}</span>
-        </dd>
-        <dt><span>Type</span></dt>
-        <dd>
-            <span>{{boardcustom.type.name}}</span>
-        </dd>
-        <dt><span>Priority</span></dt>
-        <dd>
-            <span>{{boardcustom.priority.name}}</span>
-        </dd>
-        <dt><span>Epic</span></dt>
-        <dd>
-            <span>{{boardcustom.epic.name}}</span>
-        </dd>
-    </dl>
-
-
-
-    <div class="container">
-        <h4>Details</h4>
-        <div class="panel panel-default">
-          <div class="panel-heading">Panel Heading</div>
-          <div class="panel-body">Panel Content</div>
+<!-- related to Active Sprint -->
+<div class="container-fluid" *ngIf="relatedColumns && ActiveSprint">
+    <div id="agileColumns" class="row">
+        <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
+            <div class="agileColumn">
+                <div class="panel-heading column-name"> {{col.name}} </div>
+                <div class="panel-body-active column-content-active" id="columndroppable" (dragover)="allowDrop($event)" (drop)="drop($event)" (dragleave)="dragleave($event)">
+                    <div *ngFor="let issueCol of relatedIssuesPerSprint">
+                        <div class="issue-active row" id={{issueCol.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                            <div class="issue-priority-color-active" *ngIf="issueCol.priority" [style.background] = "issueCol.priority.color"></div>
+                            <div class="card-content-active">
+                                <div class="card-body-active">
+                                    <div class="info row pl-3">
+                                        <div class="issue-type-icon-active"><img  [src] = "issueCol.type.icon" /></div>
+                                        <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
+                                        <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                    </div>
+                                    <div class="issue-summary pl-3">{{issueCol.summary}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ boardcustom.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
-    </button>
 </div>
--->
+
+

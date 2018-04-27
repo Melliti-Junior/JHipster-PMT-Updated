@@ -6,7 +6,7 @@
             <!-- <div class="card" > -->
 
             <div class="row" id="issue" draggable="true" *ngFor="let issue of issues">
-                <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
+                <div class="issue-priority-color-active" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
                 <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
                 <div class="issue-info row" id="attributes">
                     <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>

@@ -8,16 +8,9 @@ import { MenuItem } from 'primeng/components/common/api';
 })
 export class ProjectManagementComponent implements OnInit {
 
-    items: MenuItem[];
-    cols: string[] = ['1', '2', '3'];
-
   constructor() { }
 
   ngOnInit() {
-    this.items = [
-            {label: 'Backlog', icon: 'fa-bar-chart'},
-            {label: 'Active Sprints', icon: 'fa-calendar'},
-        ];
     }
 
     dragStart(ev) {

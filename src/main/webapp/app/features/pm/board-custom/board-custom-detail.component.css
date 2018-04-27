@@ -106,7 +106,7 @@
     padding-left: 7%;
 }
 
-.issue {
+.issue-active {
     border: 1px solid rgb(182, 182, 179);
     height: 30px;
     display: flex;
@@ -114,7 +114,7 @@
     flex-direction: row;
 }
 
-.issue-priority-color {
+.issue-priority-color-active {
     width:1%;
 }
 
@@ -200,4 +200,161 @@ a {
 
 a:hover {
     color: #cc6;
+}
+
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+}
+
+.card {
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    margin: 0px;
+}
+
+.card-content-active {
+    width:98%;
+}
+.card-body-active {
+    padding: 1px 0 0;
+    border: 1px solid rgb(182, 182, 179);
+}
+
+.panel-body-active {
+    padding-top: 5%;
+    background-color: #f5f5f5;;
+}
+
+.issue-priority-color-active {
+    width:2%;
+}
+
+.column-content-active {
+    /* border: 1px solid #888888; */
+    min-height: 320px;
+    border: 1px solid #888888;
+
+}
+
+.card-title {
+    padding-top: 1%;
+}
+
+.issue-code {
+    width: 80%;
+}
+
+
+.card-content-active {
+    width:98%;
+}
+.card-body-active {
+    padding: 1px 0 0;
+    border: 1px solid rgb(182, 182, 179);
+}
+
+.panel-body-active {
+    padding-top: 5%;
+    background-color: #f5f5f5;;
+}
+
+.issue-priority-color-active {
+    width:2%;
+}
+
+.column-content-active {
+    /* border: 1px solid #888888; */
+    min-height: 320px;
+    border: 1px solid #888888;
+
+}
+
+
+.issue-active {
+    background-color: #fcfcfc;
+    margin-left: inherit;
+    margin-right: inherit;
+}
+
+.card-title {
+    padding-top: 1%;
+}
+
+.issue-code {
+    width: 80%;
+}
+
+.issue-type-icon {
+    width: 10%;
+}
+
+.assignee-img {
+    width: 10%;
+}
+
+
+
+
+
+
+.card-content-active {
+    width:98%;
+}
+.card-body-active {
+    padding: 1px 0 0;
+    border: 1px solid rgb(182, 182, 179);
+}
+
+.panel-body-active {
+    padding-top: 5%;
+    background-color: #f5f5f5;;
+}
+
+.issue-priority-color-active {
+    width:2%;
+}
+
+.column-content-active {
+    /* border: 1px solid #888888; */
+    min-height: 320px;
+    border: 1px solid #888888;
+
+}
+
+.issue-active {
+    background-color: #fcfcfc;
+    margin-left: inherit;
+    margin-right: inherit;
+}
+
+.card-title-active {
+    padding-top: 1%;
+}
+
+.issue-code-active {
+    width: 80%;
+}
+
+.issue-type-icon-active {
+    width: 10%;
+}
+
+.assignee-img-active {
+    width: 10%;
+}
+
+.boardAgile {
+    display: flex;
+    flex-direction: row;
+}
+
+.boardCh {
+    width: 70%;
+}
+
+.boardConf {
+    width: 30%;
 }
