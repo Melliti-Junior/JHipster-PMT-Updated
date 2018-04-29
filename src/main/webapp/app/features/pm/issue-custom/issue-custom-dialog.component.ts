@@ -24,14 +24,13 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { Status } from '../../../entities/status/status.model';
 import { Resolution } from '../../../entities/resolution/resolution.model';
-import { StatusService } from '../../../entities/status/status.service';
 import { ResolutionService } from '../../../entities/resolution';
 import { ProjectCustom } from '../project-custom';
 import { ProjectCustomService } from '../project-custom/project-custom.service';
 import {VersionCustom, VersionCustomService} from '../version-custom';
 import {ResponseWrapper} from '../../../shared';
+import {StatusCustom, StatusCustomService} from '../status-custom';
 
 @Component({
     selector: 'jhi-issue-custom-dialog',
@@ -48,7 +47,7 @@ export class IssueCustomDialogComponent implements OnInit {
     types: IssueType[];
     priorities: IssuePriority[];
     epics: Epic[];
-    statuses: Status[];
+    statuses: StatusCustom[];
     resolutions: Resolution[];
     projects: ProjectCustom[];
     versions: VersionCustom[];
@@ -81,7 +80,7 @@ export class IssueCustomDialogComponent implements OnInit {
         private typeSce: IssueTypeService,
         private prioritySce: IssuePriorityService,
         private epicSce: EpicService,
-        private statusSce: StatusService,
+        private statusSce: StatusCustomService,
         private resolutionSce: ResolutionService,
         private projectSce: ProjectCustomService,
         private versionSce: VersionCustomService,
@@ -107,7 +106,7 @@ export class IssueCustomDialogComponent implements OnInit {
 
         this.statusSce.search({query : 'Open'})
             .subscribe(
-                (res: ResponseWrapper) => this.getInitialStatus(res.json, res.headers),
+                (res: ResponseWrapper) => this.getInitialStatusCustom(res.json, res.headers),
                 (error) => console.log(error))
         this.resolutionSce.search({query : 'Unresolved'})
             .subscribe(
@@ -171,7 +170,7 @@ export class IssueCustomDialogComponent implements OnInit {
         console.log('aff' + this.issuecustom.priority.name);
     }
 
-    findStatus() {
+    findStatusCustom() {
         let index = 0;
         let found = false;
         while (index < this.statuses.length && found === false)  {
@@ -274,7 +273,7 @@ export class IssueCustomDialogComponent implements OnInit {
         .then((priorities) => this.priorities = priorities );
         this.resolutionSce.getResolutions()
         .then((resolutions) => this.resolutions = resolutions );
-        this.statusSce.getStatuses()
+        this.statusSce.getStatusCustoms()
         .then((statuses) => this.statuses = statuses );
         this.projectSce.getProjects()
         .then((projects) => this.projects = projects );
@@ -295,7 +294,7 @@ export class IssueCustomDialogComponent implements OnInit {
         // console.log(this.comp.issuecustoms);
     }
 
-    getInitialStatus(data, header) {
+    getInitialStatusCustom(data, header) {
         for (let status of data) {
             this.issuecustom.status = status;
         }
@@ -307,31 +306,6 @@ export class IssueCustomDialogComponent implements OnInit {
         for (let resolution of data) {
             this.issuecustom.resolution = resolution;
         }
-    }
-
-    setDefaultAttributes() {
-        let index = 0;
-        let found = false;
-        while (index < this.statuses.length && found === false)  {
-            if ((this.statuses[index]).name === 'Open') {
-                found = true;
-                this.issuecustom.status = this.statuses[index];
-            } else {
-                index = index + 1;
-            }
-        }
-
-        index = 0;
-        found = false;
-        while (index < this.resolutions.length && found === false)  {
-            if ((this.resolutions[index]).name === 'Unresolved') {
-                found = true;
-                this.issuecustom.resolution = this.resolutions[index];
-            } else {
-                index = index + 1;
-            }
-        }
-        console.log('aff' + this.issuecustom.resolution.name);
     }
 
     save() {
@@ -357,6 +331,8 @@ export class IssueCustomDialogComponent implements OnInit {
                 this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
                 console.log('New Code : ' + this.issuecustom.code);
             }
+            // Set the status Open
+            this.issuecustom.status
             this.subscribeToSaveResponse(
                 this.issuecustomService.create(this.issuecustom));
         }

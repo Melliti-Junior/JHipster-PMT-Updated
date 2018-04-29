@@ -143,23 +143,58 @@
                     <div class="agileColumn">
                         <div class="panel-heading column-name"> {{col.name}} </div>
                         <div class="panel-body-active column-content-active" id="columndroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
-                            <div *ngFor="let issueCol of relatedIssuesPerSprint">
 
-                                <div class="issue-active row" id={{issueCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">
-                                    <div class="issue-priority-color-active" *ngIf="issueCol.priority" [style.background] = "issueCol.priority.color"></div>
-                                    <div class="card-content-active">
-                                        <div class="card-body-active">
-                                            <div class="info row pl-3">
-                                                <div class="issue-type-icon-active"><img  [src] = "issueCol.type.icon" /></div>
-                                                <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
-                                                <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                            <div *ngFor="let status of statuscustoms">
+
+                                <div *ngIf="status.column.name === col.name">
+
+
+                                    <div *ngFor="let issueCol of relatedIssuesPerSprint">
+
+
+
+                                        {{issueCol.status.name}}
+                                        {{status.name}}
+
+
+                                        <div *ngIf="issueCol.status.name === status.name">
+
+
+                                            <div class="issue-active row" id={{issueCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">
+                                                <div class="issue-priority-color-active" *ngIf="issueCol.priority" [style.background] = "issueCol.priority.color"></div>
+                                                <div class="card-content-active">
+                                                    <div class="card-body-active">
+                                                        <div class="info row pl-3">
+                                                            <div class="issue-type-icon-active"><img  [src] = "issueCol.type.icon" /></div>
+                                                            <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
+                                                            <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                                        </div>
+                                                        <div class="issue-summary pl-3">{{issueCol.summary}}</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="issue-summary pl-3">{{issueCol.summary}}</div>
                                         </div>
+
                                     </div>
+
+
+
+
+
                                 </div>
 
                             </div>
+
+
+
+
+
+
+
+
+
+
+
                         </div>
                     </div>
                 </div>

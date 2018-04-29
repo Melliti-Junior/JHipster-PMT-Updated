@@ -310,6 +310,8 @@ body {
 
 .main {
     border: 1px solid #888888;
+    height: content-box;
+    padding: 2%;
 }
 
 .mypanel .ui-widget-header {

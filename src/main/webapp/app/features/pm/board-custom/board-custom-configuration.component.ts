@@ -81,11 +81,13 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     searchRelatedColumns() {
         this.relatedColumns = new Array<ColumnCustom>();
         for (let col of this.allColumns) {
-            console.log('col id' + col.board.code)
-            console.log('board id' + this.boardcustom.code)
-            if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
-                if (this.relatedColumns.indexOf(col) === -1) {
-                    this.relatedColumns.push(col);
+            if (col.board) {
+                console.log('col id' + col.board.code)
+                console.log('board id' + this.boardcustom.code)
+                if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
+                    if (this.relatedColumns.indexOf(col) === -1) {
+                        this.relatedColumns.push(col);
+                    }
                 }
             }
         }

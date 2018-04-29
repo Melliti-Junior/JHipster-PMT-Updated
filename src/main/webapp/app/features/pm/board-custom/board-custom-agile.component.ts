@@ -16,6 +16,7 @@ import {ResponseWrapper} from '../../../shared';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';
 import {MenuItem} from 'primeng/api';
+import {StatusCustom, StatusCustomService} from '../status-custom';
 
 @Component({
     selector: 'jhi-board-custom-agile',
@@ -37,6 +38,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     chosenIssues: IssueCustom[] = new Array<IssueCustom>();
     sprintCustoms: SprintCustom[];
     columnCustoms: ColumnCustom[];
+    statuscustoms: StatusCustom[];
 
     relatedSprintsBoard: SprintCustom[];
 
@@ -72,6 +74,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         private issuecustomSce: IssueCustomService,
         private sprintcustomSce: SprintCustomService,
         private columncustomSce: ColumnCustomService,
+        private statusService: StatusCustomService,
     ) {
     }
 
@@ -110,7 +113,10 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             if (this.boardcustom.type.toLowerCase() === 'kanban') {
                 this.KanbanBoard = true;
             }
-            this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
+            if (this.columnCustoms) {
+                this.searchRelatedColumns();
+            }
+            this.getBacklogIssues(); this.getSprintIssues();
             this.divClick.nativeElement.click();
         }, 100);
 
@@ -155,6 +161,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.getAllSprints();
         // this.getSprintIssues();
         this.getAllColumns();
+        this.getAllStatuses();
     }
 
     searchOnlyRelatedSprints() {
@@ -172,10 +179,13 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.getBacklogIssues();
         this.getSprintIssues();
         this.relatedColumns = new Array<ColumnCustom>();
+
         for (let col of this.columnCustoms) {
-            if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
-                if (this.relatedColumns.indexOf(col) === -1) {
-                    this.relatedColumns.push(col);
+            if (col.board) {
+                if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
+                    if (this.relatedColumns.indexOf(col) === -1) {
+                        this.relatedColumns.push(col);
+                    }
                 }
             }
         }
@@ -190,6 +200,11 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     getAllColumns() {
         this.columncustomSce.getColumnCustoms()
             .then((columnCustoms) => this.columnCustoms = columnCustoms );
+    }
+
+    getAllStatuses() {
+        this.statusService.getStatusCustoms()
+            .then((statuscustoms) => this.statuscustoms = statuscustoms);
     }
 
     lookForActiveSprint() {
