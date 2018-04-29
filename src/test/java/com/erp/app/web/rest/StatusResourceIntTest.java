@@ -106,7 +106,7 @@ public class StatusResourceIntTest {
         int databaseSizeBeforeCreate = statusRepository.findAll().size();
 
         // Create the Status
-        restStatusMockMvc.perform(post("/api/statuses")
+        restStatusMockMvc.perform(post("/api/statuscustoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(status)))
             .andExpect(status().isCreated());
@@ -133,7 +133,7 @@ public class StatusResourceIntTest {
         status.setId("existing_id");
 
         // An entity with an existing ID cannot be created, so this API call must fail
-        restStatusMockMvc.perform(post("/api/statuses")
+        restStatusMockMvc.perform(post("/api/statuscustoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(status)))
             .andExpect(status().isBadRequest());
@@ -151,7 +151,7 @@ public class StatusResourceIntTest {
 
         // Create the Status, which fails.
 
-        restStatusMockMvc.perform(post("/api/statuses")
+        restStatusMockMvc.perform(post("/api/statuscustoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(status)))
             .andExpect(status().isBadRequest());
@@ -166,7 +166,7 @@ public class StatusResourceIntTest {
         statusRepository.save(status);
 
         // Get all the statusList
-        restStatusMockMvc.perform(get("/api/statuses?sort=id,desc"))
+        restStatusMockMvc.perform(get("/api/statuscustoms?sort=id,desc"))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(status.getId())))
@@ -182,7 +182,7 @@ public class StatusResourceIntTest {
         statusRepository.save(status);
 
         // Get the status
-        restStatusMockMvc.perform(get("/api/statuses/{id}", status.getId()))
+        restStatusMockMvc.perform(get("/api/statuscustoms/{id}", status.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(status.getId()))
@@ -195,7 +195,7 @@ public class StatusResourceIntTest {
     @Test
     public void getNonExistingStatus() throws Exception {
         // Get the status
-        restStatusMockMvc.perform(get("/api/statuses/{id}", Long.MAX_VALUE))
+        restStatusMockMvc.perform(get("/api/statuscustoms/{id}", Long.MAX_VALUE))
             .andExpect(status().isNotFound());
     }
 
@@ -214,7 +214,7 @@ public class StatusResourceIntTest {
             .description(UPDATED_DESCRIPTION)
             .icon(UPDATED_ICON);
 
-        restStatusMockMvc.perform(put("/api/statuses")
+        restStatusMockMvc.perform(put("/api/statuscustoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(updatedStatus)))
             .andExpect(status().isOk());
@@ -240,7 +240,7 @@ public class StatusResourceIntTest {
         // Create the Status
 
         // If the entity doesn't have an ID, it will be created instead of just being updated
-        restStatusMockMvc.perform(put("/api/statuses")
+        restStatusMockMvc.perform(put("/api/statuscustoms")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
             .content(TestUtil.convertObjectToJsonBytes(status)))
             .andExpect(status().isCreated());
@@ -258,7 +258,7 @@ public class StatusResourceIntTest {
         int databaseSizeBeforeDelete = statusRepository.findAll().size();
 
         // Get the status
-        restStatusMockMvc.perform(delete("/api/statuses/{id}", status.getId())
+        restStatusMockMvc.perform(delete("/api/statuscustoms/{id}", status.getId())
             .accept(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(status().isOk());
 
@@ -278,7 +278,7 @@ public class StatusResourceIntTest {
         statusSearchRepository.save(status);
 
         // Search the status
-        restStatusMockMvc.perform(get("/api/_search/statuses?query=id:" + status.getId()))
+        restStatusMockMvc.perform(get("/api/_search/statuscustoms?query=id:" + status.getId()))
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(status.getId())))

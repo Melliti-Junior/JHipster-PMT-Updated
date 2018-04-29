@@ -17,7 +17,7 @@
             <div class="form-group">
               <label class="form-control-label" for="field_status">Linked Status</label>
               <select class="form-control" name="status" id="field_status" [(ngModel)]="statusname" (change)="findStatus();">
-                <option *ngFor="let status of statuses" [value]="status.name">
+                <option *ngFor="let status of statuscustoms" [value]="status.name">
                     {{status.name}}
                 </option>
               </select>

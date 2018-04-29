@@ -19,7 +19,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {IssueCustom} from '../issue-custom';
-import {Status, StatusService} from '../../../entities/status';
+import {StatusCustom, StatusCustomService} from "../status-custom";
 
 @Component({
     selector: 'jhi-step-custom-dialog',
@@ -33,17 +33,14 @@ export class StepCustomDialogComponent implements OnInit {
     startDateDp: any;
     endDateDp: any;
 
-    statuses: Status[];
-    status_issues: IssueCustom[];
+    statuscustoms: StatusCustom[];
     stepCustoms: StepCustom[];
 
     // Get the status related to this step
-    parentStatus: Status;
+    parentStatus: StatusCustom;
     // Get the statusname chosen from list (combobox)
     statusname: string;
     // statuscode: string;
-
-    numStepsParentStatus: number;
 
     now = new Date();
 
@@ -51,7 +48,7 @@ export class StepCustomDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private stepcustomService: StepCustomService,
         private eventManager: JhiEventManager,
-        private statusSce: StatusService,
+        private statusSce: StatusCustomService,
         // private comp: StepCustomComponent
     ) {
     }
@@ -69,27 +66,18 @@ export class StepCustomDialogComponent implements OnInit {
         let index = 0;
         let found = false;
 
-        while (index < this.statuses.length && found === false)  {
-            if ((this.statuses[index]).name === this.statusname) {
+        while (index < this.statuscustoms.length && found === false)  {
+            if ((this.statuscustoms[index]).name === this.statusname) {
                 found = true;
-                this.parentStatus = this.statuses[index]
-                console.log('parentstatus' + this.statuses[index].name)
+                this.parentStatus = this.statuscustoms[index]
+                console.log('parentstatus' + this.statuscustoms[index].name)
                 // this.statuscode = this.statuss[index].code;
-                this.stepcustom.status = this.statuses[index];
+                this.stepcustom.status = this.statuscustoms[index];
             } else {
                 index = index + 1;
             }
         }
         console.log('aff' + this.stepcustom.status.name);
-
-        this.numStepsParentStatus = 0;
-        // tslint:disable-next-line:prefer-const
-        for (let step of this.stepCustoms) {
-            if ((step.status !== null) && (step.status.code === this.parentStatus.code)) {
-                this.numStepsParentStatus++;
-            }
-        }
-        console.log('Num' + this.numStepsParentStatus + this.parentStatus.code);
     }
 
     /**
@@ -99,8 +87,8 @@ export class StepCustomDialogComponent implements OnInit {
      * @memberof StepCustomDialogComponent
      */
     private loadAttributes() {
-        this.statusSce.getStatuses()
-        .then((statuses) => this.statuses = statuses );
+        this.statusSce.getStatusCustoms()
+        .then((statuscustoms) => this.statuscustoms = statuscustoms );
     }
 
     /**

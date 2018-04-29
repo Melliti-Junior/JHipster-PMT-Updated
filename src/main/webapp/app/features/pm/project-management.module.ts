@@ -14,6 +14,8 @@ import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module'
 import {DashBoardColumnCustomModule} from './column-custom/column-custom.module';
 import {AgileComponent} from './agile';
 import {DashBoardStepCustomModule} from './step-custom/step-custom.module';
+import {BoardSidebar} from './board-sidebar/board-sidebar';
+import {DashBoardStatusCustomModule} from './status-custom/status-custom.module';
 
 @NgModule({
   imports: [
@@ -25,11 +27,13 @@ import {DashBoardStepCustomModule} from './step-custom/step-custom.module';
     DashBoardSprintCustomModule,
     DashBoardColumnCustomModule,
     DashBoardStepCustomModule,
+    DashBoardStatusCustomModule,
     RouterModule.forChild([ ProjectManagementRoute ])
   ],
   declarations: [ProjectManagementComponent,
     BacklogComponent,
       AgileComponent,
+      BoardSidebar,
     // ProjectCustomComponent
 ],
 providers: [

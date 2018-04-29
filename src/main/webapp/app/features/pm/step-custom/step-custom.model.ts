@@ -1,11 +1,11 @@
 import { Step } from '../../../entities/step/step.model';
-import {Status} from '../../../entities/status';
+import {StatusCustom} from '../status-custom';
 
 export class StepCustom extends Step {
     constructor(
-        public status?: Status,
+        public status?: StatusCustom,
     ) {
         super();
-        status = new Status();
+        status = new StatusCustom();
     }
 }

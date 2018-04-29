@@ -110,6 +110,8 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         // tslint:disable-next-line:prefer-const
         let data = ev.dataTransfer.getData('text');
         ev.target.appendChild(document.getElementById(data));
+
+        console.log('hello ' + document.getElementById(data).id)
     }
 
 }

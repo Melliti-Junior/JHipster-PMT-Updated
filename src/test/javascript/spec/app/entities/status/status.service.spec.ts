@@ -44,7 +44,7 @@ describe('Service Tests', () => {
 
                 expect(this.lastConnection).toBeDefined();
 
-                const resourceUrl = SERVER_API_URL + 'api/statuses';
+                const resourceUrl = SERVER_API_URL + 'api/statuscustoms';
                 expect(this.lastConnection.request.url).toEqual(resourceUrl + '/' + '123');
             });
             it('should return Status', () => {
