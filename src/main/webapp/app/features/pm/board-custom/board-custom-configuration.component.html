@@ -122,21 +122,36 @@
         <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
             <div class="agileColumn">
                 <div class="panel-heading column-name"> <strong>{{col.name}}</strong></div>
-                <div class="panel-body-active column-content-active" id="droppable" (dragover)="allowDrop($event)" (drop)="drop($event)">
+                <div class="panel-body-active column-content-active droppable" id="{{col.id}}" (dragover)="allowDrop($event)" (drop)="drop($event)">
+                    <div *ngFor="let status of allStatuses">
+                        <div *ngIf="status.column">
+                            <div *ngIf="status.column.id === col.id" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                                <div class="unmapped-status-content">
+                                    <div class="unmapped-status-body">
+                                        <div class="status-info row pl-3">
+                                            <div class="status-code">
+                                                <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="panel panel-primary col"  *ngIf="allStatuses">
             <div class="panel-heading column-status">Unmapped Statuses</div>
-            <div class="panel-body-active column-content-active">
+            <div class="panel-body-active column-content-active droppable" id="unmappedStatus" (dragover)="allowDrop($event)"  (drop)="drop($event)">
                 <div *ngFor="let status of allStatuses">
-                    <div class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                    <div *ngIf="!status.column" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
                         <div class="unmapped-status-content">
                             <div class="unmapped-status-body">
                                 <div class="status-info row pl-3">
                                     <div class="status-code">
-                                        <div class="card-title"><a [routerLink]="['/status', status.id ]">{{status.code}}</a></div>
+                                        <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
                                     </div>
                                 </div>
                             </div>

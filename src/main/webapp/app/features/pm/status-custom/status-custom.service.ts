@@ -24,6 +24,7 @@ export class StatusCustomService {
     }
 
     update(statuscustom: StatusCustom): Observable<StatusCustom> {
+        // console.error('start put func : ' + statuscustom.column.name)
         const copy = this.convert(statuscustom);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
@@ -96,7 +97,9 @@ export class StatusCustomService {
      * Convert a StatusCustom to a JSON which can be sent to the server.
      */
     private convert(statuscustom: StatusCustom): StatusCustom {
+        console.error('start conversion')
         const copy: StatusCustom = Object.assign({}, statuscustom);
+        // console.error('end conversion of ' + copy.name + ' by ' + copy.column.name)
         return copy;
     }
 }
