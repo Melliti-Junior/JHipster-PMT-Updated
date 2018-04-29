@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, AfterViewInit, AfterContentInit} from '@angular/core';
+import {Component, OnInit, OnDestroy, AfterViewInit, AfterContentInit, ViewChild, ElementRef} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
@@ -63,6 +63,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     ActiveSprint = false;
     KanbanBoard = false;
 
+    @ViewChild('divClick') divClick: ElementRef;
+
     constructor(
         private eventManager: JhiEventManager,
         private boardcustomSce: BoardCustomService,
@@ -96,10 +98,26 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.kanbanItems = [
             {
                 label: 'KanbanBoard', icon: 'fa-bar-table', command: (onclick) => {
-                    this.Backlog = false; this.ActiveSprint = true;
+                    this.KanbanBoard = true;
                     this.searchRelatedColumns()
                 }},
         ];
+
+        setTimeout(() => {
+            if (this.boardcustom.type.toLowerCase() === 'scrum') {
+                this.Backlog = true;
+            }
+            if (this.boardcustom.type.toLowerCase() === 'kanban') {
+                this.KanbanBoard = true;
+            }
+            this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
+            this.divClick.nativeElement.click();
+        }, 100);
+
+        setTimeout(() => {
+            this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
+            this.divClick.nativeElement.click();
+        }, 500);
     }
 
     ngAfterContentInit() {

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
@@ -39,6 +39,8 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     ) {
     }
 
+    @ViewChild('divClick') divClick: ElementRef;
+
     ngOnInit() {
         // this.relatedColumns = new Array<ColumnCustom>();
         this.allColumns = new Array<ColumnCustom>();
@@ -48,6 +50,10 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         });
         this.registerChangeInBoardCustoms();
         this.loadAttributes();
+
+        setTimeout(() => {
+            this.divClick.nativeElement.click();
+        }, 200);
     }
 
     load(id) {
