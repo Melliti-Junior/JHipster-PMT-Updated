@@ -73,3 +73,10 @@ body {
     color: #888888;
     font-weight: bold;
 }
+
+.columnConfBtn {
+    display: flex;
+}
+
+.columnConfBtn .btn {
+}

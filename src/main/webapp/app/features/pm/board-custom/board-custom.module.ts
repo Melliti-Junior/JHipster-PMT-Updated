@@ -12,6 +12,7 @@ import {
     BoardCustomDeletePopupComponent,
     BoardCustomDeleteDialogComponent,
     BoardCustomConfigurationComponent,
+    BoardCustomAgileComponent,
     boardcustomRoute,
     boardcustomPopupRoute,
     BoardCustomResolvePagingParams,
@@ -36,7 +37,8 @@ const ENTITY_STATES = [
         BoardCustomDeleteDialogComponent,
         BoardCustomPopupComponent,
         BoardCustomDeletePopupComponent,
-        BoardCustomConfigurationComponent
+        BoardCustomConfigurationComponent,
+        BoardCustomAgileComponent
     ],
     entryComponents: [
         BoardCustomComponent,
@@ -44,7 +46,8 @@ const ENTITY_STATES = [
         BoardCustomPopupComponent,
         BoardCustomDeleteDialogComponent,
         BoardCustomDeletePopupComponent,
-        BoardCustomConfigurationComponent
+        BoardCustomConfigurationComponent,
+        BoardCustomAgileComponent
     ],
     providers: [
         BoardCustomService,

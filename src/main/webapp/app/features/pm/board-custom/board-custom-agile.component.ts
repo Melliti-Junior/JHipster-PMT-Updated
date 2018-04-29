@@ -15,14 +15,14 @@ import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {ResponseWrapper} from '../../../shared';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';
-import {MenuItem} from "primeng/api";
+import {MenuItem} from 'primeng/api';
 
 @Component({
-    selector: 'jhi-board-custom-detail',
-    templateUrl: './board-custom-detail.component.html',
-    styleUrls: ['./board-custom-detail.component.css']
+    selector: 'jhi-board-custom-agile',
+    templateUrl: './board-custom-agile.component.html',
+    styleUrls: ['./board-custom-agile.component.css']
 })
-export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterContentInit {
+export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterContentInit {
 
     boardcustom: BoardCustom;
     activeSprint: SprintCustom;
@@ -82,14 +82,23 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         // this.getBacklogIssues();
         this.scrumItems = [
-            {label: 'Backlog', icon: 'fa-tasks', command: (onclick) =>
-                { this.Backlog = true; this.ActiveSprint = false; this.getBacklogIssues(); this.getSprintIssues();}},
-            {label: 'ActiveSprint', icon: 'fa-table', command: (onclick) =>
-                { this.Backlog = false; this.ActiveSprint = true; this.searchRelatedColumns()}},
+            {
+                label: 'Backlog', icon: 'fa-tasks', command: (onclick) => {
+                    this.Backlog = true; this.ActiveSprint = false;
+                    this.getBacklogIssues(); this.getSprintIssues();
+                }},
+            {
+                label: 'ActiveSprint', icon: 'fa-table', command: (onclick) => {
+                    this.Backlog = false; this.ActiveSprint = true;
+                    this.searchRelatedColumns()
+                }},
         ];
         this.kanbanItems = [
-            {label: 'KanbanBoard', icon: 'fa-bar-table', command: (onclick) =>
-                { this.Backlog = false; this.ActiveSprint = true; this.searchRelatedColumns()}},
+            {
+                label: 'KanbanBoard', icon: 'fa-bar-table', command: (onclick) => {
+                    this.Backlog = false; this.ActiveSprint = true;
+                    this.searchRelatedColumns()
+                }},
         ];
     }
 

@@ -4,6 +4,7 @@ export * from './board-custom.service';
 export * from './board-custom-dialog.component';
 export * from './board-custom-delete-dialog.component';
 export * from './board-custom-configuration.component';
+export * from './board-custom-agile.component';
 export * from './board-custom-detail.component';
 export * from './board-custom.component';
 export * from './board-custom.route';

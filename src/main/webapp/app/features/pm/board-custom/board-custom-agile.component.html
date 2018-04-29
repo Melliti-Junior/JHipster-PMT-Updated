@@ -27,7 +27,7 @@
             <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
                 <button class="btn btn-success" id="dropdownManual" aria-hidden="true" ngbDropdownToggle >Board</button>
                 <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                    <li class="dropdown-item"><a [routerLink]="['../configure', + boardcustom.id]">Configure</a></li>
+                    <li class="dropdown-item"><a [routerLink]="['../../configure', + boardcustom.id]">Configure</a></li>
                     <li class="dropdown-item"><a [routerLink]="['/', { outlets: { popup: ['boardcustom-new'] } }]">Create Board</a></li>
                 </div>
             </div>

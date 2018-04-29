@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
 import {ColumnCustom} from '../column-custom/column-custom.model';
@@ -28,7 +28,8 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         private boardcustomService: BoardCustomService,
         private columncustomService: ColumnCustomService,
         private statusService: StatusService,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private router: Router,
     ) {
     }
 

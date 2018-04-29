@@ -97,34 +97,6 @@ export class AgileComponent implements OnInit {
               elt.children[i].hidden = true;
           }
       }
-
-/*
-            console.log($event.target.className);
-      if ($event.target.id.localeCompare('droppable') !== -1) {
-          console.log('here droppable ' + $event.target.className)
-
-          $event.preventDefault();
-          $event.target.style.border = '2px dashed blueviolet';
-          console.log('count ' + $event.target.children.length)
-          for(let i = 0; i < $event.target.children.length; i++) {
-              $event.target.children[i].hidden = true;
-          }
-          // console.log($event.target.children[i])
-      } else {
-          let elt = $event.target;
-          console.log('init ' + elt.className);
-          while ((elt.id.localeCompare('droppable') === -1) || (elt.id === undefined)) {
-              console.log('me ' + elt.className);
-              elt = elt.parentElement;
-              console.log('my parent ' + elt.className);
-          }
-          console.log('found ' + elt.id)
-
-          for(let i = 0; i < elt.children.length; i++) {
-              elt.children[i].hidden = true;
-          }
-      }
-      */
     }
 
     drop(ev) {
