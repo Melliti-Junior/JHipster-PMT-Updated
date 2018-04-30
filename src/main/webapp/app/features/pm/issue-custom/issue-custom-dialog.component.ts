@@ -103,19 +103,26 @@ export class IssueCustomDialogComponent implements OnInit {
         // let myDate = new Date(this.theDate.year, this.theDate.month-1, this.theDate.day);
         this.myDate = this.ngbDateParserFormatter.format(this.theDate);
         console.log('ngBParse : ' + this.myDate);
-
-        this.statusSce.search({query : 'Open'})
-            .subscribe(
-                (res: ResponseWrapper) => this.getInitialStatusCustom(res.json, res.headers),
-                (error) => console.log(error))
-        this.resolutionSce.search({query : 'Unresolved'})
-            .subscribe(
-                (res: ResponseWrapper) => this.getInitialResolution(res.json, res.headers),
-                (error) => console.log(error))
     }
 
     clear() {
         this.activeModal.dismiss('cancel');
+    }
+
+    makeNewIssueOpen() {
+        for (let status of this.statuses) {
+            if (status.name.toLowerCase() === 'open') {
+                this.issuecustom.status = status;
+            }
+        }
+    }
+
+    makeNewIssueUnresolved() {
+        for (let resolution of this.resolutions) {
+            if (resolution.name.toLowerCase() === 'unresolved') {
+                this.issuecustom.resolution = resolution;
+            }
+        }
     }
 
     findEpic() {
@@ -283,31 +290,6 @@ export class IssueCustomDialogComponent implements OnInit {
             .then((versions) => this.versions = versions );
     }
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof IssueCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.issuecustomService.findByRequest(name);
-        // console.log(this.comp.issuecustoms);
-    }
-
-    getInitialStatusCustom(data, header) {
-        for (let status of data) {
-            this.issuecustom.status = status;
-        }
-        // console.log(this.relatedSprintsBoard);
-
-    }
-
-    getInitialResolution(data, headers) {
-        for (let resolution of data) {
-            this.issuecustom.resolution = resolution;
-        }
-    }
-
     save() {
         this.isSaving = true;
         if (this.issuecustom.id !== undefined) {
@@ -332,7 +314,10 @@ export class IssueCustomDialogComponent implements OnInit {
                 console.log('New Code : ' + this.issuecustom.code);
             }
             // Set the status Open
-            this.issuecustom.status
+            this.makeNewIssueOpen();
+            // Set the status Unresolved
+            this.makeNewIssueUnresolved();
+            // Create the new Issue
             this.subscribeToSaveResponse(
                 this.issuecustomService.create(this.issuecustom));
         }

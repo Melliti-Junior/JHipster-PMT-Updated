@@ -1,157 +1,95 @@
-<!--
-<div>
-    <h2>
-        <span>Columns</span>
-        <button class="btn btn-primary float-right" (click)="searchRelatedColumns()">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down">
-                Show related Columns
-            </span>
-        </button>
-    </h2>
-    <jhi-alert></jhi-alert>
-    <div class="row">
-        <div class="col-sm-12">
-            <form name="searchForm" class="form-inline">
-                <div class="input-group w-100 mt-3">
-                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
-                    <button class="input-group-addon btn btn-info" (click)="search(currentSearch)">
-                        <span class="fa fa-search"></span>
-                    </button>
-                    <button class="input-group-addon btn btn-danger" (click)="clear()" *ngIf="currentSearch">
-                        <span class="fa fa-trash-o"></span>
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-    <br/>
-    <div class="table-responsive">
-        <table class="table table-striped" *ngIf="relatedColumns">
-            <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-                <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="min"><span>Min</span> <span class="fa fa-sort"></span></th>
-                <th jhiSortBy="max"><span>Max</span> <span class="fa fa-sort"></span></th>
+<div *ngIf="boardcustom">
 
-                <th></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let column of relatedColumns ;trackBy: trackId">
-                <td><a [routerLink]="['/columncustoms', column.id ]">{{column.code}}</a></td>
-                <td>{{column.name}}</td>
-                <td>{{column.min}}</td>
-                <td>{{column.max}}</td>
-                <td class="text-right">
-                    <div class="btn-group flex-btn-group-container">
+    <h2>
+        <div class="headerConf">
+
+            <div class="boardParent" style="display: flex; flex-direction: row; justify-content: space-between">
+
+                <div class="schemeBoard" style="display: flex; flex-direction: row; justify-content: space-between">
+
+                    <div class="project-name"><h4>{{boardcustom.project.name}}</h4></div>
+
+                    &nbsp;
+                    <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
+                    &nbsp;
+
+                    <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
+
+                    &nbsp;
+                    <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
+                    &nbsp;
+
+                    <div><h4>Configuration</h4></div>
+                </div>
+            </div>
+
+
+            <div class="columnConfBtn">
+                <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+
+                    <div class="btn-group mr-2 float-right" role="group" aria-label="Second group">
                         <button type="submit"
-                                [routerLink]="['../columncustoms', column.id ]"
-                                class="btn btn-info btn-sm">
-                            <span class="fa fa-eye"></span>
-                            <span class="d-none d-md-inline">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'columncustoms/'+ column.id + '/edit'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-primary btn-sm">
-                            <span class="fa fa-pencil"></span>
-                            <span class="d-none d-md-inline">Edit</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/', { outlets: { popup: 'columncustoms/'+ column.id + '/delete'} }]"
-                                replaceUrl="true"
-                                queryParamsHandling="merge"
-                                class="btn btn-danger btn-sm">
-                            <span class="fa fa-remove"></span>
-                            <span class="d-none d-md-inline">Delete</span>
+                                (click)="previousState()"
+                                class="btn btn-info">
+                            <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
                         </button>
                     </div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div *ngIf="boardcustoms && boardcustoms.length">
-        <div class="row justify-content-center">
-            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
-        </div>
-        <div class="row justify-content-center">
-            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
-        </div>
-    </div>
-</div>
--->
 
-<h2>
-    <span>Board Configuration</span>
-    <div class="columnConfBtn">
-        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-            <div class="btn-group mr-2" role="group" aria-label="First group">
-                <button #divClick class="btn btn-warning float-right" (click)="searchRelatedColumns()">
-                <span class="hidden-sm-down">
-                    Show related Columns
-                </span>
-                </button>
-            </div>
-            <div class="btn-group mr-2" role="group" aria-label="Second group">
-                <button class="btn btn-info float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['columncustom-new'] } }]">
-                <span class="hidden-sm-down">
-                    Add Column
-                </span>
-                </button>
-            </div>
-            <div class="btn-group" role="group" aria-label="Third group">
-                <button class="btn btn-info float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['status-new'] } }]">
-                <span class="hidden-sm-down">
-                    Add Status
-                </span>
-                </button>
+                    <div class="btn-group mr-2" role="group" aria-label="Second group">
+                        <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['columncustom-new'] } }]">
+                            <span class="fa fa-plus"></span>&nbsp;<span class="hidden-sm-down">Add Column</span></span>
+                        </button>
+                    </div>
+                    <div class="btn-group" role="group" aria-label="Third group">
+                        <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['status-new'] } }]">
+                            <span class="fa fa-plus"></span>&nbsp;<span class="hidden-sm-down">Add Status</span></span>
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 
-</h2>
 
-<br/>
+    </h2>
 
-<div class="container-fluid">
-    <div id="agileColumns" class="row"  *ngIf="relatedColumns">
-        <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
-            <div class="agileColumn">
-                <div class="panel-heading column-name"> <strong>{{col.name}}</strong></div>
-                <div class="panel-body-active column-content-active droppable" id="{{col.id}}" (dragover)="allowDrop($event)" (drop)="drop($event)">
-                    <div *ngFor="let status of allStatuses">
-                        <div *ngIf="status.column">
-                            <div *ngIf="status.column.id === col.id" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
-                                <div class="unmapped-status-content">
-                                    <div class="unmapped-status-body">
-                                        <div class="status-info row pl-3">
-                                            <div class="status-code">
-                                                <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+    <br/>
+
+    <div class="container-fluid">
+        <div id="agileColumns" class="row"  *ngIf="relatedColumns">
+            <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
+                <div class="agileColumn">
+                    <div class="panel-heading column-name"> <strong>{{col.name}}</strong></div>
+                    <div class="panel-body-active column-content-active droppable" id="{{col.id}}" (dragover)="allowDrop($event)" (drop)="drop($event)">
+                        <div *ngFor="let status of allStatuses">
+                            <div *ngIf="status.column">
+                                <div *ngIf="status.column.id === col.id" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                                    <div class="unmapped-status-content">
+                                        <div class="unmapped-status-body">
+                                            <div class="status-info row pl-3">
+                                                <div class="status-code">
+                                                    <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="panel panel-primary col"  *ngIf="allStatuses">
-            <div class="panel-heading column-status">Unmapped Statuses</div>
-            <div class="panel-body-active column-content-active droppable" id="unmappedStatus" (dragover)="allowDrop($event)"  (drop)="drop($event)">
-                <div *ngFor="let status of allStatuses">
-                    <div *ngIf="!status.column" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
-                        <div class="unmapped-status-content">
-                            <div class="unmapped-status-body">
-                                <div class="status-info row pl-3">
-                                    <div class="status-code">
-                                        <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+            <div class="panel panel-primary col"  *ngIf="allStatuses">
+                <div class="panel-heading column-status">Unmapped Statuses</div>
+                <div class="panel-body-active column-content-active droppable" id="unmappedStatus" (dragover)="allowDrop($event)"  (drop)="drop($event)">
+                    <div *ngFor="let status of allStatuses">
+                        <div *ngIf="!status.column" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                            <div class="unmapped-status-content">
+                                <div class="unmapped-status-body">
+                                    <div class="status-info row pl-3">
+                                        <div class="status-code">
+                                            <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -162,9 +100,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-

@@ -80,3 +80,9 @@ body {
 
 .columnConfBtn .btn {
 }
+
+.headerConf {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

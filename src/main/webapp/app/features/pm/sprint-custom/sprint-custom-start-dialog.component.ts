@@ -114,9 +114,12 @@ export class SprintCustomStartDialogComponent implements OnInit {
                 content: 'Started an sprint'
             });
             this.activeModal.dismiss(true);
+            location.reload();
+
         });
         console.log(sprint.isActive);
         this.eventManager.broadcast({ name: 'boardcustomsListModification', content: 'OK'});
+
     }
 }
 

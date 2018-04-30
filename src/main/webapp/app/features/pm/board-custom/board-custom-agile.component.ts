@@ -107,11 +107,13 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         ];
 
         setTimeout(() => {
-            if (this.boardcustom.type.toLowerCase() === 'scrum') {
-                this.Backlog = true;
-            }
-            if (this.boardcustom.type.toLowerCase() === 'kanban') {
-                this.KanbanBoard = true;
+            if (this.boardcustom) {
+                if (this.boardcustom.type.toLowerCase() === 'scrum') {
+                    this.Backlog = true;
+                }
+                if (this.boardcustom.type.toLowerCase() === 'kanban') {
+                    this.KanbanBoard = true;
+                }
             }
             if (this.columnCustoms) {
                 this.searchRelatedColumns();
@@ -124,6 +126,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
             this.divClick.nativeElement.click();
         }, 500);
+
     }
 
     ngAfterContentInit() {
@@ -275,35 +278,20 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     (error) => console.log(error));
         }
     }
+
     startSprint() {
 
-        let x = <HTMLButtonElement> document.getElementById('startSprintBtn');
-        x.disabled = true;
+        let startSpBtn = <HTMLButtonElement> document.getElementById('startSprintBtn');
+
+        if (this.activeSprint.isActive) {
+            startSpBtn.hidden = true;
+        }
+
         // Look for the active sprint in this board
         // this.searchActiveSprint();
 
         // this.affectIssuesToSprint();
 
-    }
-
-    affectIssuesToSprint() {
-        // Affect chosen issues to the active sprint
-        for (let issue of this.chosenIssues) {
-            if (issue.id !== undefined) {
-                this.isSaving = true;
-                issue.sprint = Object.assign({}, this.activeSprint);
-                // issue.updatedDate = this.theDate;
-                this.subscribeToSaveResponseIssues(
-                    this.issuecustomSce.update(issue));
-/*
-                this.issuecustomSce.search({query : issue.code})
-                    .subscribe(
-                        (res: ResponseWrapper) => console.log(),
-                        (error) => console.log(error));
-*/
-                console.log('update ' + issue.code + ' with sprint ' + issue.sprint.name);
-            }
-        }
     }
 
     prepareSprint() {
@@ -324,12 +312,18 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     this.sprintcustomSce.create(this.activeSprint));
             }
 
+            setTimeout(() => {
+                this.searchActiveSprint();
+            }, 500);
+
             let x = <HTMLButtonElement> document.getElementById('createSprintBtn');
             x.disabled = true;
         } else {
             let x = <HTMLButtonElement> document.getElementById('createSprintBtn');
             x.disabled = true;
+
         }
+
     }
 
     private subscribeToSaveResponse(result: Observable<BoardCustom>) {
@@ -359,7 +353,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     private getCurrentSprintObj(data) {
         for (let res of data) {
             this.activeSprint = res.valueOf();
-            console.log(this.activeSprint.id)
+            console.error('sprinnnttt ' + JSON.stringify(this.activeSprint))
+
         }
     }
 
@@ -447,30 +442,30 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         ev.target.appendChild(document.getElementById(data));
         // console.log(document.getElementById(data).id);
 
+
+        if (!this.activeSprint.id) {
+            this.searchActiveSprint();
+        }
+
+
+
         for (let issue of this.issueCustoms) {
             if (issue.id === document.getElementById(data).id) {
 
-                /*
-                let index = this.relatedIssuesPerSprint.indexOf(issue);
-                console.log('before splice ' + this.relatedIssuesPerSprint.length)
-                if(index !== -1) {
-                    this.relatedIssuesPerBoard.splice(index, 1);
-                }
-                console.log('after splice ' + this.relatedIssuesPerSprint.length)
-*/
-                if (this.chosenIssues.indexOf(issue) === -1) {
-                    this.chosenIssues.push(issue);
+                this.isSaving = true;
+                issue.sprint = Object.assign({}, this.activeSprint);
+                // issue.updatedDate = this.theDate;
+                this.subscribeToSaveResponseIssues(
+                    this.issuecustomSce.update(issue));
+
+                if (issue.id !== undefined) {
+
+                    console.log('update ' + issue.code + ' with sprint ' + issue.sprint.name);
                 }
 
-                console.log(issue.code);
-                console.log('chosen : ' + this.chosenIssues.length);
-                // Affect active sprint to current issue
-                // issue.sprint = Object.assign({}, this.activesprint);
-                // console.log('sprint ' + issue.sprint.name + ' of ' + issue.code);
             }
 
-            this.searchActiveSprint();
-            this.affectIssuesToSprint();
+            // this.affectIssuesToSprint();
             console.error('dropev stops here');
         }
 

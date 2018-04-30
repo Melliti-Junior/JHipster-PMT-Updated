@@ -38,6 +38,7 @@
     font-weight: bold;
     padding-right: 1%;
     padding-left: inherit;
+    width: 20%;
 }
 
 .backlogIssues {
@@ -54,7 +55,7 @@
 
 .sprintInfo {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     width: 20%;
 }
 
@@ -65,6 +66,7 @@
     color: #888888;
     font-weight: bold;
     font-size: 14px;
+    width: 30%;
 }
 
 .sprintStart {
@@ -108,13 +110,13 @@
 
 .issue {
     border: 1px solid rgb(182, 182, 179);
-    height: 30px;
+    height: fit-content;
     display: flex;
     flex-wrap: nowrap;
     flex-direction: row;
 }
 
-.issue-priority-color-active {
+.issue-priority-color {
     width:1%;
 }
 
@@ -229,7 +231,7 @@ body {
 }
 
 .issue-priority-color-active {
-    width:2%;
+    width:1%;
 }
 
 .column-content-active {
@@ -257,19 +259,6 @@ body {
 
 
 
-
-
-
-.issue-priority-color-active {
-    width:2%;
-}
-
-.column-content-active {
-    /* border: 1px solid #888888; */
-    min-height: 320px;
-    border: 1px solid #888888;
-
-}
 
 .issue-active {
     background-color: #fcfcfc;
@@ -304,10 +293,6 @@ body {
     border: white;
 }
 
-.boardConf {
-    padding-right: 2%;
-}
-
 .main {
     border: 1px solid #888888;
     height: content-box;
@@ -316,4 +301,10 @@ body {
 
 .mypanel .ui-widget-header {
     border: 20px;
+}
+
+.specBtn {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }

@@ -52,7 +52,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         this.loadAttributes();
 
         setTimeout(() => {
-            this.divClick.nativeElement.click();
+            this.searchRelatedColumns();
         }, 200);
     }
 
