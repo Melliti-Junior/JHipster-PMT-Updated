@@ -86,3 +86,16 @@ body {
     flex-direction: row;
     justify-content: space-between;
 }
+
+
+a {
+    color: #3b73af;
+}
+
+a:hover {
+    color: #cc6;
+}
+
+.card-title {
+    color: #533f03;
+}

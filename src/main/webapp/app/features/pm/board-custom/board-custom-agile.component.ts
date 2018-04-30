@@ -167,6 +167,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.getAllStatuses();
     }
 
+    makeNewIssueOpen(issuecustom: IssueCustom) {
+        for (let status of this.statuscustoms) {
+            if (status.name.toLowerCase() === 'open') {
+                issuecustom.status = status;
+            }
+        }
+    }
+
     searchOnlyRelatedSprints() {
         this.sprintcustomSce.search({query : this.boardcustom.name})
             .subscribe(
@@ -412,7 +420,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     allowDrop($event) {
         // alert($event.target.id)
-        if ((!this.activeSprint.isActive) && ($event.target.id.localeCompare('droppable') !== -1)) {
+        if ((!this.activeSprint.isActive) && ($event.target.id.includes('droppable') === true)) {
             $event.preventDefault();
         }
     }
@@ -453,6 +461,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             if (issue.id === document.getElementById(data).id) {
 
                 this.isSaving = true;
+                this.makeNewIssueOpen(issue);
                 issue.sprint = Object.assign({}, this.activeSprint);
                 // issue.updatedDate = this.theDate;
                 this.subscribeToSaveResponseIssues(
@@ -538,12 +547,12 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     allowDropColBoard($event) {
 
         let elt = $event.target;
-        while ((elt.id === undefined) || (elt.id.localeCompare('columndroppable') === -1)) {
+        while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
             console.log('me ' + elt.className);
             elt = elt.parentElement;
             console.log('my parent ' + elt.className);
         }
-        if (elt.id.localeCompare('columndroppable') !== -1) {
+        if (elt.id.includes('droppable') === true) {
             $event.preventDefault();
             elt.style.border = '2px dashed blueviolet';
             console.log('count ' + elt.children.length)

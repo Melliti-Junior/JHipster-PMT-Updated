@@ -5,7 +5,14 @@
 
         <div class="schemeBoard" style="display: flex; flex-direction: row; justify-content: space-between">
 
-            <div class="project-name"><h4>{{boardcustom.project.name}}</h4></div>
+            <div class="project-name">
+                <h5>
+                    <span>
+                        <a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>
+                    </span>
+
+                </h5>
+            </div>
 
             <div>
                 &nbsp;
@@ -13,8 +20,13 @@
                 &nbsp;
             </div>
 
-
-            <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
+            <div>
+                <h5>
+                    <span>
+                        <a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>
+                    </span>
+                </h5>
+            </div>
 
         </div>
 
@@ -67,14 +79,17 @@
 
 
             <div  *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn-group mr-2 float-right" role="group" aria-label="Second group">
-                <button type="submit"
-                        class="btn btn-danger">
-                    <span class="fa fa-hand-stop-o"></span>&nbsp;<span>Complete Sprint</span>
-                </button>
+                <div *ngIf="activeSprint && activeSprint.isActive">
+                    <button type="submit"
+                            class="btn btn-danger"
+                            [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activeSprint.id + '/complete'} }]">
+                        <span class="fa fa-hand-stop-o"></span>&nbsp;<span>Complete Sprint</span>
+                    </button>
+                </div>
             </div>
 
             <br>
-            
+
             <div class="container pl-0 py-3" id="currentIssues" *ngIf="activeSprint && Backlog">
                 <div class="PartialBacklog row">
                     <div class="sprintInfo">
@@ -162,11 +177,11 @@
 
         <div class="ScrumBan">
 
-            <div class="container-fluid" *ngIf="relatedColumns && (ActiveSprint || KanbanBoard)">
+            <div class="container-fluid" *ngIf="relatedColumns && ActiveSprint">
 
                 <div class="wipBoard">
 
-                    <div id="agileColumns" class="row">
+                    <div class="agileColumns row">
 
                         <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
                             <div class="agileColumn">
@@ -212,6 +227,88 @@
 
                 </div>
             </div>
+
+
+
+
+
+
+
+            <div class="container-fluid" *ngIf="relatedColumns && KanbanBoard">
+
+                <div class="wipBoard">
+
+                    <div class="agileColumns row">
+
+                        <div class="kanbanBacklog panel panel-primary col">
+                            <div class="panel-heading column-name">Backlog</div>
+                            <div class="panel-body-active column-content-active">
+                                <div *ngFor="let issueBckKanCol of relatedIssuesPerBoard">
+                                    <div *ngIf="!issueBckKanCol.status"><div class="issue-active row" id={{issueBckKanCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">
+                                        <div class="issue-priority-color-active" *ngIf="issueBckKanCol.priority" [style.background] = "issueBckKanCol.priority.color"></div>
+                                        <div class="card-content-active">
+                                            <div class="card-body-active">
+                                                <div class="info row pl-3">
+                                                    <div class="issue-type-icon-active" *ngIf="issueBckKanCol.type"><img  [src] = "issueBckKanCol.type.icon" /></div>
+                                                    <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueBckKanCol.id ]">{{issueBckKanCol.code}}</a></div></div>
+                                                    <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                                </div>
+                                                <div class="issue-summary pl-3">{{issueBckKanCol.summary}}</div>
+                                            </div>
+                                        </div>
+                                    </div></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
+
+                            <div class="agileColumn">
+
+                                <div class="panel-heading column-name"> {{col.name}} </div>
+                                <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
+
+                                    <div *ngFor="let status of statuscustoms">
+
+                                        <div *ngIf="status.column.name === col.name">
+
+
+                                            <div *ngFor="let issueKanCol of relatedIssuesPerBoard">
+
+
+                                                <div *ngIf="issueKanCol.status && issueKanCol.status.name === status.name">
+
+
+                                                    <div class="issue-active row" id={{issueKanCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">
+                                                        <div class="issue-priority-color-active" *ngIf="issueKanCol.priority" [style.background] = "issueKanCol.priority.color"></div>
+                                                        <div class="card-content-active">
+                                                            <div class="card-body-active">
+                                                                <div class="info row pl-3">
+                                                                    <div class="issue-type-icon-active" *ngIf="issueKanCol.type"><img  [src] = "issueKanCol.type.icon" /></div>
+                                                                    <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueKanCol.id ]">{{issueKanCol.code}}</a></div></div>
+                                                                    <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                                                </div>
+                                                                <div class="issue-summary pl-3">{{issueKanCol.summary}}</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
 
     </section>

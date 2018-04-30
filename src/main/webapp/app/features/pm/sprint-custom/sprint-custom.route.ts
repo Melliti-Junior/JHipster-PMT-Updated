@@ -8,6 +8,7 @@ import { SprintCustomDetailComponent } from './sprint-custom-detail.component';
 import { SprintCustomPopupComponent } from './sprint-custom-dialog.component';
 import { SprintCustomDeletePopupComponent } from './sprint-custom-delete-dialog.component';
 import {SprintCustomStartPopupComponent} from './sprint-custom-start-dialog.component';
+import {SprintCustomCompletePopupComponent} from "./sprint-custom-complete-dialog.component";
 
 @Injectable()
 export class SprintCustomResolvePagingParams implements Resolve<any> {
@@ -82,6 +83,16 @@ export const sprintcustomPopupRoute: Routes = [
     {
         path: 'sprintcustoms/:id/start',
         component: SprintCustomStartPopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'SprintCustoms'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'sprintcustoms/:id/complete',
+        component: SprintCustomCompletePopupComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'SprintCustoms'

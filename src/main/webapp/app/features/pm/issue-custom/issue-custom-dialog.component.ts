@@ -109,14 +109,6 @@ export class IssueCustomDialogComponent implements OnInit {
         this.activeModal.dismiss('cancel');
     }
 
-    makeNewIssueOpen() {
-        for (let status of this.statuses) {
-            if (status.name.toLowerCase() === 'open') {
-                this.issuecustom.status = status;
-            }
-        }
-    }
-
     makeNewIssueUnresolved() {
         for (let resolution of this.resolutions) {
             if (resolution.name.toLowerCase() === 'unresolved') {
@@ -313,8 +305,6 @@ export class IssueCustomDialogComponent implements OnInit {
                 this.issuecustom.code = this.parentProject.code.toUpperCase() + '-' + (this.numIssuesParentProj + 1);
                 console.log('New Code : ' + this.issuecustom.code);
             }
-            // Set the status Open
-            this.makeNewIssueOpen();
             // Set the status Unresolved
             this.makeNewIssueUnresolved();
             // Create the new Issue

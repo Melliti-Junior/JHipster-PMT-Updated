@@ -4,5 +4,7 @@ export * from './sprint-custom.service';
 export * from './sprint-custom-dialog.component';
 export * from './sprint-custom-delete-dialog.component';
 export * from './sprint-custom-detail.component';
+export * from './sprint-custom-start-dialog.component';
+export * from './sprint-custom-complete-dialog.component';
 export * from './sprint-custom.component';
 export * from './sprint-custom.route';

@@ -7,19 +7,34 @@
 
                 <div class="schemeBoard" style="display: flex; flex-direction: row; justify-content: space-between">
 
-                    <div class="project-name"><h4>{{boardcustom.project.name}}</h4></div>
+                    <div class="project-name">
+                        <h5>
+                            <span>
+                                <a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>
+                            </span>
+                        </h5>
+                    </div>
+
 
                     &nbsp;
                     <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
                     &nbsp;
 
-                    <div class="board-name"><h4>{{boardcustom.name}}</h4></div>
+
+                    <div>
+                        <h5>
+                            <span>
+                                <a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>
+                            </span>
+                        </h5>
+                    </div>
+
 
                     &nbsp;
                     <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
                     &nbsp;
 
-                    <div><h4>Configuration</h4></div>
+                    <div><h5>Configuration</h5></div>
                 </div>
             </div>
 
@@ -67,7 +82,7 @@
                                         <div class="unmapped-status-body">
                                             <div class="status-info row pl-3">
                                                 <div class="status-code">
-                                                    <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+                                                    <div class="card-title"><a style="color: #533f03;" [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -82,13 +97,13 @@
             <div class="panel panel-primary col"  *ngIf="allStatuses">
                 <div class="panel-heading column-status">Unmapped Statuses</div>
                 <div class="panel-body-active column-content-active droppable" id="unmappedStatus" (dragover)="allowDrop($event)"  (drop)="drop($event)">
-                    <div *ngFor="let status of allStatuses">
-                        <div *ngIf="!status.column" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                    <div *ngFor="let statusUnmapped of allStatuses">
+                        <div *ngIf="!statusUnmapped.column" class="status row" id={{statusUnmapped.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
                             <div class="unmapped-status-content">
                                 <div class="unmapped-status-body">
                                     <div class="status-info row pl-3">
                                         <div class="status-code">
-                                            <div class="card-title"><a [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+                                            <div class="card-title"><a style="color: #533f03;" [routerLink]="['/statuscustoms', statusUnmapped.id ]">{{statusUnmapped.code}}</a></div>
                                         </div>
                                     </div>
                                 </div>

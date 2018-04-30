@@ -20,6 +20,10 @@ import {
     SprintCustomStartDialogComponent,
     SprintCustomStartPopupComponent
 } from './sprint-custom-start-dialog.component';
+import {
+    SprintCustomCompleteDialogComponent,
+    SprintCustomCompletePopupComponent
+} from './sprint-custom-complete-dialog.component';
 
 const ENTITY_STATES = [
     ...sprintcustomRoute,
@@ -41,6 +45,8 @@ const ENTITY_STATES = [
         SprintCustomDeletePopupComponent,
         SprintCustomStartDialogComponent,
         SprintCustomStartPopupComponent,
+        SprintCustomCompleteDialogComponent,
+        SprintCustomCompletePopupComponent,
     ],
     entryComponents: [
         SprintCustomComponent,
@@ -50,6 +56,8 @@ const ENTITY_STATES = [
         SprintCustomDeletePopupComponent,
         SprintCustomStartDialogComponent,
         SprintCustomStartPopupComponent,
+        SprintCustomCompleteDialogComponent,
+        SprintCustomCompletePopupComponent,
     ],
     providers: [
         SprintCustomService,
