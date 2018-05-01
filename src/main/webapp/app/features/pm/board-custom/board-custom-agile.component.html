@@ -118,7 +118,7 @@
                     <div class="a" *ngIf="activeSprint.isActive">
                         <div class="b" *ngFor="let sp_issue of relatedIssuesPerSprint">
                             <div class="issue row" id={{sp_issue.id}}>
-                                <div class="issue-priority-color-active" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
+                                <div class="issue-priority-color" *ngIf="sp_issue.priority" [style.background] = "sp_issue.priority.color"></div>
                                 <div class="issue-type-icon" *ngIf="sp_issue.type"><img  [src] = "sp_issue.type.icon" /></div>
                                 <div class="issue-info row" id="attributessp">
                                     <div class="code"><a href="#/issuecustoms/{{sp_issue.id}}">{{sp_issue.code}}</a></div>
@@ -177,6 +177,7 @@
 
         <div class="ScrumBan">
 
+            <!-- Scrum Board -->
             <div class="container-fluid" *ngIf="relatedColumns && ActiveSprint">
 
                 <div class="wipBoard">
@@ -185,7 +186,11 @@
 
                         <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
                             <div class="agileColumn">
-                                <div class="panel-heading column-name"> {{col.name}} </div>
+                                <div class="panel-heading column-name">
+                                    <div class="colName">
+                                        {{col.name}}
+                                    </div>
+                                </div>
                                 <div class="panel-body-active column-content-active" id="columndroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
 
                                     <div *ngFor="let status of statuscustoms">
@@ -231,9 +236,7 @@
 
 
 
-
-
-
+            <!-- Kanban Board -->
             <div class="container-fluid" *ngIf="relatedColumns && KanbanBoard">
 
                 <div class="wipBoard">
@@ -241,7 +244,9 @@
                     <div class="agileColumns row">
 
                         <div class="kanbanBacklog panel panel-primary col">
-                            <div class="panel-heading column-name">Backlog</div>
+                            <div class="panel-heading column-name">
+                                <div class="colName">Backlog</div>
+                            </div>
                             <div class="panel-body-active column-content-active">
                                 <div *ngFor="let issueBckKanCol of relatedIssuesPerBoard">
                                     <div *ngIf="!issueBckKanCol.status"><div class="issue-active row" id={{issueBckKanCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">
@@ -263,20 +268,26 @@
 
                         <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
 
-                            <div class="agileColumn">
+                            <div class="agileColumn" id={{col.id}}>
 
-                                <div class="panel-heading column-name"> {{col.name}} </div>
+                                <div class="panel-heading column-name">
+                                    <div class="colInfo">
+                                        <div class="colName"> {{col.name}} </div>
+                                        <div class="colMin" *ngIf="col.min"> Min : {{col.min}} </div>
+                                        <div class="colMax" *ngIf="col.max"> Max : {{col.max}} </div>
+                                    </div>
+                                </div>
                                 <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
 
-                                    <div *ngFor="let status of statuscustoms">
+                                    <div class="status" *ngFor="let status of statuscustoms">
 
-                                        <div *ngIf="status.column.name === col.name">
-
-
-                                            <div *ngFor="let issueKanCol of relatedIssuesPerBoard">
+                                        <div class="statuscol" *ngIf="status.column.name === col.name">
 
 
-                                                <div *ngIf="issueKanCol.status && issueKanCol.status.name === status.name">
+                                            <div class="issueKan" *ngFor="let issueKanCol of relatedIssuesPerBoard">
+
+
+                                                <div class="issuesForCol" *ngIf="issueKanCol.status && issueKanCol.status.name === status.name">
 
 
                                                     <div class="issue-active row" id={{issueKanCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">

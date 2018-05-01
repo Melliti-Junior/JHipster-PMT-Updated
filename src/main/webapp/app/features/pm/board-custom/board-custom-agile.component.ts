@@ -93,14 +93,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     this.getBacklogIssues(); this.getSprintIssues();
                 }},
             {
-                label: 'ActiveSprint', icon: 'fa-table', command: (onclick) => {
+                label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
                     this.Backlog = false; this.ActiveSprint = true;
                     this.searchRelatedColumns()
                 }},
         ];
         this.kanbanItems = [
             {
-                label: 'KanbanBoard', icon: 'fa-bar-table', command: (onclick) => {
+                label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
                     this.KanbanBoard = true;
                     this.searchRelatedColumns()
                 }},
@@ -176,7 +176,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     searchOnlyRelatedSprints() {
-        this.sprintcustomSce.search({query : this.boardcustom.name})
+        this.sprintcustomSce.search({query : this.boardcustom.id})
             .subscribe(
                 (res: ResponseWrapper) => this.getRelatedSprints(res.json, res.headers),
                 (error) => console.log(error))
@@ -518,12 +518,92 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         let parent = ev.target.parentElement;
 
+        console.log(parent.childElementCount + 'counnntt')
         for (let i = 0; i < parent.children.length; i++) {
             parent.children[i].hidden = false;
         }
-        console.log('cls' + parent.className);
 
-        parent.style.border = '0px';
+        console.log('cls ' + parent.className);
+        console.log('cls parent ' + parent.parentElement.id);
+
+        /*
+                let workingCol: ColumnCustom;
+                if (parent.parentElement.className === 'agileColumn') {
+                    for (let currCol of this.columnCustoms) {
+                        if (currCol.id === parent.parentElement.id) {
+                            workingCol = currCol;
+                            console.log('col' + workingCol.name)
+                        }
+                    }
+                }
+
+                let workingStatus: StatusCustom;
+                for (let currStatus of this.statuscustoms) {
+                    if (currStatus.column && currStatus.column.id === workingCol.id) {
+                        workingStatus = currStatus;
+                        console.log('st' + workingStatus.name)
+                    }
+                }
+
+                for (let iss of this.relatedIssuesPerBoard) {
+                    if (iss.status && iss.status.id === workingStatus.id) {
+                        console.log('hereeeeee')
+                    }
+                }
+        */
+
+
+        if (this.boardcustom && this.boardcustom.type.toLowerCase() === 'kanban') {
+            let workingCol: ColumnCustom;
+            if (parent.parentElement.className === 'agileColumn') {
+                let found = false;
+                let index = 0;
+                while (found === false && index <= this.columnCustoms.length) {
+                    if (this.columnCustoms[index].id === parent.parentElement.id) {
+                        found = true;
+                        workingCol = this.columnCustoms[index];
+                        console.log('col' + workingCol.name);
+                    } else {
+                        index = index + 1;
+                    }
+                }
+            }
+
+            let countIssues = 0;
+            for (let iss of this.relatedIssuesPerBoard) {
+                if (iss.status) {
+                    console.log(iss.status.column.name)
+                    console.log(parent.parentElement.name)
+                    if (iss.status && iss.status.column.id === parent.parentElement.id) {
+                        countIssues = countIssues + 1;
+                        console.log('hereeeeee' + countIssues);
+                    }
+                }
+            }
+
+            if (countIssues < workingCol.min) {
+                console.log('Capacity shortfall by ' + (workingCol.min - countIssues) + ' cards')
+                parent.style.backgroundColor = 'green'
+            } else {
+                if (countIssues > workingCol.max) {
+                    console.log('Capacity exceeded by ' + (countIssues - workingCol.max) + ' cards')
+                    parent.style.backgroundColor = 'red'
+                } else {
+                    parent.style.backgroundColor = '#f5f5f5'
+                }
+            }
+        }
+
+
+
+        for (let child of parent.children) {
+            if (!child.hidden) {
+                // console.log('children ' + (parent.children.length - this.issueCustoms.length));
+                console.log('children ' + (parent.children.length - this.issueCustoms.length));
+            }
+        }
+
+        parent.style.border = '1px solid #888888';
 
         console.error('dragend stops here');
 
@@ -538,7 +618,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 console.log(ev.target.children.length);
                 if (ev.target.children[i].hidden) {
                     ev.target.children[i].hidden = false;
-                    ev.target.style.border = '0px';
+                    ev.target.style.border = '1px solid #888888';
                 }
             }
         }
@@ -548,14 +628,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         let elt = $event.target;
         while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
-            console.log('me ' + elt.className);
+            // console.log('me ' + elt.className);
             elt = elt.parentElement;
-            console.log('my parent ' + elt.className);
+            // console.log('my parent ' + elt.className);
         }
         if (elt.id.includes('droppable') === true) {
             $event.preventDefault();
             elt.style.border = '2px dashed blueviolet';
-            console.log('count ' + elt.children.length)
+            // console.log('count ' + elt.children.length)
 
             for (let i = 0; i < elt.children.length; i++) {
                 elt.children[i].hidden = true;
@@ -569,6 +649,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         // tslint:disable-next-line:prefer-const
         let data = ev.dataTransfer.getData('text');
         ev.target.appendChild(document.getElementById(data));
+
+        console.log('just drop ' + document.getElementById(data).id)
     }
 
 }
