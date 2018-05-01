@@ -17,6 +17,7 @@ import {DashBoardStepCustomModule} from './step-custom/step-custom.module';
 import {BoardSidebar} from './board-sidebar/board-sidebar';
 import {DashBoardStatusCustomModule} from './status-custom/status-custom.module';
 import {DashBoardWorkflowCustomModule} from './workflow-custom/workflow-custom.module';
+import {DashBoardTransitionCustomModule} from './transition-custom/transition-custom.module';
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import {DashBoardWorkflowCustomModule} from './workflow-custom/workflow-custom.m
     DashBoardStepCustomModule,
     DashBoardStatusCustomModule,
     DashBoardWorkflowCustomModule,
+    DashBoardTransitionCustomModule,
     RouterModule.forChild([ ProjectManagementRoute ])
   ],
   declarations: [ProjectManagementComponent,

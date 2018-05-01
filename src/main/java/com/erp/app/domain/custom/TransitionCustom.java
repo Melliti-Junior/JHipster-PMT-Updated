@@ -1,7 +1,6 @@
 package com.erp.app.domain.custom;
 
 import com.erp.app.domain.Transition;
-import com.erp.app.domain.Workflow;
 import com.erp.app.domain.util.CascadeSave;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -20,27 +19,49 @@ public class TransitionCustom extends Transition implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @DBRef
-    @CascadeSave
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
 	@Field("workflow")
-    // @JsonManagedReference
-    private Workflow workflow;
+    private WorkflowCustom workflow;
+
+    @DBRef
+    @Field("sourceStep")
+    private StepCustom sourceStep;
+
+    @DBRef
+    @Field("targetStep")
+    private StepCustom targetStep;
+
 
     public TransitionCustom() {
         super();
     }
 
-    public TransitionCustom(Workflow workflow) {
-		super();
-		this.workflow = workflow;
+    public TransitionCustom(WorkflowCustom workflow, StepCustom sourceStep, StepCustom targetStep) {
+        this.workflow = workflow;
+        this.sourceStep = sourceStep;
+        this.targetStep = targetStep;
     }
 
-    public Workflow getWorkflow() {
+    public WorkflowCustom getWorkflow() {
         return workflow;
     }
 
-    public void setWorkflow(Workflow workflow) {
+    public void setWorkflow(WorkflowCustom workflow) {
         this.workflow = workflow;
+    }
+
+    public StepCustom getSourceStep() {
+        return sourceStep;
+    }
+
+    public void setSourceStep(StepCustom sourceStep) {
+        this.sourceStep = sourceStep;
+    }
+
+    public StepCustom getTargetStep() {
+        return targetStep;
+    }
+
+    public void setTargetStep(StepCustom targetStep) {
+        this.targetStep = targetStep;
     }
 }
