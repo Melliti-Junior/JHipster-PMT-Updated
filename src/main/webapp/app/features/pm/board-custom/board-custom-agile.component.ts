@@ -18,6 +18,10 @@ import {ColumnCustomService} from '../column-custom/column-custom.service';
 import {MenuItem} from 'primeng/api';
 import {StatusCustom} from '../status-custom/status-custom.model';
 import {StatusCustomService} from '../status-custom/status-custom.service';
+import {StepCustomService} from '../step-custom/step-custom.service';
+import {TransitionCustomService} from '../transition-custom/transition-custom.service';
+import {TransitionCustom} from '../transition-custom/transition-custom.model';
+import {StepCustom} from '../step-custom/step-custom.model';
 
 @Component({
     selector: 'jhi-board-custom-agile',
@@ -35,6 +39,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     relatedIssuesPerBoard: IssueCustom[] = new Array<IssueCustom>();
     relatedIssuesPerSprint: IssueCustom[] = new Array<IssueCustom>();
     relatedColumns: ColumnCustom[];
+    relatedTransitions: TransitionCustom[];
+    relatedSteps: StepCustom[];
 
     chosenIssues: IssueCustom[] = new Array<IssueCustom>();
     sprintCustoms: SprintCustom[];
@@ -76,6 +82,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         private sprintcustomSce: SprintCustomService,
         private columncustomSce: ColumnCustomService,
         private statusService: StatusCustomService,
+        private stepService: StepCustomService,
+        private transitionService: TransitionCustomService,
     ) {
     }
 
@@ -91,19 +99,19 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             {
                 label: 'Backlog', icon: 'fa-tasks', command: (onclick) => {
                     this.Backlog = true; this.ActiveSprint = false;
-                    this.getBacklogIssues(); this.getSprintIssues();
+                    this.getBacklogIssues(); this.getSprintIssues(); this.lookForRelatedTransitions();
                 }},
             {
                 label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
                     this.Backlog = false; this.ActiveSprint = true;
-                    this.searchRelatedColumns()
+                    this.searchRelatedColumns(); this.lookForRelatedTransitions();
                 }},
         ];
         this.kanbanItems = [
             {
                 label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
                     this.KanbanBoard = true;
-                    this.searchRelatedColumns()
+                    this.searchRelatedColumns(); this.lookForRelatedTransitions();
                 }},
         ];
 
@@ -119,7 +127,10 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             if (this.columnCustoms) {
                 this.searchRelatedColumns();
             }
-            this.getBacklogIssues(); this.getSprintIssues();
+
+            this.lookForRelatedTransitions();
+            this.getBacklogIssues();
+            this.getSprintIssues();
             this.divClick.nativeElement.click();
         }, 100);
 
@@ -158,12 +169,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     private loadAttributes() {
-        this.issuecustomSce.getIssueCustoms()
-            .then((issueCustoms) => this.issueCustoms = issueCustoms );
-        // this.getBacklogIssues();
-        console.log('Total : ' + this.issueCustoms.length);
+        this.getAllIssues()
         this.getAllSprints();
-        // this.getSprintIssues();
         this.getAllColumns();
         this.getAllStatuses();
     }
@@ -204,6 +211,11 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         console.log(this.relatedColumns.length)
     }
 
+    getAllIssues() {
+        this.issuecustomSce.getIssueCustoms()
+            .then((issueCustoms) => this.issueCustoms = issueCustoms );
+    }
+
     getAllSprints() {
         this.sprintcustomSce.getSprintCustoms()
             .then((sprintCustoms) => this.sprintCustoms = sprintCustoms );
@@ -217,6 +229,18 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     getAllStatuses() {
         this.statusService.getStatusCustoms()
             .then((statuscustoms) => this.statuscustoms = statuscustoms);
+    }
+
+    lookForRelatedTransitions() {
+        this.transitionService.search({query : this.boardcustom.project.process.id})
+            .subscribe(
+                (res: ResponseWrapper) => this.retrieveTransitions(res.json),
+                (error) => console.log(error));
+    }
+
+    retrieveTransitions(data) {
+        this.relatedTransitions = data;
+        console.error('trans' +  this.relatedTransitions.length)
     }
 
     lookForActiveSprint() {

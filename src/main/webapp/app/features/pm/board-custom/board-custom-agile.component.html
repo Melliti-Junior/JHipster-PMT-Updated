@@ -34,8 +34,8 @@
 
     <div class="boardAgile pl-3">
         <div *ngIf="boardcustom" #divClick class="boardCh" >
-            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumItems" [activeItem]="scrumItems[0]"></p-tabMenu>
-            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" [model]="kanbanItems" [activeItem]="kanbanItems[0]"></p-tabMenu>
+            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumItems"></p-tabMenu>
+            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" [model]="kanbanItems"></p-tabMenu>
         </div>
 
 

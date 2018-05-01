@@ -13,6 +13,10 @@ import {StatusCustomService} from '../status-custom/status-custom.service';
 import {Observable} from 'rxjs/Observable';
 import {IssueCustom} from '../issue-custom';
 import {Response} from '@angular/http';
+import {TransitionCustomService} from '../transition-custom/transition-custom.service';
+import {TransitionCustom} from '../transition-custom/transition-custom.model';
+import {StepCustom} from '../step-custom/step-custom.model';
+import {StepCustomService} from '../step-custom/step-custom.service';
 
 @Component({
     selector: 'jhi-board-custom-configuration',
@@ -24,7 +28,10 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     boardcustom: BoardCustom;
     allColumns: ColumnCustom[];
     allStatuses: StatusCustom[];
+    allSteps: StepCustom[];
     relatedColumns: ColumnCustom[];
+    relatedTransitions: TransitionCustom[];
+    relatedSteps: StepCustom[];
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -35,6 +42,8 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         private boardcustomService: BoardCustomService,
         private columncustomService: ColumnCustomService,
         private statusService: StatusCustomService,
+        private transitionService: TransitionCustomService,
+        private stepService: StepCustomService,
         private route: ActivatedRoute,
         private router: Router,
     ) {
@@ -52,7 +61,8 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
 
         setTimeout(() => {
             this.searchRelatedColumns();
-        }, 200);
+            this.lookForRelatedTransitions();
+        }, 150);
     }
 
     load(id) {
@@ -98,6 +108,40 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
             .then((allColumns) => this.allColumns = allColumns );
         this.statusService.getStatusCustoms()
             .then((allStatuses) => this.allStatuses = allStatuses);
+        this.stepService.getStepCustoms()
+            .then((allSteps) => this.allSteps = allSteps);
+    }
+
+    lookForRelatedTransitions() {
+        this.transitionService.search({query : this.boardcustom.project.process.id})
+            .subscribe(
+                (res: ResponseWrapper) => this.retrieveTransitions(res.json),
+                (error) => console.log(error));
+    }
+
+    retrieveTransitions(data) {
+        this.relatedTransitions = data;
+        console.error('trans' +  this.relatedTransitions.length);
+        this.retrieveRelatedSteps();
+    }
+
+    retrieveRelatedSteps() {
+        this.relatedSteps = new Array<StepCustom>();
+        for (let step of this.allSteps) {
+            for (let trans of this.relatedTransitions) {
+                if (step.id === trans.sourceStep.id) {
+                    if (this.relatedSteps.indexOf(step) === -1) {
+                        this.relatedSteps.push(step);
+                    }
+                }
+                if (step.id === trans.targetStep.id) {
+                    if (this.relatedSteps.indexOf(step) === -1) {
+                        this.relatedSteps.push(step);
+                    }
+                }
+            }
+        }
+        console.error('steps' + this.relatedSteps.length);
     }
 
     dragStart(ev) {
