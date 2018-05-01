@@ -32,6 +32,7 @@
             <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="program"><span>Program</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="process"><span>Process</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="startDate"><span>Start Date</span> <span class="fa fa-sort"></span></th>
@@ -45,6 +46,9 @@
                 <!--<td><a [routerLink]="['../projectcustoms', projectcustom.id ]">{{projectcustom.id}}</a></td>-->
                 <td><a [routerLink]="['../projectcustoms', projectcustom.id ]">{{projectcustom.code}}</a></td>
                 <td *ngIf="projectcustom.program">{{projectcustom.program.name}}</td>
+                <td *ngIf="!projectcustom.program">&nbsp;</td>
+                <td *ngIf="projectcustom.process">{{projectcustom.process.name}}</td>
+                <td *ngIf="!projectcustom.process">&nbsp;</td>
                 <td>{{projectcustom.name}}</td>
                 <!-- <td>{{projectcustom.description}}</td> -->
                 <td>{{projectcustom.startDate | date:'mediumDate'}}</td>
