@@ -19,7 +19,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {IssueCustom} from '../issue-custom';
-import {StatusCustom, StatusCustomService} from "../status-custom";
+import {StatusCustom} from '../status-custom/status-custom.model';
+import {StatusCustomService} from '../status-custom/status-custom.service';
 
 @Component({
     selector: 'jhi-workflow-custom-dialog',

@@ -5,7 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { SprintCustom } from './sprint-custom.model';
 import { SprintCustomService } from './sprint-custom.service';
-import {IssueCustom} from '../issue-custom';
+import {IssueCustom} from '../issue-custom/issue-custom.model';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 
 @Component({

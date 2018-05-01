@@ -16,7 +16,8 @@ import {ResponseWrapper} from '../../../shared';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';
 import {MenuItem} from 'primeng/api';
-import {StatusCustom, StatusCustomService} from '../status-custom';
+import {StatusCustom} from '../status-custom/status-custom.model';
+import {StatusCustomService} from '../status-custom/status-custom.service';
 
 @Component({
     selector: 'jhi-board-custom-agile',
@@ -450,57 +451,29 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         ev.target.appendChild(document.getElementById(data));
         // console.log(document.getElementById(data).id);
 
-
         if (!this.activeSprint.id) {
             this.searchActiveSprint();
         }
-
-
-
+        ///////
         for (let issue of this.issueCustoms) {
             if (issue.id === document.getElementById(data).id) {
-
                 this.isSaving = true;
                 this.makeNewIssueOpen(issue);
                 issue.sprint = Object.assign({}, this.activeSprint);
                 // issue.updatedDate = this.theDate;
                 this.subscribeToSaveResponseIssues(
                     this.issuecustomSce.update(issue));
-
                 if (issue.id !== undefined) {
-
                     console.log('update ' + issue.code + ' with sprint ' + issue.sprint.name);
                 }
-
             }
-
             // this.affectIssuesToSprint();
             console.error('dropev stops here');
         }
-
         if (!this.activeSprint.isActive) {
             let x = <HTMLButtonElement> document.getElementById('startSprintBtn');
             x.disabled = false;
         }
-
-        /*
-        // Return the elt by ID and use it to add it to the selected Issues
-        let x = this.issuecustomSce.find(document.getElementById(data).id);
-
-        console.log('before ' + this.chosenIssues.length);
-
-        // let issue: IssueCustom;
-        // this.chosenIssues.push(issue);
-
-        this.issuecustomSce.find(document.getElementById(data).id)
-            .subscribe((res) => this.chosenIssues.push(res));
-
-        console.log('after ' + this.chosenIssues.length);
-
-        for (let index = 0; index < this.chosenIssues.length; index++) {
-            console.log(this.chosenIssues[index].code);
-        }
-        */
     }
 
     dragStartColBoard(ev) {
@@ -525,33 +498,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         console.log('cls ' + parent.className);
         console.log('cls parent ' + parent.parentElement.id);
-
-        /*
-                let workingCol: ColumnCustom;
-                if (parent.parentElement.className === 'agileColumn') {
-                    for (let currCol of this.columnCustoms) {
-                        if (currCol.id === parent.parentElement.id) {
-                            workingCol = currCol;
-                            console.log('col' + workingCol.name)
-                        }
-                    }
-                }
-
-                let workingStatus: StatusCustom;
-                for (let currStatus of this.statuscustoms) {
-                    if (currStatus.column && currStatus.column.id === workingCol.id) {
-                        workingStatus = currStatus;
-                        console.log('st' + workingStatus.name)
-                    }
-                }
-
-                for (let iss of this.relatedIssuesPerBoard) {
-                    if (iss.status && iss.status.id === workingStatus.id) {
-                        console.log('hereeeeee')
-                    }
-                }
-        */
-
 
         if (this.boardcustom && this.boardcustom.type.toLowerCase() === 'kanban') {
             let workingCol: ColumnCustom;
@@ -594,8 +540,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
         }
 
-
-
         for (let child of parent.children) {
             if (!child.hidden) {
                 // console.log('children ' + (parent.children.length - this.issueCustoms.length));
@@ -604,9 +548,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         }
 
         parent.style.border = '1px solid #888888';
-
         console.error('dragend stops here');
-
     }
 
     dragleaveColBoard(ev) {

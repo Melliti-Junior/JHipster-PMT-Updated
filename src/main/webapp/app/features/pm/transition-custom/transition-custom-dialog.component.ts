@@ -19,9 +19,9 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {IssueCustom} from '../issue-custom';
-import {StatusCustom, StatusCustomService} from "../status-custom";
-import {WorkflowCustom, WorkflowCustomService} from "../workflow-custom";
-import {StepCustom, StepCustomService} from "../step-custom";
+import {StatusCustom, StatusCustomService} from '../status-custom';
+import {WorkflowCustom, WorkflowCustomService} from '../workflow-custom';
+import {StepCustom, StepCustomService} from '../step-custom';
 
 @Component({
     selector: 'jhi-transition-custom-dialog',
@@ -68,7 +68,6 @@ export class TransitionCustomDialogComponent implements OnInit {
     clear() {
         this.activeModal.dismiss('cancel');
     }
-
 
     /**
      * This function retrieves all existing Epics, Types and Priorities

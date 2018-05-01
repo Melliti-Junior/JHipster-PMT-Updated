@@ -5,7 +5,7 @@ import { SERVER_API_URL } from '../../../app.constants';
 
 import { StatusCustom } from './status-custom.model';
 import { ResponseWrapper, createRequestOption } from '../../../shared';
-import {ColumnCustom} from "../column-custom/column-custom.model";
+import {ColumnCustom} from '../column-custom/column-custom.model';
 
 @Injectable()
 export class StatusCustomService {
@@ -53,21 +53,6 @@ export class StatusCustomService {
         const options = createRequestOption(req);
         return this.http.get(this.resourceSearchUrl, options)
             .map((res: any) => this.convertResponse(res));
-    }
-
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {StatusCustom}
-     * @memberof StatusCustomService
-     */
-    findByRequest(req?: any): StatusCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
     }
 
     getStatusCustoms():  Promise<StatusCustom[]> {

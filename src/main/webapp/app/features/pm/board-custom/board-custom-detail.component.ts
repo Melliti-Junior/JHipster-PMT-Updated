@@ -5,9 +5,9 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { BoardCustom } from './board-custom.model';
 import { BoardCustomService } from './board-custom.service';
-import {IssueCustom, IssueCustomPopupService} from '../issue-custom';
+import {IssueCustom} from '../issue-custom/issue-custom.model';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
-import {SprintCustom, SprintCustomPopupService} from '../sprint-custom';
+import {SprintCustom} from '../sprint-custom/sprint-custom.model';
 import {SprintCustomService} from '../sprint-custom/sprint-custom.service';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '@angular/http';
@@ -16,7 +16,8 @@ import {ResponseWrapper} from '../../../shared';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';
 import {MenuItem} from 'primeng/api';
-import {StatusCustom, StatusCustomService} from '../status-custom';
+import {StatusCustom} from '../status-custom/status-custom.model';
+import {StatusCustomService} from '../status-custom/status-custom.service';
 
 @Component({
     selector: 'jhi-board-custom-detail',
@@ -31,31 +32,18 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
     isSaving: boolean;
 
     issueCustoms: IssueCustom[] = new Array<IssueCustom>();
-    relatedIssuesPerBoard: IssueCustom[] = new Array<IssueCustom>();
-    relatedIssuesPerSprint: IssueCustom[] = new Array<IssueCustom>();
     relatedColumns: ColumnCustom[];
     relatedStatuses: StatusCustom[];
     relatedSprints: SprintCustom[];
 
-    chosenIssues: IssueCustom[] = new Array<IssueCustom>();
     sprintCustoms: SprintCustom[];
     columnCustoms: ColumnCustom[];
     statusCustoms: StatusCustom[];
-
-    relatedSprintsBoard: SprintCustom[];
-
-    // Get the board related to the sprint
-    parentBoard: BoardCustom;
-    // Get the current board name
-    boardname: string;
-
-    numSprintsParentBoard = 0;
 
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     totalItems: any;
-    countRelatedSprints: number;
 
     theDate: NgbDateStruct;
     now = new Date();
@@ -87,31 +75,27 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         // this.getBacklogIssues();
         this.boardItems = [
             {
-                label: 'Columns', icon: 'fa-tasks', command: (onclick) =>
-                {
+                label: 'Columns', icon: 'fa-tasks', command: (onclick) => {
                     this.myColumns = true;
                     this.myStatuses = false;
                     this.mySprints = false;
                     this.searchRelatedColumns();
                 }},
             {
-                label: 'Statuses', icon: 'fa-table', command: (onclick) =>
-                {
+                label: 'Statuses', icon: 'fa-table', command: (onclick) => {
                     this.myColumns = false;
                     this.myStatuses = true;
                     this.mySprints = false;
                     this.searchRelatedStatuses();
                 }},
             {
-                label: 'Sprints', icon: 'fa-table', command: (onclick) =>
-                {
+                label: 'Sprints', icon: 'fa-table', command: (onclick) => {
                     this.myColumns = false;
                     this.myStatuses = false;
                     this.mySprints = true;
                     this.searchRelatedSprints();
                 }},
         ];
-
 
         setTimeout(() => {
             if (this.boardcustom) {
@@ -151,12 +135,8 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
     }
 
     private loadAttributes() {
-        this.issuecustomSce.getIssueCustoms()
-            .then((issueCustoms) => this.issueCustoms = issueCustoms );
-        // this.getBacklogIssues();
-        console.log('Total : ' + this.issueCustoms.length);
+        this.getAllIssues();
         this.getAllSprints();
-        // this.getSprintIssues();
         this.getAllColumns();
         this.getAllStatuses();
     }
@@ -173,8 +153,6 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
             }
         }
         console.log(this.relatedColumns.length);
-
-
     }
 
     searchRelatedStatuses() {
@@ -190,7 +168,6 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
             }
         }
     }
-
 
     searchRelatedSprints() {
         this.sprintcustomSce.search({query : this.boardcustom.id})
@@ -216,6 +193,10 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         }
     }
 
+    getAllIssues() {
+        this.issuecustomSce.getIssueCustoms()
+            .then((issueCustoms) => this.issueCustoms = issueCustoms );
+    }
 
     getAllSprints() {
         this.sprintcustomSce.getSprintCustoms()
@@ -231,7 +212,6 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         this.statuscustomSce.getStatusCustoms()
             .then((statusCustoms) => this.statusCustoms = statusCustoms );
     }
-
 
     private subscribeToSaveResponse(result: Observable<BoardCustom>) {
         result.subscribe((res: BoardCustom) =>

@@ -8,10 +8,11 @@ import {BoardCustom} from './board-custom.model';
 import {BoardCustomService} from './board-custom.service';
 import {ResponseWrapper} from '../../../shared';
 import {Status, StatusService} from '../../../entities/status';
-import {StatusCustom, StatusCustomService} from "../status-custom";
-import {Observable} from "rxjs/Observable";
-import {IssueCustom} from "../issue-custom";
-import {Response} from "@angular/http";
+import {StatusCustom} from '../status-custom/status-custom.model';
+import {StatusCustomService} from '../status-custom/status-custom.service';
+import {Observable} from 'rxjs/Observable';
+import {IssueCustom} from '../issue-custom';
+import {Response} from '@angular/http';
 
 @Component({
     selector: 'jhi-board-custom-configuration',
@@ -38,8 +39,6 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         private router: Router,
     ) {
     }
-
-    @ViewChild('divClick') divClick: ElementRef;
 
     ngOnInit() {
         // this.relatedColumns = new Array<ColumnCustom>();
@@ -210,7 +209,6 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         result.subscribe((res: StatusCustom) =>
             this.onSaveSuccessStatus(res), (res: Response) => this.onSaveError());
     }
-
 
     private onSaveSuccessStatus(result: IssueCustom) {
         this.eventManager.broadcast({ name: 'statuscustomsListModification', content: 'OK'});

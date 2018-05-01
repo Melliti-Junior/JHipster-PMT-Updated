@@ -8,7 +8,7 @@ import { SprintCustomDetailComponent } from './sprint-custom-detail.component';
 import { SprintCustomPopupComponent } from './sprint-custom-dialog.component';
 import { SprintCustomDeletePopupComponent } from './sprint-custom-delete-dialog.component';
 import {SprintCustomStartPopupComponent} from './sprint-custom-start-dialog.component';
-import {SprintCustomCompletePopupComponent} from "./sprint-custom-complete-dialog.component";
+import {SprintCustomCompletePopupComponent} from './sprint-custom-complete-dialog.component';
 
 @Injectable()
 export class SprintCustomResolvePagingParams implements Resolve<any> {

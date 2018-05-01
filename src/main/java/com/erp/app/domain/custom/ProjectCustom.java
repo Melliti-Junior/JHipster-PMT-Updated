@@ -28,22 +28,13 @@ public class  ProjectCustom extends Project implements Serializable {
 	@Field("program")
     private Program program;
 
-    // @DBRef
-    // @CascadeSave
-    // @JsonBackReference
-    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @Field("issues")
-    private List<IssueCustom> issues = new ArrayList<IssueCustom>();
+    @DBRef
+    @Field("process")
+    private WorkflowCustom process;
 
 	public ProjectCustom(Program program) {
 		super();
 		this.program = program;
-    }
-
-    public ProjectCustom(Program program, List<IssueCustom> issues) {
-        super();
-        this.program = program;
-        this.issues = issues;
     }
 
     public ProjectCustom() {
@@ -58,13 +49,11 @@ public class  ProjectCustom extends Project implements Serializable {
 		this.program = program;
 	}
 
-
-    public List<IssueCustom> getIssues() {
-        return issues;
+    public WorkflowCustom getProcess() {
+        return process;
     }
 
-    public void setIssues(List<IssueCustom> issues) {
-        this.issues = issues;
+    public void setProcess(WorkflowCustom process) {
+        this.process = process;
     }
-
 }

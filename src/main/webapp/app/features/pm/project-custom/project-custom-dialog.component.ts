@@ -10,6 +10,8 @@ import { ProjectCustom } from './project-custom.model';
 import { ProjectCustomPopupService } from './project-custom-popup.service';
 import { ProjectCustomService } from './project-custom.service';
 import { Program, ProgramService } from '../../../entities/program';
+import {WorkflowCustom} from '../workflow-custom/workflow-custom.model';
+import {WorkflowCustomService} from '../workflow-custom/workflow-custom.service';
 
 @Component({
     selector: 'jhi-project-custom-dialog',
@@ -19,7 +21,9 @@ export class ProjectCustomDialogComponent implements OnInit {
 
     projectcustom: ProjectCustom;
     programs: Program[];
+    processes: WorkflowCustom[];
     programname: string;
+    processname: string;
     isSaving: boolean;
     startDateDp: any;
     endDateDp: any;
@@ -29,6 +33,7 @@ export class ProjectCustomDialogComponent implements OnInit {
         private projectcustomService: ProjectCustomService,
         private eventManager: JhiEventManager,
         private programSce: ProgramService,
+        private processSce: WorkflowCustomService,
     ) {
     }
 
@@ -53,6 +58,20 @@ export class ProjectCustomDialogComponent implements OnInit {
             }
         }
         console.log('aff' + this.projectcustom.program.name);
+    }
+
+    findProcess() {
+        let index = 0;
+        let found = false;
+        while (index < this.processes.length && found === false)  {
+            if ((this.processes[index]).name === this.processname) {
+                found = true;
+                this.projectcustom.process = this.processes[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.projectcustom.process.name);
     }
 
     save() {
@@ -90,6 +109,8 @@ export class ProjectCustomDialogComponent implements OnInit {
     private loadAttributes() {
         this.programSce.getPrograms()
         .then((programs) => this.programs = programs );
+        this.processSce.getWorkflowCustoms()
+            .then((processes) => this.processes = processes );
     }
 }
 
