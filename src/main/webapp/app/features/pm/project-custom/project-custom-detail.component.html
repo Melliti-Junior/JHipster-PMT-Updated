@@ -46,6 +46,9 @@
             <div style="width: 20%; font-weight: bold;"><span style="color: #888888">Start Date : </span> {{projectcustom.startDate | date:'mediumDate'}}</div>
             <div style="width: 20%; font-weight: bold;"><span style="color: #888888">Due Date : </span> {{projectcustom.endDate | date:'mediumDate'}}</div>
         </div>
+
+        <p-tabMenu [model]="projectItems"></p-tabMenu>
+
     </div>
 
     <hr>
@@ -55,6 +58,7 @@
 
         </div>
     </div>
+
 
     <hr style="border-color:transparent;">
     <button type="submit"

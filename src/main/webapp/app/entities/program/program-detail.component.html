@@ -1,5 +1,5 @@
-
 <div *ngIf="program">
+<!--
     <h2><span>Program</span> {{program.id}}</h2>
     <hr>
     <jhi-alert-error></jhi-alert-error>
@@ -31,4 +31,108 @@
             class="btn btn-primary">
         <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
     </button>
+-->
+
+
+
+    <div>
+        <div class="schemeProgram" style="display: flex; flex-direction: row; justify-content: space-between">
+            <div style="display: flex; flex-direction: row; justify-content: space-between">
+                <div class="program-name">
+                    <h5>
+                <span>
+                    {{program.name}}
+                </span>
+                    </h5>
+                </div>
+
+                <div>
+                    &nbsp;
+                    <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
+                    &nbsp;
+                </div>
+
+                <div class="projects">
+                    <h5>
+                <span>
+                    Projects
+                </span>
+                    </h5>
+                </div>
+            </div>
+
+            <div class="backBtn pr-2">
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-row">
+            <span>{{program.description}}</span>
+            <span *ngIf="projectcustoms" style="font-weight: bold;">({{projectcustoms.length}} Projects)</span>
+        </div>
+
+        <br>
+
+        <jhi-alert></jhi-alert>
+        <div class="table-responsive" *ngIf="projectcustoms">
+            <table class="table table-striped">
+                <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+                    <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
+                    <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="program"><span>Program</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+                    <!-- <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th> -->
+                    <th jhiSortBy="startDate"><span>Start Date</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="endDate"><span>End Date</span> <span class="fa fa-sort"></span></th>
+                    <th jhiSortBy="url"><span>Url</span> <span class="fa fa-sort"></span></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let projectcustom of projectcustoms ;trackBy: trackId">
+                    <!--<td><a [routerLink]="['../projectcustoms', projectcustom.id ]">{{projectcustom.id}}</a></td>-->
+                    <td><a [routerLink]="['../../projectcustoms', projectcustom.id ]">{{projectcustom.code}}</a></td>
+                    <td *ngIf="projectcustom.program">{{projectcustom.program.name}}</td>
+                    <td>{{projectcustom.name}}</td>
+                    <!-- <td>{{projectcustom.description}}</td> -->
+                    <td>{{projectcustom.startDate | date:'mediumDate'}}</td>
+                    <td>{{projectcustom.endDate | date:'mediumDate'}}</td>
+                    <td><a target="_blank" href={{projectcustom.url}}>{{projectcustom.url}}</a></td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    [routerLink]="['../../projectcustoms', projectcustom.id ]"
+                                    class="btn btn-info btn-sm">
+                                <span class="fa fa-eye"></span>
+                                <span class="d-none d-md-inline">View</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'projectcustoms/'+ projectcustom.id + '/edit'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-primary btn-sm">
+                                <span class="fa fa-pencil"></span>
+                                <span class="d-none d-md-inline">Edit</span>
+                            </button>
+                            <button type="submit"
+                                    [routerLink]="['/', { outlets: { popup: 'projectcustoms/'+ projectcustom.id + '/delete'} }]"
+                                    replaceUrl="true"
+                                    queryParamsHandling="merge"
+                                    class="btn btn-danger btn-sm">
+                                <span class="fa fa-remove"></span>
+                                <span class="d-none d-md-inline">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>

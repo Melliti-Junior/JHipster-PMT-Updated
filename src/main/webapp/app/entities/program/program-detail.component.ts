@@ -5,6 +5,8 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Program } from './program.model';
 import { ProgramService } from './program.service';
+import {ProjectCustom, ProjectCustomService} from "../../features/pm/project-custom";
+import {ResponseWrapper} from "../../shared";
 
 @Component({
     selector: 'jhi-program-detail',
@@ -13,12 +15,14 @@ import { ProgramService } from './program.service';
 export class ProgramDetailComponent implements OnInit, OnDestroy {
 
     program: Program;
+    projectcustoms: ProjectCustom[];
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
         private eventManager: JhiEventManager,
         private programService: ProgramService,
+        private projectSce: ProjectCustomService,
         private route: ActivatedRoute
     ) {
     }
@@ -28,6 +32,9 @@ export class ProgramDetailComponent implements OnInit, OnDestroy {
             this.load(params['id']);
         });
         this.registerChangeInPrograms();
+        setTimeout(() => {
+            this.getRelatedProjects();
+        }, 200);
     }
 
     load(id) {
@@ -49,5 +56,23 @@ export class ProgramDetailComponent implements OnInit, OnDestroy {
             'programListModification',
             (response) => this.load(this.program.id)
         );
+    }
+
+    getRelatedProjects() {
+        /*
+        this.projectSce.getProjects()
+            .then((projects) => this.projectcustoms = projects );
+*/
+
+        if (this.program) {
+            this.projectSce.search({query : this.program.id})
+                .subscribe(
+                    (res: ResponseWrapper) => this.retrieveRelatedProjects(res.json),
+                    (error) => console.log(error));
+        }
+    }
+
+    retrieveRelatedProjects(data) {
+        this.projectcustoms = data;
     }
 }

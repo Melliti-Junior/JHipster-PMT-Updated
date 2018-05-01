@@ -5,6 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { ProjectCustom } from './project-custom.model';
 import { ProjectCustomService } from './project-custom.service';
+import {MenuItem} from 'primeng/api';
 
 @Component({
     selector: 'jhi-project-custom-detail',
@@ -15,6 +16,11 @@ export class ProjectCustomDetailComponent implements OnInit, OnDestroy {
     projectcustom: ProjectCustom;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
+
+    projectItems: MenuItem[];
+
+    issuesProject = false;
+    versionsProject = false;
 
     constructor(
         private eventManager: JhiEventManager,
@@ -28,6 +34,15 @@ export class ProjectCustomDetailComponent implements OnInit, OnDestroy {
             this.load(params['id']);
         });
         this.registerChangeInProjectCustoms();
+
+        this.projectItems = [
+            {
+                label: 'issuesProject', icon: 'fa-tasks'
+            },
+            {
+                label: 'versionsProject', icon: 'fa-table'
+            },
+        ];
     }
 
     load(id) {
