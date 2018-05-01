@@ -1,0 +1,11 @@
+package com.erp.app.repository.search.custom;
+
+import com.erp.app.domain.custom.WorkflowCustom;
+import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
+
+/**
+ * Spring Data Elasticsearch repository for the Epic entity.
+ */
+
+public interface WorkflowCustomSearchRepository extends  ElasticsearchRepository<WorkflowCustom, String> {
+}

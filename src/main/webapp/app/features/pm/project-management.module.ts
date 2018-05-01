@@ -16,6 +16,7 @@ import {AgileComponent} from './agile';
 import {DashBoardStepCustomModule} from './step-custom/step-custom.module';
 import {BoardSidebar} from './board-sidebar/board-sidebar';
 import {DashBoardStatusCustomModule} from './status-custom/status-custom.module';
+import {DashBoardWorkflowCustomModule} from './workflow-custom/workflow-custom.module';
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ import {DashBoardStatusCustomModule} from './status-custom/status-custom.module'
     DashBoardColumnCustomModule,
     DashBoardStepCustomModule,
     DashBoardStatusCustomModule,
+    DashBoardWorkflowCustomModule,
     RouterModule.forChild([ ProjectManagementRoute ])
   ],
   declarations: [ProjectManagementComponent,
