@@ -3,9 +3,23 @@
 
     <div class="boardParent" style="display: flex; flex-direction: row; justify-content: space-between">
         <div class="schemeBoard" style="display: flex; flex-direction: row; justify-content: space-between">
+            <div class="projectName">
+                <h5>
+                    <span>
+                        <a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>
+                    </span>
+                </h5>
+            </div>
+
+            <div>
+                &nbsp;
+                <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
+                &nbsp;
+            </div>
+
             <div class="boardName">
                 <h5>
-                    <span>{{boardcustom.project.name}}</span>
+                    <span>{{boardcustom.name}}</span>
                 </h5>
             </div>
 
