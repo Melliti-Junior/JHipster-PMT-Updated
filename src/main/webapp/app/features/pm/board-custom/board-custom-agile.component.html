@@ -184,18 +184,18 @@
 
                     <div class="agileColumns row">
 
-                        <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
-                            <div class="agileColumn">
+                        <div class="panel panel-primary col" *ngFor="let colScrum of relatedColumns">
+                            <div class="agileColumn" id="{{colScrum.id}}">
                                 <div class="panel-heading column-name">
                                     <div class="colName">
-                                        {{col.name}}
+                                        {{colScrum.name}}
                                     </div>
                                 </div>
                                 <div class="panel-body-active column-content-active" id="columndroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
 
                                     <div *ngFor="let step of relatedSteps">
 
-                                        <div *ngIf="step.column.name === col.name">
+                                        <div *ngIf="step.column.name === colScrum.name">
 
 
                                             <div *ngFor="let issueCol of relatedIssuesPerSprint">
@@ -266,22 +266,22 @@
                             </div>
                         </div>
 
-                        <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
+                        <div class="panel panel-primary col" *ngFor="let colKanban of relatedColumns">
 
-                            <div class="agileColumn" id={{col.id}}>
+                            <div class="agileColumn" id={{colKanban.id}}>
 
                                 <div class="panel-heading column-name">
                                     <div class="colInfo">
-                                        <div class="colName"> {{col.name}} </div>
-                                        <div class="colMin" *ngIf="col.min"> Min : {{col.min}} </div>
-                                        <div class="colMax" *ngIf="col.max"> Max : {{col.max}} </div>
+                                        <div class="colName"> {{colKanban.name}} </div>
+                                        <div class="colMin" *ngIf="colKanban.min"> Min : {{colKanban.min}} </div>
+                                        <div class="colMax" *ngIf="colKanban.max"> Max : {{colKanban.max}} </div>
                                     </div>
                                 </div>
                                 <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
 
                                     <div class="status" *ngFor="let step of relatedSteps">
 
-                                        <div class="statuscol" *ngIf="step.column && step.column.name === col.name">
+                                        <div class="statuscol" *ngIf="step.column && step.column.name === colKanban.name">
 
 
                                             <div class="issueKan" *ngFor="let issueKanCol of relatedIssuesPerBoard">

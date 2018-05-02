@@ -81,13 +81,13 @@ export class NavbarComponent implements OnInit {
     }
 
     pmChosen() {
-        console.log(this.PMChosen);
+        // console.log(this.PMChosen);
         this.PMChosen = true;
         console.log(this.PMChosen);
     }
 
     isPMSelected(): boolean {
-        console.log(this.PMChosen);
+        // console.log(this.PMChosen);
         return this.PMChosen;
     }
 }
