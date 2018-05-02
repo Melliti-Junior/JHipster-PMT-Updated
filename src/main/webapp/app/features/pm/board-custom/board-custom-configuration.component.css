@@ -22,7 +22,7 @@ body {
     width:98%;
 }
 
-.unmapped-status-content {
+.unmapped-step-content {
     width: 98%;
 }
 
@@ -31,7 +31,7 @@ body {
     border: 1px solid rgb(182, 182, 179);
 }
 
-.unmapped-status-body {
+.unmapped-step-body {
     padding: 1px 0 0;
     border: 1px solid rgb(182, 182, 179);
 }
@@ -48,13 +48,13 @@ body {
 
 }
 
-.status-content {
+.step-content {
     /* border: 1px solid #888888; */
     min-height: 320px;
     border: 1px solid #888888;
 }
 
-.status {
+.step {
     background-color: #fcfcfc;
     margin-left: inherit;
     margin-right: inherit;
@@ -69,7 +69,7 @@ body {
     font-weight: bold;
 }
 
-.column-status {
+.column-step {
     color: #888888;
     font-weight: bold;
 }

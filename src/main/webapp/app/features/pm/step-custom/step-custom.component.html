@@ -32,6 +32,7 @@
             <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
             <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="workflow"><span>Workflow</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="board"><span>Status</span> <span class="fa fa-sort"></span></th>
 
             <th></th>
@@ -42,7 +43,10 @@
                 <!--<td><a [routerLink]="['../stepcustoms', step.id ]">{{step.id}}</a></td>-->
                 <td><a [routerLink]="['../stepcustoms', step.id ]">{{step.code}}</a></td>
                 <td>{{step.name}}</td>
+                <td *ngIf="step.workflow">{{step.workflow.name}}</td>
+                <td *ngIf="!step.workflow">&nbsp;</td>
                 <td *ngIf="step.status">{{step.status.name}}</td>
+                <td *ngIf="!step.status">&nbsp;</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
 

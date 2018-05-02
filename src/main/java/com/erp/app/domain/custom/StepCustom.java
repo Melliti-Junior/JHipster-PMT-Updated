@@ -20,19 +20,34 @@ public class StepCustom extends Step implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @DBRef
-    @CascadeSave
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
 	@Field("status")
-    // @JsonManagedReference
     private Status status;
 
-	public StepCustom(Status status) {
+    @DBRef
+    @Field("workflow")
+    private WorkflowCustom workflow;
+
+    @DBRef
+    @Field("column")
+    private ColumnCustom column;
+
+    public StepCustom(Status status) {
 		super();
 		this.status = status;
     }
 
-	public StepCustom() {
+    public StepCustom(Status status, WorkflowCustom workflow) {
+        this.status = status;
+        this.workflow = workflow;
+    }
+
+    public StepCustom(Status status, WorkflowCustom workflow, ColumnCustom column) {
+        this.status = status;
+        this.workflow = workflow;
+        this.column = column;
+    }
+
+    public StepCustom() {
 		super();
 	}
 
@@ -42,5 +57,21 @@ public class StepCustom extends Step implements Serializable {
 
     public void setStatus(Status status) {
         this.status = status;
+    }
+
+    public WorkflowCustom getWorkflow() {
+        return workflow;
+    }
+
+    public void setWorkflow(WorkflowCustom workflow) {
+        this.workflow = workflow;
+    }
+
+    public ColumnCustom getColumn() {
+        return column;
+    }
+
+    public void setColumn(ColumnCustom column) {
+        this.column = column;
     }
 }

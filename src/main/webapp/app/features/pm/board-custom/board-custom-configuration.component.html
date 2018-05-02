@@ -56,14 +56,13 @@
                         </button>
                     </div>
                     <div class="btn-group" role="group" aria-label="Third group">
-                        <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['status-new'] } }]">
+                        <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['stepcustom-new'] } }]">
                             <span class="fa fa-plus"></span>&nbsp;<span class="hidden-sm-down">Add Status</span></span>
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-
 
     </h2>
 
@@ -75,14 +74,14 @@
                 <div class="agileColumn">
                     <div class="panel-heading column-name"> <strong>{{col.name}}</strong></div>
                     <div class="panel-body-active column-content-active droppable" id="{{col.id}}" (dragover)="allowDrop($event)" (drop)="drop($event)">
-                        <div *ngFor="let status of allStatuses">
-                            <div *ngIf="status.column">
-                                <div *ngIf="status.column.id === col.id" class="status row" id={{status.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
-                                    <div class="unmapped-status-content">
-                                        <div class="unmapped-status-body">
-                                            <div class="status-info row pl-3">
-                                                <div class="status-code">
-                                                    <div class="card-title"><a style="color: #533f03;" [routerLink]="['/statuscustoms', status.id ]">{{status.code}}</a></div>
+                        <div *ngFor="let step of relatedSteps">
+                            <div *ngIf="step.column">
+                                <div *ngIf="step.column.id === col.id" class="step row" id={{step.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                                    <div class="unmapped-step-content">
+                                        <div class="unmapped-step-body">
+                                            <div class="step-info row pl-3">
+                                                <div class="step-code">
+                                                    <div class="card-title"><a style="color: #533f03;" [routerLink]="['/stepcustoms', step.id ]">{{step.code}}</a></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -94,16 +93,16 @@
                     </div>
                 </div>
             </div>
-            <div class="panel panel-primary col"  *ngIf="allStatuses">
-                <div class="panel-heading column-status">Unmapped Statuses</div>
+            <div class="panel panel-primary col"  *ngIf="relatedSteps">
+                <div class="panel-heading column-step">Unmapped Statuses</div>
                 <div class="panel-body-active column-content-active droppable" id="unmappedStatus" (dragover)="allowDrop($event)"  (drop)="drop($event)">
-                    <div *ngFor="let statusUnmapped of allStatuses">
-                        <div *ngIf="!statusUnmapped.column" class="status row" id={{statusUnmapped.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
-                            <div class="unmapped-status-content">
-                                <div class="unmapped-status-body">
-                                    <div class="status-info row pl-3">
-                                        <div class="status-code">
-                                            <div class="card-title"><a style="color: #533f03;" [routerLink]="['/statuscustoms', statusUnmapped.id ]">{{statusUnmapped.code}}</a></div>
+                    <div *ngFor="let stepUnmapped of relatedSteps">
+                        <div *ngIf="!stepUnmapped.column" class="step row" id={{stepUnmapped.id}} draggable="true" (dragstart)="dragStart($event)" (dragend)="dragend($event)">
+                            <div class="unmapped-step-content">
+                                <div class="unmapped-step-body">
+                                    <div class="step-info row pl-3">
+                                        <div class="step-code">
+                                            <div class="card-title"><a style="color: #533f03;" [routerLink]="['/stepcustoms', stepUnmapped.id ]">{{stepUnmapped.code}}</a></div>
                                         </div>
                                     </div>
                                 </div>

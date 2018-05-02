@@ -62,6 +62,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         setTimeout(() => {
             this.searchRelatedColumns();
             this.lookForRelatedTransitions();
+            this.lookForRelatedSteps();
         }, 150);
     }
 
@@ -122,26 +123,31 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     retrieveTransitions(data) {
         this.relatedTransitions = data;
         console.error('trans' +  this.relatedTransitions.length);
-        this.retrieveRelatedSteps();
     }
 
-    retrieveRelatedSteps() {
-        this.relatedSteps = new Array<StepCustom>();
-        for (let step of this.allSteps) {
-            for (let trans of this.relatedTransitions) {
-                if (step.id === trans.sourceStep.id) {
-                    if (this.relatedSteps.indexOf(step) === -1) {
-                        this.relatedSteps.push(step);
-                    }
-                }
-                if (step.id === trans.targetStep.id) {
-                    if (this.relatedSteps.indexOf(step) === -1) {
-                        this.relatedSteps.push(step);
-                    }
-                }
+    lookForRelatedSteps() {
+        this.stepService.search({query : this.boardcustom.project.process.id})
+            .subscribe(
+                (res: ResponseWrapper) => this.retrieveSteps(res.json),
+                (error) => console.log(error));
+    }
+
+    retrieveSteps(data) {
+        this.relatedSteps = data;
+        console.error('stepss' +  this.relatedSteps.length)
+    }
+
+    getStepByStatus(status: StatusCustom): StepCustom {
+        let targetStep: StepCustom;
+        let index = 0;
+        let found = false;
+        while (found === false && index <= this.relatedSteps.length) {
+            if ((this.relatedSteps[index].status.id === status.id)) {
+                found = true;
+                targetStep = this.relatedSteps[index];
             }
         }
-        console.error('steps' + this.relatedSteps.length);
+        return targetStep;
     }
 
     dragStart(ev) {
@@ -172,18 +178,18 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
 
         console.log('hello target ' + ev.target.id);
 
-        let comingStatus = this.findDraggedStatus(document.getElementById(data).id);
-        console.log(' heyyyy stats ' + comingStatus.name)
+        let comingStep = this.findDraggedStep(document.getElementById(data).id);
+        console.log(' heyyyy step ' + comingStep.name)
 
         if (ev.target.id === 'unmappedStatus') {
             console.log('unmapped')
-            this.unmapStatus(comingStatus);
+            this.unmapStep(comingStep);
             document.getElementById(data).hidden = true;
         } else {
             let currentColumn = this.findCurrentColumn(ev);
             console.log(' oppaa  coll ' + currentColumn.name)
 
-            this.mapStatusToCol(comingStatus, currentColumn);
+            this.mapStepToCol(comingStep, currentColumn);
         }
     }
 
@@ -202,60 +208,61 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         return currentCol;
     }
 
-    findDraggedStatus(id): StatusCustom {
+    findDraggedStep(id): StepCustom {
         let found = false;
         let index = 0;
-        let draggedStat = new StatusCustom()
-        while ((found === false) && (index <= this.allStatuses.length)) {
-            if (this.allStatuses[index].id === id) {
+        let draggedStep = new StepCustom()
+        while ((found === false) && (index <= this.relatedSteps.length)) {
+            if (this.relatedSteps[index].id === id) {
                 found = true;
-                draggedStat = this.allStatuses[index];
+                draggedStep = this.relatedSteps[index];
             } else {
                 index = index + 1;
             }
         }
-        return draggedStat;
+        return draggedStep;
     }
 
-    mapStatusToCol(status: StatusCustom, col: ColumnCustom) {
-        status.column = col;
+    mapStepToCol(step: StepCustom, col: ColumnCustom) {
+        console.log(step.name)
+        step.column = col;
 
         this.isSaving = true;
-        this.subscribeToSaveResponseStats(
-            this.statusService.update(status));
+        this.subscribeToSaveResponseStep(
+            this.stepService.update(step));
 
-        console.log('update ' + status.name + ' with col ' + status.column.name);
+        console.log('update ' + step.name + ' with col ' + step.column.name);
     }
 
-    unmapStatus(status: StatusCustom) {
-        status.column = null;
+    unmapStep(step: StepCustom) {
+        step.column = null;
 
         this.isSaving = true;
-        this.subscribeToSaveResponseStats(
-            this.statusService.update(status));
+        this.subscribeToSaveResponseStep(
+            this.stepService.update(step));
 
-        console.log('update ' + status.name + ' with col ' + typeof status.column);
+        console.log('update ' + step.name + ' with col ' + typeof step.column);
     }
 
-    getStatusPerColumn(col: ColumnCustom): StatusCustom[] {
-        let relatedStatuses = new Array<StatusCustom>();
-        for (let st of this.allStatuses) {
+    getStepPerColumn(col: ColumnCustom): StepCustom[] {
+        let relatedStepsForCol = new Array<StepCustom>();
+        for (let st of this.relatedSteps) {
             if (st.column.id === col.id) {
-                if (relatedStatuses.indexOf(st) === -1) {
-                    relatedStatuses.push(st)
+                if (relatedStepsForCol.indexOf(st) === -1) {
+                    relatedStepsForCol.push(st)
                 }
             }
         }
-        return relatedStatuses;
+        return relatedStepsForCol;
     }
 
-    private subscribeToSaveResponseStats(result: Observable<StatusCustom>) {
-        result.subscribe((res: StatusCustom) =>
-            this.onSaveSuccessStatus(res), (res: Response) => this.onSaveError());
+    private subscribeToSaveResponseStep(result: Observable<StepCustom>) {
+        result.subscribe((res: StepCustom) =>
+            this.onSaveSuccessStep(res), (res: Response) => this.onSaveError());
     }
 
-    private onSaveSuccessStatus(result: IssueCustom) {
-        this.eventManager.broadcast({ name: 'statuscustomsListModification', content: 'OK'});
+    private onSaveSuccessStep(result: IssueCustom) {
+        this.eventManager.broadcast({ name: 'stepcustomsListModification', content: 'OK'});
         this.isSaving = false;
     }
 

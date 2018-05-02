@@ -18,28 +18,8 @@ public class StatusCustom extends Status implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-    @DBRef
-    @CascadeSave
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
-	@Field("column")
-    // @JsonManagedReference
-    private ColumnCustom column;
-
     public StatusCustom() {
         super();
     }
 
-    public StatusCustom(ColumnCustom column) {
-		super();
-		this.column = column;
-    }
-
-    public ColumnCustom getColumn() {
-        return column;
-    }
-
-    public void setColumn(ColumnCustom column) {
-        this.column = column;
-    }
 }

@@ -18,9 +18,10 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import {IssueCustom} from '../issue-custom';
 import {StatusCustom} from '../status-custom/status-custom.model';
 import {StatusCustomService} from '../status-custom/status-custom.service';
+import {WorkflowCustomService} from '../workflow-custom/workflow-custom.service';
+import {WorkflowCustom} from '../workflow-custom/workflow-custom.model';
 
 @Component({
     selector: 'jhi-step-custom-dialog',
@@ -35,12 +36,13 @@ export class StepCustomDialogComponent implements OnInit {
     endDateDp: any;
 
     statuscustoms: StatusCustom[];
-    stepCustoms: StepCustom[];
+    workflowcustoms: WorkflowCustom[];
 
     // Get the status related to this step
     parentStatus: StatusCustom;
     // Get the statusname chosen from list (combobox)
     statusname: string;
+    workflowName: string;
     // statuscode: string;
 
     now = new Date();
@@ -50,6 +52,8 @@ export class StepCustomDialogComponent implements OnInit {
         private stepcustomService: StepCustomService,
         private eventManager: JhiEventManager,
         private statusSce: StatusCustomService,
+        private stepSce: StepCustomService,
+        private workflowSce: WorkflowCustomService,
         // private comp: StepCustomComponent
     ) {
     }
@@ -81,6 +85,21 @@ export class StepCustomDialogComponent implements OnInit {
         console.log('aff' + this.stepcustom.status.name);
     }
 
+    findWorkflow() {
+        let index = 0;
+        let found = false;
+
+        while (index < this.workflowcustoms.length && found === false)  {
+            if ((this.workflowcustoms[index]).name === this.workflowName) {
+                found = true;
+                this.stepcustom.workflow = this.workflowcustoms[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.stepcustom.workflow.name);
+    }
+
     /**
      * This function retrieves all existing Epics, Types and Priorities
      *
@@ -90,17 +109,9 @@ export class StepCustomDialogComponent implements OnInit {
     private loadAttributes() {
         this.statusSce.getStatusCustoms()
         .then((statuscustoms) => this.statuscustoms = statuscustoms );
-    }
+        this.workflowSce.getWorkflowCustoms()
+            .then((workflowcustoms) => this.workflowcustoms = workflowcustoms );
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof StepCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.stepcustomService.findByRequest(name);
-        // console.log(this.comp.stepcustoms);
     }
 
     save() {

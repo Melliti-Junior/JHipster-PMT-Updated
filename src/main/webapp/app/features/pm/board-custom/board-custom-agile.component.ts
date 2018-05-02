@@ -99,19 +99,19 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             {
                 label: 'Backlog', icon: 'fa-tasks', command: (onclick) => {
                     this.Backlog = true; this.ActiveSprint = false;
-                    this.getBacklogIssues(); this.getSprintIssues(); this.lookForRelatedTransitions();
+                    this.getBacklogIssues(); this.getSprintIssues(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                 }},
             {
                 label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
                     this.Backlog = false; this.ActiveSprint = true;
-                    this.searchRelatedColumns(); this.lookForRelatedTransitions();
+                    this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                 }},
         ];
         this.kanbanItems = [
             {
                 label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
                     this.KanbanBoard = true;
-                    this.searchRelatedColumns(); this.lookForRelatedTransitions();
+                    this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                 }},
         ];
 
@@ -129,6 +129,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
 
             this.lookForRelatedTransitions();
+            this.lookForRelatedSteps();
             this.getBacklogIssues();
             this.getSprintIssues();
             this.divClick.nativeElement.click();
@@ -138,6 +139,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
             this.divClick.nativeElement.click();
         }, 500);
+
+    }
+
+    getRelatedWorkflowSteps() {
+
+    }
+
+    getRelatedWorkflowTransitions() {
 
     }
 
@@ -241,6 +250,31 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     retrieveTransitions(data) {
         this.relatedTransitions = data;
         console.error('trans' +  this.relatedTransitions.length)
+    }
+
+    lookForRelatedSteps() {
+        this.stepService.search({query : this.boardcustom.project.process.id})
+            .subscribe(
+                (res: ResponseWrapper) => this.retrieveSteps(res.json),
+                (error) => console.log(error));
+    }
+
+    retrieveSteps(data) {
+        this.relatedSteps = data;
+        console.error('steps' +  this.relatedSteps.length)
+    }
+
+    getStepByStatus(status: StatusCustom): StepCustom {
+        let targetStep: StepCustom;
+        let index = 0;
+        let found = false;
+        while (found === false && index <= this.relatedSteps.length) {
+            if ((this.relatedSteps[index].status.id === status.id)) {
+                found = true;
+                targetStep = this.relatedSteps[index];
+            }
+        }
+        return targetStep;
     }
 
     lookForActiveSprint() {
@@ -542,20 +576,24 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             let countIssues = 0;
             for (let iss of this.relatedIssuesPerBoard) {
                 if (iss.status) {
-                    console.log(iss.status.column.name)
-                    console.log(parent.parentElement.name)
-                    if (iss.status && iss.status.column.id === parent.parentElement.id) {
+
+                    let step = this.getStepByStatus(iss.status);
+                    // console.log(iss.status.column.name);
+                    console.log(step.column.name);
+                    console.log(parent.parentElement.name);
+                    // if (iss.status && iss.status.column.id === parent.parentElement.id) {
+                    if (step && step.column.id === parent.parentElement.id) {
                         countIssues = countIssues + 1;
                         console.log('hereeeeee' + countIssues);
                     }
                 }
             }
 
-            if (countIssues < workingCol.min) {
+            if (workingCol.min && countIssues < workingCol.min) {
                 console.log('Capacity shortfall by ' + (workingCol.min - countIssues) + ' cards')
                 parent.style.backgroundColor = 'green'
             } else {
-                if (countIssues > workingCol.max) {
+                if (workingCol.max && countIssues > workingCol.max) {
                     console.log('Capacity exceeded by ' + (countIssues - workingCol.max) + ' cards')
                     parent.style.backgroundColor = 'red'
                 } else {

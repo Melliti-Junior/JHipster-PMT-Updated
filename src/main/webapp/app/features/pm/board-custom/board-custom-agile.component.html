@@ -193,15 +193,15 @@
                                 </div>
                                 <div class="panel-body-active column-content-active" id="columndroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
 
-                                    <div *ngFor="let status of statuscustoms">
+                                    <div *ngFor="let step of relatedSteps">
 
-                                        <div *ngIf="status.column.name === col.name">
+                                        <div *ngIf="step.column.name === col.name">
 
 
                                             <div *ngFor="let issueCol of relatedIssuesPerSprint">
 
 
-                                                <div *ngIf="issueCol.status && issueCol.status.name === status.name">
+                                                <div *ngIf="issueCol.status && issueCol.status.name === step.status.name">
 
 
                                                     <div class="issue-active row" id={{issueCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">
@@ -279,15 +279,15 @@
                                 </div>
                                 <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
 
-                                    <div class="status" *ngFor="let status of statuscustoms">
+                                    <div class="status" *ngFor="let step of relatedSteps">
 
-                                        <div class="statuscol" *ngIf="status.column.name === col.name">
+                                        <div class="statuscol" *ngIf="step.column && step.column.name === col.name">
 
 
                                             <div class="issueKan" *ngFor="let issueKanCol of relatedIssuesPerBoard">
 
 
-                                                <div class="issuesForCol" *ngIf="issueKanCol.status && issueKanCol.status.name === status.name">
+                                                <div class="issuesForCol" *ngIf="issueKanCol.status && issueKanCol.status.name === step.status.name">
 
 
                                                     <div class="issue-active row" id={{issueKanCol.id}} draggable="true" (dragstart)="dragStartColBoard($event)" (dragend)="dragendColBoard($event)">

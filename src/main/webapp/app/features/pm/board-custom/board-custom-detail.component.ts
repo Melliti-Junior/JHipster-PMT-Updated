@@ -16,8 +16,8 @@ import {ResponseWrapper} from '../../../shared';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';
 import {MenuItem} from 'primeng/api';
-import {StatusCustom} from '../status-custom/status-custom.model';
-import {StatusCustomService} from '../status-custom/status-custom.service';
+import {StepCustom} from '../step-custom/step-custom.model';
+import {StepCustomService} from '../step-custom/step-custom.service';
 
 @Component({
     selector: 'jhi-board-custom-detail',
@@ -33,12 +33,14 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
 
     issueCustoms: IssueCustom[] = new Array<IssueCustom>();
     relatedColumns: ColumnCustom[];
-    relatedStatuses: StatusCustom[];
+    relatedStepsForCol: StepCustom[];
+    relatedStepsForBoard: StepCustom[];
+    relatedSteps: StepCustom[];
     relatedSprints: SprintCustom[];
 
     sprintCustoms: SprintCustom[];
     columnCustoms: ColumnCustom[];
-    statusCustoms: StatusCustom[];
+    stepCustoms: StepCustom[];
 
     private subscription: Subscription;
     private eventSubscriber: Subscription;
@@ -49,6 +51,7 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
     now = new Date();
 
     boardItems: MenuItem[];
+    kanbanItems: MenuItem[];
 
     myColumns = false;
     myStatuses = false;
@@ -61,7 +64,7 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         private issuecustomSce: IssueCustomService,
         private sprintcustomSce: SprintCustomService,
         private columncustomSce: ColumnCustomService,
-        private statuscustomSce: StatusCustomService,
+        private stepcustomSce: StepCustomService,
     ) {
     }
 
@@ -73,6 +76,24 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         this.loadAttributes();
         this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         // this.getBacklogIssues();
+
+        this.kanbanItems = [
+            {
+                label: 'Columns', icon: 'fa-tasks', command: (onclick) => {
+                    this.myColumns = true;
+                    this.myStatuses = false;
+                    this.mySprints = false;
+                    this.searchRelatedColumns();
+                }},
+            {
+                label: 'Statuses', icon: 'fa-eye', command: (onclick) => {
+                    this.myColumns = false;
+                    this.myStatuses = true;
+                    this.mySprints = false;
+                    this.searchRelatedSteps();
+                }},
+        ];
+
         this.boardItems = [
             {
                 label: 'Columns', icon: 'fa-tasks', command: (onclick) => {
@@ -82,11 +103,11 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
                     this.searchRelatedColumns();
                 }},
             {
-                label: 'Statuses', icon: 'fa-table', command: (onclick) => {
+                label: 'Statuses', icon: 'fa-eye', command: (onclick) => {
                     this.myColumns = false;
                     this.myStatuses = true;
                     this.mySprints = false;
-                    this.searchRelatedStatuses();
+                    this.searchRelatedSteps();
                 }},
             {
                 label: 'Sprints', icon: 'fa-table', command: (onclick) => {
@@ -102,8 +123,8 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
                 this.myColumns = true;
             }
             this.searchRelatedColumns();
-            this.searchRelatedStatuses();
             this.searchRelatedSprints();
+            this.searchRelatedSteps();
         }, 100);
     }
 
@@ -138,35 +159,19 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
         this.getAllIssues();
         this.getAllSprints();
         this.getAllColumns();
-        this.getAllStatuses();
+        this.getAllSteps();
     }
 
     searchRelatedColumns() {
-        // this.getBacklogIssues();
-        // this.getSprintIssues();
-        this.relatedColumns = new Array<ColumnCustom>();
-        for (let col of this.columnCustoms) {
-            if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
-                if (this.relatedColumns.indexOf(col) === -1) {
-                    this.relatedColumns.push(col);
-                }
-            }
-        }
-        console.log(this.relatedColumns.length);
+        this.columncustomSce.search({query : this.boardcustom.id})
+            .subscribe(
+                (res: ResponseWrapper) => this.retrieveColumns(res.json),
+                (error) => console.log(error));
     }
 
-    searchRelatedStatuses() {
-        this.searchRelatedColumns();
-        this.relatedStatuses = new Array<StatusCustom>();
-        for (let col of this.relatedColumns) {
-            for (let status of this.statusCustoms){
-                if ((status.column && status.column.id === col.id)) {
-                    if (this.relatedStatuses.indexOf(status) === -1) {
-                        this.relatedStatuses.push(status);
-                    }
-                }
-            }
-        }
+    retrieveColumns(data) {
+        this.relatedColumns = data;
+        console.error('cols' +  this.relatedColumns.length)
     }
 
     searchRelatedSprints() {
@@ -177,12 +182,23 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
     }
 
     private getRelatedSprints(data) {
-        this.relatedSprints = data.valueOf();
-        console.log(this.relatedSprints.length);
+        this.relatedSprints = data;
 
         if (this.relatedSprints.length) {
             this.getActiveSprint();
         }
+    }
+
+    searchRelatedSteps() {
+        this.stepcustomSce.search({query : this.boardcustom.project.process.id})
+            .subscribe(
+                (res: ResponseWrapper) => this.retrieveSteps(res.json),
+                (error) => console.log(error));
+    }
+
+    retrieveSteps(data) {
+        this.relatedSteps = data;
+        console.error('stepss' +  this.relatedSteps.length)
     }
 
     getActiveSprint() {
@@ -208,9 +224,19 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
             .then((columnCustoms) => this.columnCustoms = columnCustoms );
     }
 
-    getAllStatuses() {
-        this.statuscustomSce.getStatusCustoms()
-            .then((statusCustoms) => this.statusCustoms = statusCustoms );
+    getAllSteps() {
+        this.stepcustomSce.getStepCustoms()
+            .then((stepCustoms) => this.stepCustoms = stepCustoms );
+    }
+
+    getStepsByWorkflow() {
+        for (let st of this.stepCustoms) {
+            if (this.boardcustom.project.process.id === st.workflow.id) {
+                if (this.relatedStepsForBoard.indexOf(st) === -1) {
+                    this.relatedStepsForBoard.push(st);
+                }
+            }
+        }
     }
 
     private subscribeToSaveResponse(result: Observable<BoardCustom>) {
