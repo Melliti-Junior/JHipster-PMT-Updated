@@ -21,7 +21,8 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import {IssueCustom} from '../issue-custom';
 import {StatusCustom, StatusCustomService} from '../status-custom';
 import {WorkflowCustom, WorkflowCustomService} from '../workflow-custom';
-import {StepCustom, StepCustomService} from '../step-custom';
+import {StepCustom} from '../step-custom/step-custom.model';
+import {StepCustomService} from '../step-custom/step-custom.service';
 
 @Component({
     selector: 'jhi-transition-custom-dialog',

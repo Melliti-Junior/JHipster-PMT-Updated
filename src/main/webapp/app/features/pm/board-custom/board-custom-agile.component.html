@@ -197,7 +197,6 @@
 
                                         <div *ngIf="step.column.name === colScrum.name">
 
-
                                             <div *ngFor="let issueCol of relatedIssuesPerSprint">
 
 
@@ -210,7 +209,7 @@
                                                             <div class="card-body-active">
                                                                 <div class="info row pl-3">
                                                                     <div class="issue-type-icon-active" *ngIf="issueCol.type"><img  [src] = "issueCol.type.icon" /></div>
-                                                                    <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
+                                                                    <div class="issue-code-active"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
                                                                     <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
                                                                 </div>
                                                                 <div class="issue-summary pl-3">{{issueCol.summary}}</div>

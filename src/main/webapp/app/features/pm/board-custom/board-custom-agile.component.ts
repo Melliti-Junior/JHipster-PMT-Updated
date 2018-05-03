@@ -47,6 +47,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     sprintCustoms: SprintCustom[];
     columnCustoms: ColumnCustom[];
     statuscustoms: StatusCustom[];
+    transitioncustoms: TransitionCustom[];
+    stepcustoms: StepCustom[];
 
     relatedSprintsBoard: SprintCustom[];
 
@@ -143,14 +145,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     }
 
-    getRelatedWorkflowSteps() {
-
-    }
-
-    getRelatedWorkflowTransitions() {
-
-    }
-
     ngAfterContentInit() {
         console.log('finish');
         // this.getBacklogIssues();
@@ -183,6 +177,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.getAllSprints();
         this.getAllColumns();
         this.getAllStatuses();
+        this.getAllSteps();
+        this.getAllTransitions()
     }
 
     makeNewIssueOpen(issuecustom: IssueCustom) {
@@ -241,28 +237,42 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             .then((statuscustoms) => this.statuscustoms = statuscustoms);
     }
 
-    lookForRelatedTransitions() {
-        this.transitionService.search({query : this.boardcustom.project.process.id})
-            .subscribe(
-                (res: ResponseWrapper) => this.retrieveTransitions(res.json),
-                (error) => console.log(error));
+    getAllTransitions() {
+        this.transitionService.getTransitionCustoms()
+            .then((transitioncustoms) => this.transitioncustoms = transitioncustoms);
     }
 
-    retrieveTransitions(data) {
-        this.relatedTransitions = data;
-        console.error('trans' +  this.relatedTransitions.length)
+    getAllSteps() {
+        this.stepService.getStepCustoms()
+            .then((stepcustoms) => this.stepcustoms = stepcustoms);
     }
+
+    lookForRelatedTransitions() {
+        this.relatedTransitions = new Array<TransitionCustom>();
+        for (let trans of this.transitioncustoms) {
+            if (trans.workflow.id === this.boardcustom.project.process.id) {
+                if (this.relatedTransitions.indexOf(trans) === -1) {
+                    this.relatedTransitions.push(trans);
+                }
+            }
+        }
+        console.error(this.relatedTransitions.length)
+    }
+
 
     lookForRelatedSteps() {
-        this.stepService.search({query : this.boardcustom.project.process.id})
-            .subscribe(
-                (res: ResponseWrapper) => this.retrieveSteps(res.json),
-                (error) => console.log(error));
-    }
+        this.relatedSteps = new Array<StepCustom>();
+        console.error(this.stepcustoms.length)
 
-    retrieveSteps(data) {
-        this.relatedSteps = data;
-        console.error('steps' +  this.relatedSteps.length)
+        for (let step of this.stepcustoms) {
+            console.log('step wf ' + step.workflow.id + 'process ' + this.boardcustom.project.process.id)
+            if (step.workflow.id === this.boardcustom.project.process.id) {
+                if (this.relatedSteps.indexOf(step) === -1) {
+                    this.relatedSteps.push(step);
+                }
+            }
+        }
+        console.error(this.relatedSteps.length)
     }
 
     getStepByStatus(status: StatusCustom): StepCustom {
@@ -273,6 +283,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             if ((this.relatedSteps[index].status.id === status.id)) {
                 found = true;
                 targetStep = this.relatedSteps[index];
+                console.log('target ' + JSON.stringify(targetStep))
             }
             else {
                 index = index + 1;
@@ -285,11 +296,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         let tempSteps = new Array<StepCustom>();
         for (let tran of this.relatedTransitions) {
             if (tran.sourceStep.id === sourceStep.id) {
-                if (tempSteps.indexOf(tran.targetStep) === -1) {
-                    tempSteps.push(tran.targetStep);
+                let target = tran.targetStep;
+                console.error(JSON.stringify(target))
+                if (tempSteps.indexOf(target) === -1) {
+                    tempSteps.push(target);
                 }
             }
         }
+
         return tempSteps;
     }
 
@@ -552,12 +566,47 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     dragStartColBoard(ev) {
-        console.error('start drag');
+        console.error('start drag' + ev.target.id);
         ev.dataTransfer.setData('text', ev.target.id);
 
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
-                console.log(issue.status.name)
+                console.log('old ' + issue.status.name);
+
+
+
+
+
+                this.issuecustomSce.find(issue.id).subscribe((issuecustom) => {
+                    if (issue.createdDate) {
+                        issue.createdDate = {
+                            year: issuecustom.createdDate.getFullYear(),
+                            month: issuecustom.createdDate.getMonth() + 1,
+                            day: issuecustom.createdDate.getDate()
+                        };
+                    }
+                    if (issue.updatedDate) {
+                        issue.updatedDate = {
+                            year: issuecustom.updatedDate.getFullYear(),
+                            month: issuecustom.updatedDate.getMonth() + 1,
+                            day: issuecustom.updatedDate.getDate()
+                        };
+                    }
+                    if (issue.dueDate) {
+                        issue.dueDate = {
+                            year: issuecustom.dueDate.getFullYear(),
+                            month: issuecustom.dueDate.getMonth() + 1,
+                            day: issuecustom.dueDate.getDate()
+                        };
+                    }
+                });
+
+
+
+
+
+                console.log('new' + issue.status.name);
+
 
                 let step = this.getStepByStatus(issue.status);
                 console.error('current steppppppp ' + step.column.name);
@@ -566,6 +615,19 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 console.error(this.nextPossibleSteps.length);
             }
         }
+
+
+
+
+        for (let issue of this.issueCustoms) {
+            if (issue.id === ev.target.id) {
+
+
+                console.log(issue.code);
+                console.error('drag event stops here');
+            }
+        }
+
     }
 
     dragendColBoard(ev) {
@@ -653,25 +715,113 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 if (ev.target.children[i].hidden) {
                     ev.target.children[i].hidden = false;
                     ev.target.style.border = '1px solid #888888';
+                    ev.target.style.backgroundColor = '#f5f5f5';
                 }
             }
         }
     }
 
-    allowDropColBoard($event) {
+    isAllowedToReceiveIn(col: ColumnCustom): boolean {
+        console.log('col id ' + col.id)
+        let allowed = false;
+        let stop = false;
+        let index = 0;
+        if (this.nextPossibleSteps && this.nextPossibleSteps.length > 0) {
+            console.error('length ' + this.nextPossibleSteps.length)
+            while (stop === false && allowed === false && index <= this.nextPossibleSteps.length) {
 
+                console.error(JSON.stringify(this.nextPossibleSteps) + ' this.nextPossibleSteps[index]')
 
-        //**** End Here 6:00
-        console.error($event.target.parentElement.id);
-        console.error($event.target.parentElement.className);
-
-        let currCol = $event.target.parentElement;
-        for (let col of this.relatedColumns) {
-            if (col.id === currCol.id) {
-                console.error(col.name)
+                if (this.nextPossibleSteps[index] && this.nextPossibleSteps[index].column) {
+                    if (this.nextPossibleSteps[index].column.id === col.id) {
+                        allowed = true;
+                        console.log('allowed')
+                    } else {
+                        index = index + 1;
+                    }
+                } else {
+                    // allowed = true;
+                    // console.log('sorryyy' + this.nextPossibleSteps[index].id);
+                    // index = index + 1;
+                    stop = true;
+                }
             }
         }
 
+        return allowed;
+    }
+
+    getCurrentColumnByID(ID: string): ColumnCustom {
+        let found = false;
+        let index = 0;
+        let currCol = new ColumnCustom();
+        while (found === false && index <= this.relatedColumns.length) {
+            if (this.relatedColumns[index].id === ID) {
+                found = true;
+                currCol = this.relatedColumns[index];
+                console.error(currCol.name)
+            } else {
+                index = index +1;
+            }
+        }
+        return currCol;
+    }
+
+    allowDropColBoard($event) {
+
+        // **** End Here 6:00
+        console.error($event.target.parentElement.id);
+        console.error($event.target.parentElement.className);
+
+        let currColDivElt = $event.target.parentElement;
+
+        console.log('col');
+        let currCol = this.getCurrentColumnByID(currColDivElt.id);
+
+        let isAllowed = this.isAllowedToReceiveIn(currCol);
+        console.log(this.isAllowedToReceiveIn(currCol));
+
+        if (isAllowed) {
+            for (let autStat of this.nextPossibleSteps) {
+                if (autStat.column.id === currColDivElt.id) {
+                    console.log('yepppp')
+
+                    let elt = $event.target;
+                    while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
+                        // console.log('me ' + elt.className);
+                        elt = elt.parentElement;
+                        // console.log('my parent ' + elt.className);
+                    }
+                    if (elt.id.includes('droppable') === true) {
+                        $event.preventDefault();
+                        elt.style.border = '2px dashed blueviolet';
+                        // console.log('count ' + elt.children.length)
+
+                        for (let i = 0; i < elt.children.length; i++) {
+                            elt.children[i].hidden = true;
+                        }
+                    }
+                }
+            }
+        } else {
+            let elt = $event.target;
+            while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
+                // console.log('me ' + elt.className);
+                elt = elt.parentElement;
+                // console.log('my parent ' + elt.className);
+            }
+            if (elt.id.includes('droppable') === true) {
+                // elt.style.border = '2px solid red';
+                elt.style.backgroundColor = 'Grey';
+                // console.log('count ' + elt.children.length)
+
+                for (let i = 0; i < elt.children.length; i++) {
+                    elt.children[i].hidden = true;
+                }
+            }
+
+        }
+/*
         let elt = $event.target;
         while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
             // console.log('me ' + elt.className);
@@ -687,6 +837,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 elt.children[i].hidden = true;
             }
         }
+        */
     }
 
     dropColBoard(ev) {
@@ -697,6 +848,28 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         ev.target.appendChild(document.getElementById(data));
 
         console.log('just drop ' + document.getElementById(data).id)
+
+        let currentStep: StepCustom;
+        for (let step of this.nextPossibleSteps) {
+            if (step.column.id === ev.target.parentElement.id) {
+                currentStep = step;
+            }
+        }
+
+        for (let issue of this.issueCustoms) {
+            if (issue.id === document.getElementById(data).id) {
+                this.isSaving = true;
+                issue.status = Object.assign({}, currentStep.status);
+                this.subscribeToSaveResponseIssues(
+                    this.issuecustomSce.update(issue));
+                if (issue.id !== undefined) {
+                    console.log('update ' + issue.code + ' with status ' + issue.status.name);
+                }
+            }
+            // this.affectIssuesToSprint();
+            console.error('dropev stops here');
+        }
+
     }
 
 }

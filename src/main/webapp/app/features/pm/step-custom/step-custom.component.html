@@ -34,6 +34,7 @@
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="workflow"><span>Workflow</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="board"><span>Status</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="column"><span>Column</span> <span class="fa fa-sort"></span></th>
 
             <th></th>
             </tr>
@@ -47,6 +48,8 @@
                 <td *ngIf="!step.workflow">&nbsp;</td>
                 <td *ngIf="step.status">{{step.status.name}}</td>
                 <td *ngIf="!step.status">&nbsp;</td>
+                <td *ngIf="step.column">{{step.column.name}}</td>
+                <td *ngIf="!step.column">&nbsp;</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
 

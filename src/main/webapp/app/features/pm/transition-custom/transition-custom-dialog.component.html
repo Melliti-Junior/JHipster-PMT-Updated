@@ -17,7 +17,7 @@
         <div ng-if="">
             <div class="form-group">
                 <label class="form-control-label" for="field_workflow">Workflow</label>
-                <select class="form-control" name="targetStep" id="field_workflow" [(ngModel)]="workflowName" (change)="findWorkflow();">
+                <select class="form-control" name="workflow" id="field_workflow" [(ngModel)]="workflowName" (change)="findWorkflow();">
                     <option *ngFor="let wf of workflowcustoms" [value]="wf.name">
                         {{wf.name}}
                     </option>
