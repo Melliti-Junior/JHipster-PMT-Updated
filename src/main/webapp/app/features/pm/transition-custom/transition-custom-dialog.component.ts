@@ -19,7 +19,8 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import {IssueCustom} from '../issue-custom';
-import {StatusCustom, StatusCustomService} from '../status-custom';
+import {StatusCustom} from '../status-custom/status-custom.model';
+import {StatusCustomService} from '../status-custom/status-custom.service';
 import {WorkflowCustom, WorkflowCustomService} from '../workflow-custom';
 import {StepCustom} from '../step-custom/step-custom.model';
 import {StepCustomService} from '../step-custom/step-custom.service';
@@ -40,6 +41,7 @@ export class TransitionCustomDialogComponent implements OnInit {
     stepcustoms: StepCustom[];
     workflowcustoms: WorkflowCustom[];
     transitionCustoms: TransitionCustom[];
+    possibleSteps: StepCustom[];
 
     // Get the status related to this transition
     parentStatus: StatusCustom;
@@ -47,6 +49,7 @@ export class TransitionCustomDialogComponent implements OnInit {
     sourceStepName: string;
     targetStepName: string;
     workflowName: string;
+    parentWorkflow: WorkflowCustom;
     // statuscode: string;
 
     now = new Date();
@@ -120,12 +123,27 @@ export class TransitionCustomDialogComponent implements OnInit {
         while (index < this.workflowcustoms.length && found === false)  {
             if ((this.workflowcustoms[index]).name === this.workflowName) {
                 found = true;
+                this.parentWorkflow = this.workflowcustoms[index];
                 this.transitioncustom.workflow = this.workflowcustoms[index];
+                this.possibleSteps = new Array<StepCustom>();
+                this.getWorkflowRelatedSteps()
             } else {
                 index = index + 1;
             }
         }
         console.log('aff' + this.transitioncustom.workflow.name);
+    }
+
+    getWorkflowRelatedSteps() {
+        // console.log('poss prj ver' + this.possibleVersions.length);
+        for (let step of this.stepcustoms) {
+            console.log(step.workflow.name);
+            console.log(this.parentWorkflow.name);
+            if ((step.workflow.name === this.parentWorkflow.name) ) {
+                this.possibleSteps.push(step);
+            }
+        }
+        console.log('poss steps' + this.possibleSteps.length);
     }
 
     save() {

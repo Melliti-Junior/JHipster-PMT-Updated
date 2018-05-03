@@ -53,7 +53,7 @@
             <div class="form-group">
                 <label class="form-control-label" for="field_sourceStep">Source Step</label>
                 <select class="form-control" name="sourceStep" id="field_sourceStep" [(ngModel)]="sourceStepName" (change)="findSourceStep();">
-                    <option *ngFor="let step of stepcustoms" [value]="step.name">
+                    <option *ngFor="let step of possibleSteps" [value]="step.name">
                         {{step.name}}
                     </option>
                 </select>
@@ -64,7 +64,7 @@
             <div class="form-group">
                 <label class="form-control-label" for="field_targetStep">Target Step</label>
                 <select class="form-control" name="targetStep" id="field_targetStep" [(ngModel)]="targetStepName" (change)="findTargetStep();">
-                    <option *ngFor="let step of stepcustoms" [value]="step.name">
+                    <option *ngFor="let step of possibleSteps" [value]="step.name">
                         {{step.name}}
                     </option>
                 </select>
