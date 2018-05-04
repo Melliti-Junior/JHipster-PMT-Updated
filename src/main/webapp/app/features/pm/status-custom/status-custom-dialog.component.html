@@ -12,6 +12,24 @@
             <input type="text" class="form-control" id="id" name="id"
                    [(ngModel)]="statuscustom.id" readonly />
         </div>
+
+        <div ng-if="">
+            <div class="form-group">
+                <label class="form-control-label" for="field_category">Category</label>
+                <select class="form-control" name="category" id="field_category" [(ngModel)]="categoryName" required (change)="findCategory();">
+                    <option *ngFor="let category of categorycustoms" [value]="category.name">
+                        {{category.name}}
+                    </option>
+                </select>
+                <div [hidden]="!(editForm.controls.category?.dirty && editForm.controls.category?.invalid)">
+                    <small class="form-text text-danger"
+                           [hidden]="!editForm.controls.category?.errors?.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+        </div>
+
         <div class="form-group">
             <label class="form-control-label" for="field_code">Code</label>
             <input type="text" class="form-control" name="code" id="field_code"

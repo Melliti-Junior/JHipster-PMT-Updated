@@ -136,12 +136,12 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             this.getBacklogIssues();
             this.getSprintIssues();
             this.divClick.nativeElement.click();
-        }, 100);
+        }, 1000);
 
         setTimeout(() => {
             this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
             this.divClick.nativeElement.click();
-        }, 500);
+        }, 5000);
 
     }
 

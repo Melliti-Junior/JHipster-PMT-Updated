@@ -28,10 +28,11 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     boardcustom: BoardCustom;
     allColumns: ColumnCustom[];
     allStatuses: StatusCustom[];
-    allSteps: StepCustom[];
     relatedColumns: ColumnCustom[];
     relatedTransitions: TransitionCustom[];
+    transitioncustoms: TransitionCustom[];
     relatedSteps: StepCustom[];
+    stepcustoms: StepCustom[];
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
@@ -110,9 +111,43 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         this.statusService.getStatusCustoms()
             .then((allStatuses) => this.allStatuses = allStatuses);
         this.stepService.getStepCustoms()
-            .then((allSteps) => this.allSteps = allSteps);
+            .then((stepcustoms) => this.stepcustoms = stepcustoms);
+        this.transitionService.getTransitionCustoms()
+            .then((transitioncustoms) => this.transitioncustoms = transitioncustoms);
     }
 
+
+
+    lookForRelatedTransitions() {
+        this.relatedTransitions = new Array<TransitionCustom>();
+        for (let trans of this.transitioncustoms) {
+            if (trans.workflow.id === this.boardcustom.project.process.id) {
+                if (this.relatedTransitions.indexOf(trans) === -1) {
+                    this.relatedTransitions.push(trans);
+                }
+            }
+        }
+        console.error(this.relatedTransitions.length)
+    }
+
+
+    lookForRelatedSteps() {
+        this.relatedSteps = new Array<StepCustom>();
+        console.error(this.stepcustoms.length)
+
+        for (let step of this.stepcustoms) {
+            console.log('step wf ' + step.workflow.id + 'process ' + this.boardcustom.project.process.id)
+            if (step.workflow.id === this.boardcustom.project.process.id) {
+                if (this.relatedSteps.indexOf(step) === -1) {
+                    this.relatedSteps.push(step);
+                }
+            }
+        }
+        console.error(this.relatedSteps.length)
+    }
+
+
+    /*
     lookForRelatedTransitions() {
         this.transitionService.search({query : this.boardcustom.project.process.id})
             .subscribe(
@@ -136,6 +171,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         this.relatedSteps = data;
         console.error('stepss' +  this.relatedSteps.length)
     }
+    */
 
     getStepByStatus(status: StatusCustom): StepCustom {
         let targetStep: StepCustom;

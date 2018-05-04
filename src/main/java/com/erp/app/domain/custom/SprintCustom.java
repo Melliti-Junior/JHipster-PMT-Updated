@@ -19,9 +19,6 @@ public class SprintCustom extends Sprint implements Serializable {
 	private static final long serialVersionUID = 1L;
 
     @DBRef
-    @CascadeSave
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
 	@Field("board")
     // @JsonManagedReference
     private BoardCustom board;

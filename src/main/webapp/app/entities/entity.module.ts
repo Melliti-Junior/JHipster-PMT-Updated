@@ -15,6 +15,7 @@ import { DashBoardColumnModule } from './column/column.module';
 import { DashBoardStepModule } from './step/step.module';
 import { DashBoardWorkflowModule } from './workflow/workflow.module';
 import { DashBoardTransitionModule } from './transition/transition.module';
+import { DashBoardCategoryModule } from './category/category.module';
 /* jhipster-needle-add-entity-module-import - JHipster will add entity modules imports here */
 
 @NgModule({
@@ -34,6 +35,7 @@ import { DashBoardTransitionModule } from './transition/transition.module';
         DashBoardStepModule,
         DashBoardWorkflowModule,
         DashBoardTransitionModule,
+        DashBoardCategoryModule,
         /* jhipster-needle-add-entity-module - JHipster will add entity modules here */
     ],
     declarations: [],

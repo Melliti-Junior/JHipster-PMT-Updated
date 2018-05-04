@@ -9,6 +9,8 @@ import { JhiEventManager } from 'ng-jhipster';
 import { StatusCustom } from './status-custom.model';
 import { StatusCustomPopupService } from './status-custom-popup.service';
 import { StatusCustomService } from './status-custom.service';
+import {StepCustom} from "../step-custom/step-custom.model";
+import {CategoryCustom, CategoryCustomService} from "../category-custom";
 
 @Component({
     selector: 'jhi-status-custom-dialog',
@@ -19,15 +21,20 @@ export class StatusCustomDialogComponent implements OnInit {
     statuscustom: StatusCustom;
     isSaving: boolean;
 
+    categorycustoms: CategoryCustom[];
+    categoryName: string;
+
     constructor(
         public activeModal: NgbActiveModal,
         private statuscustomService: StatusCustomService,
+        private categorySce: CategoryCustomService,
         private eventManager: JhiEventManager
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
+        this.loadAttributes();
     }
 
     clear() {
@@ -44,6 +51,27 @@ export class StatusCustomDialogComponent implements OnInit {
                 this.statuscustomService.create(this.statuscustom));
         }
     }
+
+    private loadAttributes() {
+        this.categorySce.getCategoryCustoms()
+            .then((categorycustoms) => this.categorycustoms = categorycustoms );
+    }
+
+    findCategory() {
+        let index = 0;
+        let found = false;
+
+        while (index < this.categorycustoms.length && found === false)  {
+            if ((this.categorycustoms[index]).name === this.categoryName) {
+                found = true;
+                this.statuscustom.category = this.categorycustoms[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.statuscustom.category.name);
+    }
+
 
     private subscribeToSaveResponse(result: Observable<StatusCustom>) {
         result.subscribe((res: StatusCustom) =>
