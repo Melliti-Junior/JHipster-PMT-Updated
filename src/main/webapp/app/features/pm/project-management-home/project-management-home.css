@@ -1,0 +1,13 @@
+/*
+.agile {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-animation: rotation 2s infinite linear;
+    -moz-animation:spin 4s linear normal;
+    animation:spin 4s linear normal;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(360deg); transform:rotate(360deg); } }
+*/

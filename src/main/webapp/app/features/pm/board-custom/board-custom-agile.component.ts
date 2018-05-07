@@ -98,27 +98,28 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.loadAttributes();
         this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
         // this.getBacklogIssues();
-        this.scrumItems = [
-            {
-                label: 'Backlog', icon: 'fa-tasks', command: (onclick) => {
-                    this.Backlog = true; this.ActiveSprint = false;
-                    this.getBacklogIssues(); this.getSprintIssues(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
-                }},
-            {
-                label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
-                    this.Backlog = false; this.ActiveSprint = true;
-                    this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
-                }},
-        ];
-        this.kanbanItems = [
-            {
-                label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
-                    this.KanbanBoard = true;
-                    this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
-                }},
-        ];
 
         setTimeout(() => {
+            this.scrumItems = [
+                {
+                    label: 'Backlog', icon: 'fa-tasks', command: (onclick) => {
+                        this.Backlog = true; this.ActiveSprint = false;
+                        this.getBacklogIssues(); this.getSprintIssues(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                    }},
+                {
+                    label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
+                        this.Backlog = false; this.ActiveSprint = true;
+                        this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                    }},
+            ];
+            this.kanbanItems = [
+                {
+                    label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
+                        this.KanbanBoard = true;
+                        this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                    }},
+            ];
+
             if (this.boardcustom) {
                 if (this.boardcustom.type.toLowerCase() === 'scrum') {
                     this.Backlog = true;
@@ -136,12 +137,12 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             this.getBacklogIssues();
             this.getSprintIssues();
             this.divClick.nativeElement.click();
-        }, 1000);
+        }, 100);
 
         setTimeout(() => {
             this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
             this.divClick.nativeElement.click();
-        }, 5000);
+        }, 500);
 
     }
 
@@ -306,6 +307,18 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         return tempSteps;
     }
+
+    getOpenStep(): StepCustom {
+        let tempStep = new StepCustom();
+        for (let step of this.relatedSteps) {
+            if (step.name.toLowerCase() === 'open') {
+                tempStep = step;
+            }
+        }
+
+        return tempStep;
+    }
+
 
     lookForActiveSprint() {
         let index = 0;
@@ -565,54 +578,58 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         }
     }
 
+    validateIssue(issue) {
+        this.issuecustomSce.find(issue.id).subscribe((issuecustom) => {
+            if (issue.createdDate) {
+                issue.createdDate = {
+                    year: issuecustom.createdDate.getFullYear(),
+                    month: issuecustom.createdDate.getMonth() + 1,
+                    day: issuecustom.createdDate.getDate()
+                };
+            }
+            if (issue.updatedDate) {
+                issue.updatedDate = {
+                    year: issuecustom.updatedDate.getFullYear(),
+                    month: issuecustom.updatedDate.getMonth() + 1,
+                    day: issuecustom.updatedDate.getDate()
+                };
+            }
+            if (issue.dueDate) {
+                issue.dueDate = {
+                    year: issuecustom.dueDate.getFullYear(),
+                    month: issuecustom.dueDate.getMonth() + 1,
+                    day: issuecustom.dueDate.getDate()
+                };
+            }
+        });
+
+    }
     dragStartColBoard(ev) {
         console.error('start drag' + ev.target.id);
         ev.dataTransfer.setData('text', ev.target.id);
 
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
-                console.log('old ' + issue.status.name);
 
+                this.validateIssue(issue);
 
+                if (issue.status) {
+                    console.log('old ' + issue.status.name);
 
+                    console.log('new' + issue.status.name);
 
+                    let step = this.getStepByStatus(issue.status);
+                    console.error('current steppppppp ' + step.column.name);
 
-                this.issuecustomSce.find(issue.id).subscribe((issuecustom) => {
-                    if (issue.createdDate) {
-                        issue.createdDate = {
-                            year: issuecustom.createdDate.getFullYear(),
-                            month: issuecustom.createdDate.getMonth() + 1,
-                            day: issuecustom.createdDate.getDate()
-                        };
-                    }
-                    if (issue.updatedDate) {
-                        issue.updatedDate = {
-                            year: issuecustom.updatedDate.getFullYear(),
-                            month: issuecustom.updatedDate.getMonth() + 1,
-                            day: issuecustom.updatedDate.getDate()
-                        };
-                    }
-                    if (issue.dueDate) {
-                        issue.dueDate = {
-                            year: issuecustom.dueDate.getFullYear(),
-                            month: issuecustom.dueDate.getMonth() + 1,
-                            day: issuecustom.dueDate.getDate()
-                        };
-                    }
-                });
+                    this.nextPossibleSteps = this.getNextPossibleSteps(step);
+                    console.error(this.nextPossibleSteps.length);
 
-
-
-
-
-                console.log('new' + issue.status.name);
-
-
-                let step = this.getStepByStatus(issue.status);
-                console.error('current steppppppp ' + step.column.name);
-
-                this.nextPossibleSteps = this.getNextPossibleSteps(step);
-                console.error(this.nextPossibleSteps.length);
+                } else {
+                    let openStep: StepCustom = this.getOpenStep();
+                    this.nextPossibleSteps = new Array<StepCustom>();
+                    this.nextPossibleSteps.push(openStep);
+                    console.error('backlog kanban')
+                }
             }
         }
 
@@ -621,8 +638,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
-
-
                 console.log(issue.code);
                 console.error('drag event stops here');
             }

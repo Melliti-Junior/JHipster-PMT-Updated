@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild, Input} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Response } from '@angular/http';
 
@@ -43,7 +43,6 @@ export class ColumnCustomDialogComponent implements OnInit {
     parentBoard: BoardCustom;
     // Get the boardname chosen from list (combobox)
     boardname: string;
-    // boardcode: string;
 
     numColumnsParentBoard: number;
 
@@ -156,6 +155,7 @@ export class ColumnCustomDialogComponent implements OnInit {
 export class ColumnCustomPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
+    @Input () boardParentName: string;
 
     constructor(
         private route: ActivatedRoute,
@@ -172,6 +172,9 @@ export class ColumnCustomPopupComponent implements OnInit, OnDestroy {
                     .open(ColumnCustomDialogComponent as Component);
             }
         });
+
+        console.log(this.boardParentName)
+
     }
 
     ngOnDestroy() {

@@ -14,11 +14,11 @@ import {DashBoardSprintCustomModule} from './sprint-custom/sprint-custom.module'
 import {DashBoardColumnCustomModule} from './column-custom/column-custom.module';
 import {AgileComponent} from './agile';
 import {DashBoardStepCustomModule} from './step-custom/step-custom.module';
-import {BoardSidebar} from './board-sidebar/board-sidebar';
 import {DashBoardStatusCustomModule} from './status-custom/status-custom.module';
 import {DashBoardWorkflowCustomModule} from './workflow-custom/workflow-custom.module';
 import {DashBoardTransitionCustomModule} from './transition-custom/transition-custom.module';
 import {DashBoardCategoryCustomModule} from './category-custom/category-custom.module';
+import {ProjectManagementHomeComponent} from './project-management-home/project-management-home.component';
 
 @NgModule({
   imports: [
@@ -39,7 +39,7 @@ import {DashBoardCategoryCustomModule} from './category-custom/category-custom.m
   declarations: [ProjectManagementComponent,
     BacklogComponent,
       AgileComponent,
-      BoardSidebar,
+      ProjectManagementHomeComponent,
     // ProjectCustomComponent
 ],
 providers: [

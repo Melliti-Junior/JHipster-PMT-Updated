@@ -349,6 +349,60 @@
                     </ul>
                 </li>
 
+                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a class="nav-link dropdown-toggle" ngbDropdownToggle>
+                            <span>
+                                <i class="fa fa-wrench" aria-hidden="true"></i>
+                                <span>Administration</span>
+                            </span>
+                        </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li>
+                            <a class="dropdown-item" routerLink="/statuscustoms" routerLinkActive="active">
+                                <span>Manage Statuses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/columncustoms" routerLinkActive="active">
+                                <span>Manage Columns</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" routerLink="/categorycustoms" routerLinkActive="active">
+                                <span>Manage Status Categories</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item" routerLink="/sprintcustoms" routerLinkActive="active">
+                                <span>Manage Sprints</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/issue-type" routerLinkActive="active">
+                                <span>Manage Issue Types</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/issue-priority" routerLinkActive="active">
+                                <span>Manage Issue Priorities</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/epic" routerLinkActive="active">
+                                <span>Manage Issue Epics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" routerLink="/resolution" routerLinkActive="active">
+                                <span>Manage Issue Resolutions</span>
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
 
                     <div class="createIssue" style="margin-left: 5%">
                         <button class="btn btn-primary" id="createIssueBtn" [routerLink]="['/', { outlets: { popup: ['issuecustom-new'] } }]">Create Issue</button>
