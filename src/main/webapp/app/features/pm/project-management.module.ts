@@ -19,6 +19,7 @@ import {DashBoardWorkflowCustomModule} from './workflow-custom/workflow-custom.m
 import {DashBoardTransitionCustomModule} from './transition-custom/transition-custom.module';
 import {DashBoardCategoryCustomModule} from './category-custom/category-custom.module';
 import {ProjectManagementHomeComponent} from './project-management-home/project-management-home.component';
+import {DashBoardResolutionCustomModule} from './resolution-custom/resolution-custom.module';
 
 @NgModule({
   imports: [
@@ -34,6 +35,7 @@ import {ProjectManagementHomeComponent} from './project-management-home/project-
     DashBoardWorkflowCustomModule,
     DashBoardTransitionCustomModule,
     DashBoardCategoryCustomModule,
+    DashBoardResolutionCustomModule,
     RouterModule.forChild([ ProjectManagementRoute ])
   ],
   declarations: [ProjectManagementComponent,

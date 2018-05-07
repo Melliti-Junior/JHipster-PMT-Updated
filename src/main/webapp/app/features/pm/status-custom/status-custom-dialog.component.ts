@@ -9,8 +9,7 @@ import { JhiEventManager } from 'ng-jhipster';
 import { StatusCustom } from './status-custom.model';
 import { StatusCustomPopupService } from './status-custom-popup.service';
 import { StatusCustomService } from './status-custom.service';
-import {StepCustom} from "../step-custom/step-custom.model";
-import {CategoryCustom, CategoryCustomService} from "../category-custom";
+import {CategoryCustom, CategoryCustomService} from '../category-custom';
 
 @Component({
     selector: 'jhi-status-custom-dialog',
@@ -71,7 +70,6 @@ export class StatusCustomDialogComponent implements OnInit {
         }
         console.log('aff' + this.statuscustom.category.name);
     }
-
 
     private subscribeToSaveResponse(result: Observable<StatusCustom>) {
         result.subscribe((res: StatusCustom) =>

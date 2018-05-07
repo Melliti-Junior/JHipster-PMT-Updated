@@ -1,0 +1,135 @@
+
+<div *ngIf="resolutioncustom">
+    <h6><span><a [routerLink]="['/projectcustoms', resolutioncustom.project.id ]">{{resolutioncustom.project.name}}</a></span></h6>
+
+    <h3><span>{{resolutioncustom.name}} ({{resolutioncustom.code}})</span> </h3>
+    <div *ngIf="resolutioncustom.isReleased" class="row" style="margin-left: 3%">
+        <div class="col-2" style="font-weight: bold;"><span style="color: #888888;">Release Status : </span></div>
+        <div class="col-3">Released</div>
+    </div>
+
+    <div *ngIf="!resolutioncustom.isReleased" class="row" style="margin-left: 3%">
+        <div class="col-2" style="font-weight: bold;"><span style="color: #888888;">Release Status : </span></div>
+        <div class="col-3">Unreleased</div>
+    </div>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+<div class="container">
+  <div class="panel-group row ">
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info">
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
+      <div class="panel-body-active" >
+
+          <div class="row">
+            <div class="col-10">{{resolutioncustom.description}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+    <div class="panel-group"  style="width:50%;">
+    <div class="panel panel-info" >
+      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Dates</h4></div>
+      <div class="panel-body-active" >
+
+          <div class="row">
+            <div class="col-3">Start Date :</div>
+            <div class="col-8">{{resolutioncustom.startDate | date:'mediumDate'}}</div>
+          </div>
+
+          <div class="row">
+            <div class="col-3">Release Date :</div>
+            <div class="col-8">{{resolutioncustom.releaseDate | date:'mediumDate'}}</div>
+          </div>
+
+      </div>
+    </div>
+    </div>
+
+</div>
+<hr style="border-color:transparent;">
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'resolutioncustoms/'+ resolutioncustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+
+    <!--
+<div *ngIf="resolutioncustom">
+    <h2><span>Resolution</span> {{resolutioncustom.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+
+
+        <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{resolutioncustom.code}}</span>
+        </dd>
+        <dt><span>Summary</span></dt>
+        <dd>
+            <span>{{resolutioncustom.summary}}</span>
+        </dd>
+        <dt><span>Created Date</span></dt>
+        <dd>
+            <span>{{resolutioncustom.createdDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Due Date</span></dt>
+        <dd>
+            <span>{{resolutioncustom.dueDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Estimation</span></dt>
+        <dd>
+            <span>{{resolutioncustom.estimation}}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+            <span>{{resolutioncustom.type.name}}</span>
+        </dd>
+        <dt><span>Priority</span></dt>
+        <dd>
+            <span>{{resolutioncustom.priority.name}}</span>
+        </dd>
+        <dt><span>Epic</span></dt>
+        <dd>
+            <span>{{resolutioncustom.epic.name}}</span>
+        </dd>
+    </dl>
+
+
+
+    <div class="container">
+        <h4>Details</h4>
+        <div class="panel panel-default">
+          <div class="panel-heading">Panel Heading</div>
+          <div class="panel-body">Panel Content</div>
+        </div>
+    </div>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'resolutioncustoms/'+ resolutioncustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
+-->

@@ -116,8 +116,6 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
             .then((transitioncustoms) => this.transitioncustoms = transitioncustoms);
     }
 
-
-
     lookForRelatedTransitions() {
         this.relatedTransitions = new Array<TransitionCustom>();
         for (let trans of this.transitioncustoms) {
@@ -129,7 +127,6 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         }
         console.error(this.relatedTransitions.length)
     }
-
 
     lookForRelatedSteps() {
         this.relatedSteps = new Array<StepCustom>();
@@ -145,7 +142,6 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         }
         console.error(this.relatedSteps.length)
     }
-
 
     /*
     lookForRelatedTransitions() {

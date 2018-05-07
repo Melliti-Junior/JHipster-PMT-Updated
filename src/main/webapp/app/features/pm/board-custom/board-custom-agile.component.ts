@@ -132,15 +132,25 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 this.searchRelatedColumns();
             }
 
-            this.lookForRelatedTransitions();
-            this.lookForRelatedSteps();
+            if (this.transitioncustoms) {
+                this.lookForRelatedTransitions();
+            }
+
+            if (this.stepcustoms) {
+                this.lookForRelatedSteps();
+            }
+
             this.getBacklogIssues();
             this.getSprintIssues();
             this.divClick.nativeElement.click();
         }, 100);
 
         setTimeout(() => {
-            this.getBacklogIssues(); this.getSprintIssues(); this.searchRelatedColumns();
+            this.getBacklogIssues();
+            this.getSprintIssues();
+            this.searchRelatedColumns();
+            this.lookForRelatedTransitions();
+            this.lookForRelatedSteps();
             this.divClick.nativeElement.click();
         }, 500);
 
@@ -260,7 +270,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         console.error(this.relatedTransitions.length)
     }
 
-
     lookForRelatedSteps() {
         this.relatedSteps = new Array<StepCustom>();
         console.error(this.stepcustoms.length)
@@ -285,8 +294,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 found = true;
                 targetStep = this.relatedSteps[index];
                 console.log('target ' + JSON.stringify(targetStep))
-            }
-            else {
+            } else {
                 index = index + 1;
             }
         }
@@ -318,7 +326,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         return tempStep;
     }
-
 
     lookForActiveSprint() {
         let index = 0;
@@ -604,6 +611,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         });
 
     }
+
     dragStartColBoard(ev) {
         console.error('start drag' + ev.target.id);
         ev.dataTransfer.setData('text', ev.target.id);
@@ -632,9 +640,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 }
             }
         }
-
-
-
 
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
@@ -776,7 +781,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 currCol = this.relatedColumns[index];
                 console.error(currCol.name)
             } else {
-                index = index +1;
+                index = index + 1;
             }
         }
         return currCol;
