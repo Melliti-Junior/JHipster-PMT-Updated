@@ -8,20 +8,28 @@ import { IssueCustomService } from './issue-custom.service';
 import { IssueType } from '../../../entities/issue-type/issue-type.model';
 import { IssuePriority } from '../../../entities/issue-priority';
 import { Epic } from '../../../entities/epic';
+import {StatusCustomService} from '../status-custom/status-custom.service';
+import {StatusCustom} from '../status-custom/status-custom.model';
+import {Observable} from "rxjs/Observable";
+import {Response} from "@angular/http";
 
 @Component({
     selector: 'jhi-issue-custom-detail',
-    templateUrl: './issue-custom-detail.component.html'
+    templateUrl: './issue-custom-detail.component.html',
+    styleUrls: ['./issue-custom-detail.component.css']
 })
 export class IssueCustomDetailComponent implements OnInit, OnDestroy {
 
     issuecustom: IssueCustom;
+    statuscustoms: StatusCustom[];
+    isSaving: boolean;
     private subscription: Subscription;
     private eventSubscriber: Subscription;
 
     constructor(
         private eventManager: JhiEventManager,
         private issuecustomService: IssueCustomService,
+        private statusService: StatusCustomService,
         private route: ActivatedRoute
     ) {
     }

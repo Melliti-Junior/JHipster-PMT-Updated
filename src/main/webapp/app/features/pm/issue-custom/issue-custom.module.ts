@@ -16,6 +16,10 @@ import {
     IssueCustomResolvePagingParams,
 } from './';
 import { SharedModule } from '../../shared/shared.module';
+import {
+    IssueCustomResolveDialogComponent,
+    IssueCustomResolvePopupComponent
+} from "./issue-custom-resolve-dialog.component";
 
 const ENTITY_STATES = [
     ...issuecustomRoute,
@@ -35,6 +39,8 @@ const ENTITY_STATES = [
         IssueCustomDeleteDialogComponent,
         IssueCustomPopupComponent,
         IssueCustomDeletePopupComponent,
+        IssueCustomResolveDialogComponent,
+        IssueCustomResolvePopupComponent,
     ],
     entryComponents: [
         IssueCustomComponent,
@@ -42,6 +48,8 @@ const ENTITY_STATES = [
         IssueCustomPopupComponent,
         IssueCustomDeleteDialogComponent,
         IssueCustomDeletePopupComponent,
+        IssueCustomResolveDialogComponent,
+        IssueCustomResolvePopupComponent,
     ],
     providers: [
         IssueCustomService,

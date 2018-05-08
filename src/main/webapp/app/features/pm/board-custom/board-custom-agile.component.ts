@@ -347,16 +347,28 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     getSprintIssues() {
         if (this.activeSprint !== undefined) {
             if (this.activeSprint.id !== undefined) {
-                console.log('looking for ' + this.activeSprint.id)
+                console.log('looking for ' + this.activeSprint.id);
+                /*
                 this.issuecustomSce.search({query : this.activeSprint.id})
                     .subscribe(
                         (res: ResponseWrapper) => this.retrieveIssuesOfSprint(res.json),
                         (error) => console.log(error));
-                console.log('Actual iss per sp : ' + this.relatedIssuesPerSprint.length);
+                */
+                this.relatedIssuesPerSprint = new Array<IssueCustom>();
+                for (let issue of this.issueCustoms) {
+                    if (this.activeSprint && issue.sprint && issue.sprint.id === this.activeSprint.id) {
+                        if (this.relatedIssuesPerSprint.indexOf(issue) === -1) {
+                            console.log(issue.code);
+                            this.relatedIssuesPerSprint.push(issue);
+                        }
+                    }
+                }
+                console.log('Actual iss per sp length : ' + this.relatedIssuesPerSprint.length);
+                console.log('Actual iss per sp : ' + JSON.stringify(this.relatedIssuesPerSprint));
             }
         }
     }
-
+/*
     retrieveIssuesOfSprint(data) {
         this.relatedIssuesPerSprint = new Array<IssueCustom>();
         // this.chosenIssues = this.relatedIssuesPerSprint;
@@ -370,7 +382,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         }
         console.log(this.relatedIssuesPerSprint.length)
     }
-
+*/
     getBacklogIssues() {
         // let index = 0;
         this.relatedIssuesPerBoard = new Array<IssueCustom>();

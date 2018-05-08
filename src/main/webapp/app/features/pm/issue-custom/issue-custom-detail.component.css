@@ -1,0 +1,10 @@
+.issueDetailsHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between
+}
+
+.issuePath {
+    display: flex;
+    flex-direction: row;
+}

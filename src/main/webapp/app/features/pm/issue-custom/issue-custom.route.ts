@@ -7,6 +7,7 @@ import { IssueCustomComponent } from './issue-custom.component';
 import { IssueCustomDetailComponent } from './issue-custom-detail.component';
 import { IssueCustomPopupComponent } from './issue-custom-dialog.component';
 import { IssueCustomDeletePopupComponent } from './issue-custom-delete-dialog.component';
+import {IssueCustomResolvePopupComponent} from "./issue-custom-resolve-dialog.component";
 
 @Injectable()
 export class IssueCustomResolvePagingParams implements Resolve<any> {
@@ -71,6 +72,16 @@ export const issuecustomPopupRoute: Routes = [
     {
         path: 'issuecustoms/:id/delete',
         component: IssueCustomDeletePopupComponent,
+        data: {
+            authorities: ['ROLE_USER'],
+            pageTitle: 'IssueCustoms'
+        },
+        canActivate: [UserRouteAccessService],
+        outlet: 'popup'
+    },
+    {
+        path: 'issuecustoms/:id/resolve',
+        component: IssueCustomResolvePopupComponent,
         data: {
             authorities: ['ROLE_USER'],
             pageTitle: 'IssueCustoms'

@@ -1,9 +1,23 @@
 
 <div *ngIf="issuecustom">
-    <div class="panel-group" style="display: flex">
-        <h5><span><a [routerLink]="['/projectcustoms', issuecustom.project.id ]">{{issuecustom.project.name}}</a></span></h5>
-        <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
-        <h5><span>{{issuecustom.code}}</span> </h5>
+    <div class="issueDetailsHeader panel-group">
+
+        <div class="issuePath">
+            <h5><span><a [routerLink]="['/projectcustoms', issuecustom.project.id ]">{{issuecustom.project.name}}</a></span></h5>
+            <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+            <h5><span>{{issuecustom.code}}</span> </h5>
+        </div>
+
+        <div *ngIf="issuecustom.status.name.toLowerCase() !== 'closed'" class="closeIssueBtn">
+            <button type="button"
+                    [routerLink]="['/', { outlets: { popup: 'issuecustoms/'+ issuecustom.id + '/resolve'} }]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    class="btn btn-danger">
+                <span class="fa fa-hand-stop-o"></span>&nbsp;<span> Close Issue</span>
+            </button>
+        </div>
+
     </div>
     <h2><span>{{issuecustom.summary}}</span></h2>
     <hr>
