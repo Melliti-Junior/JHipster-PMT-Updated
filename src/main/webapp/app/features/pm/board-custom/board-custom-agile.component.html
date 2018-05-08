@@ -210,10 +210,17 @@
                                                         <div class="card-content-active">
                                                             <div class="card-body-active">
                                                                 <div class="info row pl-3">
-                                                                    <div class="issue-type-icon-active" *ngIf="issueCol.type"><img  [src] = "issueCol.type.icon" /></div>
-                                                                    <div class="issue-code-active" *ngIf="!issueCol.status || issueCol.status.category.name.toLowerCase() !== 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
-                                                                    <div class="issue-code-active" *ngIf="issueCol.status && issueCol.status.category.name.toLowerCase() === 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueCol.id ]"><del>{{issueCol.code}}</del></a></div></div>
-                                                                    <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+
+                                                                    <div class="issueTypeandCode">
+                                                                        <div class="issue-type-icon-active" *ngIf="issueCol.type"><img  [src] = "issueCol.type.icon" /></div>
+                                                                        <div class="issue-code-active" *ngIf="!issueCol.status || issueCol.status.category.name.toLowerCase() !== 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueCol.id ]">{{issueCol.code}}</a></div></div>
+                                                                        <div class="issue-code-active" *ngIf="issueCol.status && issueCol.status.category.name.toLowerCase() === 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueCol.id ]"><del>{{issueCol.code}}</del>
+                                                                        </a></div></div>
+                                                                    </div>
+                                                                    <div class="assignee">
+                                                                        <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                                                    </div>
+
                                                                 </div>
                                                                 <div class="issue-summary pl-3">{{issueCol.summary}}</div>
                                                             </div>
@@ -298,10 +305,15 @@
                                                         <div class="card-content-active">
                                                             <div class="card-body-active">
                                                                 <div class="info row pl-3">
-                                                                    <div class="issue-type-icon-active" *ngIf="issueKanCol.type"><img  [src] = "issueKanCol.type.icon" /></div>
-                                                                    <div class="issue-code-active" *ngIf="!issueKanCol.status || issueKanCol.status.category.name !== 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueKanCol.id ]">{{issueKanCol.code}}</a></div></div>
-                                                                    <div class="issue-code-active" *ngIf="issueKanCol.status && issueKanCol.status.category.name === 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueKanCol.id ]"><del>{{issueKanCol.code}}</del></a></div></div>
-                                                                    <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                                                    <div class="issueTypeandCode">
+                                                                        <div class="issue-type-icon-active" *ngIf="issueKanCol.type"><img  [src] = "issueKanCol.type.icon" /></div>
+                                                                        <div class="issue-code-active" *ngIf="!issueKanCol.status || issueKanCol.status.category.name.toLowerCase() !== 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueKanCol.id ]">{{issueKanCol.code}}</a></div></div>
+                                                                        <div class="issue-code-active" *ngIf="issueKanCol.status && issueKanCol.status.category.name.toLowerCase() === 'done'"><div class="card-title"><a [routerLink]="['../../../issuecustoms', issueKanCol.id ]"><del>{{issueKanCol.code}}</del>
+                                                                        </a></div></div>
+                                                                    </div>
+                                                                    <div class="assignee">
+                                                                        <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
+                                                                    </div>
                                                                 </div>
                                                                 <div class="issue-summary pl-3">{{issueKanCol.summary}}</div>
                                                             </div>

@@ -1,12 +1,13 @@
 <form name="resolveForm" (ngSubmit)="confirmChanges()">
     <div class="modal-header">
-        <h4 class="modal-title" id="myIssueCustomLabel">Choose a resolution</h4>
+        <h4 class="modal-title" id="myIssueCustomLabel">Do you want to resolve the issue ?</h4>
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
                 (click)="clear()">&times;</button>
     </div>
     <div class="modal-body">
         <jhi-alert-error></jhi-alert-error>
         <div class="form-group">
+            <label class="form-control-label" for="field_resolution">Choose a resolution</label>
             <select class="form-control" name="resolution" id="field_resolution" [(ngModel)]="resolutionname" (change) = "findResolution()">
                 <option *ngFor="let res of resolutions" [value]="res.name"> {{res.name}}</option>
             </select>

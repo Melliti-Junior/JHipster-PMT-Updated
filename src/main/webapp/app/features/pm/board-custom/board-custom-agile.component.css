@@ -274,7 +274,7 @@ body {
 }
 
 .issue-code-active {
-    width: 80%;
+    /* width: 80%; */
 }
 
 .issue-type-icon-active {
@@ -282,7 +282,7 @@ body {
 }
 
 .assignee-img-active {
-    width: 10%;
+   /* width: 10%; */
 }
 
 .boardAgile {
@@ -333,4 +333,17 @@ body {
     color: #888888;
     font-weight: bold;
     font-size: medium;
+}
+
+.issueTypeandCode {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-right: 12%;
 }

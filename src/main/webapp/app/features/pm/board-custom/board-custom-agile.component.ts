@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, AfterViewInit, AfterContentInit, ViewChild, ElementRef} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { JhiEventManager } from 'ng-jhipster';
 
@@ -87,6 +87,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         private statusService: StatusCustomService,
         private stepService: StepCustomService,
         private transitionService: TransitionCustomService,
+        private router: Router
     ) {
     }
 
@@ -708,7 +709,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     // if (iss.status && iss.status.column.id === parent.parentElement.id) {
                     if (step && step.column.id === parent.parentElement.id) {
                         countIssues = countIssues + 1;
-                        console.log('hereeeeee' + countIssues);
+                        console.error('hereeeeee' + countIssues);
                     }
                 }
             }
@@ -726,12 +727,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
         }
 
-        for (let child of parent.children) {
-            if (!child.hidden) {
-                // console.log('children ' + (parent.children.length - this.issueCustoms.length));
-                console.log('children ' + (parent.children.length - this.issueCustoms.length));
-            }
-        }
+
 
         parent.style.border = '1px solid #888888';
         console.error('dragend stops here');
@@ -801,7 +797,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     allowDropColBoard($event) {
 
-        // **** End Here 6:00
         console.error($event.target.parentElement.id);
         console.error($event.target.parentElement.className);
 
@@ -872,6 +867,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         */
     }
 
+
     dropColBoard(ev) {
         console.error('dropev starts here')
         ev.preventDefault();
@@ -891,12 +887,26 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         for (let issue of this.issueCustoms) {
             if (issue.id === document.getElementById(data).id) {
                 this.isSaving = true;
+
+                if (currentStep.status.category.name.toLowerCase() === 'done') {
+                    this.router.navigate(['/', { outlets: { popup: 'issuecustoms/'+ issue.id + '/resolve'} }]);
+                    document.getElementById(data).style.textDecoration = 'line-through';
+                    console.error(currentStep.status.category.name);
+                } else {
+                    if (currentStep.status.category.name.toLowerCase() !== 'done') {
+                        issue.resolution = null;
+                        document.getElementById(data).style.textDecoration = 'none';
+                        console.error(currentStep.status.category.name)
+                    }
+                }
+
                 issue.status = Object.assign({}, currentStep.status);
                 this.subscribeToSaveResponseIssues(
                     this.issuecustomSce.update(issue));
                 if (issue.id !== undefined) {
                     console.log('update ' + issue.code + ' with status ' + issue.status.name);
                 }
+
             }
             // this.affectIssuesToSprint();
             console.error('dropev stops here');
