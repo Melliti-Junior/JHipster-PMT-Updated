@@ -347,3 +347,7 @@ body {
     justify-content: space-between;
     padding-right: 12%;
 }
+
+.progress-bar {
+    background-color: green;
+}

@@ -283,6 +283,8 @@
                                 <div class="panel-heading column-name">
                                     <div class="colInfo">
                                         <div class="colName"> {{colKanban.name}} </div>
+                                        <div class="colName"> {{relatedColumns.indexOf(colKanban) + 1}} </div>
+
                                         <div class="colMin" *ngIf="colKanban.min"> Min : {{colKanban.min}} </div>
                                         <div class="colMax" *ngIf="colKanban.max"> Max : {{colKanban.max}} </div>
                                     </div>
@@ -316,6 +318,12 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="issue-summary pl-3">{{issueKanCol.summary}}</div>
+                                                                <div class="progress">
+                                                                    <div class="progress-bar" role="progressbar"
+                                                                         aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': progress}">
+                                                                        {{progress}} %
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>

@@ -34,6 +34,7 @@
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="min"><span>Min</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="max"><span>Max</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="order"><span>Order</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="board"><span>Board</span> <span class="fa fa-sort"></span></th>
 
             <th></th>
@@ -46,6 +47,7 @@
                 <td>{{column.name}}</td>
                 <td>{{column.min}}</td>
                 <td>{{column.max}}</td>
+                <td>{{column.order}}</td>
                 <td *ngIf="column.board">{{column.board.name}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
