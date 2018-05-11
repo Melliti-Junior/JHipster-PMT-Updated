@@ -18,12 +18,11 @@ public class ColumnCustom extends Column implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+    @Field("order")
+    private Integer order;
+
     @DBRef
-    @CascadeSave
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
 	@Field("board")
-    // @JsonManagedReference
     private BoardCustom board;
 
 	public ColumnCustom(BoardCustom board) {
@@ -31,7 +30,12 @@ public class ColumnCustom extends Column implements Serializable {
 		this.board = board;
     }
 
-	public ColumnCustom() {
+    public ColumnCustom(Integer order, BoardCustom board) {
+        this.order = order;
+        this.board = board;
+    }
+
+    public ColumnCustom() {
 		super();
 	}
 
@@ -41,5 +45,13 @@ public class ColumnCustom extends Column implements Serializable {
 
     public void setBoard(BoardCustom board) {
         this.board = board;
+    }
+
+    public Integer getOrder() {
+        return order;
+    }
+
+    public void setOrder(Integer order) {
+        this.order = order;
     }
 }

@@ -18,6 +18,7 @@ export class IssueCustom extends Issue {
         public project?: ProjectCustom,
         public version?: VersionCustom,
         public sprint?: SprintCustom,
+        public progress?: number,
     ) {
         super();
         priority = new IssuePriority();
@@ -28,5 +29,6 @@ export class IssueCustom extends Issue {
         project = new ProjectCustom();
         version = new VersionCustom();
         sprint = new SprintCustom();
+        progress = 0;
     }
 }

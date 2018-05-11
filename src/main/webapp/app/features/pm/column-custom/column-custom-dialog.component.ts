@@ -38,6 +38,7 @@ export class ColumnCustomDialogComponent implements OnInit {
     scrumboards: BoardCustom[];
     board_issues: IssueCustom[];
     columnCustoms: ColumnCustom[];
+    siblingColumns: ColumnCustom[];
 
     // Get the board related to this column
     parentBoard: BoardCustom;
@@ -83,16 +84,21 @@ export class ColumnCustomDialogComponent implements OnInit {
             }
         }
         console.log('aff' + this.columncustom.board.name);
+    }
 
-        this.numColumnsParentBoard = 0;
-        // tslint:disable-next-line:prefer-const
+    findColumnsByBoard() {
+        this.siblingColumns = new Array<ColumnCustom>();
         for (let column of this.columnCustoms) {
-            if ((column.board !== null) && (column.board.code === this.parentBoard.code)) {
-                this.numColumnsParentBoard++;
+            if ((column.board !== null) && (column.board.id === this.parentBoard.id)) {
+                if (this.siblingColumns.indexOf(column) !== -1) {
+                    this.siblingColumns.push(column);
+                }
             }
         }
-        console.log('Num' + this.numColumnsParentBoard + this.parentBoard.code);
+        console.log('Num' + this.siblingColumns.length + this.parentBoard.code);
     }
+
+
 
     /**
      * This function retrieves all existing Epics, Types and Priorities
@@ -107,17 +113,6 @@ export class ColumnCustomDialogComponent implements OnInit {
         .then((columnCustoms) => this.columnCustoms = columnCustoms );
     }
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof ColumnCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.columncustomService.findByRequest(name);
-        // console.log(this.comp.columncustoms);
-    }
-
     save() {
         this.isSaving = true;
         if (this.columncustom.id !== undefined) {
@@ -129,6 +124,7 @@ export class ColumnCustomDialogComponent implements OnInit {
             this.subscribeToSaveResponse(
                 this.columncustomService.create(this.columncustom));
         }
+        this.findColumnsByBoard()
     }
 
     private subscribeToSaveResponse(result: Observable<ColumnCustom>) {

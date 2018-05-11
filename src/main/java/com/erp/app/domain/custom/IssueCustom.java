@@ -23,6 +23,9 @@ public class IssueCustom extends Issue implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
+    @Field("progress")
+    private Integer progress;
+
 	@DBRef
 	@Field("type")
     private IssueType type;
@@ -52,11 +55,7 @@ public class IssueCustom extends Issue implements Serializable {
     private SprintCustom sprint;
 
     @DBRef
-    @CascadeSave
-    //@ManyToOne(fetch = FetchType.EAGER)
-    @ManyToOne
 	@Field("project")
-    // @JsonManagedReference
     private ProjectCustom project;
 
     public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution, VersionCustom version, SprintCustom sprint) {
@@ -138,5 +137,13 @@ public class IssueCustom extends Issue implements Serializable {
 
     public void setSprint(SprintCustom sprint) {
         this.sprint = sprint;
+    }
+
+    public Integer getProgress() {
+        return progress;
+    }
+
+    public void setProgress(Integer progress) {
+        this.progress = progress;
     }
 }

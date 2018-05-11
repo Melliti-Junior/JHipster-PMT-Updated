@@ -56,6 +56,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     parentBoard: BoardCustom;
     // Get the current board name
     boardname: string;
+    progress: number;
 
     numSprintsParentBoard = 0;
 
@@ -221,7 +222,9 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             if (col.board) {
                 if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
                     if (this.relatedColumns.indexOf(col) === -1) {
-                        this.relatedColumns.push(col);
+                        // this.relatedColumns.push(col);
+                        this.relatedColumns.splice(col.order - 1,0, col);
+                        this.relatedColumns.sort();
                     }
                 }
             }
@@ -805,6 +808,10 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         console.log('col');
         let currCol = this.getCurrentColumnByID(currColDivElt.id);
 
+/*
+        this.progress = Math.round((this.relatedColumns.indexOf(currCol) + 1) / this.relatedColumns.length * 100)
+        console.error(Math.round(this.progress))
+*/
         let isAllowed = this.isAllowedToReceiveIn(currCol);
         console.log(this.isAllowedToReceiveIn(currCol));
 
@@ -812,6 +819,22 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             for (let autStat of this.nextPossibleSteps) {
                 if (autStat.column.id === currColDivElt.id) {
                     console.log('yepppp')
+
+                    let index = 0;
+                    let found = false;
+                    while (index <= this.relatedColumns.length && found === false) {
+                        if (this.relatedColumns[index].id === autStat.column.id) {
+                            found = true;
+                        } else {
+                            index = index + 1;
+                        }
+                    }
+                    console.log(index + ' index')
+
+                    console.log(JSON.stringify(this.relatedColumns))
+
+                    // this.progress = (autStat.column.order) / this.relatedColumns.length * 100
+
 
                     let elt = $event.target;
                     while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
@@ -875,7 +898,12 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         let data = ev.dataTransfer.getData('text');
         ev.target.appendChild(document.getElementById(data));
 
-        console.log('just drop ' + document.getElementById(data).id)
+        let currColDivElt = ev.target.parentElement;
+
+        console.log('col');
+        let currCol = this.getCurrentColumnByID(currColDivElt.id);
+
+        console.error('just drop ' + document.getElementById(data).id + ' in ' + currCol.name)
 
         let currentStep: StepCustom;
         for (let step of this.nextPossibleSteps) {
@@ -899,6 +927,19 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                         console.error(currentStep.status.category.name)
                     }
                 }
+
+                issue.progress = Math.round((this.relatedColumns.indexOf(currCol) + 1) / this.relatedColumns.length * 100)
+                this.progress = issue.progress;
+                console.error(Math.round(issue.progress));
+
+                let progresId = issue.code;
+                console.error(document.getElementById(progresId).className);
+                let issueProgress = <HTMLProgressElement> document.getElementById(progresId);
+                // document.getElementById(progresId).style.width = issue.progress + '%';
+                // document.getElementById(progresId).innerText = issue.progress + '%';
+
+                issueProgress.style.width = issue.progress + '%';
+                issueProgress.innerText = issue.progress + '%';
 
                 issue.status = Object.assign({}, currentStep.status);
                 this.subscribeToSaveResponseIssues(
