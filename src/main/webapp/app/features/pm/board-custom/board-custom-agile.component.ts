@@ -719,7 +719,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
             if (workingCol.min && countIssues < workingCol.min) {
                 console.log('Capacity shortfall by ' + (workingCol.min - countIssues) + ' cards')
-                parent.style.backgroundColor = 'green'
+                parent.style.backgroundColor = 'yellow'
             } else {
                 if (workingCol.max && countIssues > workingCol.max) {
                     console.log('Capacity exceeded by ' + (countIssues - workingCol.max) + ' cards')
@@ -831,7 +831,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     }
                     console.log(index + ' index')
 
-                    console.log(JSON.stringify(this.relatedColumns))
+                    // console.log(JSON.stringify(this.relatedColumns))
 
                     // this.progress = (autStat.column.order) / this.relatedColumns.length * 100
 
@@ -909,6 +909,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         for (let step of this.nextPossibleSteps) {
             if (step.column.id === ev.target.parentElement.id) {
                 currentStep = step;
+                console.error('steppppppppppppp' + currentStep.name)
             }
         }
 
@@ -942,6 +943,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 issueProgress.innerText = issue.progress + '%';
 
                 issue.status = Object.assign({}, currentStep.status);
+
+                console.error('statttt ' + issue.status)
                 this.subscribeToSaveResponseIssues(
                     this.issuecustomSce.update(issue));
                 if (issue.id !== undefined) {

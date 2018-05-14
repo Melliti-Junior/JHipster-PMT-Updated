@@ -66,22 +66,6 @@ export class IssueCustomService {
           .then((response) => response.json() as IssueCustom[])
       }
 
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {Observable<IssueCustom>}
-     * @memberof IssueCustomService
-     */
-    findByRequest(req?: any): IssueCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        console.log('typeof' + this.ObjReturned.priority.name);
-        return this.ObjReturned;
-    }
-
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];

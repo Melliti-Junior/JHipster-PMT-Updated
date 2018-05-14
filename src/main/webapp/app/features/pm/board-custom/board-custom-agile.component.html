@@ -276,6 +276,13 @@
                                                     <div class="assignee-img-active"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
                                                 </div>
                                                 <div class="issue-summary pl-3">{{issueBckKanCol.summary}}</div>
+                                                <div class="progress mx-1 mb-1">
+                                                    <!-- <div class="progress-bar" id="'progess'{{issueKanCol.id}}" -->
+                                                    <div class="progress-bar" id={{issueBckKanCol.code}}
+                                                         aria-valuemin="0" aria-valuemax="100" [ngStyle]="{'width': issueBckKanCol.progress + '%'}">
+                                                        {{issueBckKanCol.progress}} %
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div></div>
