@@ -812,6 +812,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.progress = Math.round((this.relatedColumns.indexOf(currCol) + 1) / this.relatedColumns.length * 100)
         console.error(Math.round(this.progress))
 */
+
         let isAllowed = this.isAllowedToReceiveIn(currCol);
         console.log(this.isAllowedToReceiveIn(currCol));
 
@@ -832,6 +833,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     console.log(index + ' index')
 
                     // console.log(JSON.stringify(this.relatedColumns))
+
 
                     // this.progress = (autStat.column.order) / this.relatedColumns.length * 100
 
