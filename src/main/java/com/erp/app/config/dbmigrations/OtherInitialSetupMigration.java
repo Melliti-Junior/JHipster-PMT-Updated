@@ -4,6 +4,7 @@ import com.erp.app.domain.Authority;
 import com.erp.app.domain.IssueType;
 import com.erp.app.domain.IssuePriority;
 import com.erp.app.domain.Category;
+import com.erp.app.domain.Resolution;
 import com.erp.app.security.AuthoritiesConstants;
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
@@ -13,7 +14,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 public class OtherInitialSetupMigration {
 
     @ChangeSet(order = "03", author = "initiator", id = "03-addOtherAuthorities")
-    public void addAuthorities(MongoTemplate mongoTemplate) {
+    public void addOtherAuthorities(MongoTemplate mongoTemplate) {
         Authority managerAuthority = new Authority();
         managerAuthority.setName(AuthoritiesConstants.MANAGER);
         Authority employeeAuthority = new Authority();
@@ -119,5 +120,43 @@ public class OtherInitialSetupMigration {
         done.setName("Done");
         done.setColor("#488a08");
         mongoTemplate.save(done);
+    }
+
+    @ChangeSet(order = "07", author = "initiator", id = "07-addResolution")
+    public void addResolution(MongoTemplate mongoTemplate) {
+        Resolution fixed = new Resolution();
+        fixed.setId("resolution-1");
+        fixed.setCode("FXD");
+        fixed.setName("Fixed");
+        fixed.setDescription("The task has been completed, or a response to the support request has been sent.");
+        mongoTemplate.save(fixed);
+
+        Resolution notfixed = new Resolution();
+        notfixed.setId("resolution-2");
+        notfixed.setCode("NTFX");
+        notfixed.setName("Won't Fix");
+        notfixed.setDescription("The issue described is one that will never be fixed.");
+        mongoTemplate.save(notfixed);
+
+        Resolution invalid = new Resolution();
+        invalid.setId("resolution-3");
+        invalid.setCode("INVLD");
+        invalid.setName("Invalid");
+        invalid.setDescription("The issue is not completely described, or is not a valid bug or request.");
+        mongoTemplate.save(invalid);
+
+        Resolution rejected = new Resolution();
+        rejected.setId("resolution-4");
+        rejected.setCode("RJCT");
+        rejected.setName("Rejected");
+        rejected.setDescription("The request will be rejected.");
+        mongoTemplate.save(rejected);
+
+        Resolution resolved = new Resolution();
+        resolved.setId("resolution-5");
+        resolved.setCode("RSLVD");
+        resolved.setName("Resolved");
+        resolved.setDescription("The request has been completed and put into action.");
+        mongoTemplate.save(resolved);
     }
 }
