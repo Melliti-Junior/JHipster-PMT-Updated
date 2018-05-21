@@ -8,7 +8,8 @@
             <div class="project-name">
                 <h5>
                     <span>
-                        <a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>
+                        <!--<a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>-->
+                        {{boardcustom.project.name}}
                     </span>
 
                 </h5>
@@ -23,7 +24,27 @@
             <div>
                 <h5>
                     <span>
-                        <a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>
+                        <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
+                        {{boardcustom.name}}
+                    </span>
+                </h5>
+            </div>
+
+            <div>
+                &nbsp;
+                <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
+                &nbsp;
+            </div>
+
+            <div>
+                <h5>
+                    <span *ngIf="boardcustom.type.toLowerCase() === 'kanban'">
+                        <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
+                        Kanban
+                    </span>
+                    <span *ngIf="boardcustom.type.toLowerCase() === 'scrum'">
+                        <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
+                        Scrum
                     </span>
                 </h5>
             </div>

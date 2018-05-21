@@ -6,7 +6,6 @@ import { SERVER_API_URL } from '../../../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { ColumnCustom } from './column-custom.model';
-import { ColumnComponent } from '../../../entities/column/column.component';
 import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()

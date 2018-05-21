@@ -6,7 +6,6 @@ import { SERVER_API_URL } from '../../../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { StepCustom } from './step-custom.model';
-import { StepComponent } from '../../../entities/step/step.component';
 import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()

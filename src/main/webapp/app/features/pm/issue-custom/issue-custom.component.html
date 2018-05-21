@@ -51,8 +51,11 @@
                 <td>{{issue.dueDate | date:'mediumDate'}}</td>
                 <td>{{issue.estimation}}</td>
                 <td *ngIf="issue.type">{{issue.type.name}}</td>
+                <td *ngIf="!issue.type">&nbsp;</td>
                 <td *ngIf="issue.priority">{{issue.priority.name}}</td>
+                <td *ngIf="!issue.priority"></td>
                 <td *ngIf="issue.epic">{{issue.epic.name}}</td>
+                <td *ngIf="!issue.epic">&nbsp;</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

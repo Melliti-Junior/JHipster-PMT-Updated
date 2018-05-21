@@ -7,11 +7,11 @@ import { JhiEventManager } from 'ng-jhipster';
 import { IssueCustom } from './issue-custom.model';
 import { IssueCustomPopupService } from './issue-custom-popup.service';
 import { IssueCustomService } from './issue-custom.service';
-import {ResolutionService} from "../../../entities/resolution";
-import {ResolutionCustom} from "../resolution-custom";
-import {Response} from "@angular/http";
-import {Observable} from "rxjs/Observable";
-import {StatusCustom, StatusCustomService} from "../status-custom";
+import {ResolutionService} from '../../../entities/resolution';
+import {ResolutionCustom} from '../resolution-custom';
+import {Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {StatusCustom, StatusCustomService} from '../status-custom';
 
 @Component({
     selector: 'jhi-issue-custom-resolve-dialog',

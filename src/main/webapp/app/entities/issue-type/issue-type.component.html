@@ -39,8 +39,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let issueType of issueTypes ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../issue-type', issueType.id ]">{{issueType.id}}</a></td>-->
-                <td><a [routerLink]="['../issue-type', issueType.id ]">{{issueType.code}}</a></td>
+                <!--<td><a [routerLink]="['../issue-type', issueType.id ]">{{issueType.code}}</a></td>-->
+                <td style="font-weight: bold">{{issueType.code}}</td>
                 <td>{{issueType.name}}</td>
                 <td>{{issueType.description}}</td>
                 <td><img  class="img-responsive" [attr.src] = "issueType.icon"  style="max-width: 35px; max-height: 35px"/></td>

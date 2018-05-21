@@ -39,8 +39,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let epic of epics ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../epic', epic.id ]">{{epic.id}}</a></td>-->
-                <td><a [routerLink]="['../epic', epic.id ]">{{epic.code}}</a></td>
+                <!--<td><a [routerLink]="['../epic', epic.id ]">{{epic.code}}</a></td>-->
+                <td style="font-weight: bold">{{epic.code}}</td>
                 <td>{{epic.name}}</td>
                 <td>{{epic.summary}}</td>
                 <td>{{epic.color}}</td>

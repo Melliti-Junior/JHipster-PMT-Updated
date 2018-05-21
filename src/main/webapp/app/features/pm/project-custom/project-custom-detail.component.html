@@ -33,7 +33,13 @@
 
 
 <div *ngIf="projectcustom">
-    <h2><span>{{projectcustom.name}}</span> </h2>
+
+
+    <div class="issuePath">
+        <h5><span><a [routerLink]="['/projectcustoms', issuecustom.project.id ]">{{projectcustom.program.name}}</a></span></h5>
+        <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+        <h5><span>{{projectcustom.name}}</span> </h5>
+    </div>
 
     <div class="container">
         <div class="panel-group row ">

@@ -38,8 +38,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let issuePriority of issuePriorities ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../issue-priority', issuePriority.id ]">{{issuePriority.id}}</a></td>-->
-                <td><a [routerLink]="['../issue-priority', issuePriority.id ]">{{issuePriority.code}}</a></td>
+                <!--<td><a [routerLink]="['../issue-priority', issuePriority.id ]">{{issuePriority.code}}</a></td>-->
+                <td style="font-weight: bold">{{issuePriority.code}}</td>
                 <td>{{issuePriority.name}}</td>
                 <td>{{issuePriority.color}}</td>
                 <td class="text-right">

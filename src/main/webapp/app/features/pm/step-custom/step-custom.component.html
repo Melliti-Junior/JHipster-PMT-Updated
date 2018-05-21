@@ -41,8 +41,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let step of stepcustoms ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../stepcustoms', step.id ]">{{step.id}}</a></td>-->
-                <td><a [routerLink]="['../stepcustoms', step.id ]">{{step.code}}</a></td>
+                <!--<td><a [routerLink]="['../stepcustoms', step.id ]">{{step.code}}</a></td>-->
+                <td style="font-weight: bold">{{step.code}}</td>
                 <td>{{step.name}}</td>
                 <td *ngIf="step.workflow">{{step.workflow.name}}</td>
                 <td *ngIf="!step.workflow">&nbsp;</td>

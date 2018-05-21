@@ -9,15 +9,17 @@ import {IssueCustom} from '../issue-custom/issue-custom.model';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 import {SprintCustom} from '../sprint-custom/sprint-custom.model';
 import {SprintCustomService} from '../sprint-custom/sprint-custom.service';
+import {ColumnCustom} from '../column-custom/column-custom.model';
+import {ColumnCustomService} from '../column-custom/column-custom.service';
+import {StepCustom} from '../step-custom/step-custom.model';
+import {StepCustomService} from '../step-custom/step-custom.service';
+
 import {Observable} from 'rxjs/Observable';
 import {Response} from '@angular/http';
 import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {ResponseWrapper} from '../../../shared';
-import {ColumnCustom} from '../column-custom/column-custom.model';
-import {ColumnCustomService} from '../column-custom/column-custom.service';
+
 import {MenuItem} from 'primeng/api';
-import {StepCustom} from '../step-custom/step-custom.model';
-import {StepCustomService} from '../step-custom/step-custom.service';
 
 @Component({
     selector: 'jhi-board-custom-detail',

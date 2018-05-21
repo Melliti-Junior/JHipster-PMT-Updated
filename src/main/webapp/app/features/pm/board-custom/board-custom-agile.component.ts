@@ -649,6 +649,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     console.error(this.nextPossibleSteps.length);
 
                 } else {
+                    // if the issue is still unresolved
                     let openStep: StepCustom = this.getOpenStep();
                     this.nextPossibleSteps = new Array<StepCustom>();
                     this.nextPossibleSteps.push(openStep);
@@ -729,8 +730,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 }
             }
         }
-
-
 
         parent.style.border = '1px solid #888888';
         console.error('dragend stops here');
@@ -834,9 +833,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
                     // console.log(JSON.stringify(this.relatedColumns))
 
-
                     // this.progress = (autStat.column.order) / this.relatedColumns.length * 100
-
 
                     let elt = $event.target;
                     while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
@@ -892,7 +889,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         */
     }
 
-
     dropColBoard(ev) {
         console.error('dropev starts here')
         ev.preventDefault();
@@ -920,7 +916,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 this.isSaving = true;
 
                 if (currentStep.status.category.name.toLowerCase() === 'done') {
-                    this.router.navigate(['/', { outlets: { popup: 'issuecustoms/'+ issue.id + '/resolve'} }]);
+                    this.router.navigate(['/', { outlets: { popup : 'issuecustoms/'+ issue.id + '/resolve' } }]);
                     document.getElementById(data).style.textDecoration = 'line-through';
                     console.error(currentStep.status.category.name);
                 } else {

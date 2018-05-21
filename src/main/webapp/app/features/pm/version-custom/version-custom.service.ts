@@ -7,7 +7,6 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { VersionCustom } from './version-custom.model';
 import { ResponseWrapper, createRequestOption } from '../../../shared';
-import { VersionComponent } from '../../../entities/version/version.component';
 
 @Injectable()
 export class VersionCustomService {

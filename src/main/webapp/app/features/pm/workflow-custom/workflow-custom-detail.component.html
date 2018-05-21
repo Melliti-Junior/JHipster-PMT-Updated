@@ -1,246 +1,197 @@
-<div *ngIf="workflowcustom"> {{workflowcustom.name}}</div>
-<!--
-<div *ngIf="workflowcustom" (load)="document.getElementById('backlog').click()">
+<div *ngIf="workflowcustom">
 
-    <div class="row" id="workflowspec" >
-        <div class="workflow-name"><h4>{{workflowcustom.name}}</h4></div>
-        <div class="workflow-choices">
-            <button *ngIf="workflowcustom.type.toUpperCase().localeCompare('SCRUM')===0" id="backlog" type="button" class="btn btn-primary" (click)="getBacklogIssues()">Backlog</button>
-            <button *ngIf="workflowcustom.type.toUpperCase().localeCompare('SCRUM')===0" type="button" class="btn btn-primary">Active Workflow</button>
-            <button *ngIf="workflowcustom.type.toUpperCase().localeCompare('KANBAN')===0" type="button" class="btn btn-primary">Kanban Workflow</button>
+
+    <div class="workflowParent" style="display: flex; flex-direction: row; justify-content: space-between">
+        <div class="schemeWF" style="display: flex; flex-direction: row; justify-content: space-between">
+            <div class="workflowname">
+                <h5>
+                    <span>
+                        <!--<a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>-->
+                        {{workflowcustom.name}}
+                    </span>
+                </h5>
+            </div>
+
+            <div>
+                &nbsp;
+                <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
+                &nbsp;
+            </div>
+
+            <div>
+                <h5>
+                    <span>
+                        <div *ngIf="mySteps">Steps</div>
+                        <div *ngIf="myTransitions">Transitions</div>
+                    </span>
+                </h5>
+            </div>
+        </div>
+        <div class="backBtn pr-2 pb-2">
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+            </button>
         </div>
     </div>
 
-    <section>
-        <div class="container pl-0 py-3">
-            <div class="PartialBacklog">
-                <div *ngIf="workflowcustom.type.toUpperCase() === 'KANBAN'">Selected for Development</div>
-                <div *ngIf="workflowcustom.type.toUpperCase() === 'SCRUM'">Workflow Issues</div>
-            </div>
+    <p-tabMenu [activeItem]="workflowItems[0]" [model]="workflowItems"></p-tabMenu>
 
-            <div class="DropZone container px-5" id="WIP" (dragover)="allowDrop($event)" (drop)="drop($event)">
+    <div *ngIf="mySteps && relatedSteps">
 
-            </div>
-        </div>
+        <div>
+            <br/>
 
-        <div class="container pl-0 py-3">
-            <div *ngIf="relatedIssuesPerBoard">
-                <div *ngIf="relatedIssuesPerBoard.length" class="product-backlog-info row">
-                    <div class="backlog-option row">
-                        <div class="product-backlog"><span>Product Backlog</span></div>
-                        <div class="totIssues">{{relatedIssuesPerBoard.length}} issues</div>
-                    </div>
-                    <div class="NewWorkflow"><button *ngIf="workflowcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-info">Create Workflow</button></div>
-                </div>
+            <h4>
+                <span>Total Steps related to this Workflow : {{relatedSteps.length}}</span>
+            </h4>
+            <jhi-alert></jhi-alert>
+            <br/>
 
-                <div *ngFor="let issue of relatedIssuesPerBoard">
+            <div class="table-responsive" *ngIf="relatedSteps">
+                <table class="table table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+                        <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
+                        <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="workflow"><span>Workflow</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="board"><span>Status</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="column"><span>Column</span> <span class="fa fa-sort"></span></th>
 
-                    <div class="issue row" id={{issue.id}} draggable="true" (dragstart)="dragStart($event)" >
-                        <div class="issue-priority-color" *ngIf="issue.priority" [style.background] = "issue.priority.color"></div>
-                        <div class="issue-type-icon"><img  [src] = "issue.type.icon" /></div>
-                        <div class="issue-info row" id="attributes">
-                            <div class="code"><a href="#/issuecustoms/{{issue.id}}">{{issue.code}}</a></div>
-                            <div class="summary">{{issue.summary}}</div>
-                            <div class="external-info">
-                                <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
-                                <div class="version" *ngIf="issue.version">{{issue.version.name}}</div>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let step of relatedSteps ;trackBy: trackId">
+                        <!--<td><a [routerLink]="['../stepcustoms', step.id ]">{{step.code}}</a></td>-->
+                        <td style="font-weight: bold">{{step.code}}</td>
+                        <td>{{step.name}}</td>
+                        <td *ngIf="step.workflow">{{step.workflow.name}}</td>
+                        <td *ngIf="!step.workflow">&nbsp;</td>
+                        <td *ngIf="step.status">{{step.status.name}}</td>
+                        <td *ngIf="!step.status">&nbsp;</td>
+                        <td *ngIf="step.column">{{step.column.name}}</td>
+                        <td *ngIf="!step.column">&nbsp;</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
+
+                                <!--<button type="submit"
+                                        [routerLink]="['../stepcustoms', step.id ]"
+                                        class="btn btn-info btn-sm">
+                                    <span class="fa fa-eye"></span>
+                                    <span class="d-none d-md-inline">View</span>
+                                </button>-->
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'stepcustoms/'+ step.id + '/edit'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-primary btn-sm">
+                                    <span class="fa fa-pencil"></span>
+                                    <span class="d-none d-md-inline">Edit</span>
+                                </button>
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'stepcustoms/'+ step.id + '/delete'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <span class="fa fa-remove"></span>
+                                    <span class="d-none d-md-inline">Delete</span>
+                                </button>
                             </div>
-                            <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
-                        </div>
-                    </div>
-
-                </div>
-
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
+
+
+
         </div>
-    </section>
-</div>
-
--->
 
 
 
-<!--
-<div *ngIf="workflowcustom">
-    <h4><span>{{workflowcustom.code}}</span> </h4>
-    <h2><span>{{workflowcustom.summary}}</span></h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-<div class="container">
-  <div class="panel-group row ">
 
-    <div class="panel-group"  style="width:50%;">
-    <div class="panel panel-info">
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
-      <div class="panel-body" >
-
-          <div class="row">
-            <div class="col-3">Type :</div>
-            <div *ngIf ="workflowcustom.type" class="col-8">{{workflowcustom.type.name}}</div>
-            <div *ngIf ="!workflowcustom.type" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Priority :</div>
-            <div *ngIf ="workflowcustom.priority" class="col-8">{{workflowcustom.priority.name}}</div>
-            <div *ngIf ="!workflowcustom.priority" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div *ngIf ="workflowcustom.epic" class="row">
-            <div class="col-3">Epic :</div>
-            <div *ngIf ="workflowcustom.epic" class="col-8">{{workflowcustom.epic.summary}} ({{workflowcustom.epic.name}})</div>
-            <div *ngIf ="!workflowcustom.epic" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Status :</div>
-            <div *ngIf ="workflowcustom.status"  class="col-8">{{workflowcustom.status.name}}</div>
-            <div *ngIf ="!workflowcustom.status"  class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Resolution :</div>
-            <div *ngIf ="workflowcustom.resolution" class="col-8">{{workflowcustom.resolution.name}}</div>
-            <div *ngIf ="!workflowcustom.resolution" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
-          </div>
-          <div class="row">
-            <div class="col-3">Estimation :</div>
-            <div class="col-8">{{workflowcustom.estimation}} Hours</div>
-          </div>
-
-      </div>
-    </div>
-    <hr style="border-color:transparent;">
-    <div class="panel panel-info">
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
-      <div class="panel-body" >
-
-          <div class="row">
-            <div class="col-10">{{workflowcustom.description}}</div>
-          </div>
-
-      </div>
-    </div>
     </div>
 
-    <div class="panel-group"  style="width:50%;">
-    <div class="panel panel-info" >
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>People</h4></div>
-      <div class="panel-body" >
 
-          <div class="row">
-            <div class="col-3">Assignee :</div>
-            <div class="col-8">Melliti Zied</div>
-          </div>
+    <div *ngIf="myTransitions && relatedTransitions">
 
-          <div class="row">
-            <div class="col-3">Reporter :</div>
-            <div class="col-8">Melliti Zied</div>
-          </div>
+        <div>
+            <br/>
 
-      </div>
-    </div>
-    <hr style="border-color:transparent;">
-    <div class="panel panel-info" >
-      <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Dates</h4></div>
-      <div class="panel-body" >
+            <h4>
+                <span>Total Transitions related to this Workflow : {{relatedTransitions.length}}</span>
+            </h4>
+            <jhi-alert></jhi-alert>
+            <br/>
 
-          <div class="row">
-            <div class="col-3">Created :</div>
-            <div class="col-8">{{workflowcustom.createdDate | date:'mediumDate'}}</div>
-          </div>
+            <div class="table-responsive" *ngIf="relatedTransitions">
+                <table class="table table-striped">
+                    <thead>
+                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
+                        <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
+                        <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="workflow"><span>Workflow</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="sourceStep"><span>Source Step</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="targetStep"><span>Target Step</span> <span class="fa fa-sort"></span></th>
+                        <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th>
 
-          <div class="row">
-            <div class="col-3">Due :</div>
-            <div class="col-8">{{workflowcustom.dueDate | date:'mediumDate'}}</div>
-          </div>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr *ngFor="let transition of relatedTransitions ;trackBy: trackId">
+                        <!--<td><a [routerLink]="['../transitioncustoms', transition.id ]">{{transition.code}}</a></td>-->
+                        <td style="font-weight: bold">{{transition.code}}</td>
+                        <td>{{transition.name}}</td>
+                        <td *ngIf="transition.workflow">{{transition.workflow.name}}</td>
+                        <td *ngIf="!transition.workflow">&nbsp;</td>
+                        <td *ngIf="transition.sourceStep">{{transition.sourceStep.name}}</td>
+                        <td *ngIf="!transition.sourceStep">&nbsp;</td>
+                        <td *ngIf="transition.targetStep">{{transition.targetStep.name}}</td>
+                        <td *ngIf="!transition.targetStep">&nbsp;</td>
+                        <td>{{transition.description}}</td>
+                        <td class="text-right">
+                            <div class="btn-group flex-btn-group-container">
 
-          <div class="row">
-            <div class="col-3">Updated :</div>
-            <div class="col-8">{{workflowcustom.updatedDate | date:'mediumDate'}}</div>
-          </div>
+                                <!--<button type="submit"
+                                        [routerLink]="['../transitioncustoms', transition.id ]"
+                                        class="btn btn-info btn-sm">
+                                    <span class="fa fa-eye"></span>
+                                    <span class="d-none d-md-inline">View</span>
+                                </button>-->
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'transitioncustoms/'+ transition.id + '/edit'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-primary btn-sm">
+                                    <span class="fa fa-pencil"></span>
+                                    <span class="d-none d-md-inline">Edit</span>
+                                </button>
+                                <button type="submit"
+                                        [routerLink]="['/', { outlets: { popup: 'transitioncustoms/'+ transition.id + '/delete'} }]"
+                                        replaceUrl="true"
+                                        queryParamsHandling="merge"
+                                        class="btn btn-danger btn-sm">
+                                    <span class="fa fa-remove"></span>
+                                    <span class="d-none d-md-inline">Delete</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
 
-      </div>
-    </div>
-    </div>
-
-</div>
-<hr style="border-color:transparent;">
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
-
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'workflowcustoms/'+ workflowcustom.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
-    </button>
-</div>
-
-
-<div *ngIf="workflowcustom">
-    <h2><span>Workflow</span> {{workflowcustom.id}}</h2>
-    <hr>
-    <jhi-alert-error></jhi-alert-error>
-
-
-        <dl class="row-md jh-entity-details">
-        <dt><span>Code</span></dt>
-        <dd>
-            <span>{{workflowcustom.code}}</span>
-        </dd>
-        <dt><span>Summary</span></dt>
-        <dd>
-            <span>{{workflowcustom.summary}}</span>
-        </dd>
-        <dt><span>Created Date</span></dt>
-        <dd>
-            <span>{{workflowcustom.createdDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span>Due Date</span></dt>
-        <dd>
-            <span>{{workflowcustom.dueDate | date:'mediumDate'}}</span>
-        </dd>
-        <dt><span>Estimation</span></dt>
-        <dd>
-            <span>{{workflowcustom.estimation}}</span>
-        </dd>
-        <dt><span>Type</span></dt>
-        <dd>
-            <span>{{workflowcustom.type.name}}</span>
-        </dd>
-        <dt><span>Priority</span></dt>
-        <dd>
-            <span>{{workflowcustom.priority.name}}</span>
-        </dd>
-        <dt><span>Epic</span></dt>
-        <dd>
-            <span>{{workflowcustom.epic.name}}</span>
-        </dd>
-    </dl>
-
-
-
-    <div class="container">
-        <h4>Details</h4>
-        <div class="panel panel-default">
-          <div class="panel-heading">Panel Heading</div>
-          <div class="panel-body">Panel Content</div>
         </div>
+
+
+
+
     </div>
 
-    <button type="submit"
-            (click)="previousState()"
-            class="btn btn-info">
-        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
-    </button>
 
-    <button type="button"
-            [routerLink]="['/', { outlets: { popup: 'workflowcustoms/'+ workflowcustom.id + '/edit'} }]"
-            replaceUrl="true"
-            queryParamsHandling="merge"
-            class="btn btn-primary">
-        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
-    </button>
 </div>
--->

@@ -7,6 +7,11 @@ import { WorkflowCustom } from './workflow-custom.model';
 import { WorkflowCustomService } from './workflow-custom.service';
 import {IssueCustom} from '../issue-custom';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
+import {TransitionCustom} from '../transition-custom/transition-custom.model';
+import {TransitionCustomService} from '../transition-custom/transition-custom.service';
+import {StepCustom} from '../step-custom/step-custom.model';
+import {StepCustomService} from '../step-custom/step-custom.service';
+import {MenuItem} from "primeng/api";
 
 @Component({
     selector: 'jhi-workflow-custom-detail',
@@ -16,10 +21,17 @@ import {IssueCustomService} from '../issue-custom/issue-custom.service';
 export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 
     workflowcustom: WorkflowCustom;
-    issueCustoms: IssueCustom[] = new Array<IssueCustom>();
-    relatedissuecustoms: IssueCustom[] = new Array<IssueCustom>();
 
-    chosenIssues: IssueCustom[] = new Array<IssueCustom>();
+    relatedTransitions: TransitionCustom[];
+    Alltransitions: TransitionCustom[];
+
+    relatedSteps: StepCustom[];
+    Allsteps: StepCustom[];
+
+    workflowItems: MenuItem[];
+
+    myTransitions = false;
+    mySteps = false;
 
     private subscription: Subscription;
     private eventSubscriber: Subscription;
@@ -29,6 +41,8 @@ export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterVi
         private workflowcustomSce: WorkflowCustomService,
         private route: ActivatedRoute,
         private issuecustomSce: IssueCustomService,
+        private transitioncustomSce: TransitionCustomService,
+        private stepcustomSce: StepCustomService,
     ) {
     }
 
@@ -38,7 +52,28 @@ export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterVi
         });
         this.registerChangeInWorkflowCustoms();
         this.loadAttributes();
-        // this.getBoardIssues();
+
+        this.workflowItems = [
+            {
+                label: 'Steps', icon: 'fa-tasks', command: (onclick) => {
+                    this.mySteps = true;
+                    this.myTransitions = false;
+                    this.getRelatedSteps();
+                }},
+            {
+                label: 'Transitions', icon: 'fa-eye', command: (onclick) => {
+                    this.mySteps = false;
+                    this.myTransitions = true;
+                    this.getRelatedTransitions();
+                }},
+        ];
+        setTimeout(() => {
+            if (this.workflowcustom) {
+                this.mySteps = true;
+            }
+            this.getRelatedTransitions();
+            this.getRelatedSteps();
+        }, 500);
     }
 
     ngAfterViewInit() {
@@ -68,58 +103,39 @@ export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterVi
     }
 
     private loadAttributes() {
-        this.issuecustomSce.getIssueCustoms()
-            .then((issueCustoms) => this.issueCustoms = issueCustoms );
-        // this.getBoardIssues();
-        console.log('Total : ' + this.issueCustoms.length);
+        this.getAllSteps();
+        this.getAllTransitions();
     }
 
-    dragStart(ev) {
-        ev.dataTransfer.setData('text', ev.target.id);
-        console.log(ev.target.id);
+    getAllTransitions() {
+        this.transitioncustomSce.getTransitionCustoms()
+            .then((transitioncustoms) => this.Alltransitions = transitioncustoms );
     }
 
-    allowDrop($event) {
-        $event.preventDefault();
+    getAllSteps() {
+        this.stepcustomSce.getStepCustoms()
+            .then((stepcustoms) => this.Allsteps = stepcustoms );
     }
 
-    drag(ev) {
-        ev.dataTransfer.setData('text', ev.target.id);
-    }
-
-    drop(ev) {
-        ev.preventDefault();
-        // tslint:disable-next-line:prefer-const
-        let data = ev.dataTransfer.getData('text');
-        ev.target.appendChild(document.getElementById(data));
-        // console.log(document.getElementById(data).id);
-
-        for (let issue of this.issueCustoms) {
-            if (issue.id === document.getElementById(data).id) {
-                this.chosenIssues.push(issue);
-                console.log(issue.code);
-                console.log(this.chosenIssues.length);
+    getRelatedTransitions () {
+        this.relatedTransitions = new Array<TransitionCustom>();
+        for (let trans of this.Alltransitions) {
+            if (trans.workflow.id === this.workflowcustom.id) {
+                if (this.relatedTransitions.indexOf(trans) === -1) {
+                    this.relatedTransitions.push(trans);
+                }
             }
         }
-
-        /*
-        // Return the elt by ID and use it to add it to the selected Issues
-        let x = this.issuecustomSce.find(document.getElementById(data).id);
-
-        console.log('before ' + this.chosenIssues.length);
-
-        // let issue: IssueCustom;
-        // this.chosenIssues.push(issue);
-
-        this.issuecustomSce.find(document.getElementById(data).id)
-            .subscribe((res) => this.chosenIssues.push(res));
-
-        console.log('after ' + this.chosenIssues.length);
-
-        for (let index = 0; index < this.chosenIssues.length; index++) {
-            console.log(this.chosenIssues[index].code);
-        }
-        */
     }
 
+    getRelatedSteps () {
+        this.relatedSteps = new Array<StepCustom>();
+        for (let step of this.Allsteps) {
+            if (step.workflow.id === this.workflowcustom.id) {
+                if (this.relatedSteps.indexOf(step) === -1) {
+                    this.relatedSteps.push(step);
+                }
+            }
+        }
+    }
 }

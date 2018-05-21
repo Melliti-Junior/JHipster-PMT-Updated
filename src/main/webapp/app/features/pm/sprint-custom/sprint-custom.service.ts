@@ -6,7 +6,6 @@ import { SERVER_API_URL } from '../../../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { SprintCustom } from './sprint-custom.model';
-import { SprintComponent } from '../../../entities/sprint/sprint.component';
 import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()

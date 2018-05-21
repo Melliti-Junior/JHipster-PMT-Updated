@@ -38,8 +38,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let category of categorycustoms ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../category', category.id ]">{{category.id}}</a></td>-->
-                <td><a [routerLink]="['../categorycustoms', category.id ]">{{category.code}}</a></td>
+                <!--<td><a [routerLink]="['../categorycustoms', category.id ]">{{category.code}}</a></td>-->
+                <td style="font-weight: bold">{{category.code}}</td>
                 <td>{{category.name}}</td>
                 <td>{{category.color}}</td>
                 <td class="text-right">

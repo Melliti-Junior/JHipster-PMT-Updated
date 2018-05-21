@@ -98,8 +98,6 @@ export class ColumnCustomDialogComponent implements OnInit {
         console.log('Num' + this.siblingColumns.length + this.parentBoard.code);
     }
 
-
-
     /**
      * This function retrieves all existing Epics, Types and Priorities
      *

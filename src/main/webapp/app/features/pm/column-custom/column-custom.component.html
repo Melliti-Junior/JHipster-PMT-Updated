@@ -42,8 +42,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let column of columncustoms ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../columncustoms', column.id ]">{{column.id}}</a></td>-->
-                <td><a [routerLink]="['../columncustoms', column.id ]">{{column.code}}</a></td>
+                <!--<td><a [routerLink]="['../columncustoms', column.id ]">{{column.code}}</a></td>-->
+                <td style="font-weight: bold">{{column.code}}</td>
                 <td>{{column.name}}</td>
                 <td>{{column.min}}</td>
                 <td>{{column.max}}</td>

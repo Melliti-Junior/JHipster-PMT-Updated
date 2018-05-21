@@ -7,9 +7,6 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { IssueCustom } from './issue-custom.model';
 import { ResponseWrapper, createRequestOption } from '../../../shared';
-import { IssueTypeService } from '../../../entities/issue-type/issue-type.service';
-import { IssuePriorityService } from '../../../entities/issue-priority';
-import { IssueComponent } from '../../../entities/issue/issue.component';
 
 @Injectable()
 export class IssueCustomService {

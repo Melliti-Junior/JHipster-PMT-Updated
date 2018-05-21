@@ -42,8 +42,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let sprint of sprintcustoms ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../sprintcustoms', sprint.id ]">{{sprint.id}}</a></td>-->
-                <td><a [routerLink]="['../sprintcustoms', sprint.id ]">{{sprint.code}}</a></td>
+                <!--<td><a [routerLink]="['../sprintcustoms', sprint.id ]">{{sprint.code}}</a></td>-->
+                <td style="font-weight: bold">{{sprint.code}}</td>
                 <td>{{sprint.name}}</td>
                 <td>{{sprint.startDate | date:'mediumDate'}}</td>
                 <td>{{sprint.endDate | date:'mediumDate'}}</td>
@@ -60,12 +60,12 @@
                             <span class="fa fa-check"></span>
                             <span class="d-none d-md-inline">Start</span>
                         </button>
-                        <button type="submit"
+                        <!--<button type="submit"
                                 [routerLink]="['../sprintcustoms', sprint.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
-                        </button>
+                        </button>-->
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprint.id + '/edit'} }]"
                                 replaceUrl="true"

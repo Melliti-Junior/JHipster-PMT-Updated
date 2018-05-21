@@ -6,7 +6,6 @@ import { SERVER_API_URL } from '../../../app.constants';
 import { JhiDateUtils } from 'ng-jhipster';
 
 import { BoardCustom } from './board-custom.model';
-import { BoardComponent } from '../../../entities/board/board.component';
 import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()

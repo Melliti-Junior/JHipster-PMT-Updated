@@ -39,8 +39,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let resolution of resolutioncustoms ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../resolutioncustoms', resolution.id ]">{{resolution.id}}</a></td>-->
-                <td><a [routerLink]="['/resolutioncustoms', resolution.id ]">{{resolution.code}}</a></td>
+                <!--<td><a [routerLink]="['/resolutioncustoms', resolution.id ]">{{resolution.code}}</a></td>-->
+                <td style="font-weight: bold">{{resolution.code}}</td>
                 <td>{{resolution.name}}</td>
                 <td>{{resolution.description}}</td>
                 <td class="text-right">

@@ -42,8 +42,8 @@
             </thead>
             <tbody>
             <tr *ngFor="let transition of transitioncustoms ;trackBy: trackId">
-                <!--<td><a [routerLink]="['../transitioncustoms', transition.id ]">{{transition.id}}</a></td>-->
-                <td><a [routerLink]="['../transitioncustoms', transition.id ]">{{transition.code}}</a></td>
+                <!--<td><a [routerLink]="['../transitioncustoms', transition.id ]">{{transition.code}}</a></td>-->
+                <td style="font-weight: bold">{{transition.code}}</td>
                 <td>{{transition.name}}</td>
                 <td *ngIf="transition.workflow">{{transition.workflow.name}}</td>
                 <td *ngIf="!transition.workflow">&nbsp;</td>

@@ -19,7 +19,7 @@ import { SharedModule } from '../../shared/shared.module';
 import {
     IssueCustomResolveDialogComponent,
     IssueCustomResolvePopupComponent
-} from "./issue-custom-resolve-dialog.component";
+} from './issue-custom-resolve-dialog.component';
 
 const ENTITY_STATES = [
     ...issuecustomRoute,
