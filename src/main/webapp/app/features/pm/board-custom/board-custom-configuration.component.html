@@ -5,56 +5,23 @@
 
             <div class="boardParent" style="display: flex; flex-direction: row; justify-content: space-between">
 
-                <div class="schemeBoard" style="display: flex; flex-direction: row; justify-content: space-between">
-
-                    <div class="project-name">
-                        <h5>
-                            <span>
-                                <!--<a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>-->
-                                {{boardcustom.project.name}}
-                            </span>
-                        </h5>
-                    </div>
-
-
-                    &nbsp;
-                    <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
-                    &nbsp;
-
-
-
-                    <div>
-                        <h5>
-                            <span>
-                                <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
-                                {{boardcustom.name}}
-                            </span>
-                        </h5>
-                    </div>
-
-
-                    &nbsp;
-                    <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
-                    &nbsp;
-
-                    <div>
-                        <h5>
-                            <span *ngIf="boardcustom.type.toLowerCase() === 'kanban'">
+                <div class="boardPath" style="display: flex; flex-direction: row; justify-content: space-between">
+                    <h5><span>{{boardcustom.project.name}}</span></h5>
+                    <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+                    <h5><span>{{boardcustom.name}}</span> </h5>
+                    <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+                    <h5>
+                        <span *ngIf="boardcustom.type.toLowerCase() === 'kanban'">
                             <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
                                 Kanban
-                            </span>
-                            <span *ngIf="boardcustom.type.toLowerCase() === 'scrum'">
+                        </span>
+                        <span *ngIf="boardcustom.type.toLowerCase() === 'scrum'">
                             <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
                                 Scrum
-                            </span>
-                        </h5>
-                    </div>
-
-                    &nbsp;
-                    <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
-                    &nbsp;
-
-                    <div><h5>Configuration</h5></div>
+                        </span>
+                    </h5>
+                    <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+                    <h5><span>Configuration</span> </h5>
                 </div>
             </div>
 
@@ -70,16 +37,28 @@
                         </button>
                     </div>
 
+                    <div class="btn-group mr-2" role="group">
+                        <button class="btn btn-warning float-right" routerLink="/columncustoms" routerLinkActive="active">
+                            <span class="fa fa-columns"></span>
+                            <span class="hidden-sm-down" >
+                                Columns
+                            </span>
+                        </button>
+                    </div>
+<!--
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
                         <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['columncustom-new'] } }]">
                             <span class="fa fa-plus"></span>&nbsp;<span class="hidden-sm-down">Add Column</span></span>
                         </button>
                     </div>
+                    -->
+                    <!--
                     <div class="btn-group" role="group" aria-label="Third group">
                         <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['stepcustom-new'] } }]">
                             <span class="fa fa-plus"></span>&nbsp;<span class="hidden-sm-down">Add Status</span></span>
                         </button>
                     </div>
+                    -->
                 </div>
             </div>
         </div>

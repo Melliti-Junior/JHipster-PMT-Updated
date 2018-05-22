@@ -1,8 +1,8 @@
-<nav class="navbar navbar-dark navbar-expand-md jh-navbar">
+<nav class="navbar navbar-dark navbar-expand-md jh-navbar" >
      <div *ngIf="isAuthenticated()" class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
         <button class="btn btn-outline-light fa fa-cubes" style="font-size:24px;" id="dropdownManual" aria-hidden="true" ngbDropdownToggle ></button>
         <div ngbDropdownMenu aria-labelledby="dropdownManual">
-            <button class="dropdown-item fa fa-trello" routerLink="project-management" (click)="pmChosen()"> Project Management</button>
+            <button class="dropdown-item fa fa-briefcase" routerLink="project-management" (click)="pmChosen()"> Project Management</button>
             <!-- you could add other modules here
             <button class="dropdown-item">Another Action</button>
             <button class="dropdown-item">Something else is here</button>
@@ -54,7 +54,7 @@
             -->
 
             <!-- jhipster-needle-add-element-to-menu - JHipster will add new menu items here -->
-            <li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <!--<li *ngSwitchCase="true" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="entity-menu">
                     <span>
                         <i class="fa fa-th-list" aria-hidden="true"></i>
@@ -160,10 +160,26 @@
                             <span>Category</span>
                         </a>
                     </li>
-                    <!-- jhipster-needle-add-entity-to-menu - JHipster will add entities to the menu here -->
                 </ul>
-            </li>
-            <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            </li>-->
+                <li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
+                    <span>
+                        <!--<i class="fa fa-user-plus" aria-hidden="true"></i>-->
+                        <i class="fa fa-wrench" aria-hidden="true"></i>
+                        <span>Administration</span>
+                    </span>
+                    </a>
+                    <ul class="dropdown-menu" ngbDropdownMenu>
+                        <li>
+                            <a class="dropdown-item" routerLink="user-management" routerLinkActive="active" (click)="collapseNavbar()">
+                                <i class="fa fa-fw fa-user" aria-hidden="true"></i>
+                                <span>User management</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            <!--<li *jhiHasAnyAuthority="'ROLE_ADMIN'" ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="admin-menu">
                     <span>
                         <i class="fa fa-user-plus" aria-hidden="true"></i>
@@ -213,9 +229,8 @@
                             <span>API</span>
                         </a>
                     </li>
-                    <!-- jhipster-needle-add-element-to-admin-menu - JHipster will add entities to the admin menu here -->
                 </ul>
-            </li>
+            </li>-->
             <li ngbDropdown class="nav-item dropdown pointer" placement="bottom-right" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                 <a class="nav-link dropdown-toggle" ngbDropdownToggle href="javascript:void(0);" id="account-menu">
                   <span *ngIf="!getImageUrl()">
@@ -241,12 +256,14 @@
                             <span>Password</span>
                         </a>
                     </li>
+                    <!--
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" (click)="logout()" id="logout">
                             <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
                             <span>Sign out</span>
                         </a>
                     </li>
+                    -->
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" (click)="login()" id="login">
                             <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
@@ -260,70 +277,114 @@
                         </a>
                     </li>
                 </ul>
+
+                <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" (click)="logout()">
+                    <span>
+                        <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
+                        <span>Sign out</span>
+                    </span>
+                    </a>
+                </li>
             </li>
         </ul>
         </div>
 
-        <div *ngIf="isPMSelected() && isAuthenticated()">
-                <ul class="navbar-nav ml-auto">
-                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        <div *ngIf="isPMSelected() && isAuthenticated()" style="display: flex; flex-direction: row;">
+                <ul class="navbar-nav ml-auto" style="display: flex; flex-direction: row; justify-content: space-between">
+                    <li class="btn btn-default nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a class="nav-link" routerLink="/" (click)="collapseNavbar()">
+                            <span>
+                                <i class="fa fa-home" aria-hidden="true"></i>
+                                <span>Home</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li ngbDropdown class="btn btn-default dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <a class="nav-link dropdown-toggle" ngbDropdownToggle>
                         <span>
-                            <i class="fa fa-tasks" aria-hidden="true"></i>
+                            <i class="fa fa-files-o" aria-hidden="true"></i>
                             <span>Projects</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu" ngbDropdownMenu>
                         <li>
-                            <a class="dropdown-item" routerLink="/program" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-briefcase" routerLink="/program" routerLinkActive="active">
                                 <span>View All Programs</span>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="/projectcustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-files-o" routerLink="/projectcustoms" routerLinkActive="active">
                                 <span>View All Projects</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <li ngbDropdown class="btn btn-default dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                     <a class="nav-link dropdown-toggle" ngbDropdownToggle>
                         <span>
-                            <i class="fa fa-bug" aria-hidden="true"></i>
+                            <i class="fa fa-tasks" aria-hidden="true"></i>
                             <span>Issues</span>
                         </span>
                     </a>
                     <ul class="dropdown-menu" ngbDropdownMenu>
                         <li>
-                            <a class="dropdown-item" routerLink="/issuecustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-tasks" routerLink="/issuecustoms" routerLinkActive="active">
                                 <span>View All Issues</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item fa fa-linode" routerLink="/issue-type" routerLinkActive="active">
+                                <span>Manage Types</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fa fa-angle-double-up" routerLink="/issue-priority" routerLinkActive="active">
+                                <span>Manage Priorities</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fa fa-clipboard" routerLink="/epic" routerLinkActive="active">
+                                <span>Manage Epics</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fa fa-calendar-check-o" routerLink="/resolutioncustoms" routerLinkActive="active">
+                                <span>Manage Resolutions</span>
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <li ngbDropdown class="btn btn-default dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link dropdown-toggle" ngbDropdownToggle>
                             <span>
-                                <i class="fa fa-columns" aria-hidden="true"></i>
+                                <i class="fa fa-trello" aria-hidden="true"></i>
                                 <span>Agile</span>
                             </span>
                         </a>
                     <ul class="dropdown-menu" ngbDropdownMenu>
                         <li>
-                            <a class="dropdown-item" routerLink="/boardcustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-cogs" routerLink="/workflowcustoms" routerLinkActive="active">
+                                <span>Manage Workflows</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item fa fa-columns" routerLink="/boardcustoms" routerLinkActive="active">
                                 <span>Manage Boards</span>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="/sprintcustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-undo" routerLink="/sprintcustoms" routerLinkActive="active">
                                 <span>Manage Sprints</span>
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+<!--
+                <li ngbDropdown class="btn btn-default dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link dropdown-toggle" ngbDropdownToggle>
                             <span>
                                 <i class="fa fa-cogs" aria-hidden="true"></i>
@@ -332,24 +393,25 @@
                         </a>
                     <ul class="dropdown-menu" ngbDropdownMenu>
                         <li>
-                            <a class="dropdown-item" routerLink="/workflowcustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-cog" routerLink="/workflowcustoms" routerLinkActive="active">
                                 <span>Manage Workflows</span>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="/stepcustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-circle-o" routerLink="/stepcustoms" routerLinkActive="active">
                                 <span>Manage Steps</span>
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" routerLink="/transitioncustoms" routerLinkActive="active">
+                            <a class="dropdown-item fa fa-arrow-right" routerLink="/transitioncustoms" routerLinkActive="active">
                                 <span>Manage Transtitions</span>
                             </a>
                         </li>
                     </ul>
                 </li>
-
-                <li ngbDropdown class="nav-item dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+-->
+<!--
+                <li ngbDropdown class="btn btn-default dropdown pointer" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link dropdown-toggle" ngbDropdownToggle>
                             <span>
                                 <i class="fa fa-wrench" aria-hidden="true"></i>
@@ -367,16 +429,9 @@
                                 <span>Manage Columns</span>
                             </a>
                         </li>
-
                         <li>
                             <a class="dropdown-item" routerLink="/categorycustoms" routerLinkActive="active">
                                 <span>Manage Status Categories</span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a class="dropdown-item" routerLink="/sprintcustoms" routerLinkActive="active">
-                                <span>Manage Sprints</span>
                             </a>
                         </li>
                         <li>
@@ -402,11 +457,20 @@
 
                     </ul>
                 </li>
-
-
-                    <div class="createIssue" style="margin-left: 5%">
-                        <button class="btn btn-primary" id="createIssueBtn" [routerLink]="['/', { outlets: { popup: ['issuecustom-new'] } }]">Create Issue</button>
+-->
+                    <div>
+                        <button class="btn btn-primary my-2" [routerLink]="['/', { outlets: { popup: ['issuecustom-new'] } }]">Create Issue</button>
                     </div>
+
+                    <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                        <a class="nav-link" (click)="logout()">
+                            <span>
+                                <i class="fa fa-fw fa-sign-out my-2" aria-hidden="true"></i>
+                                <span>Sign out</span>
+                            </span>
+                        </a>
+                    </li>
+
                 </ul>
             </div>
 

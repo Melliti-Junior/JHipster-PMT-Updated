@@ -1,12 +1,27 @@
 <div>
     <h2>
         <span>Transitions</span>
-        <button class="btn btn-primary float-right jh-create-entity create-transition-custom" [routerLink]="['/', { outlets: { popup: ['transitioncustom-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down" >
-            Create new Transition
-            </span>
-        </button>
+        <div class="btn-group mr-2 float-right" style="display: flex; flex-direction: row; justify-content: space-between">
+
+            <div class="btn-group mr-2" role="group">
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                </button>
+            </div>
+
+            <div class="btn-group mr-2" role="group">
+                <button class="btn btn-primary float-right jh-create-entity create-transition-custom" [routerLink]="['/', { outlets: { popup: ['transitioncustom-new'] } }]">
+                    <span class="fa fa-plus"></span>
+                    <span class="hidden-sm-down" >
+                        Create new Transition
+                    </span>
+                </button>
+            </div>
+
+        </div>
+
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">

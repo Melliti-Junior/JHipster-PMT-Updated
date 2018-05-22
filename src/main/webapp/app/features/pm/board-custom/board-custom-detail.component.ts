@@ -81,7 +81,7 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
 
         this.kanbanItems = [
             {
-                label: 'Columns', icon: 'fa-tasks', command: (onclick) => {
+                label: 'Columns', icon: 'fa-columns', command: (onclick) => {
                     this.myColumns = true;
                     this.myStatuses = false;
                     this.mySprints = false;
@@ -98,21 +98,21 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
 
         this.boardItems = [
             {
-                label: 'Columns', icon: 'fa-tasks', command: (onclick) => {
+                label: 'Columns', icon: 'fa-columns', command: (onclick) => {
                     this.myColumns = true;
                     this.myStatuses = false;
                     this.mySprints = false;
                     this.searchRelatedColumns();
                 }},
             {
-                label: 'Statuses', icon: 'fa-eye', command: (onclick) => {
+                label: 'Statuses', icon: 'fa-tachometer', command: (onclick) => {
                     this.myColumns = false;
                     this.myStatuses = true;
                     this.mySprints = false;
                     this.searchRelatedSteps();
                 }},
             {
-                label: 'Sprints', icon: 'fa-table', command: (onclick) => {
+                label: 'Sprints', icon: 'fa-undo', command: (onclick) => {
                     this.myColumns = false;
                     this.myStatuses = false;
                     this.mySprints = true;

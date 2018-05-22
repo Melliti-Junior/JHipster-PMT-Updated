@@ -3,50 +3,40 @@
 
     <div class="boardParent" style="display: flex; flex-direction: row; justify-content: space-between">
 
-        <div class="schemeBoard" style="display: flex; flex-direction: row; justify-content: space-between">
+        <div class="boardPath" style="display: flex; flex-direction: row; justify-content: space-between">
+            <h5><span>{{boardcustom.project.name}}</span></h5>
+            <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+            <h5><span>{{boardcustom.name}}</span> </h5>
+            <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+            <h5>
+                <span *ngIf="boardcustom.type.toLowerCase() === 'kanban'">
+                    <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
+                    Kanban
+                </span>
+                <span *ngIf="boardcustom.type.toLowerCase() === 'scrum'">
+                    <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
+                    Scrum
+                </span>
+            </h5>
+        </div>
 
-            <div class="project-name">
-                <h5>
-                    <span>
-                        <!--<a [routerLink]="['/projectcustoms', boardcustom.project.id ]">{{boardcustom.project.name}}</a>-->
-                        {{boardcustom.project.name}}
-                    </span>
+        <div class="btn-group mr-2 float-right" style="display: flex; flex-direction: row; justify-content: space-between">
 
-                </h5>
+            <div class="btn-group mr-2" role="group">
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                </button>
             </div>
 
-            <div>
-                &nbsp;
-                <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
-                &nbsp;
-            </div>
-
-            <div>
-                <h5>
-                    <span>
-                        <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
-                        {{boardcustom.name}}
+            <div class="btn-group mr-2" role="group">
+                <button class="btn btn-warning float-right" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
+                    <span class="fa fa-wrench"></span>
+                    <span class="hidden-sm-down" >
+                        Configure
                     </span>
-                </h5>
-            </div>
-
-            <div>
-                &nbsp;
-                <span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder;"></span>
-                &nbsp;
-            </div>
-
-            <div>
-                <h5>
-                    <span *ngIf="boardcustom.type.toLowerCase() === 'kanban'">
-                        <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
-                        Kanban
-                    </span>
-                    <span *ngIf="boardcustom.type.toLowerCase() === 'scrum'">
-                        <!--<a [routerLink]="['/boardcustoms', boardcustom.id ]">{{boardcustom.name}}</a>-->
-                        Scrum
-                    </span>
-                </h5>
+                </button>
             </div>
 
         </div>
@@ -60,7 +50,7 @@
         </div>
 
 
-        <div class="specBtn">
+        <!--<div class="specBtn">
             <div class="backBtn pr-2">
                 <button type="submit"
                         (click)="previousState()"
@@ -90,7 +80,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>-->
 
     </div>
 

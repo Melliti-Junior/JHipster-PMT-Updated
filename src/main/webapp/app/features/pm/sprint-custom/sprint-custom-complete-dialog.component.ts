@@ -10,6 +10,7 @@ import { SprintCustomService } from './sprint-custom.service';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {BoardCustom} from '../board-custom/board-custom.model';
+import {Router} from '@angular/router';
 
 @Component({
     selector: 'jhi-sprint-custom-complete-dialog',
@@ -26,6 +27,7 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager,
         private sprintcustomSce: SprintCustomService,
+        private router: Router,
     ) {
     }
 
@@ -114,7 +116,8 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
                 content: 'Completeed an sprint'
             });
             this.activeModal.dismiss(true);
-            location.reload();
+            // location.reload();
+            this.router.navigate(['/boardcustoms/agile/5ae63240c1ba680b624ab17e']);
 
         });
         console.log(sprint.isActive);

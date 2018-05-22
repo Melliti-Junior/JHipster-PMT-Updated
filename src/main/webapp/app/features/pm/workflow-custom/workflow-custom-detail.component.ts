@@ -55,13 +55,13 @@ export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterVi
 
         this.workflowItems = [
             {
-                label: 'Steps', icon: 'fa-tasks', command: (onclick) => {
+                label: 'Steps', icon: 'fa-circle-o', command: (onclick) => {
                     this.mySteps = true;
                     this.myTransitions = false;
                     this.getRelatedSteps();
                 }},
             {
-                label: 'Transitions', icon: 'fa-eye', command: (onclick) => {
+                label: 'Transitions', icon: 'fa-arrow-right', command: (onclick) => {
                     this.mySteps = false;
                     this.myTransitions = true;
                     this.getRelatedTransitions();
