@@ -256,14 +256,12 @@
                             <span>Password</span>
                         </a>
                     </li>
-                    <!--
                     <li *ngSwitchCase="true">
                         <a class="dropdown-item" (click)="logout()" id="logout">
                             <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
                             <span>Sign out</span>
                         </a>
                     </li>
-                    -->
                     <li *ngSwitchCase="false">
                         <a class="dropdown-item" (click)="login()" id="login">
                             <i class="fa fa-fw fa-sign-in" aria-hidden="true"></i>
@@ -277,15 +275,6 @@
                         </a>
                     </li>
                 </ul>
-
-                <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                    <a class="nav-link" (click)="logout()">
-                    <span>
-                        <i class="fa fa-fw fa-sign-out" aria-hidden="true"></i>
-                        <span>Sign out</span>
-                    </span>
-                    </a>
-                </li>
             </li>
         </ul>
         </div>
@@ -461,19 +450,8 @@
                     <div>
                         <button class="btn btn-primary my-2" [routerLink]="['/', { outlets: { popup: ['issuecustom-new'] } }]">Create Issue</button>
                     </div>
-
-                    <li *ngSwitchCase="true" class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
-                        <a class="nav-link" (click)="logout()">
-                            <span>
-                                <i class="fa fa-fw fa-sign-out my-2" aria-hidden="true"></i>
-                                <span>Sign out</span>
-                            </span>
-                        </a>
-                    </li>
-
                 </ul>
             </div>
-
     </div>
 
 </nav>
