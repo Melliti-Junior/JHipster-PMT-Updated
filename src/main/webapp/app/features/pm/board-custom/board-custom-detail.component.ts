@@ -98,6 +98,13 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
 
         this.boardItems = [
             {
+                label: 'Sprints', icon: 'fa-undo', command: (onclick) => {
+                    this.myColumns = false;
+                    this.myStatuses = false;
+                    this.mySprints = true;
+                    this.searchRelatedSprints();
+                }},
+            {
                 label: 'Columns', icon: 'fa-columns', command: (onclick) => {
                     this.myColumns = true;
                     this.myStatuses = false;
@@ -111,18 +118,11 @@ export class BoardCustomDetailComponent implements OnInit, OnDestroy, AfterConte
                     this.mySprints = false;
                     this.searchRelatedSteps();
                 }},
-            {
-                label: 'Sprints', icon: 'fa-undo', command: (onclick) => {
-                    this.myColumns = false;
-                    this.myStatuses = false;
-                    this.mySprints = true;
-                    this.searchRelatedSprints();
-                }},
         ];
 
         setTimeout(() => {
             if (this.boardcustom) {
-                this.myColumns = true;
+                this.mySprints = true;
             }
             this.searchRelatedColumns();
             this.searchRelatedSprints();

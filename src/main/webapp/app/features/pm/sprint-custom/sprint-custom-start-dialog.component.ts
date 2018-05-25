@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { JhiEventManager } from 'ng-jhipster';
@@ -26,6 +26,7 @@ export class SprintCustomStartDialogComponent implements OnInit {
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager,
         private sprintcustomSce: SprintCustomService,
+        private router: Router,
     ) {
     }
 
@@ -48,6 +49,7 @@ export class SprintCustomStartDialogComponent implements OnInit {
     private onSaveSuccess(result: BoardCustom) {
         this.eventManager.broadcast({ name: 'sprintcustomsListModification', content: 'OK'});
     }
+
     verifyDates(sprint) {
         this.sprintcustomService.find(sprint.id).subscribe((sprintcustom) => {
             if (sprint.startDate) {
@@ -69,57 +71,50 @@ export class SprintCustomStartDialogComponent implements OnInit {
     confirmStart(sprint: SprintCustom) {
         console.log(sprint.isActive);
 
-        sprint.isActive = true;
+        this.verifyDates(sprint);
 
-        for (let sp of this.sprintcustoms) {
-            if (sp.board.name === sprint.board.name) {
-                if (sp.id !== sprint.id) {
-                    sp.isActive = false;
-                    console.log('name : ' + sp.name)
-                    // Make the other sprints not active
-                    this.sprintcustomService.find(sp.id).subscribe((sprintcustom) => {
-                        if (sp.startDate) {
-                            sp.startDate = {
-                                year: sprintcustom.startDate.getFullYear(),
-                                month: sprintcustom.startDate.getMonth() + 1,
-                                day: sprintcustom.startDate.getDate()
-                            };
-                        }
-                        console.log(sp.startDate)
+        setTimeout(() => {
 
-                        if (sp.endDate) {
-                            sp.endDate = {
-                                year: sprintcustom.endDate.getFullYear(),
-                                month: sprintcustom.endDate.getMonth() + 1,
-                                day: sprintcustom.endDate.getDate()
-                            };
-                        }
-                        console.log(sp.endDate)
+            sprint.isActive = true;
 
-                    });
-                    console.log('I am here ' + sp.code)
+            for (let sp of this.sprintcustoms) {
+                if (sp.board.name === sprint.board.name) {
+                    if (sp.id !== sprint.id) {
+                        sp.isActive = false;
+                        console.log('name : ' + sp.name)
+                        // Make the other sprints not active
+                        this.verifyDates(sp);
+                        console.log('I am here ' + sp.code)
 
-                    if (sp.id !== undefined) {
-                        this.subscribeToSaveResponse(
-                            this.sprintcustomSce.update(sp));
+                        setTimeout(() => {
+                            if (sp.id !== undefined) {
+                                this.subscribeToSaveResponse(
+                                    this.sprintcustomSce.update(sp));
+                            }
+                        }, 1000);
                     }
                 }
             }
-        }
 
-        // Make the chosen sprint active
-        this.sprintcustomService.update(sprint).subscribe((response) => {
-            this.eventManager.broadcast({
-                name: 'sprintcustomsListModification',
-                content: 'Started an sprint'
+            // Make the chosen sprint active
+            this.sprintcustomService.update(sprint).subscribe((response) => {
+                this.eventManager.broadcast({
+                    name: 'sprintcustomsListModification',
+                    content: 'Started an sprint'
+                });
+                //
+                // location.reload();
+                this.router.navigate(['/boardcustoms/agile', this.sprintcustom.board.id]);
+
+                this.activeModal.dismiss(true);
             });
-            this.activeModal.dismiss(true);
-            location.reload();
+            console.log(sprint.isActive);
+            this.eventManager.broadcast({ name: 'boardcustomsListModification', content: 'OK'});
+            this.eventManager.broadcast({ name: 'boardcustomsAgileModification', content: 'OK'});
 
-        });
-        console.log(sprint.isActive);
-        this.eventManager.broadcast({ name: 'boardcustomsListModification', content: 'OK'});
+            this.activeModal.dismiss('started');
 
+        }, 1000);
     }
 }
 

@@ -1,12 +1,26 @@
 <div>
     <h2>
         <span>Sprints</span>
-        <button class="btn btn-primary float-right jh-create-entity create-sprint-custom" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down" >
-            Create new Sprint
-            </span>
-        </button>
+
+        <div class="btn-group mr-2 float-right" style="display: flex; flex-direction: row; justify-content: space-between">
+
+            <div class="btn-group mr-2" role="group">
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                </button>
+            </div>
+
+            <button class="btn btn-primary float-right jh-create-entity create-sprint-custom" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">
+                <span class="fa fa-plus"></span>
+                    <span class="hidden-sm-down" >
+                    Create new Sprint
+                    </span>
+            </button>
+
+        </div>
+
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -59,6 +73,14 @@
                                 class="btn btn-success btn-sm">
                             <span class="fa fa-check"></span>
                             <span class="d-none d-md-inline">Start</span>
+                        </button>
+                        <button type="submit" *ngIf="sprint.isActive"
+                                [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprint.id + '/complete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-warning btn-sm">
+                            <span class="fa fa-hand-stop-o"></span>
+                            <span class="d-none d-md-inline">Complete</span>
                         </button>
                         <!--<button type="submit"
                                 [routerLink]="['../sprintcustoms', sprint.id ]"

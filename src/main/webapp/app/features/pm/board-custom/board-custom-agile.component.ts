@@ -164,6 +164,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         // let BacklogBtnID = document.getElementById('backlog').click();
     }
 
+
     load(id) {
         this.boardcustomSce.find(id).subscribe((boardcustom) => {
             this.boardcustom = boardcustom;
@@ -178,10 +179,33 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.eventManager.destroy(this.eventSubscriber);
     }
 
+    transition() {
+        console.error('fghjkl ' + this.boardcustom.id)
+        this.getAllSprints();
+        this.getBacklogIssues();
+        this.getSprintIssues();
+        this.searchRelatedColumns();
+        this.lookForRelatedTransitions();
+        this.lookForRelatedSteps();
+        this.activeSprint.isActive = false;
+        /*
+        for (let sp of this.sprintCustoms) {
+            if (sp.id === this.activeSprint.id) {
+                this.activeSprint = sp;
+            }
+        }
+        */
+        console.error(this.activeSprint.isActive + ' rrr')
+        this.router.navigate(['/boardcustoms/agile', this.boardcustom.id]);
+
+        console.error('68465546 ' + this.activeSprint.isActive)
+    }
+
     registerChangeInBoardCustoms() {
         this.eventSubscriber = this.eventManager.subscribe(
-            'boardcustomListModification',
-            (response) => this.load(this.boardcustom.id)
+            'boardcustomsAgileModification',
+            // (response) => this.load(this.boardcustom.id)
+            (response) => this.transition()
         );
     }
 
@@ -406,6 +430,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     searchActiveSprint() {
         if (this.activeSprint.id === undefined) {
+            console.error('searchhhhhhhh')
             this.sprintcustomSce.search({query : this.activeSprint.code}, )
                 .subscribe(
                     (res: ResponseWrapper) => this.getCurrentSprintObj(res.json),
@@ -485,11 +510,17 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     private getCurrentSprintObj(data) {
-        for (let res of data) {
-            this.activeSprint = res.valueOf();
-            console.error('sprinnnttt ' + JSON.stringify(this.activeSprint))
+        console.error('currrr ' + data)
+        if (!data) {
+            console.error('nnnnoooooo')
+        } else {
+            for (let res of data) {
+                this.activeSprint = res.valueOf();
+                console.error('sprinnnttt ' + JSON.stringify(this.activeSprint))
 
+            }
         }
+
     }
 
     private getRelatedSprints(data, headers) {

@@ -30,8 +30,17 @@
                 </button>
             </div>
 
+            <div *ngIf="boardcustom.type.toLowerCase() === 'scrum'" class="btn-group mr-2" role="group">
+                <button class="btn btn-warning float-right" [routerLink]="['../../../sprintcustoms']" routerLinkActive="active">
+                    <span class="fa fa-undo"></span>
+                    <span class="hidden-sm-down" >
+                        Sprints
+                    </span>
+                </button>
+            </div>
+
             <div class="btn-group mr-2" role="group">
-                <button class="btn btn-warning float-right" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
+                <button class="btn btn-success float-right" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
                     <span class="fa fa-wrench"></span>
                     <span class="hidden-sm-down" >
                         Configure
@@ -113,7 +122,10 @@
                     <!--<div class="StartSprint" *ngIf="!activeSprint.isActive">-->
                     <div class="startSprintBtn">
                         <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
-                        <button disabled="disabled" *ngIf="(boardcustom.type.toUpperCase().localeCompare('SCRUM')===0) && (!activeSprint.isActive)" class="btn btn-warning" id="startSprintBtn" (click)="startSprint()" [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activeSprint.id + '/start'} }]">Start Sprint</button>
+                        <button disabled="disabled" *ngIf="(boardcustom.type.toUpperCase().localeCompare('SCRUM')===0) && (!activeSprint.isActive)" class="btn btn-success" id="startSprintBtn" (click)="startSprint()" [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activeSprint.id + '/start'} }]">
+                            <span class="fa fa-check"></span>
+                            Start Sprint
+                        </button>
                     </div>
 
 
@@ -150,12 +162,12 @@
             <div class="container pl-0 py-3">
                 <div *ngIf="relatedIssuesPerBoard && Backlog">
                     <!-- <div class="card" > -->
-                    <div *ngIf="relatedIssuesPerBoard.length" class="product-backlog-info row">
+                    <div *ngIf="relatedIssuesPerBoard.length" class="product-backlog-info" style="display: flex; flex-direction: row; justify-content: space-between">
                         <div class="backlog-option row">
-                            <div class="product-backlog"><span>Product Backlog</span></div>
+                            <div class="product-backlog">Product Backlog</div>
                             <div class="backlogIssues">{{relatedIssuesPerBoard.length}} issues</div>
                         </div>
-                        <div class="NewSprint" *ngIf="activeSprint === undefined">
+                        <div class="NewSprint" *ngIf="!activeSprint">
                             <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
                             <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="createSprintBtn" (click)="prepareSprint();" >Create Sprint</button>
                         </div>

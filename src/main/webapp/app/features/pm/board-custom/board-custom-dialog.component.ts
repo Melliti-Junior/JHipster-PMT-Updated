@@ -104,17 +104,6 @@ export class BoardCustomDialogComponent implements OnInit {
         .then((boardCustoms) => this.boardCustoms = boardCustoms );
     }
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof BoardCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.boardcustomService.findByRequest(name);
-        // console.log(this.comp.boardcustoms);
-    }
-
     save() {
         this.isSaving = true;
         if (this.boardcustom.id !== undefined) {
