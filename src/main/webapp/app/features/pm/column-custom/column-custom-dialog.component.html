@@ -13,13 +13,19 @@
                    [(ngModel)]="columncustom.id" readonly />
         </div>
 
-        <div class="form-group">
+        <div *ngIf="!columncustom.id" class="form-group">
             <label class="form-control-label" for="field_board">Board</label>
             <select class="form-control" name="board" id="field_board" [(ngModel)]="boardname" (change)="findBoard();">
                 <option *ngFor="let board of boards" [value]="board.name">
                     {{board.name}}
                 </option>
             </select>
+        </div>
+
+        <div *ngIf="columncustom.id" class="form-group">
+            <label class="form-control-label" for="field_board">Board</label>
+            <input type="text" class="form-control" name="board" id="field_board_edit"
+                   [(ngModel)]="columncustom.board.name" readonly/>
         </div>
 
         <div class="form-group">

@@ -47,6 +47,20 @@
                 <td *ngIf="board.project">{{board.project.name}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <!--
+                        <button type="submit"
+                                [routerLink]="['../boardcustoms/agile', board.id ]"
+                                class="btn btn-success btn-sm">
+                            <span class="fa fa-columns"></span>
+                            <span class="d-none d-md-inline">Agile</span>
+                        </button>
+                        -->
+                        <button type="submit"
+                                [routerLink]="['../boardcustoms/configure', board.id ]"
+                                class="btn btn-warning btn-sm">
+                            <span class="fa fa-wrench"></span>
+                            <span class="d-none d-md-inline">Configure</span>
+                        </button>
                         <button type="submit"
                                 [routerLink]="['../boardcustoms/agile', board.id ]"
                                 class="btn btn-success btn-sm">

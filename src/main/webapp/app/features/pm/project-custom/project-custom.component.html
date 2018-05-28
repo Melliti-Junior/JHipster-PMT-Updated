@@ -33,6 +33,7 @@
             <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="program"><span>Program</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="process"><span>Process</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="manager"><span>Manager</span> <span class="fa fa-sort"></span></th>
             <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
             <!-- <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th> -->
             <th jhiSortBy="startDate"><span>Start Date</span> <span class="fa fa-sort"></span></th>
@@ -49,6 +50,8 @@
                 <td *ngIf="!projectcustom.program">&nbsp;</td>
                 <td *ngIf="projectcustom.process">{{projectcustom.process.name}}</td>
                 <td *ngIf="!projectcustom.process">&nbsp;</td>
+                <td *ngIf="projectcustom.lead">{{projectcustom.lead.login}}</td>
+                <td *ngIf="!projectcustom.lead">&nbsp;</td>
                 <td>{{projectcustom.name}}</td>
                 <!-- <td>{{projectcustom.description}}</td> -->
                 <td>{{projectcustom.startDate | date:'mediumDate'}}</td>

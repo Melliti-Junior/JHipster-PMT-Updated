@@ -55,7 +55,7 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
     }
 
     private onSaveSuccess(result: BoardCustom) {
-        this.eventManager.broadcast({ name: 'sprintcustomsListModification', content: 'OK'});
+        // this.eventManager.broadcast({ name: 'sprintcustomsListModification', content: 'OK'});
         this.eventManager.broadcast({ name: 'boardcustomsAgileModification', content: 'OK'});
     }
 
@@ -110,7 +110,6 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
     }
 
     private onSaveIssuesSuccess(result: IssueCustom) {
-        this.eventManager.broadcast({ name: 'issuecustomsListModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
     }
@@ -180,23 +179,6 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
             this.activeModal.dismiss('completed');
 
         }, 1000);
-
-
-        /*
-        // Make the chosen sprint active
-        this.sprintcustomService.update(sprint).subscribe((response) => {
-
-            this.eventManager.broadcast({ name: 'sprintcustomsListModification', content: 'OK'});
-            this.eventManager.broadcast({ name: 'boardcustomsAgileModification', content: 'OK'});
-
-            // location.reload();
-            this.router.navigate(['/sprintcustoms']);
-            this.activeModal.dismiss(true);
-
-        });
-        console.log(sprint.isActive);
-        // this.eventManager.broadcast({ name: 'boardcustomsListModification', content: 'OK'});
-*/
     }
 }
 

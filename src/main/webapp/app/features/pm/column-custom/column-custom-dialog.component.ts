@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, ViewChild, Input} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { Response } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
@@ -54,6 +54,7 @@ export class ColumnCustomDialogComponent implements OnInit {
         private columncustomService: ColumnCustomService,
         private eventManager: JhiEventManager,
         private boardSce: BoardCustomService,
+        private router: Router,
         // private comp: ColumnCustomComponent
     ) {
         this.scrumboards = new Array<BoardCustom>();
@@ -91,7 +92,7 @@ export class ColumnCustomDialogComponent implements OnInit {
         for (let column of this.columnCustoms) {
             if ((column.board !== null) && (column.board.id === this.parentBoard.id)) {
                 if (this.siblingColumns.indexOf(column) !== -1) {
-                    this.siblingColumns.push(column);
+                    this.siblingColumns.splice(column.order - 1, 0 ,column);
                 }
             }
         }
@@ -132,8 +133,13 @@ export class ColumnCustomDialogComponent implements OnInit {
 
     private onSaveSuccess(result: ColumnCustom) {
         this.eventManager.broadcast({ name: 'columncustomsListModification', content: 'OK'});
+        this.eventManager.broadcast({ name: 'boardcustomConfigModification', content: 'OK'});
         this.isSaving = false;
         this.activeModal.dismiss(result);
+        setTimeout(() => {
+            this.router.navigate(['/columncustoms', {search: result.id}], );
+        }, 100);
+
     }
 
     private onSaveError() {

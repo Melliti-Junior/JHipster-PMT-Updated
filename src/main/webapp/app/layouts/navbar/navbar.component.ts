@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.PMChosen = false;
+        this.PMChosen = true;
 
         this.profileService.getProfileInfo().then((profileInfo) => {
             this.inProduction = profileInfo.inProduction;

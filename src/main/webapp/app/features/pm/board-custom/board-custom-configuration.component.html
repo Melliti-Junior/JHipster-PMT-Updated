@@ -38,13 +38,25 @@
                     </div>
 
                     <div class="btn-group mr-2" role="group">
-                        <button class="btn btn-warning float-right" routerLink="/columncustoms" routerLinkActive="active">
+                        <button class="btn btn-warning float-right"
+                        [routerLink]="['../../../columncustoms', {search: boardcustom.id}]" routerLinkActive="active">
                             <span class="fa fa-columns"></span>
                             <span class="hidden-sm-down" >
                                 Columns
                             </span>
                         </button>
                     </div>
+
+<!--
+                    <div class="btn-group mr-2" role="group">
+                        <button type="submit"
+                                [routerLink]="['../../../boardcustoms/agile', boardcustom.id ]"
+                                class="btn btn-success btn-sm">
+                            <span class="fa fa-columns"></span>
+                            <span class="d-none d-md-inline">Agile</span>
+                        </button>
+                    </div>
+-->
 <!--
                     <div class="btn-group mr-2" role="group" aria-label="Second group">
                         <button class="btn btn-success float-right" (click)="searchRelatedColumns()" [routerLink]="['/', { outlets: { popup: ['columncustom-new'] } }]">
@@ -71,7 +83,7 @@
         <div id="agileColumns" class="row"  *ngIf="relatedColumns">
             <div class="panel panel-primary col" *ngFor="let col of relatedColumns">
                 <div class="agileColumn">
-                    <div class="panel-heading column-name"> <strong>{{col.name}}</strong></div>
+                    <div class="panel-heading column-name"> <strong><u><a [routerLink]="['/', { outlets: { popup: 'columncustoms/'+ col.id + '/edit'} }]">{{col.name}}</a></u></strong></div>
                     <div class="panel-body-active column-content-active droppable" id="{{col.id}}" (dragover)="allowDrop($event)" (drop)="drop($event)">
                         <div *ngFor="let step of relatedSteps">
                             <div *ngIf="step.column">

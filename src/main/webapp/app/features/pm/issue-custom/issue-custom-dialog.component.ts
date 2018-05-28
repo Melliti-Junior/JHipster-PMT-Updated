@@ -29,7 +29,7 @@ import { ResolutionService } from '../../../entities/resolution';
 import { ProjectCustom } from '../project-custom';
 import { ProjectCustomService } from '../project-custom/project-custom.service';
 import {VersionCustom, VersionCustomService} from '../version-custom';
-import {ResponseWrapper} from '../../../shared';
+import {Principal, ResponseWrapper, User, UserService} from '../../../shared';
 import {StatusCustom, StatusCustomService} from '../status-custom';
 
 @Component({
@@ -73,6 +73,9 @@ export class IssueCustomDialogComponent implements OnInit {
     now = new Date();
     myDate: any;
 
+    currentAccount: any;
+    users: User[];
+
     constructor(
         public activeModal: NgbActiveModal,
         private issuecustomService: IssueCustomService,
@@ -86,6 +89,8 @@ export class IssueCustomDialogComponent implements OnInit {
         private versionSce: VersionCustomService,
         private dateUtils: JhiDateUtils,
         private ngbDateParserFormatter: NgbDateParserFormatter,
+        private userSce: UserService,
+        private principal: Principal,
         // private comp: IssueCustomComponent
     ) {
     }
@@ -103,6 +108,10 @@ export class IssueCustomDialogComponent implements OnInit {
         // let myDate = new Date(this.theDate.year, this.theDate.month-1, this.theDate.day);
         this.myDate = this.ngbDateParserFormatter.format(this.theDate);
         console.log('ngBParse : ' + this.myDate);
+
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        });
     }
 
     clear() {
@@ -167,6 +176,20 @@ export class IssueCustomDialogComponent implements OnInit {
             }
         }
         console.log('aff' + this.issuecustom.priority.name);
+    }
+
+    findCurrentUser() {
+        let index = 0;
+        let found = false;
+        while (index < this.users.length && found === false)  {
+            if ((this.users[index]).login.toLowerCase() === this.currentAccount.login.toLowerCase()) {
+                found = true;
+                this.issuecustom.reporter = this.users[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.reporter.login);
     }
 
     findStatusCustom() {
@@ -280,6 +303,8 @@ export class IssueCustomDialogComponent implements OnInit {
         .then((issueCustoms) => this.issueCustoms = issueCustoms );
         this.versionSce.getVersionCustoms()
             .then((versions) => this.versions = versions );
+        this.userSce.getUsers()
+            .then((users) => this.users = users );
     }
 
     save() {
@@ -308,6 +333,7 @@ export class IssueCustomDialogComponent implements OnInit {
             // Set the status Unresolved
             this.makeNewIssueUnresolved();
             // Create the new Issue
+            this.findCurrentUser();
             this.subscribeToSaveResponse(
                 this.issuecustomService.create(this.issuecustom));
         }

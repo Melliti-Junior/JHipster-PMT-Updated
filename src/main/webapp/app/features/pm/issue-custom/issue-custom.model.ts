@@ -7,6 +7,7 @@ import { ProjectCustom } from '../project-custom';
 import {VersionCustom} from '../version-custom';
 import {SprintCustom} from '../sprint-custom';
 import {StatusCustom} from '../status-custom';
+import {User} from "../../../shared";
 
 export class IssueCustom extends Issue {
     constructor(
@@ -19,6 +20,8 @@ export class IssueCustom extends Issue {
         public version?: VersionCustom,
         public sprint?: SprintCustom,
         public progress?: number,
+        public reporter?: User,
+        public assignee?: User,
     ) {
         super();
         priority = new IssuePriority();

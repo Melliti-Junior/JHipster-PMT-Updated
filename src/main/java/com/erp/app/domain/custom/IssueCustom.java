@@ -1,15 +1,9 @@
 package com.erp.app.domain.custom;
 
+import com.erp.app.domain.*;
 import com.erp.app.domain.util.CascadeSave;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
-
-import com.erp.app.domain.Epic;
-import com.erp.app.domain.Issue;
-import com.erp.app.domain.IssuePriority;
-import com.erp.app.domain.IssueType;
-import com.erp.app.domain.Resolution;
-import com.erp.app.domain.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -57,6 +51,15 @@ public class IssueCustom extends Issue implements Serializable {
     @DBRef
 	@Field("project")
     private ProjectCustom project;
+
+    @DBRef
+    @Field("reporter")
+    private User reporter;
+
+    @DBRef
+    @Field("assignee")
+    private User assignee;
+
 
     public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution, VersionCustom version, SprintCustom sprint) {
 		super();
@@ -145,5 +148,21 @@ public class IssueCustom extends Issue implements Serializable {
 
     public void setProgress(Integer progress) {
         this.progress = progress;
+    }
+
+    public User getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(User reporter) {
+        this.reporter = reporter;
+    }
+
+    public User getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
     }
 }

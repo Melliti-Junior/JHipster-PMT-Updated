@@ -31,13 +31,14 @@
             </div>
 
             <div *ngIf="boardcustom.type.toLowerCase() === 'scrum'" class="btn-group mr-2" role="group">
-                <button class="btn btn-warning float-right" [routerLink]="['../../../sprintcustoms']" routerLinkActive="active">
+                <button class="btn btn-warning float-right" [routerLink]="['../../../sprintcustoms', {search: boardcustom.id}]" routerLinkActive="active">
                     <span class="fa fa-undo"></span>
                     <span class="hidden-sm-down" >
                         Sprints
                     </span>
                 </button>
             </div>
+
 
             <div class="btn-group mr-2" role="group">
                 <button class="btn btn-success float-right" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
@@ -57,46 +58,10 @@
             <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumItems"></p-tabMenu>
             <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" [model]="kanbanItems"></p-tabMenu>
         </div>
-
-
-        <!--<div class="specBtn">
-            <div class="backBtn pr-2">
-                <button type="submit"
-                        (click)="previousState()"
-                        class="btn btn-info">
-                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
-                </button>
-            </div>
-
-            <div class="boardConf">
-
-                <div class="d-inline-block" ngbDropdown #myDrop="ngbDropdown">
-                    <button class="btn btn-success" id="dropdownManual" aria-hidden="true" ngbDropdownToggle >
-                        <span class="fa fa-cogs"></span>&nbsp;<span> Board </span>
-                    </button>
-
-                    <div ngbDropdownMenu aria-labelledby="dropdownManual">
-                        <li class="dropdown-item">
-                            <a [routerLink]="['../../configure', + boardcustom.id]">
-                                <span class="fa fa-wrench"></span>&nbsp;<span>Configure</span>
-                            </a>
-                        </li>
-                        <li class="dropdown-item">
-                            <a [routerLink]="['/', { outlets: { popup: ['boardcustom-new'] } }]">
-                                <span class="fa fa-plus"></span>&nbsp;<span>Create Board</span>
-                            </a>
-                        </li>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-
     </div>
-
 
     <section class="main">
         <div class="backlogScrum">
-
 
             <div  *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn-group mr-2 float-right" role="group" aria-label="Second group">
                 <div *ngIf="activeSprint && activeSprint.isActive">

@@ -9,6 +9,7 @@ import { BoardCustomPopupComponent } from './board-custom-dialog.component';
 import { BoardCustomDeletePopupComponent } from './board-custom-delete-dialog.component';
 import {BoardCustomConfigurationComponent} from './board-custom-configuration.component';
 import {BoardCustomAgileComponent} from './board-custom-agile.component';
+import {ColumnCustomPopupComponent} from "../column-custom/column-custom-dialog.component";
 
 @Injectable()
 export class BoardCustomResolvePagingParams implements Resolve<any> {

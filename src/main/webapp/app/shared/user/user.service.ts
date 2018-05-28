@@ -6,6 +6,7 @@ import { SERVER_API_URL } from '../../app.constants';
 import { User } from './user.model';
 import { ResponseWrapper } from '../model/response-wrapper.model';
 import { createRequestOption } from '../model/request-util';
+import {BoardCustom} from "../../features/pm/board-custom/board-custom.model";
 
 @Injectable()
 export class UserService {
@@ -42,6 +43,12 @@ export class UserService {
             const json = res.json();
             return <string[]> json;
         });
+    }
+
+    getUsers():  Promise<User[]> {
+        return this.http.get(this.resourceUrl)
+            .toPromise()
+            .then((response) => response.json() as User[])
     }
 
     private convertResponse(res: Response): ResponseWrapper {

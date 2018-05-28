@@ -12,6 +12,7 @@ import { ProjectCustomService } from './project-custom.service';
 import { Program, ProgramService } from '../../../entities/program';
 import {WorkflowCustom} from '../workflow-custom/workflow-custom.model';
 import {WorkflowCustomService} from '../workflow-custom/workflow-custom.service';
+import {Principal, User, UserService} from "../../../shared";
 
 @Component({
     selector: 'jhi-project-custom-dialog',
@@ -22,6 +23,8 @@ export class ProjectCustomDialogComponent implements OnInit {
     projectcustom: ProjectCustom;
     programs: Program[];
     processes: WorkflowCustom[];
+    currentAccount: any;
+    users: User[];
     programname: string;
     processname: string;
     isSaving: boolean;
@@ -34,12 +37,17 @@ export class ProjectCustomDialogComponent implements OnInit {
         private eventManager: JhiEventManager,
         private programSce: ProgramService,
         private processSce: WorkflowCustomService,
+        private userSce: UserService,
+        private principal: Principal,
     ) {
     }
 
     ngOnInit() {
         this.isSaving = false;
         this.loadAttributes();
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        });
     }
 
     clear() {
@@ -74,12 +82,27 @@ export class ProjectCustomDialogComponent implements OnInit {
         console.log('aff' + this.projectcustom.process.name);
     }
 
+    findCurrentUser() {
+        let index = 0;
+        let found = false;
+        while (index < this.users.length && found === false)  {
+            if ((this.users[index]).login.toLowerCase() === this.currentAccount.login.toLowerCase()) {
+                found = true;
+                this.projectcustom.lead = this.users[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.projectcustom.lead.login);
+    }
+
     save() {
         this.isSaving = true;
         if (this.projectcustom.id !== undefined) {
             this.subscribeToSaveResponse(
                 this.projectcustomService.update(this.projectcustom));
         } else {
+            this.findCurrentUser();
             this.subscribeToSaveResponse(
                 this.projectcustomService.create(this.projectcustom));
         }
@@ -111,6 +134,8 @@ export class ProjectCustomDialogComponent implements OnInit {
         .then((programs) => this.programs = programs );
         this.processSce.getWorkflowCustoms()
             .then((processes) => this.processes = processes );
+        this.userSce.getUsers()
+            .then((users) => this.users = users );
     }
 }
 

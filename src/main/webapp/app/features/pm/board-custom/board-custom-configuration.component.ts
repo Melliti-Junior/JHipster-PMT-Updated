@@ -27,6 +27,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
 
     boardcustom: BoardCustom;
     allColumns: ColumnCustom[];
+    currCol: ColumnCustom;
     allStatuses: StatusCustom[];
     relatedColumns: ColumnCustom[];
     relatedTransitions: TransitionCustom[];
@@ -84,9 +85,17 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
 
     registerChangeInBoardCustoms() {
         this.eventSubscriber = this.eventManager.subscribe(
-            'boardcustomListModification',
+            'boardcustomConfigModification',
             (response) => this.load(this.boardcustom.id)
         );
+    }
+
+    findSelectedColumn () {
+        for (let col of this.relatedColumns) {
+            if (col.board.id === this.boardcustom.id) {
+                this.currCol = col;
+            }
+        }
     }
 
     searchRelatedColumns() {
@@ -97,12 +106,13 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
                 console.log('board id' + this.boardcustom.code)
                 if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
                     if (this.relatedColumns.indexOf(col) === -1) {
-                        this.relatedColumns.push(col);
+                        this.relatedColumns.splice(col.order - 1, 0, col);
                     }
                 }
             }
         }
-        console.log(this.relatedColumns.length)
+        console.log(this.relatedColumns.length);
+        this.findSelectedColumn();
     }
 
     loadAttributes() {
