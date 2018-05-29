@@ -59,7 +59,7 @@
                                 [routerLink]="['../boardcustoms/configure', board.id ]"
                                 class="btn btn-warning btn-sm">
                             <span class="fa fa-wrench"></span>
-                            <span class="d-none d-md-inline">Configure</span>
+                            <span class="d-none d-md-inline">Settings</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['../boardcustoms/agile', board.id ]"
@@ -67,11 +67,19 @@
                             <span class="fa fa-columns"></span>
                             <span class="d-none d-md-inline">Agile</span>
                         </button>
+                        <!--
                         <button type="submit"
                                 [routerLink]="['../boardcustoms', board.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
+                        </button>
+                        -->
+                        <button type="submit"
+                                [routerLink]="['/workflowcustoms', {search: board.project.process.id}]" routerLinkActive="active"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">Workflow</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ board.id + '/edit'} }]"

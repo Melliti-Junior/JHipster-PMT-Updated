@@ -1,4 +1,4 @@
-<div *ngIf="boardcustom">
+<!--<div *ngIf="boardcustom">
 
 
     <div class="boardParent" style="display: flex; flex-direction: row; justify-content: space-between">
@@ -35,20 +35,12 @@
 
             <h4>
                 <span>Total columns related to this Board : {{relatedColumns.length}}</span>
-                <!--<button class="btn btn-primary float-right jh-create-entity create-column-custom" [routerLink]="['/', { outlets: { popup: ['columncustom-new'] } }]">
-                    <span class="fa fa-plus"></span>
-                    <span class="hidden-sm-down" >
-                    Create new Column
-                    </span>
-                </button>-->
             </h4>
             <jhi-alert></jhi-alert>
             <br/>
             <div class="table-responsive" *ngIf="relatedColumns">
                 <table class="table table-striped">
                     <thead>
-                    <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-                        <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
                         <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
                         <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
                         <th jhiSortBy="min"><span>Min</span> <span class="fa fa-sort"></span></th>
@@ -60,7 +52,6 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let column of relatedColumns ;trackBy: trackId">
-                        <!--<td><a [routerLink]="['../../columncustoms', column.id ]">{{column.code}}</a></td>-->
                         <td style="font-weight: bold">{{column.code}}</td>
                         <td>{{column.name}}</td>
                         <td>{{column.min}}</td>
@@ -69,13 +60,6 @@
                         <td *ngIf="!column.board">&nbsp;</td>
                         <td class="text-right">
                             <div class="btn-group flex-btn-group-container">
-
-                                <!--<button type="submit"
-                                        [routerLink]="['../../columncustoms', column.id ]"
-                                        class="btn btn-info btn-sm">
-                                    <span class="fa fa-eye"></span>
-                                    <span class="d-none d-md-inline">View</span>
-                                </button>-->
                                 <button type="submit"
                                         [routerLink]="['/', { outlets: { popup: 'columncustoms/'+ column.id + '/edit'} }]"
                                         replaceUrl="true"
@@ -113,12 +97,6 @@
 
             <h4>
                 <span>Total statuses related to this Board : {{relatedSteps.length}}</span>
-                <!--<button class="btn btn-primary float-right jh-create-entity create-step-custom" [routerLink]="['/', { outlets: { popup: ['stepcustom-new'] } }]">
-                    <span class="fa fa-plus"></span>
-                    <span class="hidden-sm-down" >
-                    Create new Status
-                    </span>
-                </button>-->
             </h4>
             <jhi-alert></jhi-alert>
             <br/>
@@ -126,7 +104,6 @@
                 <table class="table table-striped">
                     <thead>
                     <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-                        <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
                         <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
                         <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
                         <th jhiSortBy="description"><span>Description</span> <span class="fa fa-sort"></span></th>
@@ -136,19 +113,12 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let step of relatedSteps ;trackBy: trackId">
-                        <!--<td><a [routerLink]="['../../stepcustoms', step.id ]">{{step.code}}</a></td>-->
                         <td style="font-weight: bold">{{step.code}}</td>
                         <td>{{step.name}}</td>
                         <td>{{step.description}}</td>
                         <td *ngIf="step.column">{{step.column.name}}</td>
                         <td class="text-right">
                             <div class="btn-group flex-btn-group-container">
-                                <!--<button type="submit"
-                                        [routerLink]="['../../stepcustoms', step.id ]"
-                                        class="btn btn-info btn-sm">
-                                    <span class="fa fa-eye"></span>
-                                    <span class="d-none d-md-inline">View</span>
-                                </button>-->
                                 <button type="submit"
                                         [routerLink]="['/', { outlets: { popup: 'stepcustoms/'+ step.id + '/edit'} }]"
                                         replaceUrl="true"
@@ -182,12 +152,6 @@
 
             <h4>
                 <span>Total sprints related to this Board : {{relatedSprints.length}}</span>
-                <!--<button class="btn btn-primary float-right jh-create-entity create-sprint-custom" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">
-                    <span class="fa fa-plus"></span>
-                    <span class="hidden-sm-down" >
-                    Create new Sprint
-                    </span>
-                </button>-->
             </h4>
 
             <h5>
@@ -200,7 +164,6 @@
                 <table class="table table-striped">
                     <thead>
                     <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse">
-                        <!--<th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>-->
                         <th jhiSortBy="code"><span>Code</span> <span class="fa fa-sort"></span></th>
                         <th jhiSortBy="name"><span>Name</span> <span class="fa fa-sort"></span></th>
                         <th jhiSortBy="startDate"><span>Start Date</span> <span class="fa fa-sort"></span></th>
@@ -213,7 +176,6 @@
                     </thead>
                     <tbody>
                     <tr *ngFor="let sprint of relatedSprints ;trackBy: trackId">
-                        <!--<td><a [routerLink]="['../../sprintcustoms', sprint.id ]">{{sprint.code}}</a></td>-->
                         <td style="font-weight: bold">{{sprint.code}}</td>
                         <td>{{sprint.name}}</td>
                         <td>{{sprint.startDate | date:'mediumDate'}}</td>
@@ -232,12 +194,6 @@
                                     <span class="fa fa-check"></span>
                                     <span class="d-none d-md-inline">Start</span>
                                 </button>
-                                <!--<button type="submit"
-                                        [routerLink]="['../../sprintcustoms', sprint.id ]"
-                                        class="btn btn-info btn-sm">
-                                    <span class="fa fa-eye"></span>
-                                    <span class="d-none d-md-inline">View</span>
-                                </button>-->
                                 <button type="submit"
                                         [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ sprint.id + '/edit'} }]"
                                         replaceUrl="true"
@@ -266,6 +222,97 @@
 
     </div>
 
+</div>
+-->
+
+
+
+<div *ngIf="boardcustom">
+    <div class="boardHeader" style="display: flex; flex-direction: row; justify-content: space-between">
+        <div class="boardScheme" style="display: flex; flex-direction: row;">
+            <!--<h5><span><a [routerLink]="['/projectcustoms', issuecustom.project.id ]">{{issuecustom.project.name}}</a></span></h5>-->
+            <h5><span>Boards</span></h5>
+            <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+            <h5><span>{{boardcustom.code}}</span> </h5>
+        </div>
+        <div class="btn-group mr-2" style="display: flex; flex-direction: row; justify-content: flex-end">
+
+            <button type="button"
+                    [routerLink]="['../../boardcustoms/agile', boardcustom.id ]"
+                    replaceUrl="true"
+                    queryParamsHandling="merge"
+                    class=" btn btn-success btn-group mr-2" role="group">
+                <span class="fa fa-columns"></span><span>&nbsp;</span>
+                <span class="d-none d-md-inline"> Agile</span>
+            </button>
+
+            <button type="button"
+                [routerLink]="['../../boardcustoms/configure', boardcustom.id ]"
+                replaceUrl="true"
+                queryParamsHandling="merge"
+                class="btn btn-warning btn-group mr-2" role="group">
+                <span class="fa fa-wrench"></span><span>&nbsp;</span>
+                <span class="d-none d-md-inline"> Configure</span>
+            </button>
+
+        </div>
+    </div>
+
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+
+        <div class="container">
+            <div class="panel-group row ">
+
+                <div class="panel-group"  style="width:50%;">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Details</h4></div>
+                        <div class="panel-body-active" >
+                            <div class="row">
+                                <div class="col-3"><dt><span class="col-3">Name : </span></dt></div>
+                                <div class="col-8">{{boardcustom.name}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-3"><dt><span class="col-3">Type : </span></dt></div>
+                                <div class="col-8">{{boardcustom.type}}</div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="border-color:transparent;">
+                    <div class="panel panel-info">
+                        <div class="panel-heading" style="color:rgb(19, 89, 146); background-color:transparent;"><h4>Description</h4></div>
+                        <div class="panel-body-active" >
+                            <div class="row">
+                                <h6>
+                                    <span class="col-3" style="font-weight: bold">Total sprints : </span>
+                                    {{relatedSprints.length}}
+                                </h6>
+                            </div>
+                            <div class="row">
+                                <h6>
+                                    <span class="col-3" style="font-weight: bold">Total columns : </span>
+                                    {{relatedColumns.length}}
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'boardcustom/'+ boardcustom.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
 </div>
 
 

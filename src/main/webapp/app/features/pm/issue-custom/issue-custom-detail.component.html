@@ -9,14 +9,26 @@
             <h5><span>{{issuecustom.code}}</span> </h5>
         </div>
 
-        <div *ngIf="!issuecustom.resolution" class="closeIssueBtn">
-            <button type="button"
-                    [routerLink]="['/', { outlets: { popup: 'issuecustoms/'+ issuecustom.id + '/resolve'} }]"
-                    replaceUrl="true"
-                    queryParamsHandling="merge"
-                    class="btn btn-danger">
-                <span class="fa fa-hand-stop-o"></span>&nbsp;<span> Resolve Issue</span>
-            </button>
+        <div class="btn-group mr-2 float-right" style="display: flex; flex-direction: row; justify-content: space-between">
+            <div class="btn-group mr-2 assignIssueBtn">
+                <button type="button"
+                        [routerLink]="['/', { outlets: { popup: 'issuecustoms/'+ issuecustom.id + '/assign'} }]"
+                        replaceUrl="true"
+                        queryParamsHandling="merge"
+                        class="btn btn-warning">
+                    <span class="fa fa-user-plus"></span>&nbsp;<span> Assign Issue</span>
+                </button>
+            </div>
+
+            <div *ngIf="!issuecustom.resolution" class="btn-group mr-2 resolveIssueBtn">
+                <button type="button"
+                        [routerLink]="['/', { outlets: { popup: 'issuecustoms/'+ issuecustom.id + '/resolve'} }]"
+                        replaceUrl="true"
+                        queryParamsHandling="merge"
+                        class="btn btn-danger">
+                    <span class="fa fa-hourglass-end"></span>&nbsp;<span> Resolve Issue</span>
+                </button>
+            </div>
         </div>
 
     </div>
@@ -83,12 +95,14 @@
 
           <div class="row">
             <div class="col-3">Assignee :</div>
-            <div class="col-8">Melliti Zied</div>
+            <div *ngIf="issuecustom.assignee" class="col-8">{{issuecustom.assignee.login}}</div>
+            <div *ngIf="!issuecustom.assignee" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
 
           <div class="row">
             <div class="col-3">Reporter :</div>
-            <div class="col-8">Melliti Zied</div>
+            <div *ngIf="issuecustom.reporter" class="col-8">{{issuecustom.reporter.login}}</div>
+            <div *ngIf="!issuecustom.reporter" class="col-8" style="color:lightslategray; font-weight: bold; font-style: italic;">None</div>
           </div>
 
       </div>

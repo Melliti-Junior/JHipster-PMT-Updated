@@ -52,7 +52,7 @@ export class IssueCustomDetailComponent implements OnInit, OnDestroy {
 
     registerChangeInIssueCustoms() {
         this.eventSubscriber = this.eventManager.subscribe(
-            'issuecustomListModification',
+            'issuecustomsDetailsModification',
             (response) => this.load(this.issuecustom.id)
         );
     }

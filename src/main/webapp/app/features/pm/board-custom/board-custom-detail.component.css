@@ -223,11 +223,6 @@ body {
     border: 1px solid rgb(182, 182, 179);
 }
 
-.panel-body-active {
-    padding-top: 5%;
-    background-color: #f5f5f5;;
-}
-
 .issue-priority-color-active {
     width:2%;
 }

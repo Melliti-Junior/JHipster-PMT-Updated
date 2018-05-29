@@ -12,52 +12,72 @@ import {ResolutionCustom} from '../resolution-custom';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {StatusCustom, StatusCustomService} from '../status-custom';
+import {Principal, User, UserService} from "../../../shared";
 
 @Component({
-    selector: 'jhi-issue-custom-resolve-dialog',
-    templateUrl: './issue-custom-resolve-dialog.component.html'
+    selector: 'jhi-issue-custom-assign-dialog',
+    templateUrl: './issue-custom-assign-dialog.component.html'
 })
-export class IssueCustomResolveDialogComponent implements OnInit {
+export class IssueCustomAssignDialogComponent implements OnInit {
 
     issuecustom: IssueCustom;
-    resolutions: ResolutionCustom[];
-    statuses: StatusCustom[];
-    resolutionname: string;
+    users: User[];
+    username: string;
 
     isSaving: boolean;
+
+    currentAccount: any;
 
     constructor(
         private issuecustomService: IssueCustomService,
         public activeModal: NgbActiveModal,
         private eventManager: JhiEventManager,
-        private resolutionSce: ResolutionService,
-        private statusSce: StatusCustomService,
+        private userSce: UserService,
+        private principal: Principal,
     ) {
     }
 
     ngOnInit() {
-        this.resolutionSce.getResolutions()
-            .then((resolutions) => this.resolutions = resolutions );
-        this.statusSce.getStatusCustoms()
-            .then((statuses) => this.statuses = statuses);
+        this.userSce.getUsers()
+            .then((users) => this.users = users );
+        this.principal.identity().then((account) => {
+            this.currentAccount = account;
+        });
     }
 
     clear() {
         this.activeModal.dismiss('cancel');
     }
 
-    findResolution() {
+    findUser() {
         let index = 0;
         let found = false;
-        while (index < this.resolutions.length && found === false)  {
-            if ((this.resolutions[index]).name === this.resolutionname) {
+        while (index < this.users.length && found === false)  {
+            if ((this.users[index]).login === this.username) {
                 found = true;
-                this.issuecustom.resolution = this.resolutions[index];
+                this.issuecustom.assignee = this.users[index];
             } else {
                 index = index + 1;
             }
         }
-        console.log('aff' + this.issuecustom.resolution.name);
+        console.log('aff' + this.issuecustom.assignee.login);
+    }
+
+    assignToMe() {
+        let index = 0;
+        let found = false;
+        while (index < this.users.length && found === false)  {
+            if ((this.users[index]).login.toLowerCase() === this.currentAccount.login.toLowerCase()) {
+                found = true;
+                this.issuecustom.assignee = this.users[index];
+            } else {
+                index = index + 1;
+            }
+        }
+        console.log('aff' + this.issuecustom.assignee.login);
+
+        this.subscribeToSaveResponse(
+            this.issuecustomService.update(this.issuecustom));
     }
 
     private subscribeToSaveResponse(result: Observable<IssueCustom>) {
@@ -76,12 +96,6 @@ export class IssueCustomResolveDialogComponent implements OnInit {
     }
 
     confirmChanges() {
-        for (let status of this.statuses) {
-            if (status.name.toLowerCase() === 'closed') {
-                this.issuecustom.status = status;
-            }
-        }
-
         this.subscribeToSaveResponse(
             this.issuecustomService.update(this.issuecustom));
     }
@@ -91,7 +105,7 @@ export class IssueCustomResolveDialogComponent implements OnInit {
     selector: 'jhi-issue-custom-resolve-popup',
     template: ''
 })
-export class IssueCustomResolvePopupComponent implements OnInit, OnDestroy {
+export class IssueCustomAssignPopupComponent implements OnInit, OnDestroy {
 
     routeSub: any;
 
@@ -103,7 +117,7 @@ export class IssueCustomResolvePopupComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.routeSub = this.route.params.subscribe((params) => {
             this.issuecustomPopupService
-                .open(IssueCustomResolveDialogComponent as Component, params['id']);
+                .open(IssueCustomAssignDialogComponent as Component, params['id']);
         });
     }
 

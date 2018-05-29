@@ -20,6 +20,10 @@ import {
     IssueCustomResolveDialogComponent,
     IssueCustomResolvePopupComponent
 } from './issue-custom-resolve-dialog.component';
+import {
+    IssueCustomAssignDialogComponent,
+    IssueCustomAssignPopupComponent
+} from "./issue-custom-assign-dialog.component";
 
 const ENTITY_STATES = [
     ...issuecustomRoute,
@@ -41,6 +45,8 @@ const ENTITY_STATES = [
         IssueCustomDeletePopupComponent,
         IssueCustomResolveDialogComponent,
         IssueCustomResolvePopupComponent,
+        IssueCustomAssignDialogComponent,
+        IssueCustomAssignPopupComponent,
     ],
     entryComponents: [
         IssueCustomComponent,
@@ -50,6 +56,8 @@ const ENTITY_STATES = [
         IssueCustomDeletePopupComponent,
         IssueCustomResolveDialogComponent,
         IssueCustomResolvePopupComponent,
+        IssueCustomAssignDialogComponent,
+        IssueCustomAssignPopupComponent,
     ],
     providers: [
         IssueCustomService,

@@ -44,11 +44,19 @@
                 <td>{{program.description}}</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <!--
                         <button type="submit"
                                 [routerLink]="['../program', program.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
+                        </button>
+                        -->
+                        <button type="submit"
+                                [routerLink]="['/projectcustoms', {search: program.id}]" routerLinkActive="active"
+                                class="btn btn-warning btn-sm">
+                            <span class="fa fa-files-o"></span>
+                            <span class="d-none d-md-inline">Projects</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'program/'+ program.id + '/edit'} }]"

@@ -1,0 +1,28 @@
+<form name="assignForm" (ngSubmit)="confirmChanges()">
+    <div class="modal-header">
+        <h4 class="modal-title" id="myIssueCustomLabel">Do you want to assign the issue ?</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+            <div class="form-group">
+                <div class="assignment mb-2" style="display: flex; flex-direction: row; justify-content: space-between">
+                    <button class="btn btn-dark btn-sm" (click)="assignToMe()"><span class="fa fa-user-o"></span><span> Assign to me</span></button>
+                    <span style="font-weight: bold; align-items: center"> OR </span>
+                    <label class="form-control-label" for="field_user">Choose a user</label>
+                </div>
+                <select class="form-control" name="user" id="field_user" [(ngModel)]="username" (change) = "findUser()">
+                    <option *ngFor="let user of users" [value]="user.login"> {{user.login}}</option>
+                </select>
+            </div>
+        </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" class="btn btn-danger">
+            <span class="fa fa-user-plus"></span>&nbsp;<span>Assign</span>
+        </button>
+    </div>
+</form>

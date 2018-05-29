@@ -7,6 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { IssueCustom } from './issue-custom.model';
 import { ResponseWrapper, createRequestOption } from '../../../shared';
+import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
 
 @Injectable()
 export class IssueCustomService {
@@ -15,10 +16,15 @@ export class IssueCustomService {
     private resourceSearchUrl = SERVER_API_URL + 'api/custom/_search/issuecustoms';
 
     ObjReturned: IssueCustom;
+    theDate: NgbDateStruct;
+    now = new Date();
 
-    constructor(private http: Http, private dateUtils: JhiDateUtils) { }
+    constructor(private http: Http, private dateUtils: JhiDateUtils) {
+        this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
+    }
 
     create(issuecustom: IssueCustom): Observable<IssueCustom> {
+        issuecustom.createdDate = this.theDate;
         const copy = this.convert(issuecustom);
         return this.http.post(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
@@ -27,6 +33,7 @@ export class IssueCustomService {
     }
 
     update(issuecustom: IssueCustom): Observable<IssueCustom> {
+        issuecustom.updatedDate = this.theDate;
         const copy = this.convert(issuecustom);
         return this.http.put(this.resourceUrl, copy).map((res: Response) => {
             const jsonResponse = res.json();
