@@ -41,10 +41,10 @@
             <tbody>
             <tr *ngFor="let board of boardcustoms ;trackBy: trackId">
                 <!--<td><a [routerLink]="['../boardcustoms', board.id ]">{{board.id}}</a></td>-->
-                <td><a [routerLink]="['../boardcustoms', board.id ]">{{board.code}}</a></td>
+                <td style="font-weight: bold">{{board.code}}</td>
                 <td>{{board.name}}</td>
                 <td>{{board.type}}</td>
-                <td *ngIf="board.project">{{board.project.name}}</td>
+                <td *ngIf="board.project"><a style="color: darkslateblue" [routerLink]="['/projectcustoms', {search: board.project.id}]">{{board.project.name}}</a></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <!--
@@ -59,7 +59,7 @@
                                 [routerLink]="['../boardcustoms/configure', board.id ]"
                                 class="btn btn-warning btn-sm">
                             <span class="fa fa-wrench"></span>
-                            <span class="d-none d-md-inline">Settings</span>
+                            <span class="d-none d-md-inline">Configure</span>
                         </button>
                         <button type="submit"
                                 [routerLink]="['../boardcustoms/agile', board.id ]"

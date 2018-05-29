@@ -1,10 +1,7 @@
 package com.erp.app.config.dbmigrations;
 
-import com.erp.app.domain.Authority;
-import com.erp.app.domain.IssueType;
-import com.erp.app.domain.IssuePriority;
-import com.erp.app.domain.Category;
-import com.erp.app.domain.Resolution;
+import com.erp.app.domain.*;
+import com.erp.app.domain.custom.WorkflowCustom;
 import com.erp.app.security.AuthoritiesConstants;
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
@@ -158,5 +155,15 @@ public class OtherInitialSetupMigration {
         resolved.setName("Resolved");
         resolved.setDescription("The request has been completed and put into action.");
         mongoTemplate.save(resolved);
+    }
+
+    @ChangeSet(order = "08", author = "initiator", id = "08-addWorkflow")
+    public void addWorkflow(MongoTemplate mongoTemplate) {
+        WorkflowCustom simplified = new WorkflowCustom();
+        simplified.setId("workflow-1");
+        simplified.setCode("SMPL");
+        simplified.setName("Simplified Workflow");
+        simplified.setDescription("Can be edited via the board configuration");
+        mongoTemplate.save(simplified);
     }
 }

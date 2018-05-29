@@ -46,9 +46,9 @@
             <tr *ngFor="let projectcustom of projectcustoms ;trackBy: trackId">
                 <!--<td><a [routerLink]="['../projectcustoms', projectcustom.id ]">{{projectcustom.code}}</a></td>-->
                 <td style="font-weight: bold">{{projectcustom.code}}</td>
-                <td *ngIf="projectcustom.program">{{projectcustom.program.name}}</td>
+                <td *ngIf="projectcustom.program"><a style="color: darkslateblue" [routerLink]="['/program', {search: projectcustom.program.id}]">{{projectcustom.program.name}}</a></td>
                 <td *ngIf="!projectcustom.program">&nbsp;</td>
-                <td *ngIf="projectcustom.process">{{projectcustom.process.name}}</td>
+                <td *ngIf="projectcustom.process"><a style="color: darkslateblue" [routerLink]="['/workflowcustoms', {search: projectcustom.process.id}]">{{projectcustom.process.name}}</a></td>
                 <td *ngIf="!projectcustom.process">&nbsp;</td>
                 <td *ngIf="projectcustom.lead">{{projectcustom.lead.login}}</td>
                 <td *ngIf="!projectcustom.lead">&nbsp;</td>
@@ -65,6 +65,14 @@
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
                         </button>-->
+                        <button type="submit"
+                                [routerLink]="['/versioncustoms', {search: projectcustom.id}]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-warning btn-sm">
+                            <span class="fa fa-puzzle-piece"></span>
+                            <span class="d-none d-md-inline">Versions</span>
+                        </button>
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'projectcustoms/'+ projectcustom.id + '/edit'} }]"
                                 replaceUrl="true"

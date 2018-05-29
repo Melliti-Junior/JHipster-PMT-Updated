@@ -69,11 +69,11 @@
                 <!--<td><a [routerLink]="['../stepcustoms', step.id ]">{{step.code}}</a></td>-->
                 <td style="font-weight: bold">{{step.code}}</td>
                 <td>{{step.name}}</td>
-                <td *ngIf="step.workflow">{{step.workflow.name}}</td>
+                <td *ngIf="step.workflow"><a style="color: darkslateblue" [routerLink]="['/workflowcustoms', {search: step.workflow.id}]">{{step.workflow.name}}</a></td>
                 <td *ngIf="!step.workflow">&nbsp;</td>
-                <td *ngIf="step.status">{{step.status.name}}</td>
+                <td *ngIf="step.status"><a style="color: darkslateblue" [routerLink]="['/statuscustoms', {search: step.status.id}]">{{step.status.name}}</a></td>
                 <td *ngIf="!step.status">&nbsp;</td>
-                <td *ngIf="step.column">{{step.column.name}}</td>
+                <td *ngIf="step.column"><a style="color: darkslateblue" [routerLink]="['/columncustoms', {search: step.column.id}]">{{step.column.name}}</a></td>
                 <td *ngIf="!step.column">&nbsp;</td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">

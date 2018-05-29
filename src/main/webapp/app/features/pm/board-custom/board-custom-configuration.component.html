@@ -93,7 +93,7 @@
                                             <div class="step-info row pl-3">
                                                 <div class="step-code">
                                                     <!-- <div class="card-title"><a style="color: #533f03;" [routerLink]="['/stepcustoms', step.id ]">{{step.code}}</a></div> -->
-                                                    <div class="card-title" [ngStyle]="{'color': step.status.category.color}">{{step.code}}</div>
+                                                    <div class="card-title" [ngStyle]="{'color': step.status.category.color}">{{step.name}}</div>
                                                 </div>
                                             </div>
                                         </div>
@@ -115,7 +115,7 @@
                                     <div class="step-info row pl-3">
                                         <div class="step-code">
                                             <!-- <div class="card-title" style="color: {{stepUnmapped.status.category.color}};"><a style="color: #533f03;" [routerLink]="['/stepcustoms', stepUnmapped.id ]">{{stepUnmapped.code}}</a></div> -->
-                                            <div class="card-title" style="font-weight: bold; padding: 2px;" [ngStyle]="{'color': stepUnmapped.status.category.color}">{{stepUnmapped.code}}</div>
+                                            <div class="card-title" style="font-weight: bold; padding: 2px;" [ngStyle]="{'color': stepUnmapped.status.category.color}">{{stepUnmapped.name}}</div>
                                         </div>
                                     </div>
                                 </div>

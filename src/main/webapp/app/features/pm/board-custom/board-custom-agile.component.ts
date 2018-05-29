@@ -347,7 +347,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     getOpenStep(): StepCustom {
         let tempStep = new StepCustom();
         for (let step of this.relatedSteps) {
-            if (step.name.toLowerCase() === 'open') {
+            if (step.status.category.code.toUpperCase() === 'NEW') {
                 tempStep = step;
             }
         }
@@ -534,7 +534,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         this.lookForActiveSprint();
     }
-
+kan
     dragStart(ev) {
         console.error('drag event starts here');
 

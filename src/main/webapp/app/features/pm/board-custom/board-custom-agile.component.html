@@ -113,7 +113,7 @@
                                     <div class="code" *ngIf="sp_issue.status && sp_issue.status.category.name.toLowerCase() === 'done'"><a href="#/issuecustoms/{{sp_issue.id}}"><del>{{sp_issue.code}}</del></del></a></div>
                                     <div class="summary">{{sp_issue.summary}}</div>
                                     <div class="external-info">
-                                        <div class="epic" *ngIf="sp_issue.epic" [style.background-color] = "sp_issue.epic.color">{{sp_issue.epic.name}}</div>
+                                        <div class="epic" *ngIf="sp_issue.epic" [style.background-color] = "sp_issue.epic.color">{{sp_issue.epic.code}}</div>
                                         <div class="version" *ngIf="sp_issue.version">{{sp_issue.version.name}}</div>
                                     </div>
                                     <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>
@@ -148,7 +148,7 @@
                                     <div class="code" *ngIf="issue.status && issue.status.category.name.toLowerCase() === 'done'"><a href="#/issuecustoms/{{issue.id}}"><del>{{issue.code}}</del></a></div>
                                     <div class="summary">{{issue.summary}}</div>
                                     <div class="external-info">
-                                        <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.name}}</div>
+                                        <div class="epic" *ngIf="issue.epic" [style.background-color] = "issue.epic.color">{{issue.epic.code}}</div>
                                         <div class="version" *ngIf="issue.version">{{issue.version.name}}</div>
                                     </div>
                                     <div class="assignee-img"><img src="../../../../content/images/logo-jhipster.png" alt="assignee img"/></div>

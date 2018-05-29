@@ -1,14 +1,17 @@
 
 <div *ngIf="versioncustom">
-    <h6><span><a [routerLink]="['/projectcustoms', versioncustom.project.id ]">{{versioncustom.project.name}}</a></span></h6>
-
+    <div style="display: flex; flex-direction: row">
+        <h5><span>{{versioncustom.project.name}}</span></h5>
+        <h5>&nbsp;<span class="fa fa-angle-right" style="font-size: x-large; font-weight: bolder">&nbsp;</span> </h5>
+        <h5><span>{{versioncustom.name}}</span> </h5>
+    </div>
     <h3><span>{{versioncustom.name}} ({{versioncustom.code}})</span> </h3>
-    <div *ngIf="versioncustom.isReleased" class="row" style="margin-left: 3%">
+    <div *ngIf="versioncustom.releaseDate" class="row" style="margin-left: 3%">
         <div class="col-2" style="font-weight: bold;"><span style="color: #888888;">Release Status : </span></div>
         <div class="col-3">Released</div>
     </div>
 
-    <div *ngIf="!versioncustom.isReleased" class="row" style="margin-left: 3%">
+    <div *ngIf="!versioncustom.releaseDate" class="row" style="margin-left: 3%">
         <div class="col-2" style="font-weight: bold;"><span style="color: #888888;">Release Status : </span></div>
         <div class="col-3">Unreleased</div>
     </div>

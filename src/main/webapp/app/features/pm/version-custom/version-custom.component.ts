@@ -136,6 +136,10 @@ currentAccount: any;
         return result;
     }
 
+    previousState() {
+        window.history.back();
+    }
+
     private onSuccess(data, headers) {
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');

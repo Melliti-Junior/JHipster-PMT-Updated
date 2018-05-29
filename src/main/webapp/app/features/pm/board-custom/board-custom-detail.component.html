@@ -286,7 +286,7 @@
                             <div class="row">
                                 <h6>
                                     <span class="col-3" style="font-weight: bold">Total sprints : </span>
-                                    {{relatedSprints.length}}
+                                    <div>{{relatedSprints.length}}</div>
                                 </h6>
                             </div>
                             <div class="row">
@@ -300,6 +300,7 @@
                 </div>
             </div>
         </div>
+    </dl>
     <button type="submit"
             (click)="previousState()"
             class="btn btn-info">

@@ -1,12 +1,26 @@
 <div>
     <h2>
         <span>Versions</span>
-        <button class="btn btn-primary float-right jh-create-entity create-version-custom" [routerLink]="['/', { outlets: { popup: ['versioncustom-new'] } }]">
-            <span class="fa fa-plus"></span>
-            <span class="hidden-sm-down" >
-            Create new Version
-            </span>
-        </button>
+        <div class="btn-group mr-2 float-right" style="display: flex; flex-direction: row; justify-content: space-between">
+
+            <div class="btn-group mr-2" role="group">
+                <button type="submit"
+                        (click)="previousState()"
+                        class="btn btn-info">
+                    <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+                </button>
+            </div>
+
+            <div class="btn-group mr-2" role="group">
+                <button class="btn btn-primary float-right jh-create-entity create-version-custom" [routerLink]="['/', { outlets: { popup: ['versioncustom-new'] } }]">
+                    <span class="fa fa-plus"></span>
+                        <span class="hidden-sm-down" >
+                        Create new Version
+                        </span>
+                </button>
+            </div>
+
+        </div>
     </h2>
     <jhi-alert></jhi-alert>
     <div class="row">
@@ -48,7 +62,7 @@
                 <td>{{version.startDate | date:'mediumDate'}}</td>
                 <td>{{version.releaseDate | date:'mediumDate'}}</td>
                 <td>{{version.description}}</td>
-                <td *ngIf="version.project">{{version.project.name}}</td>
+                <td *ngIf="version.project"><a style="color: darkslateblue" [routerLink]="['/projectcustoms', {search: version.project.id}]">{{version.project.name}}</a></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <button type="submit"

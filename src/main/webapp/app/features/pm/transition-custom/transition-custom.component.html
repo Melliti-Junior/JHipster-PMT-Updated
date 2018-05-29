@@ -60,11 +60,11 @@
                 <!--<td><a [routerLink]="['../transitioncustoms', transition.id ]">{{transition.code}}</a></td>-->
                 <td style="font-weight: bold">{{transition.code}}</td>
                 <td>{{transition.name}}</td>
-                <td *ngIf="transition.workflow">{{transition.workflow.name}}</td>
+                <td *ngIf="transition.workflow"><a style="color: darkslateblue" [routerLink]="['/workflowcustoms', {search: transition.workflow.id}]">{{transition.workflow.name}}</a></td>
                 <td *ngIf="!transition.workflow">&nbsp;</td>
-                <td *ngIf="transition.sourceStep">{{transition.sourceStep.name}}</td>
+                <td *ngIf="transition.sourceStep"><a style="color: darkslateblue" [routerLink]="['/stepcustoms', {search: transition.sourceStep.id}]">{{transition.sourceStep.name}}</a></td>
                 <td *ngIf="!transition.sourceStep">&nbsp;</td>
-                <td *ngIf="transition.targetStep">{{transition.targetStep.name}}</td>
+                <td *ngIf="transition.targetStep"><a style="color: darkslateblue" [routerLink]="['/stepcustoms', {search: transition.targetStep.id}]">{{transition.targetStep.name}}</a></td>
                 <td *ngIf="!transition.targetStep">&nbsp;</td>
                 <td>{{transition.description}}</td>
                 <td class="text-right">
