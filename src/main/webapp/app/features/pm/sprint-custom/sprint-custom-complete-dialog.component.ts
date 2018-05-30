@@ -169,7 +169,7 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
                 });
                 //
                 // location.reload();
-                this.router.navigate(['/sprintcustoms']);
+                this.router.navigate(['/sprintcustoms', {search: this.sprintcustom.board.id}]);
 
                 this.activeModal.dismiss(true);
             });

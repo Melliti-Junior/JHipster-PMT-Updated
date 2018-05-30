@@ -65,12 +65,14 @@
                 <td *ngIf="version.project"><a style="color: darkslateblue" [routerLink]="['/projectcustoms', {search: version.project.id}]">{{version.project.name}}</a></td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
+                        <!--
                         <button type="submit"
                                 [routerLink]="['../versioncustoms', version.id ]"
                                 class="btn btn-info btn-sm">
                             <span class="fa fa-eye"></span>
                             <span class="d-none d-md-inline">View</span>
                         </button>
+                        -->
                         <button type="submit"
                                 [routerLink]="['/', { outlets: { popup: 'versioncustoms/'+ version.id + '/edit'} }]"
                                 replaceUrl="true"
