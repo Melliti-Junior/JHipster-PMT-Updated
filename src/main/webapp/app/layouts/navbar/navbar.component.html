@@ -298,7 +298,7 @@
                         </span>
                     </a>
                     <ul class="dropdown-menu" ngbDropdownMenu>
-                        <li>
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
                             <a class="dropdown-item fa fa-briefcase" routerLink="/program" routerLinkActive="active">
                                 <span>View All Programs</span>
                             </a>
@@ -324,22 +324,22 @@
                             </a>
                         </li>
 
-                        <li>
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
                             <a class="dropdown-item fa fa-linode" routerLink="/issue-type" routerLinkActive="active">
                                 <span>Manage Types</span>
                             </a>
                         </li>
-                        <li>
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
                             <a class="dropdown-item fa fa-angle-double-up" routerLink="/issue-priority" routerLinkActive="active">
                                 <span>Manage Priorities</span>
                             </a>
                         </li>
-                        <li>
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
                             <a class="dropdown-item fa fa-clipboard" routerLink="/epic" routerLinkActive="active">
                                 <span>Manage Epics</span>
                             </a>
                         </li>
-                        <li>
+                        <li *jhiHasAnyAuthority="['ROLE_ADMIN']">
                             <a class="dropdown-item fa fa-calendar-check-o" routerLink="/resolutioncustoms" routerLinkActive="active">
                                 <span>Manage Resolutions</span>
                             </a>

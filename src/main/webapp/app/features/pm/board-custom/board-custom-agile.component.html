@@ -31,7 +31,7 @@
             </div>
 
             <div *ngIf="boardcustom.type.toLowerCase() === 'scrum'" class="btn-group mr-2" role="group">
-                <button class="btn btn-warning float-right" [routerLink]="['../../../sprintcustoms', {search: boardcustom.id}]" routerLinkActive="active">
+                <button class="btn btn-warning float-right" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" [routerLink]="['../../../sprintcustoms', {search: boardcustom.id}]" routerLinkActive="active">
                     <span class="fa fa-undo"></span>
                     <span class="hidden-sm-down" >
                         Sprints
@@ -41,7 +41,7 @@
 
 
             <div class="btn-group mr-2" role="group">
-                <button class="btn btn-success float-right" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
+                <button class="btn btn-success float-right" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
                     <span class="fa fa-wrench"></span>
                     <span class="hidden-sm-down" >
                         Configure
@@ -67,6 +67,7 @@
                 <div *ngIf="activeSprint && activeSprint.isActive">
                     <button type="submit"
                             class="btn btn-danger"
+                            *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
                             [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activeSprint.id + '/complete'} }]">
                         <span class="fa fa-hand-stop-o"></span>&nbsp;<span>Complete Sprint</span>
                     </button>
@@ -85,7 +86,7 @@
                         <div class="sprintIssues">{{relatedIssuesPerSprint.length}} issues</div>
                     </div>
                     <!--<div class="StartSprint" *ngIf="!activeSprint.isActive">-->
-                    <div class="startSprintBtn">
+                    <div class="startSprintBtn" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']">
                         <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
                         <button disabled="disabled" *ngIf="(boardcustom.type.toUpperCase().localeCompare('SCRUM')===0) && (!activeSprint.isActive)" class="btn btn-success" id="startSprintBtn" (click)="startSprint()" [routerLink]="['/', { outlets: { popup: 'sprintcustoms/'+ activeSprint.id + '/start'} }]">
                             <span class="fa fa-check"></span>
@@ -134,7 +135,9 @@
                         </div>
                         <div class="NewSprint" *ngIf="!activeSprint">
                             <!--<button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" [routerLink]="['/', { outlets: { popup: ['sprintcustom-new'] } }]">Create Sprint</button>-->
-                            <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="createSprintBtn" (click)="prepareSprint();" >Create Sprint</button>
+                            <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']">
+                                <button *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" class="btn btn-warning" id="createSprintBtn" (click)="prepareSprint();" >Create Sprint</button>
+                            </div>
                         </div>
                     </div>
 

@@ -46,9 +46,15 @@
             <tr *ngFor="let projectcustom of projectcustoms ;trackBy: trackId">
                 <!--<td><a [routerLink]="['../projectcustoms', projectcustom.id ]">{{projectcustom.code}}</a></td>-->
                 <td style="font-weight: bold">{{projectcustom.code}}</td>
-                <td *ngIf="projectcustom.program"><a style="color: darkslateblue" [routerLink]="['/program', {search: projectcustom.program.id}]">{{projectcustom.program.name}}</a></td>
+                <td *ngIf="projectcustom.program">
+                    <a *jhiHasAnyAuthority="['ROLE_ADMIN']" style="color: darkslateblue" [routerLink]="['/program', {search: projectcustom.program.id}]">{{projectcustom.program.name}}</a>
+                    <span *jhiHasAnyAuthority="['ROLE_MANAGER']">{{projectcustom.program.name}}</span>
+                </td>
                 <td *ngIf="!projectcustom.program">&nbsp;</td>
-                <td *ngIf="projectcustom.process"><a style="color: darkslateblue" [routerLink]="['/workflowcustoms', {search: projectcustom.process.id}]">{{projectcustom.process.name}}</a></td>
+                <td *ngIf="projectcustom.process">
+                    <a *jhiHasAnyAuthority="['ROLE_ADMIN']" style="color: darkslateblue" [routerLink]="['/workflowcustoms', {search: projectcustom.process.id}]">{{projectcustom.process.name}}</a>
+                    <span *jhiHasAnyAuthority="['ROLE_MANAGER']">{{projectcustom.process.name}}</span>
+                </td>
                 <td *ngIf="!projectcustom.process">&nbsp;</td>
                 <td *ngIf="projectcustom.lead">{{projectcustom.lead.login}}</td>
                 <td *ngIf="!projectcustom.lead">&nbsp;</td>
