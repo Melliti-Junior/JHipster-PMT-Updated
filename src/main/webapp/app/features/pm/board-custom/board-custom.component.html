@@ -1,7 +1,7 @@
 <div>
     <h2>
         <span>Boards</span>
-        <button class="btn btn-primary float-right jh-create-entity create-board-custom" [routerLink]="['/', { outlets: { popup: ['boardcustom-new'] } }]">
+        <button class="btn btn-primary float-right jh-create-entity create-board-custom" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" [routerLink]="['/', { outlets: { popup: ['boardcustom-new'] } }]">
             <span class="fa fa-plus"></span>
             <span class="hidden-sm-down" >
             Create new Board
@@ -44,7 +44,10 @@
                 <td style="font-weight: bold">{{board.code}}</td>
                 <td>{{board.name}}</td>
                 <td>{{board.type}}</td>
-                <td *ngIf="board.project"><a style="color: darkslateblue" [routerLink]="['/projectcustoms', {search: board.project.id}]">{{board.project.name}}</a></td>
+                <td *ngIf="board.project">
+                    <a *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" style="color: darkslateblue" [routerLink]="['/projectcustoms', {search: board.project.id}]">{{board.project.name}}</a>
+                    <span *jhiHasAnyAuthority="['ROLE_EMPLOYEE']">{{board.project.name}}</span>
+                </td>
                 <td class="text-right">
                     <div class="btn-group flex-btn-group-container">
                         <!--
@@ -56,6 +59,7 @@
                         </button>
                         -->
                         <button type="submit"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
                                 [routerLink]="['../boardcustoms/configure', board.id ]"
                                 class="btn btn-warning btn-sm">
                             <span class="fa fa-wrench"></span>
@@ -83,6 +87,7 @@
                         </button>
                         -->
                         <button type="submit"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
                                 [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ board.id + '/edit'} }]"
                                 replaceUrl="true"
                                 queryParamsHandling="merge"
@@ -91,6 +96,7 @@
                             <span class="d-none d-md-inline">Edit</span>
                         </button>
                         <button type="submit"
+                                *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']"
                                  [routerLink]="['/', { outlets: { popup: 'boardcustoms/'+ board.id + '/delete'} }]"
                                  replaceUrl="true"
                                  queryParamsHandling="merge"

@@ -31,7 +31,7 @@
             </div>
 
             <div *ngIf="boardcustom.type.toLowerCase() === 'scrum'" class="btn-group mr-2" role="group">
-                <button class="btn btn-warning float-right" [routerLink]="['../../../sprintcustoms', {search: boardcustom.id}]" routerLinkActive="active">
+                <button class="btn btn-warning float-right" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" [routerLink]="['../../../sprintcustoms', {search: boardcustom.id}]" routerLinkActive="active">
                     <span class="fa fa-undo"></span>
                     <span class="hidden-sm-down" >
                         Sprints
@@ -41,7 +41,7 @@
 
 
             <div class="btn-group mr-2" role="group">
-                <button class="btn btn-success float-right" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
+                <button class="btn btn-success float-right" *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" [routerLink]="['../../configure', + boardcustom.id]" routerLinkActive="active">
                     <span class="fa fa-wrench"></span>
                     <span class="hidden-sm-down" >
                         Configure
