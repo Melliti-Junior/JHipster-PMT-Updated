@@ -55,7 +55,8 @@
 
     <div class="boardAgile pl-3">
         <div *ngIf="boardcustom" #divClick class="boardCh" >
-            <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumItems"></p-tabMenu>
+            <div *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_MANAGER']" ><p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumItems"></p-tabMenu></div>
+            <div *jhiHasAnyAuthority="['ROLE_EMPLOYEE']" ><p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('SCRUM')===0" [model]="scrumViewItems"></p-tabMenu></div>
             <p-tabMenu *ngIf="boardcustom.type.toUpperCase().localeCompare('KANBAN')===0" [model]="kanbanItems"></p-tabMenu>
         </div>
     </div>

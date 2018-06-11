@@ -70,6 +70,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     now = new Date();
 
     scrumItems: MenuItem[];
+    scrumViewItems: MenuItem[];
     kanbanItems: MenuItem[];
 
     Backlog = false;
@@ -114,6 +115,15 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                         this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                     }},
             ];
+
+            this.scrumViewItems = [
+                {
+                    label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
+                        this.Backlog = false; this.ActiveSprint = true;
+                        this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                    }},
+            ];
+
             this.kanbanItems = [
                 {
                     label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
@@ -123,8 +133,11 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             ];
 
             if (this.boardcustom) {
-                if (this.boardcustom.type.toLowerCase() === 'scrum') {
-                    this.Backlog = true;
+                if (this.boardcustom.type.toLowerCase() === 'scrum' && this.scrumItems) {
+                    this.Backlog = true; this.ActiveSprint = false;
+                }
+                if (this.boardcustom.type.toLowerCase() === 'scrum' && this.scrumViewItems) {
+                    this.ActiveSprint = true; this.Backlog = false;
                 }
                 if (this.boardcustom.type.toLowerCase() === 'kanban') {
                     this.KanbanBoard = true;
