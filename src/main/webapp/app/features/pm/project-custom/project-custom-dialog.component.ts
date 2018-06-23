@@ -12,7 +12,7 @@ import { ProjectCustomService } from './project-custom.service';
 import { Program, ProgramService } from '../../../entities/program';
 import {WorkflowCustom} from '../workflow-custom/workflow-custom.model';
 import {WorkflowCustomService} from '../workflow-custom/workflow-custom.service';
-import {Principal, User, UserService} from "../../../shared";
+import {Principal, User, UserService} from '../../../shared';
 
 @Component({
     selector: 'jhi-project-custom-dialog',

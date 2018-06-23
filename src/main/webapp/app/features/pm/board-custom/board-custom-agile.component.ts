@@ -177,7 +177,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         // let BacklogBtnID = document.getElementById('backlog').click();
     }
 
-
     load(id) {
         this.boardcustomSce.find(id).subscribe((boardcustom) => {
             this.boardcustom = boardcustom;
@@ -260,7 +259,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 if (col.board.code.toLowerCase() === this.boardcustom.code.toLowerCase()) {
                     if (this.relatedColumns.indexOf(col) === -1) {
                         // this.relatedColumns.push(col);
-                        this.relatedColumns.splice(col.order - 1,0, col);
+                        this.relatedColumns.splice(col.order - 1, 0, col);
                         this.relatedColumns.sort();
                     }
                 }
@@ -547,7 +546,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
         this.lookForActiveSprint();
     }
-kan
+
     dragStart(ev) {
         console.error('drag event starts here');
 
@@ -960,7 +959,7 @@ kan
                 this.isSaving = true;
 
                 if (currentStep.status.category.name.toLowerCase() === 'done') {
-                    this.router.navigate(['/', { outlets: { popup : 'issuecustoms/'+ issue.id + '/resolve' } }]);
+                    this.router.navigate(['/', { outlets: { popup : 'issuecustoms/' + issue.id + '/resolve' } }]);
                     document.getElementById(data).style.textDecoration = 'line-through';
                     console.error(currentStep.status.category.name);
                 } else {

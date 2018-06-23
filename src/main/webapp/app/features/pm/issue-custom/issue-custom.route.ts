@@ -8,7 +8,7 @@ import { IssueCustomDetailComponent } from './issue-custom-detail.component';
 import { IssueCustomPopupComponent } from './issue-custom-dialog.component';
 import { IssueCustomDeletePopupComponent } from './issue-custom-delete-dialog.component';
 import {IssueCustomResolvePopupComponent} from './issue-custom-resolve-dialog.component';
-import {IssueCustomAssignPopupComponent} from "./issue-custom-assign-dialog.component";
+import {IssueCustomAssignPopupComponent} from './issue-custom-assign-dialog.component';
 
 @Injectable()
 export class IssueCustomResolvePagingParams implements Resolve<any> {

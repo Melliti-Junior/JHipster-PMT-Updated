@@ -11,7 +11,7 @@ import {TransitionCustom} from '../transition-custom/transition-custom.model';
 import {TransitionCustomService} from '../transition-custom/transition-custom.service';
 import {StepCustom} from '../step-custom/step-custom.model';
 import {StepCustomService} from '../step-custom/step-custom.service';
-import {MenuItem} from "primeng/api";
+import {MenuItem} from 'primeng/api';
 
 @Component({
     selector: 'jhi-workflow-custom-detail',
@@ -117,7 +117,7 @@ export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterVi
             .then((stepcustoms) => this.Allsteps = stepcustoms );
     }
 
-    getRelatedTransitions () {
+    getRelatedTransitions() {
         this.relatedTransitions = new Array<TransitionCustom>();
         for (let trans of this.Alltransitions) {
             if (trans.workflow.id === this.workflowcustom.id) {
@@ -128,7 +128,7 @@ export class WorkflowCustomDetailComponent implements OnInit, OnDestroy, AfterVi
         }
     }
 
-    getRelatedSteps () {
+    getRelatedSteps() {
         this.relatedSteps = new Array<StepCustom>();
         for (let step of this.Allsteps) {
             if (step.workflow.id === this.workflowcustom.id) {

@@ -23,7 +23,7 @@ import {
 import {
     IssueCustomAssignDialogComponent,
     IssueCustomAssignPopupComponent
-} from "./issue-custom-assign-dialog.component";
+} from './issue-custom-assign-dialog.component';
 
 const ENTITY_STATES = [
     ...issuecustomRoute,

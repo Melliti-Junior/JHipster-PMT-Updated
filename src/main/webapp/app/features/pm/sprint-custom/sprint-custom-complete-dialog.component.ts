@@ -45,7 +45,7 @@ export class SprintCustomCompleteDialogComponent implements OnInit {
         this.sprintcustomService.getSprintCustoms()
             .then((sprints) => this.sprintcustoms = sprints );
         this.issuecustomSce.getIssueCustoms()
-            .then((issues)=> this.issuecustoms = issues);
+            .then((issues) => this.issuecustoms = issues);
         this.verifyDates(this.sprintcustom);
     }
 

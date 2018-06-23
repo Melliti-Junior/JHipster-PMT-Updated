@@ -7,7 +7,7 @@ import { JhiDateUtils } from 'ng-jhipster';
 
 import { IssueCustom } from './issue-custom.model';
 import { ResponseWrapper, createRequestOption } from '../../../shared';
-import {NgbDateStruct} from "@ng-bootstrap/ng-bootstrap";
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()
 export class IssueCustomService {

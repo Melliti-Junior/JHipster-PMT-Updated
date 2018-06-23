@@ -418,7 +418,7 @@
                             </span>
                         </a>
                 </li>
-                <li ngbDropdown class="btn btn-default dropdown pointer" [routerLink]="['/', { outlets: { popup: ['issuecustom-new'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                <li *jhiHasAnyAuthority="['ROLE_ADMIN', 'ROLE_EMPLOYEE', 'ROLE_MANAGER']" ngbDropdown class="btn btn-default dropdown pointer" [routerLink]="['/', { outlets: { popup: ['issuecustom-new'] } }]" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
                         <a class="nav-link">
                             <span>
                                 <i class="fa fa-plus" aria-hidden="true"></i>

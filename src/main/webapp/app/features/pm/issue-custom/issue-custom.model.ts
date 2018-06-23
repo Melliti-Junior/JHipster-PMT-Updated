@@ -7,7 +7,7 @@ import { ProjectCustom } from '../project-custom';
 import {VersionCustom} from '../version-custom';
 import {SprintCustom} from '../sprint-custom';
 import {StatusCustom} from '../status-custom';
-import {User} from "../../../shared";
+import {User} from '../../../shared';
 
 export class IssueCustom extends Issue {
     constructor(

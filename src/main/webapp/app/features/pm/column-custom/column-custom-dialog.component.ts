@@ -92,7 +92,7 @@ export class ColumnCustomDialogComponent implements OnInit {
         for (let column of this.columnCustoms) {
             if ((column.board !== null) && (column.board.id === this.parentBoard.id)) {
                 if (this.siblingColumns.indexOf(column) !== -1) {
-                    this.siblingColumns.splice(column.order - 1, 0 ,column);
+                    this.siblingColumns.splice(column.order - 1, 0 , column);
                 }
             }
         }

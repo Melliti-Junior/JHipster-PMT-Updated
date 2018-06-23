@@ -90,7 +90,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         );
     }
 
-    findSelectedColumn () {
+    findSelectedColumn() {
         for (let col of this.relatedColumns) {
             if (col.board.id === this.boardcustom.id) {
                 this.currCol = col;

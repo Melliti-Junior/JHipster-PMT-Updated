@@ -12,7 +12,7 @@ import {ResolutionCustom} from '../resolution-custom';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {StatusCustom, StatusCustomService} from '../status-custom';
-import {Principal, User, UserService} from "../../../shared";
+import {Principal, User, UserService} from '../../../shared';
 
 @Component({
     selector: 'jhi-issue-custom-assign-dialog',
