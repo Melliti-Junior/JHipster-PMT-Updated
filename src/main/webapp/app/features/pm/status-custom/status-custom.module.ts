@@ -1,17 +1,17 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    StatusCustomService,
-    StatusCustomPopupService,
     StatusCustomComponent,
+    StatusCustomDeleteDialogComponent,
+    StatusCustomDeletePopupComponent,
     StatusCustomDetailComponent,
     StatusCustomDialogComponent,
     StatusCustomPopupComponent,
-    StatusCustomDeletePopupComponent,
-    StatusCustomDeleteDialogComponent,
+    StatusCustomPopupService,
     statusCustomRoute,
+    StatusCustomService,
     statusPopupRoute,
     StatusResolvePagingParams,
 } from './';

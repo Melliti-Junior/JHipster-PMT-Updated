@@ -1,8 +1,8 @@
-import { Injectable, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { BoardCustom } from './board-custom.model';
-import { BoardCustomService } from './board-custom.service';
+import {Component, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {BoardCustom} from './board-custom.model';
+import {BoardCustomService} from './board-custom.service';
 
 @Injectable()
 export class BoardCustomPopupService {

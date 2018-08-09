@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ProjectCustom } from './project-custom.model';
-import { ProjectCustomPopupService } from './project-custom-popup.service';
-import { ProjectCustomService } from './project-custom.service';
-import { Program, ProgramService } from '../../../entities/program';
+import {ProjectCustom} from './project-custom.model';
+import {ProjectCustomPopupService} from './project-custom-popup.service';
+import {ProjectCustomService} from './project-custom.service';
+import {Program, ProgramService} from '../../../entities/program';
 import {WorkflowCustom} from '../workflow-custom/workflow-custom.model';
 import {WorkflowCustomService} from '../workflow-custom/workflow-custom.service';
 import {Principal, User, UserService} from '../../../shared';

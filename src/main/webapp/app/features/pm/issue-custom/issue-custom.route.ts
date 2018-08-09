@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { IssueCustomComponent } from './issue-custom.component';
-import { IssueCustomDetailComponent } from './issue-custom-detail.component';
-import { IssueCustomPopupComponent } from './issue-custom-dialog.component';
-import { IssueCustomDeletePopupComponent } from './issue-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {IssueCustomComponent} from './issue-custom.component';
+import {IssueCustomDetailComponent} from './issue-custom-detail.component';
+import {IssueCustomPopupComponent} from './issue-custom-dialog.component';
+import {IssueCustomDeletePopupComponent} from './issue-custom-delete-dialog.component';
 import {IssueCustomResolvePopupComponent} from './issue-custom-resolve-dialog.component';
 import {IssueCustomAssignPopupComponent} from './issue-custom-assign-dialog.component';
 

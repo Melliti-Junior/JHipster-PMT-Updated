@@ -1,15 +1,13 @@
 package com.erp.app.domain.custom;
 
 import com.erp.app.domain.*;
-import com.erp.app.domain.util.CascadeSave;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-// @Document(collection = "issue")
 public class IssueCustom extends Issue implements Serializable {
 
 	/**

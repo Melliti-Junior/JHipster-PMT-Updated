@@ -1,4 +1,4 @@
-import { Sprint } from '../../../entities/sprint/sprint.model';
+import {Sprint} from '../../../entities/sprint/sprint.model';
 import {BoardCustom} from '../board-custom';
 
 export class SprintCustom extends Sprint {

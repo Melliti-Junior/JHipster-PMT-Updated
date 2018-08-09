@@ -1,8 +1,8 @@
-import { Injectable, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ColumnCustom } from './column-custom.model';
-import { ColumnCustomService } from './column-custom.service';
+import {Component, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {ColumnCustom} from './column-custom.model';
+import {ColumnCustomService} from './column-custom.service';
 
 @Injectable()
 export class ColumnCustomPopupService {

@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
+import {JhiDateUtils} from 'ng-jhipster';
 
-import { BoardCustom } from './board-custom.model';
+import {BoardCustom} from './board-custom.model';
 import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()

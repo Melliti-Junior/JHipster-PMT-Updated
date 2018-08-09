@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
-import { StatusCustom } from './status-custom.model';
-import { StatusCustomService } from './status-custom.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../../shared';
+import {StatusCustom} from './status-custom.model';
+import {StatusCustomService} from './status-custom.service';
+import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../../shared';
 
 @Component({
     selector: 'jhi-status-custom',

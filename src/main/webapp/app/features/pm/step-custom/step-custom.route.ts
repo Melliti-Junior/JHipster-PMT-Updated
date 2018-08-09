@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { StepCustomComponent } from './step-custom.component';
-import { StepCustomDetailComponent } from './step-custom-detail.component';
-import { StepCustomPopupComponent } from './step-custom-dialog.component';
-import { StepCustomDeletePopupComponent } from './step-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {StepCustomComponent} from './step-custom.component';
+import {StepCustomDetailComponent} from './step-custom-detail.component';
+import {StepCustomPopupComponent} from './step-custom-dialog.component';
+import {StepCustomDeletePopupComponent} from './step-custom-delete-dialog.component';
 
 @Injectable()
 export class StepCustomResolvePagingParams implements Resolve<any> {

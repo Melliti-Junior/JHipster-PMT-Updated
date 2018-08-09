@@ -1,19 +1,19 @@
-import { ProjectCustomService } from './project-custom.service';
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {ProjectCustomService} from './project-custom.service';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    ProjectCustomPopupService,
     ProjectCustomComponent,
+    ProjectCustomDeleteDialogComponent,
+    ProjectCustomDeletePopupComponent,
     ProjectCustomDetailComponent,
     ProjectCustomDialogComponent,
     ProjectCustomPopupComponent,
-    ProjectCustomDeletePopupComponent,
-    ProjectCustomDeleteDialogComponent,
-    projectcustomRoute,
     projectcustomPopupRoute,
+    ProjectCustomPopupService,
     ProjectCustomResolvePagingParams,
+    projectcustomRoute,
 } from './';
 
 const ENTITY_STATES = [

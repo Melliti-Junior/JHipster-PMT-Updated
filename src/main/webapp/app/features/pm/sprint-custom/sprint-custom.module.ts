@@ -1,21 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    SprintCustomService,
-    SprintCustomPopupService,
     SprintCustomComponent,
+    SprintCustomDeleteDialogComponent,
+    SprintCustomDeletePopupComponent,
     SprintCustomDetailComponent,
     SprintCustomDialogComponent,
     SprintCustomPopupComponent,
-    SprintCustomDeletePopupComponent,
-    SprintCustomDeleteDialogComponent,
-    sprintcustomRoute,
     sprintcustomPopupRoute,
+    SprintCustomPopupService,
     SprintCustomResolvePagingParams,
+    sprintcustomRoute,
+    SprintCustomService,
 } from './';
-import { SharedModule } from '../../shared/shared.module';
+import {SharedModule} from '../../shared/shared.module';
 import {
     SprintCustomStartDialogComponent,
     SprintCustomStartPopupComponent

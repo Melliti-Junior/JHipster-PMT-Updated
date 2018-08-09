@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { StatusCustom } from './status-custom.model';
-import { StatusCustomService } from './status-custom.service';
+import {StatusCustom} from './status-custom.model';
+import {StatusCustomService} from './status-custom.service';
 
 @Component({
     selector: 'jhi-status-custom-detail',

@@ -1,4 +1,4 @@
-import { Step } from '../../../entities/step/step.model';
+import {Step} from '../../../entities/step/step.model';
 import {StatusCustom} from '../status-custom';
 import {ColumnCustom} from '../column-custom';
 import {WorkflowCustom} from '../workflow-custom';

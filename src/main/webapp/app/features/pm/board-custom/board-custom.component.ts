@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
-import { BoardCustom } from './board-custom.model';
-import { BoardCustomService } from './board-custom.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../../shared';
+import {BoardCustom} from './board-custom.model';
+import {BoardCustomService} from './board-custom.service';
+import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../../shared';
 
 @Component({
     selector: 'jhi-board-custom',

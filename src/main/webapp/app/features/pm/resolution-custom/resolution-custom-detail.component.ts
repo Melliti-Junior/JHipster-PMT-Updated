@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ResolutionCustom } from './resolution-custom.model';
-import { ResolutionCustomService } from './resolution-custom.service';
+import {ResolutionCustom} from './resolution-custom.model';
+import {ResolutionCustomService} from './resolution-custom.service';
 
 @Component({
     selector: 'jhi-resolution-custom-detail',

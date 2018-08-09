@@ -1,15 +1,15 @@
-import {Component, OnInit, OnDestroy, ViewChild, Input} from '@angular/core';
+import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Response } from '@angular/http';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ColumnCustom } from './column-custom.model';
-import { ColumnCustomPopupService } from './column-custom-popup.service';
-import { ColumnCustomService } from './column-custom.service';
-import { ColumnCustomComponent } from './column-custom.component';
+import {ColumnCustom} from './column-custom.model';
+import {ColumnCustomPopupService} from './column-custom-popup.service';
+import {ColumnCustomService} from './column-custom.service';
+import {ColumnCustomComponent} from './column-custom.component';
 import 'rxjs/add/observable/throw';
 
 import 'rxjs/add/operator/map';
@@ -18,8 +18,8 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { BoardCustom } from '../board-custom';
-import { BoardCustomService } from '../board-custom/board-custom.service';
+import {BoardCustom} from '../board-custom';
+import {BoardCustomService} from '../board-custom/board-custom.service';
 import {IssueCustom} from '../issue-custom';
 
 @Component({

@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
-import { ResolutionCustom } from './resolution-custom.model';
-import { ResolutionCustomService } from './resolution-custom.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../../shared';
+import {ResolutionCustom} from './resolution-custom.model';
+import {ResolutionCustomService} from './resolution-custom.service';
+import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../../shared';
 
 @Component({
     selector: 'jhi-resolution-custom',

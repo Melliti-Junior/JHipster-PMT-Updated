@@ -1,33 +1,23 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { VersionCustom } from './version-custom.model';
-import { VersionCustomPopupService } from './version-custom-popup.service';
-import { VersionCustomService } from './version-custom.service';
-import { EpicService, Epic } from '../../../entities/epic';
-import { VersionCustomComponent } from './version-custom.component';
+import {VersionCustom} from './version-custom.model';
+import {VersionCustomPopupService} from './version-custom-popup.service';
+import {VersionCustomService} from './version-custom.service';
+import {VersionCustomComponent} from './version-custom.component';
 import 'rxjs/add/observable/throw';
-
-import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { Status } from '../../../entities/status/status.model';
-import { Resolution } from '../../../entities/resolution/resolution.model';
-import { StatusService } from '../../../entities/status/status.service';
-import { ResolutionService } from '../../../entities/resolution';
-import { ProjectCustom } from '../project-custom';
-import { ProjectCustomService } from '../project-custom/project-custom.service';
+import {ProjectCustom} from '../project-custom';
+import {ProjectCustomService} from '../project-custom/project-custom.service';
 
 @Component({
     selector: 'jhi-version-custom-dialog',

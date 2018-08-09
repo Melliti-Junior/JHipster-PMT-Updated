@@ -1,24 +1,15 @@
 package com.erp.app.domain.custom;
 
+import com.erp.app.domain.Program;
+import com.erp.app.domain.Project;
 import com.erp.app.domain.User;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
-import com.erp.app.domain.Program;
-import com.erp.app.domain.Project;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
+import java.io.Serializable;
 
 @Entity
-// @Document(collection = "project")
 public class  ProjectCustom extends Project implements Serializable {
 
 	/**

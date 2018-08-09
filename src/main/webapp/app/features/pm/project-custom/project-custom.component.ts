@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager, JhiParseLinks, JhiAlertService } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiAlertService, JhiEventManager, JhiParseLinks} from 'ng-jhipster';
 
-import { ProjectCustom } from './project-custom.model';
-import { ProjectCustomService } from './project-custom.service';
-import { ITEMS_PER_PAGE, Principal, ResponseWrapper } from '../../../shared';
+import {ProjectCustom} from './project-custom.model';
+import {ProjectCustomService} from './project-custom.service';
+import {ITEMS_PER_PAGE, Principal, ResponseWrapper} from '../../../shared';
 
 @Component({
     selector: 'jhi-project-custom',

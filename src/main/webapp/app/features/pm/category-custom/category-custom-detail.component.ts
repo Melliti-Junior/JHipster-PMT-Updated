@@ -1,10 +1,10 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { CategoryCustom } from './category-custom.model';
-import { CategoryCustomService } from './category-custom.service';
+import {CategoryCustom} from './category-custom.model';
+import {CategoryCustomService} from './category-custom.service';
 
 @Component({
     selector: 'jhi-category-custom-detail',

@@ -1,17 +1,17 @@
-import {Component, OnInit, OnDestroy, AfterViewInit, AfterContentInit, ViewChild, ElementRef} from '@angular/core';
+import {AfterContentInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { BoardCustom } from './board-custom.model';
-import { BoardCustomService } from './board-custom.service';
-import {IssueCustom, IssueCustomPopupService} from '../issue-custom';
+import {BoardCustom} from './board-custom.model';
+import {BoardCustomService} from './board-custom.service';
+import {IssueCustom} from '../issue-custom';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
-import {SprintCustom, SprintCustomPopupService} from '../sprint-custom';
+import {SprintCustom} from '../sprint-custom';
 import {SprintCustomService} from '../sprint-custom/sprint-custom.service';
 import {Observable} from 'rxjs/Observable';
 import {Response} from '@angular/http';
-import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {ResponseWrapper} from '../../../shared';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';

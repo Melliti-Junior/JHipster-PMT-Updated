@@ -1,11 +1,10 @@
-import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { WorkflowCustom } from './workflow-custom.model';
-import { WorkflowCustomService } from './workflow-custom.service';
-import {IssueCustom} from '../issue-custom';
+import {WorkflowCustom} from './workflow-custom.model';
+import {WorkflowCustomService} from './workflow-custom.service';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 import {TransitionCustom} from '../transition-custom/transition-custom.model';
 import {TransitionCustomService} from '../transition-custom/transition-custom.service';

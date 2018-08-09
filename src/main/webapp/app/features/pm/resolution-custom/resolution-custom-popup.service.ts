@@ -1,8 +1,8 @@
-import { Injectable, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { ResolutionCustom } from './resolution-custom.model';
-import { ResolutionCustomService } from './resolution-custom.service';
+import {Component, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {ResolutionCustom} from './resolution-custom.model';
+import {ResolutionCustomService} from './resolution-custom.service';
 
 @Injectable()
 export class ResolutionCustomPopupService {

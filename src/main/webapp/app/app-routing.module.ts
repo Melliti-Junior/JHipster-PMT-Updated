@@ -1,6 +1,7 @@
-import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
-import { errorRoute, navbarRoute } from './layouts';
+import {NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
+import {errorRoute, navbarRoute} from './layouts';
+
 const LAYOUT_ROUTES = [
     navbarRoute,
     ...errorRoute

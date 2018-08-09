@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
 import {BoardCustom} from './board-custom.model';
-import { BoardCustomPopupService } from './board-custom-popup.service';
-import { BoardCustomService } from './board-custom.service';
-import { BoardCustomComponent } from './board-custom.component';
+import {BoardCustomPopupService} from './board-custom-popup.service';
+import {BoardCustomService} from './board-custom.service';
+import {BoardCustomComponent} from './board-custom.component';
 import 'rxjs/add/observable/throw';
 
 import 'rxjs/add/operator/map';
@@ -18,8 +18,8 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
-import { ProjectCustom } from '../project-custom';
-import { ProjectCustomService } from '../project-custom/project-custom.service';
+import {ProjectCustom} from '../project-custom';
+import {ProjectCustomService} from '../project-custom/project-custom.service';
 import {IssueCustom} from '../issue-custom';
 
 @Component({

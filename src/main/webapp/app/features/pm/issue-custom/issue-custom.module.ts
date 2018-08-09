@@ -1,21 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    IssueCustomService,
-    IssueCustomPopupService,
     IssueCustomComponent,
+    IssueCustomDeleteDialogComponent,
+    IssueCustomDeletePopupComponent,
     IssueCustomDetailComponent,
     IssueCustomDialogComponent,
     IssueCustomPopupComponent,
-    IssueCustomDeletePopupComponent,
-    IssueCustomDeleteDialogComponent,
-    issuecustomRoute,
     issuecustomPopupRoute,
+    IssueCustomPopupService,
     IssueCustomResolvePagingParams,
+    issuecustomRoute,
+    IssueCustomService,
 } from './';
-import { SharedModule } from '../../shared/shared.module';
+import {SharedModule} from '../../shared/shared.module';
 import {
     IssueCustomResolveDialogComponent,
     IssueCustomResolvePopupComponent

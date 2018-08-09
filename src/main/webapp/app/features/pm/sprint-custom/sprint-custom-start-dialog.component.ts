@@ -1,13 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { SprintCustom } from './sprint-custom.model';
-import { SprintCustomPopupService } from './sprint-custom-popup.service';
-import { SprintCustomService } from './sprint-custom.service';
-import {Response} from '@angular/http';
+import {SprintCustom} from './sprint-custom.model';
+import {SprintCustomPopupService} from './sprint-custom-popup.service';
+import {SprintCustomService} from './sprint-custom.service';
 import {Observable} from 'rxjs/Observable';
 import {BoardCustom} from '../board-custom/board-custom.model';
 

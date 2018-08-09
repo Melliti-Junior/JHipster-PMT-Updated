@@ -1,35 +1,30 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import {NgbActiveModal, NgbDateParserFormatter} from '@ng-bootstrap/ng-bootstrap';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal, NgbDateParserFormatter, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {JhiDateUtils, JhiEventManager} from 'ng-jhipster';
 
-import { IssueCustom } from './issue-custom.model';
-import { IssueCustomPopupService } from './issue-custom-popup.service';
-import { IssueCustomService } from './issue-custom.service';
-import { EpicService, Epic } from '../../../entities/epic';
-import { IssuePriorityService, IssuePriority } from '../../../entities/issue-priority';
-import { IssueTypeService, IssueType } from '../../../entities/issue-type';
-import { IssueCustomComponent } from './issue-custom.component';
+import {IssueCustom} from './issue-custom.model';
+import {IssueCustomPopupService} from './issue-custom-popup.service';
+import {IssueCustomService} from './issue-custom.service';
+import {Epic, EpicService} from '../../../entities/epic';
+import {IssuePriority, IssuePriorityService} from '../../../entities/issue-priority';
+import {IssueType, IssueTypeService} from '../../../entities/issue-type';
+import {IssueCustomComponent} from './issue-custom.component';
 import 'rxjs/add/observable/throw';
-
-import {NgbTypeahead} from '@ng-bootstrap/ng-bootstrap';
-import {Subject} from 'rxjs/Subject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-
-import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { Resolution } from '../../../entities/resolution/resolution.model';
-import { ResolutionService } from '../../../entities/resolution';
-import { ProjectCustom } from '../project-custom';
-import { ProjectCustomService } from '../project-custom/project-custom.service';
+import {Resolution} from '../../../entities/resolution/resolution.model';
+import {ResolutionService} from '../../../entities/resolution';
+import {ProjectCustom} from '../project-custom';
+import {ProjectCustomService} from '../project-custom/project-custom.service';
 import {VersionCustom, VersionCustomService} from '../version-custom';
-import {Principal, ResponseWrapper, User, UserService} from '../../../shared';
+import {Principal, User, UserService} from '../../../shared';
 import {StatusCustom, StatusCustomService} from '../status-custom';
 
 @Component({

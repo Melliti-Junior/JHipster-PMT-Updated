@@ -1,17 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { IssueCustom } from './issue-custom.model';
-import { IssueCustomPopupService } from './issue-custom-popup.service';
-import { IssueCustomService } from './issue-custom.service';
-import {ResolutionService} from '../../../entities/resolution';
-import {ResolutionCustom} from '../resolution-custom';
+import {IssueCustom} from './issue-custom.model';
+import {IssueCustomPopupService} from './issue-custom-popup.service';
+import {IssueCustomService} from './issue-custom.service';
 import {Response} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {StatusCustom, StatusCustomService} from '../status-custom';
 import {Principal, User, UserService} from '../../../shared';
 
 @Component({

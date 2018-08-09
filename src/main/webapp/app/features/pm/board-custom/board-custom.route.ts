@@ -1,15 +1,14 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { BoardCustomComponent } from './board-custom.component';
-import { BoardCustomDetailComponent } from './board-custom-detail.component';
-import { BoardCustomPopupComponent } from './board-custom-dialog.component';
-import { BoardCustomDeletePopupComponent } from './board-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {BoardCustomComponent} from './board-custom.component';
+import {BoardCustomDetailComponent} from './board-custom-detail.component';
+import {BoardCustomPopupComponent} from './board-custom-dialog.component';
+import {BoardCustomDeletePopupComponent} from './board-custom-delete-dialog.component';
 import {BoardCustomConfigurationComponent} from './board-custom-configuration.component';
 import {BoardCustomAgileComponent} from './board-custom-agile.component';
-import {ColumnCustomPopupComponent} from '../column-custom/column-custom-dialog.component';
 
 @Injectable()
 export class BoardCustomResolvePagingParams implements Resolve<any> {

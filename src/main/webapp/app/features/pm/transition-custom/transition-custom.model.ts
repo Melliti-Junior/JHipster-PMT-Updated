@@ -1,4 +1,4 @@
-import { Transition } from '../../../entities/transition/transition.model';
+import {Transition} from '../../../entities/transition/transition.model';
 import {WorkflowCustom} from '../workflow-custom';
 import {StepCustom} from '../step-custom';
 

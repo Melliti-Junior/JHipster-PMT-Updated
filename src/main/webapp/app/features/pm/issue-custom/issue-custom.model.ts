@@ -1,9 +1,9 @@
-import { Issue } from '../../../entities/issue/issue.model';
-import { IssuePriority } from '../../../entities/issue-priority/issue-priority.model';
-import { IssueType } from '../../../entities/issue-type/issue-type.model';
-import { Epic } from '../../../entities/epic/epic.model';
-import { Resolution } from '../../../entities/resolution';
-import { ProjectCustom } from '../project-custom';
+import {Issue} from '../../../entities/issue/issue.model';
+import {IssuePriority} from '../../../entities/issue-priority/issue-priority.model';
+import {IssueType} from '../../../entities/issue-type/issue-type.model';
+import {Epic} from '../../../entities/epic/epic.model';
+import {Resolution} from '../../../entities/resolution';
+import {ProjectCustom} from '../project-custom';
 import {VersionCustom} from '../version-custom';
 import {SprintCustom} from '../sprint-custom';
 import {StatusCustom} from '../status-custom';

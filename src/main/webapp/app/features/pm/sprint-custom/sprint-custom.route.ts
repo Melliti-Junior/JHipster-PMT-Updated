@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { SprintCustomComponent } from './sprint-custom.component';
-import { SprintCustomDetailComponent } from './sprint-custom-detail.component';
-import { SprintCustomPopupComponent } from './sprint-custom-dialog.component';
-import { SprintCustomDeletePopupComponent } from './sprint-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {SprintCustomComponent} from './sprint-custom.component';
+import {SprintCustomDetailComponent} from './sprint-custom-detail.component';
+import {SprintCustomPopupComponent} from './sprint-custom-dialog.component';
+import {SprintCustomDeletePopupComponent} from './sprint-custom-delete-dialog.component';
 import {SprintCustomStartPopupComponent} from './sprint-custom-start-dialog.component';
 import {SprintCustomCompletePopupComponent} from './sprint-custom-complete-dialog.component';
 

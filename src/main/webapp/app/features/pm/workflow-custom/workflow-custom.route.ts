@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { WorkflowCustomComponent } from './workflow-custom.component';
-import { WorkflowCustomDetailComponent } from './workflow-custom-detail.component';
-import { WorkflowCustomPopupComponent } from './workflow-custom-dialog.component';
-import { WorkflowCustomDeletePopupComponent } from './workflow-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {WorkflowCustomComponent} from './workflow-custom.component';
+import {WorkflowCustomDetailComponent} from './workflow-custom-detail.component';
+import {WorkflowCustomPopupComponent} from './workflow-custom-dialog.component';
+import {WorkflowCustomDeletePopupComponent} from './workflow-custom-delete-dialog.component';
 
 @Injectable()
 export class WorkflowCustomResolvePagingParams implements Resolve<any> {

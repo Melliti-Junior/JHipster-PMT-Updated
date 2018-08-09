@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { StatusCustom } from './status-custom.model';
-import { StatusCustomPopupService } from './status-custom-popup.service';
+import {StatusCustom} from './status-custom.model';
+import {StatusCustomPopupService} from './status-custom-popup.service';
 import {StatusCustomService} from './status-custom.service';
 
 @Component({

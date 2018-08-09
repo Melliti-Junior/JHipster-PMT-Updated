@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { IssueCustomService } from '../issue-custom/issue-custom.service';
-import { IssueCustom } from '../issue-custom';
+import {Component, OnInit} from '@angular/core';
+import {IssueCustomService} from '../issue-custom/issue-custom.service';
+import {IssueCustom} from '../issue-custom';
 
 @Component({
   selector: 'jhi-backlog',

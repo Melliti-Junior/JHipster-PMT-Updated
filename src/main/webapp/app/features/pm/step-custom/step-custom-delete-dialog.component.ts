@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { StepCustom } from './step-custom.model';
-import { StepCustomPopupService } from './step-custom-popup.service';
-import { StepCustomService } from './step-custom.service';
+import {StepCustom} from './step-custom.model';
+import {StepCustomPopupService} from './step-custom-popup.service';
+import {StepCustomService} from './step-custom.service';
 
 @Component({
     selector: 'jhi-step-custom-delete-dialog',

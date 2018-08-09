@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { TransitionCustom } from './transition-custom.model';
-import { TransitionCustomService } from './transition-custom.service';
+import {TransitionCustom} from './transition-custom.model';
+import {TransitionCustomService} from './transition-custom.service';
 import {IssueCustom} from '../issue-custom';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 

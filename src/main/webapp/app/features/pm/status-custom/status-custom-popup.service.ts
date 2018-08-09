@@ -1,8 +1,8 @@
-import { Injectable, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { StatusCustom } from './status-custom.model';
-import { StatusCustomService } from './status-custom.service';
+import {Component, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {StatusCustom} from './status-custom.model';
+import {StatusCustomService} from './status-custom.service';
 
 @Injectable()
 export class StatusCustomPopupService {

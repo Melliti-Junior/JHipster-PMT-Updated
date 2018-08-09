@@ -1,21 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    TransitionCustomService,
-    TransitionCustomPopupService,
     TransitionCustomComponent,
+    TransitionCustomDeleteDialogComponent,
+    TransitionCustomDeletePopupComponent,
     TransitionCustomDetailComponent,
     TransitionCustomDialogComponent,
     TransitionCustomPopupComponent,
-    TransitionCustomDeletePopupComponent,
-    TransitionCustomDeleteDialogComponent,
-    transitionCustomRoute,
     transitioncustomPopupRoute,
+    TransitionCustomPopupService,
     TransitionCustomResolvePagingParams,
+    transitionCustomRoute,
+    TransitionCustomService,
 } from './';
-import { SharedModule } from '../../shared/shared.module';
+import {SharedModule} from '../../shared/shared.module';
 
 const ENTITY_STATES = [
     ...transitionCustomRoute,

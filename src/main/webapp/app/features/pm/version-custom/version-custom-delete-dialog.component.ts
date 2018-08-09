@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { VersionCustom } from './version-custom.model';
-import { VersionCustomPopupService } from './version-custom-popup.service';
-import { VersionCustomService } from './version-custom.service';
+import {VersionCustom} from './version-custom.model';
+import {VersionCustomPopupService} from './version-custom-popup.service';
+import {VersionCustomService} from './version-custom.service';
 
 @Component({
     selector: 'jhi-version-custom-delete-dialog',

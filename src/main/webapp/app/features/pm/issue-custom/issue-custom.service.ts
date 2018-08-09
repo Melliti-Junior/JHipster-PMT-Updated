@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
+import {JhiDateUtils} from 'ng-jhipster';
 
-import { IssueCustom } from './issue-custom.model';
-import { ResponseWrapper, createRequestOption } from '../../../shared';
+import {IssueCustom} from './issue-custom.model';
+import {createRequestOption, ResponseWrapper} from '../../../shared';
 import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 
 @Injectable()

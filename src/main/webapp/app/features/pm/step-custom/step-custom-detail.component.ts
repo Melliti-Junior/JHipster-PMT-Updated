@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { StepCustom } from './step-custom.model';
-import { StepCustomService } from './step-custom.service';
+import {StepCustom} from './step-custom.model';
+import {StepCustomService} from './step-custom.service';
 import {IssueCustom} from '../issue-custom';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 

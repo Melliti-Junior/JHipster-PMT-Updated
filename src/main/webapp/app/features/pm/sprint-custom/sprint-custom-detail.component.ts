@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, AfterViewInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { SprintCustom } from './sprint-custom.model';
-import { SprintCustomService } from './sprint-custom.service';
+import {SprintCustom} from './sprint-custom.model';
+import {SprintCustomService} from './sprint-custom.service';
 import {IssueCustom} from '../issue-custom/issue-custom.model';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 

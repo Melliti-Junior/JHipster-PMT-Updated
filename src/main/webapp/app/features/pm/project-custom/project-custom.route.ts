@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { ProjectCustomComponent } from './project-custom.component';
-import { ProjectCustomDetailComponent } from './project-custom-detail.component';
-import { ProjectCustomPopupComponent } from './project-custom-dialog.component';
-import { ProjectCustomDeletePopupComponent } from './project-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {ProjectCustomComponent} from './project-custom.component';
+import {ProjectCustomDetailComponent} from './project-custom-detail.component';
+import {ProjectCustomPopupComponent} from './project-custom-dialog.component';
+import {ProjectCustomDeletePopupComponent} from './project-custom-delete-dialog.component';
 
 @Injectable()
 export class ProjectCustomResolvePagingParams implements Resolve<any> {

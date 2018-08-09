@@ -1,14 +1,14 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { CategoryCustom } from './category-custom.model';
-import { CategoryCustomPopupService } from './category-custom-popup.service';
-import { CategoryCustomService } from './category-custom.service';
+import {CategoryCustom} from './category-custom.model';
+import {CategoryCustomPopupService} from './category-custom-popup.service';
+import {CategoryCustomService} from './category-custom.service';
 
 @Component({
     selector: 'jhi-category-custom-dialog',

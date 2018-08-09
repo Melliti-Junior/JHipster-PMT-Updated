@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { WorkflowCustom } from './workflow-custom.model';
-import { WorkflowCustomPopupService } from './workflow-custom-popup.service';
-import { WorkflowCustomService } from './workflow-custom.service';
+import {WorkflowCustom} from './workflow-custom.model';
+import {WorkflowCustomPopupService} from './workflow-custom-popup.service';
+import {WorkflowCustomService} from './workflow-custom.service';
 
 @Component({
     selector: 'jhi-workflow-custom-delete-dialog',

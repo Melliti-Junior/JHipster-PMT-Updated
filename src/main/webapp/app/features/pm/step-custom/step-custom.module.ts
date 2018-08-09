@@ -1,21 +1,21 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    StepCustomService,
-    StepCustomPopupService,
     StepCustomComponent,
+    StepCustomDeleteDialogComponent,
+    StepCustomDeletePopupComponent,
     StepCustomDetailComponent,
     StepCustomDialogComponent,
     StepCustomPopupComponent,
-    StepCustomDeletePopupComponent,
-    StepCustomDeleteDialogComponent,
-    stepCustomRoute,
     stepcustomPopupRoute,
+    StepCustomPopupService,
     StepCustomResolvePagingParams,
+    stepCustomRoute,
+    StepCustomService,
 } from './';
-import { SharedModule } from '../../shared/shared.module';
+import {SharedModule} from '../../shared/shared.module';
 
 const ENTITY_STATES = [
     ...stepCustomRoute,

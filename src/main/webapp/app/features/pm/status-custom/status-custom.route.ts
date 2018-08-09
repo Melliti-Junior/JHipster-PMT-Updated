@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { StatusCustomComponent } from './status-custom.component';
-import { StatusCustomDetailComponent } from './status-custom-detail.component';
-import { StatusCustomPopupComponent } from './status-custom-dialog.component';
-import { StatusCustomDeletePopupComponent } from './status-custom-delete-dialog.component';
+import {StatusCustomComponent} from './status-custom.component';
+import {StatusCustomDetailComponent} from './status-custom-detail.component';
+import {StatusCustomPopupComponent} from './status-custom-dialog.component';
+import {StatusCustomDeletePopupComponent} from './status-custom-delete-dialog.component';
 import {UserRouteAccessService} from '../../../shared';
 
 @Injectable()

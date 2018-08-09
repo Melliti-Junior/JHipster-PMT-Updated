@@ -1,12 +1,11 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
+import {JhiDateUtils} from 'ng-jhipster';
 
-import { WorkflowCustom } from './workflow-custom.model';
-import { WorkflowComponent } from '../../../entities/workflow/workflow.component';
+import {WorkflowCustom} from './workflow-custom.model';
 import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()

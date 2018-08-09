@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
+import {JhiDateUtils} from 'ng-jhipster';
 
-import { ResponseWrapper, createRequestOption } from '../../../shared';
-import { ProjectCustom } from './project-custom.model';
-import {IssueCustom, IssueCustomService} from '../issue-custom';
+import {createRequestOption, ResponseWrapper} from '../../../shared';
+import {ProjectCustom} from './project-custom.model';
 
 @Injectable()
 export class ProjectCustomService {

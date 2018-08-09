@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { TransitionCustomComponent } from './transition-custom.component';
-import { TransitionCustomDetailComponent } from './transition-custom-detail.component';
-import { TransitionCustomPopupComponent } from './transition-custom-dialog.component';
-import { TransitionCustomDeletePopupComponent } from './transition-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {TransitionCustomComponent} from './transition-custom.component';
+import {TransitionCustomDetailComponent} from './transition-custom-detail.component';
+import {TransitionCustomPopupComponent} from './transition-custom-dialog.component';
+import {TransitionCustomDeletePopupComponent} from './transition-custom-delete-dialog.component';
 
 @Injectable()
 export class TransitionCustomResolvePagingParams implements Resolve<any> {

@@ -1,12 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Resolve, ActivatedRouteSnapshot, RouterStateSnapshot, Routes } from '@angular/router';
-import { JhiPaginationUtil } from 'ng-jhipster';
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, Resolve, RouterStateSnapshot, Routes} from '@angular/router';
+import {JhiPaginationUtil} from 'ng-jhipster';
 
-import { UserRouteAccessService } from '../../../shared';
-import { ResolutionCustomComponent } from './resolution-custom.component';
-import { ResolutionCustomDetailComponent } from './resolution-custom-detail.component';
-import { ResolutionCustomPopupComponent } from './resolution-custom-dialog.component';
-import { ResolutionCustomDeletePopupComponent } from './resolution-custom-delete-dialog.component';
+import {UserRouteAccessService} from '../../../shared';
+import {ResolutionCustomComponent} from './resolution-custom.component';
+import {ResolutionCustomDetailComponent} from './resolution-custom-detail.component';
+import {ResolutionCustomPopupComponent} from './resolution-custom-dialog.component';
+import {ResolutionCustomDeletePopupComponent} from './resolution-custom-delete-dialog.component';
 
 @Injectable()
 export class ResolutionCustomResolvePagingParams implements Resolve<any> {

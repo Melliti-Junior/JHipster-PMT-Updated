@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { BoardCustom } from './board-custom.model';
-import { BoardCustomPopupService } from './board-custom-popup.service';
-import { BoardCustomService } from './board-custom.service';
+import {BoardCustom} from './board-custom.model';
+import {BoardCustomPopupService} from './board-custom-popup.service';
+import {BoardCustomService} from './board-custom.service';
 
 @Component({
     selector: 'jhi-board-custom-delete-dialog',

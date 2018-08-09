@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-// @Document(collection = "board")
 public class BoardCustom extends Board implements Serializable {
 
 	/**

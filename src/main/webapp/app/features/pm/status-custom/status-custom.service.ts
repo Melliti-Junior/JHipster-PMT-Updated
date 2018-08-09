@@ -1,11 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { StatusCustom } from './status-custom.model';
-import { ResponseWrapper, createRequestOption } from '../../../shared';
-import {ColumnCustom} from '../column-custom/column-custom.model';
+import {StatusCustom} from './status-custom.model';
+import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()
 export class StatusCustomService {

@@ -1,7 +1,7 @@
-import { BacklogComponent } from './backlog.component';
-import { Route } from '@angular/router';
+import {BacklogComponent} from './backlog.component';
+import {Route} from '@angular/router';
 
-import { UserRouteAccessService } from '../../../shared';
+import {UserRouteAccessService} from '../../../shared';
 
 export const BacklogRoute: Route = {
     path: 'backlog',

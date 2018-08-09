@@ -1,7 +1,6 @@
 package com.erp.app.repository;
 
 import com.erp.app.domain.Authority;
-
 import org.springframework.data.mongodb.repository.MongoRepository;
 
 /**

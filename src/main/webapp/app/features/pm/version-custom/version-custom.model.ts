@@ -1,5 +1,5 @@
-import { Version } from '../../../entities/version/version.model';
-import { ProjectCustom } from '../project-custom';
+import {Version} from '../../../entities/version/version.model';
+import {ProjectCustom} from '../project-custom';
 
 export class VersionCustom extends Version {
     constructor(

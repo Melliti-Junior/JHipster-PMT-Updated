@@ -1,12 +1,11 @@
-import { ProjectManagementModule } from './pm/project-management.module';
-import { HttpModule } from '@angular/http';
-import { ProjectManagementComponent } from './pm/project-management.component';
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FeaturesComponent } from './features.component';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { featuresState } from './features.route';
+import {ProjectManagementModule} from './pm/project-management.module';
+import {HttpModule} from '@angular/http';
+import {CommonModule} from '@angular/common';
+import {NgModule} from '@angular/core';
+import {FeaturesComponent} from './features.component';
+import {FormsModule} from '@angular/forms';
+import {RouterModule} from '@angular/router';
+import {featuresState} from './features.route';
 
 @NgModule({
   imports: [

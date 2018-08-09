@@ -1,8 +1,8 @@
-import { Injectable, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { StepCustom } from './step-custom.model';
-import { StepCustomService } from './step-custom.service';
+import {Component, Injectable} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgbModal, NgbModalRef} from '@ng-bootstrap/ng-bootstrap';
+import {StepCustom} from './step-custom.model';
+import {StepCustomService} from './step-custom.service';
 
 @Injectable()
 export class StepCustomPopupService {

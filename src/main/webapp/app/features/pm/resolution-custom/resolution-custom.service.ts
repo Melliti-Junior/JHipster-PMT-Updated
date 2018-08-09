@@ -1,13 +1,12 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { JhiDateUtils } from 'ng-jhipster';
+import {JhiDateUtils} from 'ng-jhipster';
 
-import { ResolutionCustom } from './resolution-custom.model';
-import { ResponseWrapper, createRequestOption } from '../../../shared';
-import { ResolutionComponent } from '../../../entities/resolution/resolution.component';
+import {ResolutionCustom} from './resolution-custom.model';
+import {createRequestOption, ResponseWrapper} from '../../../shared';
 
 @Injectable()
 export class ResolutionCustomService {

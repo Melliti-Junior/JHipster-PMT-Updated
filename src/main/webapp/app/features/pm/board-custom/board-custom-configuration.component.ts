@@ -1,13 +1,11 @@
-import {Component, OnInit, OnDestroy, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 import {ColumnCustom} from '../column-custom/column-custom.model';
 import {ColumnCustomService} from '../column-custom/column-custom.service';
 import {BoardCustom} from './board-custom.model';
 import {BoardCustomService} from './board-custom.service';
-import {ResponseWrapper} from '../../../shared';
-import {Status, StatusService} from '../../../entities/status';
 import {StatusCustom} from '../status-custom/status-custom.model';
 import {StatusCustomService} from '../status-custom/status-custom.service';
 import {Observable} from 'rxjs/Observable';

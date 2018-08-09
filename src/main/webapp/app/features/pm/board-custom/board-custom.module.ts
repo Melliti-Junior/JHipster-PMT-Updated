@@ -1,23 +1,23 @@
-import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {RouterModule} from '@angular/router';
 
-import { DashBoardSharedModule } from '../../../shared';
+import {DashBoardSharedModule} from '../../../shared';
 import {
-    BoardCustomService,
-    BoardCustomPopupService,
+    BoardCustomAgileComponent,
     BoardCustomComponent,
+    BoardCustomConfigurationComponent,
+    BoardCustomDeleteDialogComponent,
+    BoardCustomDeletePopupComponent,
     BoardCustomDetailComponent,
     BoardCustomDialogComponent,
     BoardCustomPopupComponent,
-    BoardCustomDeletePopupComponent,
-    BoardCustomDeleteDialogComponent,
-    BoardCustomConfigurationComponent,
-    BoardCustomAgileComponent,
-    boardcustomRoute,
     boardcustomPopupRoute,
+    BoardCustomPopupService,
     BoardCustomResolvePagingParams,
+    boardcustomRoute,
+    BoardCustomService,
 } from './';
-import { SharedModule } from '../../shared/shared.module';
+import {SharedModule} from '../../shared/shared.module';
 
 const ENTITY_STATES = [
     ...boardcustomRoute,

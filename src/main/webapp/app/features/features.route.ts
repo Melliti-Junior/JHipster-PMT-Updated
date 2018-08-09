@@ -1,8 +1,6 @@
-import { Routes } from '@angular/router';
+import {Routes} from '@angular/router';
 
-import {
-    ProjectManagementRoute
-} from './';
+import {ProjectManagementRoute} from './';
 
 const FEATURES_ROUTES = [
     ProjectManagementRoute

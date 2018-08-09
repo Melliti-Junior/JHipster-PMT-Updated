@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
-import { Observable } from 'rxjs/Observable';
-import { SERVER_API_URL } from '../../../app.constants';
+import {Injectable} from '@angular/core';
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {SERVER_API_URL} from '../../../app.constants';
 
-import { CategoryCustom } from './category-custom.model';
-import { ResponseWrapper, createRequestOption } from '../../../shared/index';
+import {CategoryCustom} from './category-custom.model';
+import {createRequestOption, ResponseWrapper} from '../../../shared/index';
 
 @Injectable()
 export class CategoryCustomService {

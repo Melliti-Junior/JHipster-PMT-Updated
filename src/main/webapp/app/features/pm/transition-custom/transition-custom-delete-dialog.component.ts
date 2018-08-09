@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { TransitionCustom } from './transition-custom.model';
-import { TransitionCustomPopupService } from './transition-custom-popup.service';
-import { TransitionCustomService } from './transition-custom.service';
+import {TransitionCustom} from './transition-custom.model';
+import {TransitionCustomPopupService} from './transition-custom-popup.service';
+import {TransitionCustomService} from './transition-custom.service';
 
 @Component({
     selector: 'jhi-transition-custom-delete-dialog',

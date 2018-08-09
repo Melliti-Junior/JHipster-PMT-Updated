@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { CategoryCustom } from './category-custom.model';
-import { CategoryCustomPopupService } from './category-custom-popup.service';
+import {CategoryCustom} from './category-custom.model';
+import {CategoryCustomPopupService} from './category-custom-popup.service';
 import {CategoryCustomService} from './category-custom.service';
 
 @Component({

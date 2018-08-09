@@ -1,6 +1,6 @@
 import {Project} from '../../../entities/project/project.model';
-import {BaseEntity, User} from './../../../shared';
-import { Program } from '../../../entities/program/program.model';
+import {User} from './../../../shared';
+import {Program} from '../../../entities/program/program.model';
 import {WorkflowCustom} from '../workflow-custom';
 
 export class ProjectCustom extends Project {

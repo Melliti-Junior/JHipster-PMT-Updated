@@ -1,12 +1,12 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { ColumnCustom } from './column-custom.model';
-import { ColumnCustomPopupService } from './column-custom-popup.service';
-import { ColumnCustomService } from './column-custom.service';
+import {ColumnCustom} from './column-custom.model';
+import {ColumnCustomPopupService} from './column-custom-popup.service';
+import {ColumnCustomService} from './column-custom.service';
 
 @Component({
     selector: 'jhi-column-custom-delete-dialog',

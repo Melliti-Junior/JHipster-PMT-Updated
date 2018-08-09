@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { StepCustom } from './step-custom.model';
-import { StepCustomPopupService } from './step-custom-popup.service';
-import { StepCustomService } from './step-custom.service';
-import { StepCustomComponent } from './step-custom.component';
+import {StepCustom} from './step-custom.model';
+import {StepCustomPopupService} from './step-custom-popup.service';
+import {StepCustomService} from './step-custom.service';
+import {StepCustomComponent} from './step-custom.component';
 import 'rxjs/add/observable/throw';
 
 import 'rxjs/add/operator/map';

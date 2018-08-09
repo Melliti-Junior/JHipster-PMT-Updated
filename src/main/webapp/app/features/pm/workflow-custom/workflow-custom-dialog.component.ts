@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Response } from '@angular/http';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Response} from '@angular/http';
 
-import { Observable } from 'rxjs/Observable';
-import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
-import { JhiEventManager } from 'ng-jhipster';
+import {Observable} from 'rxjs/Observable';
+import {NgbActiveModal} from '@ng-bootstrap/ng-bootstrap';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { WorkflowCustom } from './workflow-custom.model';
-import { WorkflowCustomPopupService } from './workflow-custom-popup.service';
-import { WorkflowCustomService } from './workflow-custom.service';
-import { WorkflowCustomComponent } from './workflow-custom.component';
+import {WorkflowCustom} from './workflow-custom.model';
+import {WorkflowCustomPopupService} from './workflow-custom-popup.service';
+import {WorkflowCustomService} from './workflow-custom.service';
+import {WorkflowCustomComponent} from './workflow-custom.component';
 import 'rxjs/add/observable/throw';
 
 import 'rxjs/add/operator/map';
@@ -17,8 +17,6 @@ import 'rxjs/add/operator/merge';
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
-
-import {IssueCustom} from '../issue-custom';
 import {StatusCustom} from '../status-custom/status-custom.model';
 import {StatusCustomService} from '../status-custom/status-custom.service';
 

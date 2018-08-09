@@ -1,10 +1,10 @@
-import {Component, OnInit, OnDestroy, AfterViewInit, AfterContentInit} from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { JhiEventManager } from 'ng-jhipster';
+import {AfterContentInit, Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {Subscription} from 'rxjs/Subscription';
+import {JhiEventManager} from 'ng-jhipster';
 
-import { BoardCustom } from './board-custom.model';
-import { BoardCustomService } from './board-custom.service';
+import {BoardCustom} from './board-custom.model';
+import {BoardCustomService} from './board-custom.service';
 import {IssueCustom} from '../issue-custom/issue-custom.model';
 import {IssueCustomService} from '../issue-custom/issue-custom.service';
 import {SprintCustom} from '../sprint-custom/sprint-custom.model';
@@ -16,7 +16,7 @@ import {StepCustomService} from '../step-custom/step-custom.service';
 
 import {Observable} from 'rxjs/Observable';
 import {Response} from '@angular/http';
-import {NgbActiveModal, NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
+import {NgbDateStruct} from '@ng-bootstrap/ng-bootstrap';
 import {ResponseWrapper} from '../../../shared';
 
 import {MenuItem} from 'primeng/api';
