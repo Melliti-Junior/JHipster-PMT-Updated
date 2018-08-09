@@ -5,7 +5,7 @@ import { JhiEventManager } from 'ng-jhipster';
 
 import { Program } from './program.model';
 import { ProgramService } from './program.service';
-import {ProjectCustom, ProjectCustomService} from '../../features/pm/project-custom';
+import {ProjectCustom, ProjectCustomService} from '../../features/project-tracking/project-custom';
 import {ResponseWrapper} from '../../shared';
 
 @Component({

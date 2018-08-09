@@ -99,11 +99,6 @@ export class BoardCustomService {
      * Convert a Board to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(boardcustom: BoardCustom): BoardCustom {
-        // Start Conversion
-        console.log('Start Conversion');
-        // boardcustom.createdDate = new Date().getDate;
-        // boardcustom.updatedDate = new Date().getDate;
-        // boardcustom.dueDate = new Date().getDate;
         const copy: BoardCustom = Object.assign({}, boardcustom);
         return copy;
     }

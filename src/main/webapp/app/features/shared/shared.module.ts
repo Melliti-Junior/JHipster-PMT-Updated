@@ -15,7 +15,7 @@ import {TieredMenuModule} from 'primeng/tieredmenu';
 import {TabMenuModule} from 'primeng/tabmenu';
 import {DashBoardEntityModule} from '../../entities/entity.module';
 import {AutoCompleteModule} from 'primeng/autocomplete';
-import {MatAutocompleteModule,} from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material';
 
 @NgModule({
   imports: [

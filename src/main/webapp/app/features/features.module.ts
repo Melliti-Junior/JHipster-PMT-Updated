@@ -1,4 +1,4 @@
-import {ProjectManagementModule} from './pm/project-management.module';
+import {ProjectManagementModule} from './project-tracking/project-management.module';
 import {HttpModule} from '@angular/http';
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
