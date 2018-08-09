@@ -63,21 +63,6 @@ export class BoardCustomService {
           .then((response) => response.json() as BoardCustom[])
       }
 
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {Observable<BoardCustom>}
-     * @memberof BoardCustomService
-     */
-    findByRequest(req?: any): BoardCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
-    }
-
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];

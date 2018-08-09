@@ -57,21 +57,6 @@ export class ProjectCustomService {
             .map((res: any) => this.convertResponse(res));
     }
 
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {ProjectCustom}
-     * @memberof ProjectCustomService
-     */
-    findByRequest(req?: any): ProjectCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
-    }
-
     getProjects():  Promise<ProjectCustom[]> {
         return this.http.get(this.resourceUrl)
           .toPromise()

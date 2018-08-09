@@ -34,16 +34,6 @@ export class TransitionCustomService {
         });
     }
 
-    updateAll(transitioncustoms: TransitionCustom[]): Observable<TransitionCustom> {
-        for (let sp of transitioncustoms) {
-            let copy = this.convert(sp);
-            return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-                const jsonResponse = res.json();
-                return this.convertItemFromServer(jsonResponse);
-            });
-        }
-    }
-
     find(id: string): Observable<TransitionCustom> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
@@ -89,25 +79,12 @@ export class TransitionCustomService {
 
         const entity: TransitionCustom = Object.assign(new TransitionCustom(), json);
         return entity;
-        /*
-        this.ObjReturned = Object.assign(new TransitionCustom(), json);
-        this.ObjReturned.startDate = this.dateUtils
-            .convertLocalDateFromServer(json.startDate);
-        this.ObjReturned.endDate = this.dateUtils
-            .convertLocalDateFromServer(json.endDate);
-        return this.ObjReturned;
-        */
     }
 
     /**
      * Convert a Transition to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(transitioncustom: TransitionCustom): TransitionCustom {
-        // Start Conversion
-        console.log('Start Conversion');
-        // transitioncustom.createdDate = new Date().getDate;
-        // transitioncustom.updatedDate = new Date().getDate;
-        // transitioncustom.dueDate = new Date().getDate;
         const copy: TransitionCustom = Object.assign({}, transitioncustom);
         return copy;
     }

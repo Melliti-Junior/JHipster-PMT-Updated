@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuItem } from 'primeng/components/common/api';
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'jhi-project-management',

@@ -63,21 +63,6 @@ export class VersionCustomService {
           .then((response) => response.json() as VersionCustom[])
       }
 
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {Observable<VersionCustom>}
-     * @memberof VersionCustomService
-     */
-    findByRequest(req?: any): VersionCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
-    }
-
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
@@ -103,11 +88,6 @@ export class VersionCustomService {
      * Convert a Version to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(versioncustom: VersionCustom): VersionCustom {
-        // Start Conversion
-        console.log('Start Conversion');
-        // versioncustom.createdDate = new Date().getDate;
-        // versioncustom.updatedDate = new Date().getDate;
-        // versioncustom.dueDate = new Date().getDate;
         const copy: VersionCustom = Object.assign({}, versioncustom);
         copy.startDate = this.dateUtils
             .convertLocalDateToServer(versioncustom.startDate);

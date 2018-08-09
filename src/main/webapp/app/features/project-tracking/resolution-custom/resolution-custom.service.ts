@@ -63,21 +63,6 @@ export class ResolutionCustomService {
           .then((response) => response.json() as ResolutionCustom[])
       }
 
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {Observable<ResolutionCustom>}
-     * @memberof ResolutionCustomService
-     */
-    findByRequest(req?: any): ResolutionCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
-    }
-
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
@@ -99,11 +84,6 @@ export class ResolutionCustomService {
      * Convert a Resolution to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(resolutioncustom: ResolutionCustom): ResolutionCustom {
-        // Start Conresolution
-        console.log('Start Conresolution');
-        // resolutioncustom.createdDate = new Date().getDate;
-        // resolutioncustom.updatedDate = new Date().getDate;
-        // resolutioncustom.dueDate = new Date().getDate;
         const copy: ResolutionCustom = Object.assign({}, resolutioncustom);
         return copy;
     }

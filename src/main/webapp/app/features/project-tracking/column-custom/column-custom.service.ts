@@ -34,16 +34,6 @@ export class ColumnCustomService {
         });
     }
 
-    updateAll(columncustoms: ColumnCustom[]): Observable<ColumnCustom> {
-        for (let sp of columncustoms) {
-            let copy = this.convert(sp);
-            return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-                const jsonResponse = res.json();
-                return this.convertItemFromServer(jsonResponse);
-            });
-        }
-    }
-
     find(id: string): Observable<ColumnCustom> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
@@ -73,21 +63,6 @@ export class ColumnCustomService {
           .then((response) => response.json() as ColumnCustom[])
       }
 
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {Observable<ColumnCustom>}
-     * @memberof ColumnCustomService
-     */
-    findByRequest(req?: any): ColumnCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
-    }
-
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();
         const result = [];
@@ -104,25 +79,12 @@ export class ColumnCustomService {
 
         const entity: ColumnCustom = Object.assign(new ColumnCustom(), json);
         return entity;
-        /*
-        this.ObjReturned = Object.assign(new ColumnCustom(), json);
-        this.ObjReturned.startDate = this.dateUtils
-            .convertLocalDateFromServer(json.startDate);
-        this.ObjReturned.endDate = this.dateUtils
-            .convertLocalDateFromServer(json.endDate);
-        return this.ObjReturned;
-        */
     }
 
     /**
      * Convert a Column to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(columncustom: ColumnCustom): ColumnCustom {
-        // Start Conversion
-        console.log('Start Conversion');
-        // columncustom.createdDate = new Date().getDate;
-        // columncustom.updatedDate = new Date().getDate;
-        // columncustom.dueDate = new Date().getDate;
         const copy: ColumnCustom = Object.assign({}, columncustom);
         return copy;
     }

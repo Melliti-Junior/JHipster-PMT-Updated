@@ -1,4 +1,4 @@
-import {AfterContentInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Subscription} from 'rxjs/Subscription';
 import {JhiEventManager} from 'ng-jhipster';
@@ -28,7 +28,7 @@ import {StepCustom} from '../step-custom/step-custom.model';
     templateUrl: './board-custom-agile.component.html',
     styleUrls: ['./board-custom-agile.component.css']
 })
-export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterContentInit {
+export class BoardCustomAgileComponent implements OnInit, OnDestroy {
 
     boardcustom: BoardCustom;
     activeSprint: SprintCustom;
@@ -43,7 +43,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     relatedSteps: StepCustom[];
     nextPossibleSteps: StepCustom[];
 
-    chosenIssues: IssueCustom[] = new Array<IssueCustom>();
     sprintCustoms: SprintCustom[];
     columnCustoms: ColumnCustom[];
     statuscustoms: StatusCustom[];
@@ -52,10 +51,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     relatedSprintsBoard: SprintCustom[];
 
-    // Get the board related to the sprint
-    parentBoard: BoardCustom;
-    // Get the current board name
-    boardname: string;
     progress: number;
 
     numSprintsParentBoard = 0;
@@ -100,7 +95,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.registerChangeInBoardCustoms();
         this.loadAttributes();
         this.theDate = {year: this.now.getFullYear(), month: this.now.getMonth() + 1, day: this.now.getDate()};
-        // this.getBacklogIssues();
 
         setTimeout(() => {
             this.scrumItems = [
@@ -171,12 +165,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     }
 
-    ngAfterContentInit() {
-        console.log('finish');
-        // this.getBacklogIssues();
-        // let BacklogBtnID = document.getElementById('backlog').click();
-    }
-
     load(id) {
         this.boardcustomSce.find(id).subscribe((boardcustom) => {
             this.boardcustom = boardcustom;
@@ -192,7 +180,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     transition() {
-        console.error('fghjkl ' + this.boardcustom.id)
         this.getAllSprints();
         this.getBacklogIssues();
         this.getSprintIssues();
@@ -207,10 +194,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
         }
         */
-        console.error(this.activeSprint.isActive + ' rrr')
         this.router.navigate(['/boardcustoms/agile', this.boardcustom.id]);
-
-        console.error('68465546 ' + this.activeSprint.isActive)
     }
 
     registerChangeInBoardCustoms() {
@@ -307,13 +291,10 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 }
             }
         }
-        console.error(this.relatedTransitions.length)
     }
 
     lookForRelatedSteps() {
         this.relatedSteps = new Array<StepCustom>();
-        console.error(this.stepcustoms.length)
-
         for (let step of this.stepcustoms) {
             console.log('step wf ' + step.workflow.id + 'process ' + this.boardcustom.project.process.id)
             if (step.workflow.id === this.boardcustom.project.process.id) {
@@ -322,7 +303,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 }
             }
         }
-        console.error(this.relatedSteps.length)
     }
 
     getStepByStatus(status: StatusCustom): StepCustom {
@@ -346,7 +326,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         for (let tran of this.relatedTransitions) {
             if (tran.sourceStep.id === sourceStep.id) {
                 let target = tran.targetStep;
-                console.error(JSON.stringify(target))
                 if (tempSteps.indexOf(target) === -1) {
                     tempSteps.push(target);
                 }
@@ -363,7 +342,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 tempStep = step;
             }
         }
-
         return tempStep;
     }
 
@@ -378,22 +356,13 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 index = index + 1;
             }
         }
-        /*if (this.activeSprint !== undefined) {
-            let x = <HTMLButtonElement> document.getElemefntById('createSprintBtn');
-            x.disabled = true;
-        }*/
     }
 
     getSprintIssues() {
         if (this.activeSprint !== undefined) {
             if (this.activeSprint.id !== undefined) {
                 console.log('looking for ' + this.activeSprint.id);
-                /*
-                this.issuecustomSce.search({query : this.activeSprint.id})
-                    .subscribe(
-                        (res: ResponseWrapper) => this.retrieveIssuesOfSprint(res.json),
-                        (error) => console.log(error));
-                */
+
                 this.relatedIssuesPerSprint = new Array<IssueCustom>();
                 for (let issue of this.issueCustoms) {
                     if (this.activeSprint && issue.sprint && issue.sprint.id === this.activeSprint.id) {
@@ -408,21 +377,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
         }
     }
-/*
-    retrieveIssuesOfSprint(data) {
-        this.relatedIssuesPerSprint = new Array<IssueCustom>();
-        // this.chosenIssues = this.relatedIssuesPerSprint;
-        for (let res of data) {
-            let tempIssue: IssueCustom = res.valueOf();
-            if (this.relatedIssuesPerSprint.indexOf(tempIssue) === -1) {
-                console.log(tempIssue.code);
-                this.relatedIssuesPerSprint.push(tempIssue);
-            }
-            // console.log(this.activesprint.id)
-        }
-        console.log(this.relatedIssuesPerSprint.length)
-    }
-*/
+
     getBacklogIssues() {
         // let index = 0;
         this.relatedIssuesPerBoard = new Array<IssueCustom>();
@@ -434,7 +389,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
         }
 
-        //  Search the related sprints to identify the active one
         this.searchOnlyRelatedSprints();
 
         console.log('Actual : ' + this.relatedIssuesPerBoard.length);
@@ -442,10 +396,9 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     searchActiveSprint() {
         if (this.activeSprint.id === undefined) {
-            console.error('searchhhhhhhh')
             this.sprintcustomSce.search({query : this.activeSprint.code}, )
                 .subscribe(
-                    (res: ResponseWrapper) => this.getCurrentSprintObj(res.json),
+                    (res: ResponseWrapper) => this.getCurrentSprint(res.json),
                     (error) => console.log(error));
         }
     }
@@ -457,12 +410,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         if (this.activeSprint.isActive) {
             startSpBtn.hidden = true;
         }
-
-        // Look for the active sprint in this board
-        // this.searchActiveSprint();
-
-        // this.affectIssuesToSprint();
-
     }
 
     prepareSprint() {
@@ -521,18 +468,12 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         this.isSaving = false;
     }
 
-    private getCurrentSprintObj(data) {
-        console.error('currrr ' + data)
-        if (!data) {
-            console.error('nnnnoooooo')
-        } else {
+    private getCurrentSprint(data) {
+        if (data) {
             for (let res of data) {
                 this.activeSprint = res.valueOf();
-                console.error('sprinnnttt ' + JSON.stringify(this.activeSprint))
-
             }
         }
-
     }
 
     private getRelatedSprints(data, headers) {
@@ -548,76 +489,38 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     dragStart(ev) {
-        console.error('drag event starts here');
-
         ev.dataTransfer.setData('text', ev.target.id);
         console.log(ev.target.id);
 
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
 
-                this.issuecustomSce.find(issue.id).subscribe((issuecustom) => {
-                    if (issue.createdDate) {
-                        issue.createdDate = {
-                            year: issuecustom.createdDate.getFullYear(),
-                            month: issuecustom.createdDate.getMonth() + 1,
-                            day: issuecustom.createdDate.getDate()
-                        };
-                    }
-                    if (issue.updatedDate) {
-                        issue.updatedDate = {
-                            year: issuecustom.updatedDate.getFullYear(),
-                            month: issuecustom.updatedDate.getMonth() + 1,
-                            day: issuecustom.updatedDate.getDate()
-                        };
-                    }
-                    if (issue.dueDate) {
-                        issue.dueDate = {
-                            year: issuecustom.dueDate.getFullYear(),
-                            month: issuecustom.dueDate.getMonth() + 1,
-                            day: issuecustom.dueDate.getDate()
-                        };
-                    }
-                });
-
-                console.log(issue.code);
-                console.error('drag event stops here');
+                this.validateIssue(issue);
             }
         }
 
     }
 
     allowDrop($event) {
-        // alert($event.target.id)
         if ((!this.activeSprint.isActive) && ($event.target.id.includes('droppable') === true)) {
             $event.preventDefault();
         }
     }
 
     dragend(ev) {
-        console.error('dragend starts here');
 
         let data = ev.dataTransfer.getData('text');
-
-        // this.searchActiveSprint();
-
-        // this.affectIssuesToSprint();
 
         this.getBacklogIssues();
 
         this.getSprintIssues();
 
-        console.error('dragend stops here');
-
     }
 
     drop(ev) {
-        console.error('dropev starts here')
         ev.preventDefault();
-        // tslint:disable-next-line:prefer-const
         let data = ev.dataTransfer.getData('text');
         ev.target.appendChild(document.getElementById(data));
-        // console.log(document.getElementById(data).id);
 
         if (!this.activeSprint.id) {
             this.searchActiveSprint();
@@ -635,8 +538,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     console.log('update ' + issue.code + ' with sprint ' + issue.sprint.name);
                 }
             }
-            // this.affectIssuesToSprint();
-            console.error('dropev stops here');
         }
         if (!this.activeSprint.isActive) {
             let x = <HTMLButtonElement> document.getElementById('startSprintBtn');
@@ -644,7 +545,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         }
     }
 
-    validateIssue(issue) {
+    private validateIssue(issue) {
         this.issuecustomSce.find(issue.id).subscribe((issuecustom) => {
             if (issue.createdDate) {
                 issue.createdDate = {
@@ -672,7 +573,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
     }
 
     dragStartColBoard(ev) {
-        console.error('start drag' + ev.target.id);
         ev.dataTransfer.setData('text', ev.target.id);
 
         for (let issue of this.issueCustoms) {
@@ -686,17 +586,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     console.log('new' + issue.status.name);
 
                     let step = this.getStepByStatus(issue.status);
-                    console.error('current steppppppp ' + step.column.name);
 
                     this.nextPossibleSteps = this.getNextPossibleSteps(step);
-                    console.error(this.nextPossibleSteps.length);
 
                 } else {
                     // if the issue is still unresolved
                     let openStep: StepCustom = this.getOpenStep();
                     this.nextPossibleSteps = new Array<StepCustom>();
                     this.nextPossibleSteps.push(openStep);
-                    console.error('backlog kanban')
                 }
             }
         }
@@ -704,20 +601,14 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
                 console.log(issue.code);
-                console.error('drag event stops here');
             }
         }
 
     }
 
     dragendColBoard(ev) {
-        console.error('dragend starts here');
 
         let data = ev.dataTransfer.getData('text');
-
-        // this.searchActiveSprint();
-
-        // this.affectIssuesToSprint();
 
         let parent = ev.target.parentElement;
 
@@ -756,7 +647,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                     // if (iss.status && iss.status.column.id === parent.parentElement.id) {
                     if (step && step.column.id === parent.parentElement.id) {
                         countIssues = countIssues + 1;
-                        console.error('hereeeeee' + countIssues);
                     }
                 }
             }
@@ -775,12 +665,9 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         }
 
         parent.style.border = '1px solid #888888';
-        console.error('dragend stops here');
     }
 
     dragleaveColBoard(ev) {
-        console.error('dragleave starts here');
-        // let parent = ev.target.parentElement;
         if (ev.target.children !== undefined) {
             console.log('curr' + ev.target.className);
             for (let i = 0; i < ev.target.children.length; i++) {
@@ -800,10 +687,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         let stop = false;
         let index = 0;
         if (this.nextPossibleSteps && this.nextPossibleSteps.length > 0) {
-            console.error('length ' + this.nextPossibleSteps.length)
             while (stop === false && allowed === false && index <= this.nextPossibleSteps.length) {
-
-                console.error(JSON.stringify(this.nextPossibleSteps) + ' this.nextPossibleSteps[index]')
 
                 if (this.nextPossibleSteps[index] && this.nextPossibleSteps[index].column) {
                     if (this.nextPossibleSteps[index].column.id === col.id) {
@@ -813,9 +697,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                         index = index + 1;
                     }
                 } else {
-                    // allowed = true;
-                    // console.log('sorryyy' + this.nextPossibleSteps[index].id);
-                    // index = index + 1;
                     stop = true;
                 }
             }
@@ -832,7 +713,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             if (this.relatedColumns[index].id === ID) {
                 found = true;
                 currCol = this.relatedColumns[index];
-                console.error(currCol.name)
             } else {
                 index = index + 1;
             }
@@ -842,18 +722,10 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
 
     allowDropColBoard($event) {
 
-        console.error($event.target.parentElement.id);
-        console.error($event.target.parentElement.className);
-
         let currColDivElt = $event.target.parentElement;
 
         console.log('col');
         let currCol = this.getCurrentColumnByID(currColDivElt.id);
-
-/*
-        this.progress = Math.round((this.relatedColumns.indexOf(currCol) + 1) / this.relatedColumns.length * 100)
-        console.error(Math.round(this.progress))
-*/
 
         let isAllowed = this.isAllowedToReceiveIn(currCol);
         console.log(this.isAllowedToReceiveIn(currCol));
@@ -873,10 +745,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                         }
                     }
                     console.log(index + ' index')
-
-                    // console.log(JSON.stringify(this.relatedColumns))
-
-                    // this.progress = (autStat.column.order) / this.relatedColumns.length * 100
 
                     let elt = $event.target;
                     while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
@@ -913,27 +781,9 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
             }
 
         }
-/*
-        let elt = $event.target;
-        while ((elt.id === undefined) || (elt.id.includes('droppable') === false)) {
-            // console.log('me ' + elt.className);
-            elt = elt.parentElement;
-            // console.log('my parent ' + elt.className);
-        }
-        if (elt.id.includes('droppable') === true) {
-            $event.preventDefault();
-            elt.style.border = '2px dashed blueviolet';
-            // console.log('count ' + elt.children.length)
-
-            for (let i = 0; i < elt.children.length; i++) {
-                elt.children[i].hidden = true;
-            }
-        }
-        */
     }
 
     dropColBoard(ev) {
-        console.error('dropev starts here')
         ev.preventDefault();
         // tslint:disable-next-line:prefer-const
         let data = ev.dataTransfer.getData('text');
@@ -944,13 +794,10 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
         console.log('col');
         let currCol = this.getCurrentColumnByID(currColDivElt.id);
 
-        console.error('just drop ' + document.getElementById(data).id + ' in ' + currCol.name)
-
         let currentStep: StepCustom;
         for (let step of this.nextPossibleSteps) {
             if (step.column.id === ev.target.parentElement.id) {
                 currentStep = step;
-                console.error('steppppppppppppp' + currentStep.name)
             }
         }
 
@@ -961,31 +808,24 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 if (currentStep.status.category.name.toLowerCase() === 'done') {
                     this.router.navigate(['/', { outlets: { popup : 'issuecustoms/' + issue.id + '/resolve' } }]);
                     document.getElementById(data).style.textDecoration = 'line-through';
-                    console.error(currentStep.status.category.name);
                 } else {
                     if (currentStep.status.category.name.toLowerCase() !== 'done') {
                         issue.resolution = null;
                         document.getElementById(data).style.textDecoration = 'none';
-                        console.error(currentStep.status.category.name)
                     }
                 }
 
                 issue.progress = Math.round((this.relatedColumns.indexOf(currCol) + 1) / this.relatedColumns.length * 100)
                 this.progress = issue.progress;
-                console.error(Math.round(issue.progress));
 
                 let progresId = issue.code;
-                console.error(document.getElementById(progresId).className);
                 let issueProgress = <HTMLProgressElement> document.getElementById(progresId);
-                // document.getElementById(progresId).style.width = issue.progress + '%';
-                // document.getElementById(progresId).innerText = issue.progress + '%';
 
                 issueProgress.style.width = issue.progress + '%';
                 issueProgress.innerText = issue.progress + '%';
 
                 issue.status = Object.assign({}, currentStep.status);
 
-                console.error('statttt ' + issue.status)
                 this.subscribeToSaveResponseIssues(
                     this.issuecustomSce.update(issue));
                 if (issue.id !== undefined) {
@@ -993,8 +833,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy, AfterConten
                 }
 
             }
-            // this.affectIssuesToSprint();
-            console.error('dropev stops here');
         }
 
     }

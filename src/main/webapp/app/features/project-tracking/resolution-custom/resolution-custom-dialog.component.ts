@@ -80,17 +80,6 @@ export class ResolutionCustomDialogComponent implements OnInit {
         .then((resolutionCustoms) => this.resolutionCustoms = resolutionCustoms );
     }
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof ResolutionCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.resolutioncustomService.findByRequest(name);
-        // console.log(this.comp.resolutioncustoms);
-    }
-
     save() {
         this.isSaving = true;
         if (this.resolutioncustom.id !== undefined) {

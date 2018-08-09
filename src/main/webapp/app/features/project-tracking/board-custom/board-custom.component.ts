@@ -139,7 +139,6 @@ currentAccount: any;
         this.links = this.parseLinks.parse(headers.get('link'));
         this.totalItems = headers.get('X-Total-Count');
         this.queryCount = this.totalItems;
-        // this.page = pagingParams.page;
         this.boardcustoms = data;
     }
     private onError(error) {

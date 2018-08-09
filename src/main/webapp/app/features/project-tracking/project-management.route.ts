@@ -1,7 +1,7 @@
-import { ProjectManagementComponent } from './project-management.component';
-import { Route } from '@angular/router';
+import {ProjectManagementComponent} from './project-management.component';
+import {Route} from '@angular/router';
 
-import { UserRouteAccessService } from '../../shared';
+import {UserRouteAccessService} from '../../shared';
 
 export const ProjectManagementRoute: Route = {
     path: 'project-management',

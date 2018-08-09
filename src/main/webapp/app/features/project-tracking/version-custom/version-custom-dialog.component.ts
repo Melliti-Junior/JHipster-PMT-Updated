@@ -96,17 +96,6 @@ export class VersionCustomDialogComponent implements OnInit {
         .then((versionCustoms) => this.versionCustoms = versionCustoms );
     }
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof VersionCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.versioncustomService.findByRequest(name);
-        // console.log(this.comp.versioncustoms);
-    }
-
     save() {
         this.isSaving = true;
         if (this.versioncustom.id !== undefined) {

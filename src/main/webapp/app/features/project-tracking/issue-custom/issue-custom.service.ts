@@ -97,15 +97,9 @@ export class IssueCustomService {
      * Convert a Issue to a JSON which can be sent to the server.JSON.stringify(val.json)
      */
     private convert(issuecustom: IssueCustom): IssueCustom {
-        // Start Conversion
-        console.log('Start Conversion');
-        // issuecustom.createdDate = new Date().getDate;
-        // issuecustom.updatedDate = new Date().getDate;
-        // issuecustom.dueDate = new Date().getDate;
         const copy: IssueCustom = Object.assign({}, issuecustom);
        if (copy.id === undefined) {
             console.log('creation');
-           // copy.updatedDate = Object.assign(copy.updatedDate);
        } else {
             console.log('update');
        }
@@ -120,36 +114,6 @@ export class IssueCustomService {
         console.log('Due : ' + copy.dueDate);
         copy.dueDate = this.dateUtils
             .convertLocalDateToServer(issuecustom.dueDate);
-            /*
-        if (copy.createdDate !== undefined) {
-            if (copy.createdDate.valid) {
-                console.log('Created : ' + issuecustom.createdDate);
-                copy.createdDate = this.dateUtils
-                    .convertLocalDateToServer(issuecustom.createdDate);
-            }
-        } else {
-            console.error('Invalid Date : createdDate')
-        }
-        if (copy.dueDate !== undefined) {
-            if (copy.dueDate.valid) {
-                console.log('Due : ' + issuecustom.dueDate);
-                copy.dueDate = this.dateUtils
-                    .convertLocalDateToServer(issuecustom.dueDate);
-            }
-        } else {
-            console.error('Invalid Date : dueDate')
-        }
-        if (copy.updatedDate !== undefined) {
-            if (copy.updatedDate.valid) {
-                console.log('Updated : ' + issuecustom.updatedDate);
-                copy.updatedDate = this.dateUtils
-                    .convertLocalDateToServer(issuecustom.updatedDate);
-                return copy;
-            }
-        } else {
-            console.error('Invalid Date : updatedDate')
-        }
-        */
         return copy;
     }
 

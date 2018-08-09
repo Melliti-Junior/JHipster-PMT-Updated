@@ -34,16 +34,6 @@ export class SprintCustomService {
         });
     }
 
-    updateAll(sprintcustoms: SprintCustom[]): Observable<SprintCustom> {
-        for (let sp of sprintcustoms) {
-            let copy = this.convert(sp);
-            return this.http.put(this.resourceUrl, copy).map((res: Response) => {
-                const jsonResponse = res.json();
-                return this.convertItemFromServer(jsonResponse);
-            });
-        }
-    }
-
     find(id: string): Observable<SprintCustom> {
         return this.http.get(`${this.resourceUrl}/${id}`).map((res: Response) => {
             const jsonResponse = res.json();
@@ -72,21 +62,6 @@ export class SprintCustomService {
           .toPromise()
           .then((response) => response.json() as SprintCustom[])
       }
-
-    /**
-     *
-     * this function return an entity by request
-     *
-     * @param {*} [req]
-     * @returns {Observable<SprintCustom>}
-     * @memberof ColumnCustomService
-     */
-    findByRequest(req?: any): SprintCustom {
-        const result = this.search({ query: req });
-        // result.subscribe((val) => console.log('val ' + JSON.stringify(val.json)));
-        result.subscribe((val) => this.ObjReturned = this.convertItemFromServer(JSON.stringify(val.json)));
-        return this.ObjReturned;
-    }
 
     private convertResponse(res: Response): ResponseWrapper {
         const jsonResponse = res.json();

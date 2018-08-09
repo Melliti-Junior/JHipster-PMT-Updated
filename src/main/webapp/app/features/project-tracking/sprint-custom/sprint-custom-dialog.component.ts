@@ -121,17 +121,6 @@ export class SprintCustomDialogComponent implements OnInit {
         .then((sprintCustoms) => this.sprintCustoms = sprintCustoms );
     }
 
-    /**
-     * Use ElasticSearch to find element by request
-     *
-     * @param {string} req
-     * @memberof SprintCustomDialogComponent
-     */
-    findByname(name: string) {
-        this.sprintcustomService.findByRequest(name);
-        // console.log(this.comp.sprintcustoms);
-    }
-
     save() {
         this.isSaving = true;
         if (this.sprintcustom.id !== undefined) {

@@ -81,9 +81,7 @@ export class CategoryCustomService {
      * Convert a CategoryCustom to a JSON which can be sent to the server.
      */
     private convert(categorycustom: CategoryCustom): CategoryCustom {
-        console.error('start conversion')
         const copy: CategoryCustom = Object.assign({}, categorycustom);
-        // console.error('end conversion of ' + copy.name + ' by ' + copy.column.name)
         return copy;
     }
 }
