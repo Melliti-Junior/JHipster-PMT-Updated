@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class StatusCustom extends Status implements Serializable {
+public class CustomStatus extends Status implements Serializable {
 
 	/**
 	 *
@@ -20,11 +20,11 @@ public class StatusCustom extends Status implements Serializable {
     @Field("category")
     private Category category;
 
-    public StatusCustom() {
+    public CustomStatus() {
         super();
     }
 
-    public StatusCustom(Category category) {
+    public CustomStatus(Category category) {
         this.category = category;
     }
 

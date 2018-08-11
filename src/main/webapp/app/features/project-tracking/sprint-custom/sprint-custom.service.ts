@@ -73,7 +73,7 @@ export class SprintCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to SprintCustom.
+     * Convert a returned JSON ObjReturned to CustomSprint.
      */
     private convertItemFromServer(json: any): SprintCustom {
 
@@ -84,7 +84,7 @@ export class SprintCustomService {
             .convertLocalDateFromServer(json.endDate);
         return entity;
         /*
-        this.ObjReturned = Object.assign(new SprintCustom(), json);
+        this.ObjReturned = Object.assign(new CustomSprint(), json);
         this.ObjReturned.startDate = this.dateUtils
             .convertLocalDateFromServer(json.startDate);
         this.ObjReturned.endDate = this.dateUtils

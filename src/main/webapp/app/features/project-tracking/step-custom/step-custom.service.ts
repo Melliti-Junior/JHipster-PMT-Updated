@@ -73,7 +73,7 @@ export class StepCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to StepCustom.
+     * Convert a returned JSON ObjReturned to CustomStep.
      */
     private convertItemFromServer(json: any): StepCustom {
         const entity: StepCustom = Object.assign(new StepCustom(), json);

@@ -73,7 +73,7 @@ export class VersionCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to VersionCustom.
+     * Convert a returned JSON ObjReturned to CustomVersion.
      */
     private convertItemFromServer(json: any): VersionCustom {
         this.ObjReturned = Object.assign(new VersionCustom(), json);

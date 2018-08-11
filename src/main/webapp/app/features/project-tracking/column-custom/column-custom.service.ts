@@ -73,7 +73,7 @@ export class ColumnCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to ColumnCustom.
+     * Convert a returned JSON ObjReturned to CustomColumn.
      */
     private convertItemFromServer(json: any): ColumnCustom {
 

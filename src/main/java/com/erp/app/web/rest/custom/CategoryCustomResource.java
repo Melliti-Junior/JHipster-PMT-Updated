@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.CategoryCustom;
+import com.erp.app.domain.custom.CustomCategory;
 import com.erp.app.repository.custom.CategoryCustomRepository;
 import com.erp.app.repository.search.custom.CategoryCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class CategoryCustomResource {
      */
     @PostMapping("/categorycustoms")
     @Timed
-    public ResponseEntity<CategoryCustom> createCategoryCustom(@Valid @RequestBody CategoryCustom categorycustom) throws URISyntaxException {
-        log.debug("REST request to save CategoryCustom : {}", categorycustom);
+    public ResponseEntity<CustomCategory> createCategoryCustom(@Valid @RequestBody CustomCategory categorycustom) throws URISyntaxException {
+        log.debug("REST request to save CustomCategory : {}", categorycustom);
         if (categorycustom.getId() != null) {
             throw new BadRequestAlertException("A new categorycustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        CategoryCustom result = categorycustomRepository.save(categorycustom);
+        CustomCategory result = categorycustomRepository.save(categorycustom);
         categorycustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/categorycustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class CategoryCustomResource {
      */
     @PutMapping("/categorycustoms")
     @Timed
-    public ResponseEntity<CategoryCustom> updateCategoryCustom(@Valid @RequestBody CategoryCustom categorycustom) throws URISyntaxException {
-        log.debug("REST request to update CategoryCustom : {}", categorycustom);
+    public ResponseEntity<CustomCategory> updateCategoryCustom(@Valid @RequestBody CustomCategory categorycustom) throws URISyntaxException {
+        log.debug("REST request to update CustomCategory : {}", categorycustom);
         if (categorycustom.getId() == null) {
             return createCategoryCustom(categorycustom);
         }
-        CategoryCustom result = categorycustomRepository.save(categorycustom);
+        CustomCategory result = categorycustomRepository.save(categorycustom);
         categorycustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, categorycustom.getId().toString()))
@@ -94,9 +94,9 @@ public class CategoryCustomResource {
      */
     @GetMapping("/categorycustoms")
     @Timed
-    public ResponseEntity<List<CategoryCustom>> getAllCategoryCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomCategory>> getAllCategoryCustoms(Pageable pageable) {
         log.debug("REST request to get a page of CategoryCustoms");
-        Page<CategoryCustom> page = categorycustomRepository.findAll(pageable);
+        Page<CustomCategory> page = categorycustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/categorycustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class CategoryCustomResource {
      */
     @GetMapping("/categorycustoms/{id}")
     @Timed
-    public ResponseEntity<CategoryCustom> getCategoryCustom(@PathVariable String id) {
-        log.debug("REST request to get CategoryCustom : {}", id);
-        CategoryCustom categorycustom = categorycustomRepository.findOne(id);
+    public ResponseEntity<CustomCategory> getCategoryCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomCategory : {}", id);
+        CustomCategory categorycustom = categorycustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(categorycustom));
     }
 
@@ -124,7 +124,7 @@ public class CategoryCustomResource {
     @DeleteMapping("/categorycustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteCategoryCustom(@PathVariable String id) {
-        log.debug("REST request to delete CategoryCustom : {}", id);
+        log.debug("REST request to delete CustomCategory : {}", id);
         categorycustomRepository.delete(id);
         categorycustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class CategoryCustomResource {
      */
     @GetMapping("/_search/categorycustoms")
     @Timed
-    public ResponseEntity<List<CategoryCustom>> searchCategoryCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomCategory>> searchCategoryCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of CategoryCustoms for query {}", query);
-        Page<CategoryCustom> page = categorycustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomCategory> page = categorycustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/categorycustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

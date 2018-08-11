@@ -1,7 +1,7 @@
 package com.erp.app.config.dbmigrations;
 
 import com.erp.app.domain.*;
-import com.erp.app.domain.custom.WorkflowCustom;
+import com.erp.app.domain.custom.CustomWorkflow;
 import com.erp.app.security.AuthoritiesConstants;
 import com.github.mongobee.changeset.ChangeLog;
 import com.github.mongobee.changeset.ChangeSet;
@@ -159,7 +159,7 @@ public class OtherInitialSetupMigration {
 
     @ChangeSet(order = "08", author = "initiator", id = "08-addWorkflow")
     public void addWorkflow(MongoTemplate mongoTemplate) {
-        WorkflowCustom simplified = new WorkflowCustom();
+        CustomWorkflow simplified = new CustomWorkflow();
         simplified.setId("workflow-1");
         simplified.setCode("SMPL");
         simplified.setName("Simplified Workflow");

@@ -50,7 +50,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
-        // this.relatedColumns = new Array<ColumnCustom>();
+        // this.relatedColumns = new Array<CustomColumn>();
         this.allColumns = new Array<ColumnCustom>();
 
         this.subscription = this.route.params.subscribe((params) => {

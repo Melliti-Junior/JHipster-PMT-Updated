@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class IssueCustom extends Issue implements Serializable {
+public class CustomIssue extends Issue implements Serializable {
 
 	/**
 	 *
@@ -40,15 +40,15 @@ public class IssueCustom extends Issue implements Serializable {
 
     @DBRef
     @Field("version")
-    private VersionCustom version;
+    private CustomVersion version;
 
     @DBRef
     @Field("sprint")
-    private SprintCustom sprint;
+    private CustomSprint sprint;
 
     @DBRef
 	@Field("project")
-    private ProjectCustom project;
+    private CustomProject project;
 
     @DBRef
     @Field("reporter")
@@ -59,7 +59,7 @@ public class IssueCustom extends Issue implements Serializable {
     private User assignee;
 
 
-    public IssueCustom(IssueType type, IssuePriority priority, Epic epic, ProjectCustom project, Status status, Resolution resolution, VersionCustom version, SprintCustom sprint) {
+    public CustomIssue(IssueType type, IssuePriority priority, Epic epic, CustomProject project, Status status, Resolution resolution, CustomVersion version, CustomSprint sprint) {
 		super();
 		this.type = type;
 		this.priority = priority;
@@ -72,7 +72,7 @@ public class IssueCustom extends Issue implements Serializable {
 	}
 
 
-	public IssueCustom() {
+	public CustomIssue() {
 		super();
 	}
 
@@ -100,11 +100,11 @@ public class IssueCustom extends Issue implements Serializable {
 		this.epic = epic;
 	}
 
-	public ProjectCustom getProject() {
+	public CustomProject getProject() {
 		return project;
 	}
 
-	public void setProject(ProjectCustom project) {
+	public void setProject(CustomProject project) {
 		this.project = project;
 	}
 
@@ -124,19 +124,19 @@ public class IssueCustom extends Issue implements Serializable {
 		this.resolution = resolution;
 	}
 
-    public VersionCustom getVersion() {
+    public CustomVersion getVersion() {
         return version;
     }
 
-    public void setVersion(VersionCustom version) {
+    public void setVersion(CustomVersion version) {
         this.version = version;
     }
 
-    public SprintCustom getSprint() {
+    public CustomSprint getSprint() {
         return sprint;
     }
 
-    public void setSprint(SprintCustom sprint) {
+    public void setSprint(CustomSprint sprint) {
         this.sprint = sprint;
     }
 

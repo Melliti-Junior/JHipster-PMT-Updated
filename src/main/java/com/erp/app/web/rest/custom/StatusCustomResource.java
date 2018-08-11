@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.StatusCustom;
+import com.erp.app.domain.custom.CustomStatus;
 import com.erp.app.repository.custom.StatusCustomRepository;
 import com.erp.app.repository.search.custom.StatusCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class StatusCustomResource {
      */
     @PostMapping("/statuscustoms")
     @Timed
-    public ResponseEntity<StatusCustom> createStatusCustom(@Valid @RequestBody StatusCustom statuscustom) throws URISyntaxException {
-        log.debug("REST request to save StatusCustom : {}", statuscustom);
+    public ResponseEntity<CustomStatus> createStatusCustom(@Valid @RequestBody CustomStatus statuscustom) throws URISyntaxException {
+        log.debug("REST request to save CustomStatus : {}", statuscustom);
         if (statuscustom.getId() != null) {
             throw new BadRequestAlertException("A new statuscustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        StatusCustom result = statuscustomRepository.save(statuscustom);
+        CustomStatus result = statuscustomRepository.save(statuscustom);
         statuscustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/statuscustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class StatusCustomResource {
      */
     @PutMapping("/statuscustoms")
     @Timed
-    public ResponseEntity<StatusCustom> updateStatusCustom(@Valid @RequestBody StatusCustom statuscustom) throws URISyntaxException {
-        log.debug("REST request to update StatusCustom : {}", statuscustom);
+    public ResponseEntity<CustomStatus> updateStatusCustom(@Valid @RequestBody CustomStatus statuscustom) throws URISyntaxException {
+        log.debug("REST request to update CustomStatus : {}", statuscustom);
         if (statuscustom.getId() == null) {
             return createStatusCustom(statuscustom);
         }
-        StatusCustom result = statuscustomRepository.save(statuscustom);
+        CustomStatus result = statuscustomRepository.save(statuscustom);
         statuscustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, statuscustom.getId().toString()))
@@ -94,9 +94,9 @@ public class StatusCustomResource {
      */
     @GetMapping("/statuscustoms")
     @Timed
-    public ResponseEntity<List<StatusCustom>> getAllStatusCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomStatus>> getAllStatusCustoms(Pageable pageable) {
         log.debug("REST request to get a page of StatusCustoms");
-        Page<StatusCustom> page = statuscustomRepository.findAll(pageable);
+        Page<CustomStatus> page = statuscustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/statuscustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class StatusCustomResource {
      */
     @GetMapping("/statuscustoms/{id}")
     @Timed
-    public ResponseEntity<StatusCustom> getStatusCustom(@PathVariable String id) {
-        log.debug("REST request to get StatusCustom : {}", id);
-        StatusCustom statuscustom = statuscustomRepository.findOne(id);
+    public ResponseEntity<CustomStatus> getStatusCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomStatus : {}", id);
+        CustomStatus statuscustom = statuscustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(statuscustom));
     }
 
@@ -124,7 +124,7 @@ public class StatusCustomResource {
     @DeleteMapping("/statuscustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteStatusCustom(@PathVariable String id) {
-        log.debug("REST request to delete StatusCustom : {}", id);
+        log.debug("REST request to delete CustomStatus : {}", id);
         statuscustomRepository.delete(id);
         statuscustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class StatusCustomResource {
      */
     @GetMapping("/_search/statuscustoms")
     @Timed
-    public ResponseEntity<List<StatusCustom>> searchStatusCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomStatus>> searchStatusCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of StatusCustoms for query {}", query);
-        Page<StatusCustom> page = statuscustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomStatus> page = statuscustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/statuscustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

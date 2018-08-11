@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.SprintCustom;
+import com.erp.app.domain.custom.CustomSprint;
 import com.erp.app.repository.custom.SprintCustomRepository;
 import com.erp.app.repository.search.custom.SprintCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class SprintCustomResource {
      */
     @PostMapping("/sprintcustoms")
     @Timed
-    public ResponseEntity<SprintCustom> createSprintCustom(@Valid @RequestBody SprintCustom sprintcustom) throws URISyntaxException {
-        log.debug("REST request to save SprintCustom : {}", sprintcustom);
+    public ResponseEntity<CustomSprint> createSprintCustom(@Valid @RequestBody CustomSprint sprintcustom) throws URISyntaxException {
+        log.debug("REST request to save CustomSprint : {}", sprintcustom);
         if (sprintcustom.getId() != null) {
             throw new BadRequestAlertException("A new sprintcustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        SprintCustom result = sprintcustomRepository.save(sprintcustom);
+        CustomSprint result = sprintcustomRepository.save(sprintcustom);
         sprintcustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/sprintcustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class SprintCustomResource {
      */
     @PutMapping("/sprintcustoms")
     @Timed
-    public ResponseEntity<SprintCustom> updateSprintCustom(@Valid @RequestBody SprintCustom sprintcustom) throws URISyntaxException {
-        log.debug("REST request to update SprintCustom : {}", sprintcustom);
+    public ResponseEntity<CustomSprint> updateSprintCustom(@Valid @RequestBody CustomSprint sprintcustom) throws URISyntaxException {
+        log.debug("REST request to update CustomSprint : {}", sprintcustom);
         if (sprintcustom.getId() == null) {
             return createSprintCustom(sprintcustom);
         }
-        SprintCustom result = sprintcustomRepository.save(sprintcustom);
+        CustomSprint result = sprintcustomRepository.save(sprintcustom);
         sprintcustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, sprintcustom.getId().toString()))
@@ -94,9 +94,9 @@ public class SprintCustomResource {
      */
     @GetMapping("/sprintcustoms")
     @Timed
-    public ResponseEntity<List<SprintCustom>> getAllSprintCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomSprint>> getAllSprintCustoms(Pageable pageable) {
         log.debug("REST request to get a page of SprintCustoms");
-        Page<SprintCustom> page = sprintcustomRepository.findAll(pageable);
+        Page<CustomSprint> page = sprintcustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/sprintcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class SprintCustomResource {
      */
     @GetMapping("/sprintcustoms/{id}")
     @Timed
-    public ResponseEntity<SprintCustom> getSprintCustom(@PathVariable String id) {
-        log.debug("REST request to get SprintCustom : {}", id);
-        SprintCustom sprintcustom = sprintcustomRepository.findOne(id);
+    public ResponseEntity<CustomSprint> getSprintCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomSprint : {}", id);
+        CustomSprint sprintcustom = sprintcustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(sprintcustom));
     }
 
@@ -124,7 +124,7 @@ public class SprintCustomResource {
     @DeleteMapping("/sprintcustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteSprintCustom(@PathVariable String id) {
-        log.debug("REST request to delete SprintCustom : {}", id);
+        log.debug("REST request to delete CustomSprint : {}", id);
         sprintcustomRepository.delete(id);
         sprintcustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class SprintCustomResource {
      */
     @GetMapping("/_search/sprintcustoms")
     @Timed
-    public ResponseEntity<List<SprintCustom>> searchSprintCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomSprint>> searchSprintCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of SprintCustoms for query {}", query);
-        Page<SprintCustom> page = sprintcustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomSprint> page = sprintcustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/sprintcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

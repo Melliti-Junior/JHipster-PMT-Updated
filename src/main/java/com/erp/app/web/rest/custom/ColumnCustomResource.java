@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.ColumnCustom;
+import com.erp.app.domain.custom.CustomColumn;
 import com.erp.app.repository.custom.ColumnCustomRepository;
 import com.erp.app.repository.search.custom.ColumnCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class ColumnCustomResource {
      */
     @PostMapping("/columncustoms")
     @Timed
-    public ResponseEntity<ColumnCustom> createColumnCustom(@Valid @RequestBody ColumnCustom columncustom) throws URISyntaxException {
-        log.debug("REST request to save ColumnCustom : {}", columncustom);
+    public ResponseEntity<CustomColumn> createColumnCustom(@Valid @RequestBody CustomColumn columncustom) throws URISyntaxException {
+        log.debug("REST request to save CustomColumn : {}", columncustom);
         if (columncustom.getId() != null) {
             throw new BadRequestAlertException("A new columncustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ColumnCustom result = columncustomRepository.save(columncustom);
+        CustomColumn result = columncustomRepository.save(columncustom);
         columncustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/columncustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class ColumnCustomResource {
      */
     @PutMapping("/columncustoms")
     @Timed
-    public ResponseEntity<ColumnCustom> updateColumnCustom(@Valid @RequestBody ColumnCustom columncustom) throws URISyntaxException {
-        log.debug("REST request to update ColumnCustom : {}", columncustom);
+    public ResponseEntity<CustomColumn> updateColumnCustom(@Valid @RequestBody CustomColumn columncustom) throws URISyntaxException {
+        log.debug("REST request to update CustomColumn : {}", columncustom);
         if (columncustom.getId() == null) {
             return createColumnCustom(columncustom);
         }
-        ColumnCustom result = columncustomRepository.save(columncustom);
+        CustomColumn result = columncustomRepository.save(columncustom);
         columncustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, columncustom.getId().toString()))
@@ -94,9 +94,9 @@ public class ColumnCustomResource {
      */
     @GetMapping("/columncustoms")
     @Timed
-    public ResponseEntity<List<ColumnCustom>> getAllColumnCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomColumn>> getAllColumnCustoms(Pageable pageable) {
         log.debug("REST request to get a page of ColumnCustoms");
-        Page<ColumnCustom> page = columncustomRepository.findAll(pageable);
+        Page<CustomColumn> page = columncustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/columncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class ColumnCustomResource {
      */
     @GetMapping("/columncustoms/{id}")
     @Timed
-    public ResponseEntity<ColumnCustom> getColumnCustom(@PathVariable String id) {
-        log.debug("REST request to get ColumnCustom : {}", id);
-        ColumnCustom columncustom = columncustomRepository.findOne(id);
+    public ResponseEntity<CustomColumn> getColumnCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomColumn : {}", id);
+        CustomColumn columncustom = columncustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(columncustom));
     }
 
@@ -124,7 +124,7 @@ public class ColumnCustomResource {
     @DeleteMapping("/columncustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteColumnCustom(@PathVariable String id) {
-        log.debug("REST request to delete ColumnCustom : {}", id);
+        log.debug("REST request to delete CustomColumn : {}", id);
         columncustomRepository.delete(id);
         columncustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class ColumnCustomResource {
      */
     @GetMapping("/_search/columncustoms")
     @Timed
-    public ResponseEntity<List<ColumnCustom>> searchColumnCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomColumn>> searchColumnCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ColumnCustoms for query {}", query);
-        Page<ColumnCustom> page = columncustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomColumn> page = columncustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/columncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -108,7 +108,7 @@ export class TransitionCustomDetailComponent implements OnInit, OnDestroy, After
 
         console.log('before ' + this.chosenIssues.length);
 
-        // let issue: IssueCustom;
+        // let issue: CustomIssue;
         // this.chosenIssues.push(issue);
 
         this.issuecustomSce.find(document.getElementById(data).id)

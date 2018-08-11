@@ -70,7 +70,7 @@ export class CategoryCustomService {
     }
 
     /**
-     * Convert a returned JSON object to CategoryCustom.
+     * Convert a returned JSON object to CustomCategory.
      */
     private convertItemFromServer(json: any): CategoryCustom {
         const entity: CategoryCustom = Object.assign(new CategoryCustom(), json);
@@ -78,7 +78,7 @@ export class CategoryCustomService {
     }
 
     /**
-     * Convert a CategoryCustom to a JSON which can be sent to the server.
+     * Convert a CustomCategory to a JSON which can be sent to the server.
      */
     private convert(categorycustom: CategoryCustom): CategoryCustom {
         const copy: CategoryCustom = Object.assign({}, categorycustom);

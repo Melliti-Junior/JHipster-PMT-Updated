@@ -73,7 +73,7 @@ export class WorkflowCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to WorkflowCustom.
+     * Convert a returned JSON ObjReturned to CustomWorkflow.
      */
     private convertItemFromServer(json: any): WorkflowCustom {
         const entity: WorkflowCustom = Object.assign(new WorkflowCustom(), json);

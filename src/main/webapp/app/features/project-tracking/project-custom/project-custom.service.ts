@@ -73,7 +73,7 @@ export class ProjectCustomService {
     }
 
     /**
-     * Convert a returned JSON object to ProjectCustom.
+     * Convert a returned JSON object to CustomProject.
      */
     private convertItemFromServer(json: any): ProjectCustom {
         this.ObjReturned = Object.assign(new ProjectCustom(), json);
@@ -85,7 +85,7 @@ export class ProjectCustomService {
     }
 
     /**
-     * Convert a ProjectCustom to a JSON which can be sent to the server.
+     * Convert a CustomProject to a JSON which can be sent to the server.
      */
     private convert(projectcustom: ProjectCustom): ProjectCustom {
         const copy: ProjectCustom = Object.assign({}, projectcustom);

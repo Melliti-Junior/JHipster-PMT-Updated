@@ -70,7 +70,7 @@ export class StatusCustomService {
     }
 
     /**
-     * Convert a returned JSON object to StatusCustom.
+     * Convert a returned JSON object to CustomStatus.
      */
     private convertItemFromServer(json: any): StatusCustom {
         const entity: StatusCustom = Object.assign(new StatusCustom(), json);
@@ -78,7 +78,7 @@ export class StatusCustomService {
     }
 
     /**
-     * Convert a StatusCustom to a JSON which can be sent to the server.
+     * Convert a CustomStatus to a JSON which can be sent to the server.
      */
     private convert(statuscustom: StatusCustom): StatusCustom {
         console.error('start conversion')

@@ -10,7 +10,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class  ProjectCustom extends Project implements Serializable {
+public class CustomProject extends Project implements Serializable {
 
 	/**
 	 *
@@ -23,18 +23,18 @@ public class  ProjectCustom extends Project implements Serializable {
 
     @DBRef
     @Field("process")
-    private WorkflowCustom process;
+    private CustomWorkflow process;
 
     @DBRef
     @Field("lead")
     private User lead;
 
-	public ProjectCustom(Program program) {
+	public CustomProject(Program program) {
 		super();
 		this.program = program;
     }
 
-    public ProjectCustom() {
+    public CustomProject() {
 		super();
 	}
 
@@ -46,11 +46,11 @@ public class  ProjectCustom extends Project implements Serializable {
 		this.program = program;
 	}
 
-    public WorkflowCustom getProcess() {
+    public CustomWorkflow getProcess() {
         return process;
     }
 
-    public void setProcess(WorkflowCustom process) {
+    public void setProcess(CustomWorkflow process) {
         this.process = process;
     }
 

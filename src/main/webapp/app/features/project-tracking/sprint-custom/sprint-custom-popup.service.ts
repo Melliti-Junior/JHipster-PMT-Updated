@@ -83,7 +83,7 @@ export class SprintCustomPopupService {
             } else {
                 // setTimeout used as a workaround for getting ExpressionChangedAfterItHasBeenCheckedErrorsprint
                 setTimeout(() => {
-                    this.ngbModalRef = this.sprintcustomModalRef(component, new SprintCustom());
+                    this.ngbModalRef = this.sprintcustomModalRef(component, new CustomSprint());
                     resolve(this.ngbModalRef);
                 }, 0);
             }

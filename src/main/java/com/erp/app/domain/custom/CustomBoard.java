@@ -1,6 +1,6 @@
 package com.erp.app.domain.custom;
 
-import com.erp.app.domain.Version;
+import com.erp.app.domain.Board;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -8,31 +8,33 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class VersionCustom extends Version implements Serializable {
+public class CustomBoard extends Board implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
+
     @DBRef
 	@Field("project")
-    private ProjectCustom project;
+    private CustomProject project;
 
-	public VersionCustom(ProjectCustom project) {
+    public CustomBoard(CustomProject project) {
 		super();
 		this.project = project;
     }
 
-	public VersionCustom() {
+	public CustomBoard() {
 		super();
 	}
 
-	public ProjectCustom getProject() {
+	public CustomProject getProject() {
 		return project;
 	}
 
-	public void setProject(ProjectCustom project) {
+	public void setProject(CustomProject project) {
 		this.project = project;
 	}
+
 }

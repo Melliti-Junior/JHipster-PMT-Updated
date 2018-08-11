@@ -54,7 +54,7 @@ export class BoardCustomDialogComponent implements OnInit {
         // private comp: BoardCustomComponent
     ) {
         // To check ----
-        // this.boardcustom = new BoardCustom();
+        // this.boardcustom = new CustomBoard();
     }
 
     ngOnInit() {

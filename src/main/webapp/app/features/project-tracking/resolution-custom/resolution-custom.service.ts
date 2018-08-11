@@ -73,7 +73,7 @@ export class ResolutionCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to ResolutionCustom.
+     * Convert a returned JSON ObjReturned to CustomResolution.
      */
     private convertItemFromServer(json: any): ResolutionCustom {
         this.ObjReturned = Object.assign(new ResolutionCustom(), json);

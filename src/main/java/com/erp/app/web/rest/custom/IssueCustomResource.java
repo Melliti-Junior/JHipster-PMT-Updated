@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.IssueCustom;
+import com.erp.app.domain.custom.CustomIssue;
 import com.erp.app.repository.custom.IssueCustomRepository;
 import com.erp.app.repository.search.custom.IssueCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class IssueCustomResource {
      */
     @PostMapping("/issuecustoms")
     @Timed
-    public ResponseEntity<IssueCustom> createIssueCustom(@Valid @RequestBody IssueCustom issuecustom) throws URISyntaxException {
-        log.debug("REST request to save IssueCustom : {}", issuecustom);
+    public ResponseEntity<CustomIssue> createIssueCustom(@Valid @RequestBody CustomIssue issuecustom) throws URISyntaxException {
+        log.debug("REST request to save CustomIssue : {}", issuecustom);
         if (issuecustom.getId() != null) {
             throw new BadRequestAlertException("A new issuecustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        IssueCustom result = issuecustomRepository.save(issuecustom);
+        CustomIssue result = issuecustomRepository.save(issuecustom);
         issuecustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/issuecustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class IssueCustomResource {
      */
     @PutMapping("/issuecustoms")
     @Timed
-    public ResponseEntity<IssueCustom> updateIssueCustom(@Valid @RequestBody IssueCustom issuecustom) throws URISyntaxException {
-        log.debug("REST request to update IssueCustom : {}", issuecustom);
+    public ResponseEntity<CustomIssue> updateIssueCustom(@Valid @RequestBody CustomIssue issuecustom) throws URISyntaxException {
+        log.debug("REST request to update CustomIssue : {}", issuecustom);
         if (issuecustom.getId() == null) {
             return createIssueCustom(issuecustom);
         }
-        IssueCustom result = issuecustomRepository.save(issuecustom);
+        CustomIssue result = issuecustomRepository.save(issuecustom);
         issuecustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, issuecustom.getId().toString()))
@@ -94,9 +94,9 @@ public class IssueCustomResource {
      */
     @GetMapping("/issuecustoms")
     @Timed
-    public ResponseEntity<List<IssueCustom>> getAllIssueCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomIssue>> getAllIssueCustoms(Pageable pageable) {
         log.debug("REST request to get a page of IssueCustoms");
-        Page<IssueCustom> page = issuecustomRepository.findAll(pageable);
+        Page<CustomIssue> page = issuecustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/issuecustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class IssueCustomResource {
      */
     @GetMapping("/issuecustoms/{id}")
     @Timed
-    public ResponseEntity<IssueCustom> getIssueCustom(@PathVariable String id) {
-        log.debug("REST request to get IssueCustom : {}", id);
-        IssueCustom issuecustom = issuecustomRepository.findOne(id);
+    public ResponseEntity<CustomIssue> getIssueCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomIssue : {}", id);
+        CustomIssue issuecustom = issuecustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(issuecustom));
     }
 
@@ -124,7 +124,7 @@ public class IssueCustomResource {
     @DeleteMapping("/issuecustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteIssueCustom(@PathVariable String id) {
-        log.debug("REST request to delete IssueCustom : {}", id);
+        log.debug("REST request to delete CustomIssue : {}", id);
         issuecustomRepository.delete(id);
         issuecustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class IssueCustomResource {
      */
     @GetMapping("/_search/issuecustoms")
     @Timed
-    public ResponseEntity<List<IssueCustom>> searchIssueCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomIssue>> searchIssueCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of IssueCustoms for query {}", query);
-        Page<IssueCustom> page = issuecustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomIssue> page = issuecustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/issuecustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class TransitionCustom extends Transition implements Serializable {
+public class CustomTransition extends Transition implements Serializable {
 
 	/**
 	 *
@@ -17,48 +17,48 @@ public class TransitionCustom extends Transition implements Serializable {
 
     @DBRef
 	@Field("workflow")
-    private WorkflowCustom workflow;
+    private CustomWorkflow workflow;
 
     @DBRef
     @Field("sourceStep")
-    private StepCustom sourceStep;
+    private CustomStep sourceStep;
 
     @DBRef
     @Field("targetStep")
-    private StepCustom targetStep;
+    private CustomStep targetStep;
 
 
-    public TransitionCustom() {
+    public CustomTransition() {
         super();
     }
 
-    public TransitionCustom(WorkflowCustom workflow, StepCustom sourceStep, StepCustom targetStep) {
+    public CustomTransition(CustomWorkflow workflow, CustomStep sourceStep, CustomStep targetStep) {
         this.workflow = workflow;
         this.sourceStep = sourceStep;
         this.targetStep = targetStep;
     }
 
-    public WorkflowCustom getWorkflow() {
+    public CustomWorkflow getWorkflow() {
         return workflow;
     }
 
-    public void setWorkflow(WorkflowCustom workflow) {
+    public void setWorkflow(CustomWorkflow workflow) {
         this.workflow = workflow;
     }
 
-    public StepCustom getSourceStep() {
+    public CustomStep getSourceStep() {
         return sourceStep;
     }
 
-    public void setSourceStep(StepCustom sourceStep) {
+    public void setSourceStep(CustomStep sourceStep) {
         this.sourceStep = sourceStep;
     }
 
-    public StepCustom getTargetStep() {
+    public CustomStep getTargetStep() {
         return targetStep;
     }
 
-    public void setTargetStep(StepCustom targetStep) {
+    public void setTargetStep(CustomStep targetStep) {
         this.targetStep = targetStep;
     }
 }

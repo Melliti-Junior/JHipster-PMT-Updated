@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.WorkflowCustom;
+import com.erp.app.domain.custom.CustomWorkflow;
 import com.erp.app.repository.custom.WorkflowCustomRepository;
 import com.erp.app.repository.search.custom.WorkflowCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class WorkflowCustomResource {
      */
     @PostMapping("/workflowcustoms")
     @Timed
-    public ResponseEntity<WorkflowCustom> createWorkflowCustom(@Valid @RequestBody WorkflowCustom workflowcustom) throws URISyntaxException {
-        log.debug("REST request to save WorkflowCustom : {}", workflowcustom);
+    public ResponseEntity<CustomWorkflow> createWorkflowCustom(@Valid @RequestBody CustomWorkflow workflowcustom) throws URISyntaxException {
+        log.debug("REST request to save CustomWorkflow : {}", workflowcustom);
         if (workflowcustom.getId() != null) {
             throw new BadRequestAlertException("A new workflowcustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        WorkflowCustom result = workflowcustomRepository.save(workflowcustom);
+        CustomWorkflow result = workflowcustomRepository.save(workflowcustom);
         workflowcustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/workflowcustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class WorkflowCustomResource {
      */
     @PutMapping("/workflowcustoms")
     @Timed
-    public ResponseEntity<WorkflowCustom> updateWorkflowCustom(@Valid @RequestBody WorkflowCustom workflowcustom) throws URISyntaxException {
-        log.debug("REST request to update WorkflowCustom : {}", workflowcustom);
+    public ResponseEntity<CustomWorkflow> updateWorkflowCustom(@Valid @RequestBody CustomWorkflow workflowcustom) throws URISyntaxException {
+        log.debug("REST request to update CustomWorkflow : {}", workflowcustom);
         if (workflowcustom.getId() == null) {
             return createWorkflowCustom(workflowcustom);
         }
-        WorkflowCustom result = workflowcustomRepository.save(workflowcustom);
+        CustomWorkflow result = workflowcustomRepository.save(workflowcustom);
         workflowcustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, workflowcustom.getId().toString()))
@@ -94,9 +94,9 @@ public class WorkflowCustomResource {
      */
     @GetMapping("/workflowcustoms")
     @Timed
-    public ResponseEntity<List<WorkflowCustom>> getAllWorkflowCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomWorkflow>> getAllWorkflowCustoms(Pageable pageable) {
         log.debug("REST request to get a page of WorkflowCustoms");
-        Page<WorkflowCustom> page = workflowcustomRepository.findAll(pageable);
+        Page<CustomWorkflow> page = workflowcustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/workflowcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class WorkflowCustomResource {
      */
     @GetMapping("/workflowcustoms/{id}")
     @Timed
-    public ResponseEntity<WorkflowCustom> getWorkflowCustom(@PathVariable String id) {
-        log.debug("REST request to get WorkflowCustom : {}", id);
-        WorkflowCustom workflowcustom = workflowcustomRepository.findOne(id);
+    public ResponseEntity<CustomWorkflow> getWorkflowCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomWorkflow : {}", id);
+        CustomWorkflow workflowcustom = workflowcustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(workflowcustom));
     }
 
@@ -124,7 +124,7 @@ public class WorkflowCustomResource {
     @DeleteMapping("/workflowcustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteWorkflowCustom(@PathVariable String id) {
-        log.debug("REST request to delete WorkflowCustom : {}", id);
+        log.debug("REST request to delete CustomWorkflow : {}", id);
         workflowcustomRepository.delete(id);
         workflowcustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class WorkflowCustomResource {
      */
     @GetMapping("/_search/workflowcustoms")
     @Timed
-    public ResponseEntity<List<WorkflowCustom>> searchWorkflowCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomWorkflow>> searchWorkflowCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of WorkflowCustoms for query {}", query);
-        Page<WorkflowCustom> page = workflowcustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomWorkflow> page = workflowcustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/workflowcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

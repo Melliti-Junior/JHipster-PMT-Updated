@@ -261,7 +261,7 @@ export class IssueCustomDialogComponent implements OnInit {
     }
 
     findFixVersion() {
-        // this.issuecustom.version = new VersionCustom();
+        // this.issuecustom.version = new CustomVersion();
         let index = 0;
         let found = false;
         while (index < this.possibleVersions.length && found === false)  {

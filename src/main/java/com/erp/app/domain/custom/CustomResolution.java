@@ -6,14 +6,14 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class ResolutionCustom extends Resolution implements Serializable {
+public class CustomResolution extends Resolution implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialResolutionUID = 1L;
 
-	public ResolutionCustom() {
+	public CustomResolution() {
 		super();
 	}
 

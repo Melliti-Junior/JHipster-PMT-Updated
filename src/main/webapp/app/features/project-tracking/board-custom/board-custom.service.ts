@@ -73,7 +73,7 @@ export class BoardCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to BoardCustom.
+     * Convert a returned JSON ObjReturned to CustomBoard.
      */
     private convertItemFromServer(json: any): BoardCustom {
         const entity: BoardCustom = Object.assign(new BoardCustom(), json);

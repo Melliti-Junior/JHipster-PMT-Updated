@@ -80,7 +80,7 @@ export class IssueCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to IssueCustom.
+     * Convert a returned JSON ObjReturned to CustomIssue.
      */
     private convertItemFromServer(json: any): IssueCustom {
         const entity: IssueCustom = Object.assign(new IssueCustom(), json);

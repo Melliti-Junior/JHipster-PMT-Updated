@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.StepCustom;
+import com.erp.app.domain.custom.CustomStep;
 import com.erp.app.repository.custom.StepCustomRepository;
 import com.erp.app.repository.search.custom.StepCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class StepCustomResource {
      */
     @PostMapping("/stepcustoms")
     @Timed
-    public ResponseEntity<StepCustom> createStepCustom(@Valid @RequestBody StepCustom stepcustom) throws URISyntaxException {
-        log.debug("REST request to save StepCustom : {}", stepcustom);
+    public ResponseEntity<CustomStep> createStepCustom(@Valid @RequestBody CustomStep stepcustom) throws URISyntaxException {
+        log.debug("REST request to save CustomStep : {}", stepcustom);
         if (stepcustom.getId() != null) {
             throw new BadRequestAlertException("A new stepcustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        StepCustom result = stepcustomRepository.save(stepcustom);
+        CustomStep result = stepcustomRepository.save(stepcustom);
         stepcustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/stepcustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class StepCustomResource {
      */
     @PutMapping("/stepcustoms")
     @Timed
-    public ResponseEntity<StepCustom> updateStepCustom(@Valid @RequestBody StepCustom stepcustom) throws URISyntaxException {
-        log.debug("REST request to update StepCustom : {}", stepcustom);
+    public ResponseEntity<CustomStep> updateStepCustom(@Valid @RequestBody CustomStep stepcustom) throws URISyntaxException {
+        log.debug("REST request to update CustomStep : {}", stepcustom);
         if (stepcustom.getId() == null) {
             return createStepCustom(stepcustom);
         }
-        StepCustom result = stepcustomRepository.save(stepcustom);
+        CustomStep result = stepcustomRepository.save(stepcustom);
         stepcustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, stepcustom.getId().toString()))
@@ -94,9 +94,9 @@ public class StepCustomResource {
      */
     @GetMapping("/stepcustoms")
     @Timed
-    public ResponseEntity<List<StepCustom>> getAllStepCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomStep>> getAllStepCustoms(Pageable pageable) {
         log.debug("REST request to get a page of StepCustoms");
-        Page<StepCustom> page = stepcustomRepository.findAll(pageable);
+        Page<CustomStep> page = stepcustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/stepcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class StepCustomResource {
      */
     @GetMapping("/stepcustoms/{id}")
     @Timed
-    public ResponseEntity<StepCustom> getStepCustom(@PathVariable String id) {
-        log.debug("REST request to get StepCustom : {}", id);
-        StepCustom stepcustom = stepcustomRepository.findOne(id);
+    public ResponseEntity<CustomStep> getStepCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomStep : {}", id);
+        CustomStep stepcustom = stepcustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(stepcustom));
     }
 
@@ -124,7 +124,7 @@ public class StepCustomResource {
     @DeleteMapping("/stepcustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteStepCustom(@PathVariable String id) {
-        log.debug("REST request to delete StepCustom : {}", id);
+        log.debug("REST request to delete CustomStep : {}", id);
         stepcustomRepository.delete(id);
         stepcustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class StepCustomResource {
      */
     @GetMapping("/_search/stepcustoms")
     @Timed
-    public ResponseEntity<List<StepCustom>> searchStepCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomStep>> searchStepCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of StepCustoms for query {}", query);
-        Page<StepCustom> page = stepcustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomStep> page = stepcustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/stepcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

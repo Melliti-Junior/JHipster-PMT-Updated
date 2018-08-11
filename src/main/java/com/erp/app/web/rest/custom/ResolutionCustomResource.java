@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.ResolutionCustom;
+import com.erp.app.domain.custom.CustomResolution;
 import com.erp.app.repository.custom.ResolutionCustomRepository;
 import com.erp.app.repository.search.custom.ResolutionCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class ResolutionCustomResource {
      */
     @PostMapping("/resolutioncustoms")
     @Timed
-    public ResponseEntity<ResolutionCustom> createResolutionCustom(@Valid @RequestBody ResolutionCustom resolutioncustom) throws URISyntaxException {
-        log.debug("REST request to save ResolutionCustom : {}", resolutioncustom);
+    public ResponseEntity<CustomResolution> createResolutionCustom(@Valid @RequestBody CustomResolution resolutioncustom) throws URISyntaxException {
+        log.debug("REST request to save CustomResolution : {}", resolutioncustom);
         if (resolutioncustom.getId() != null) {
             throw new BadRequestAlertException("A new resolutioncustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ResolutionCustom result = resolutioncustomRepository.save(resolutioncustom);
+        CustomResolution result = resolutioncustomRepository.save(resolutioncustom);
         resolutioncustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/resolutioncustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class ResolutionCustomResource {
      */
     @PutMapping("/resolutioncustoms")
     @Timed
-    public ResponseEntity<ResolutionCustom> updateResolutionCustom(@Valid @RequestBody ResolutionCustom resolutioncustom) throws URISyntaxException {
-        log.debug("REST request to update ResolutionCustom : {}", resolutioncustom);
+    public ResponseEntity<CustomResolution> updateResolutionCustom(@Valid @RequestBody CustomResolution resolutioncustom) throws URISyntaxException {
+        log.debug("REST request to update CustomResolution : {}", resolutioncustom);
         if (resolutioncustom.getId() == null) {
             return createResolutionCustom(resolutioncustom);
         }
-        ResolutionCustom result = resolutioncustomRepository.save(resolutioncustom);
+        CustomResolution result = resolutioncustomRepository.save(resolutioncustom);
         resolutioncustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, resolutioncustom.getId().toString()))
@@ -94,9 +94,9 @@ public class ResolutionCustomResource {
      */
     @GetMapping("/resolutioncustoms")
     @Timed
-    public ResponseEntity<List<ResolutionCustom>> getAllResolutionCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomResolution>> getAllResolutionCustoms(Pageable pageable) {
         log.debug("REST request to get a page of ResolutionCustoms");
-        Page<ResolutionCustom> page = resolutioncustomRepository.findAll(pageable);
+        Page<CustomResolution> page = resolutioncustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/resolutioncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class ResolutionCustomResource {
      */
     @GetMapping("/resolutioncustoms/{id}")
     @Timed
-    public ResponseEntity<ResolutionCustom> getResolutionCustom(@PathVariable String id) {
-        log.debug("REST request to get ResolutionCustom : {}", id);
-        ResolutionCustom resolutioncustom = resolutioncustomRepository.findOne(id);
+    public ResponseEntity<CustomResolution> getResolutionCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomResolution : {}", id);
+        CustomResolution resolutioncustom = resolutioncustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(resolutioncustom));
     }
 
@@ -124,7 +124,7 @@ public class ResolutionCustomResource {
     @DeleteMapping("/resolutioncustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteResolutionCustom(@PathVariable String id) {
-        log.debug("REST request to delete ResolutionCustom : {}", id);
+        log.debug("REST request to delete CustomResolution : {}", id);
         resolutioncustomRepository.delete(id);
         resolutioncustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class ResolutionCustomResource {
      */
     @GetMapping("/_search/resolutioncustoms")
     @Timed
-    public ResponseEntity<List<ResolutionCustom>> searchResolutionCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomResolution>> searchResolutionCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ResolutionCustoms for query {}", query);
-        Page<ResolutionCustom> page = resolutioncustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomResolution> page = resolutioncustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/resolutioncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

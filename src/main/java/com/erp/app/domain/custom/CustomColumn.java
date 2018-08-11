@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class ColumnCustom extends Column implements Serializable {
+public class CustomColumn extends Column implements Serializable {
 
 	/**
 	 *
@@ -20,27 +20,27 @@ public class ColumnCustom extends Column implements Serializable {
 
     @DBRef
 	@Field("board")
-    private BoardCustom board;
+    private CustomBoard board;
 
-	public ColumnCustom(BoardCustom board) {
+	public CustomColumn(CustomBoard board) {
 		super();
 		this.board = board;
     }
 
-    public ColumnCustom(Integer order, BoardCustom board) {
+    public CustomColumn(Integer order, CustomBoard board) {
         this.order = order;
         this.board = board;
     }
 
-    public ColumnCustom() {
+    public CustomColumn() {
 		super();
 	}
 
-    public BoardCustom getBoard() {
+    public CustomBoard getBoard() {
         return board;
     }
 
-    public void setBoard(BoardCustom board) {
+    public void setBoard(CustomBoard board) {
         this.board = board;
     }
 

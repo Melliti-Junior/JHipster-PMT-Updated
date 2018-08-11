@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.ProjectCustom;
+import com.erp.app.domain.custom.CustomProject;
 import com.erp.app.repository.custom.ProjectCustomRepository;
 import com.erp.app.repository.search.custom.ProjectCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class ProjectCustomResource {
      */
     @PostMapping("/projectcustoms")
     @Timed
-    public ResponseEntity<ProjectCustom> createProjectCustom(@Valid @RequestBody ProjectCustom projectcustom) throws URISyntaxException {
-        log.debug("REST request to save ProjectCustom : {}", projectcustom);
+    public ResponseEntity<CustomProject> createProjectCustom(@Valid @RequestBody CustomProject projectcustom) throws URISyntaxException {
+        log.debug("REST request to save CustomProject : {}", projectcustom);
         if (projectcustom.getId() != null) {
             throw new BadRequestAlertException("A new projectcustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        ProjectCustom result = projectcustomRepository.save(projectcustom);
+        CustomProject result = projectcustomRepository.save(projectcustom);
         projectcustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/projectcustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class ProjectCustomResource {
      */
     @PutMapping("/projectcustoms")
     @Timed
-    public ResponseEntity<ProjectCustom> updateProjectCustom(@Valid @RequestBody ProjectCustom projectcustom) throws URISyntaxException {
-        log.debug("REST request to update ProjectCustom : {}", projectcustom);
+    public ResponseEntity<CustomProject> updateProjectCustom(@Valid @RequestBody CustomProject projectcustom) throws URISyntaxException {
+        log.debug("REST request to update CustomProject : {}", projectcustom);
         if (projectcustom.getId() == null) {
             return createProjectCustom(projectcustom);
         }
-        ProjectCustom result = projectcustomRepository.save(projectcustom);
+        CustomProject result = projectcustomRepository.save(projectcustom);
         projectcustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, projectcustom.getId().toString()))
@@ -94,9 +94,9 @@ public class ProjectCustomResource {
      */
     @GetMapping("/projectcustoms")
     @Timed
-    public ResponseEntity<List<ProjectCustom>> getAllProjectCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomProject>> getAllProjectCustoms(Pageable pageable) {
         log.debug("REST request to get a page of ProjectCustoms");
-        Page<ProjectCustom> page = projectcustomRepository.findAll(pageable);
+        Page<CustomProject> page = projectcustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/projectcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class ProjectCustomResource {
      */
     @GetMapping("/projectcustoms/{id}")
     @Timed
-    public ResponseEntity<ProjectCustom> getProjectCustom(@PathVariable String id) {
-        log.debug("REST request to get ProjectCustom : {}", id);
-        ProjectCustom projectcustom = projectcustomRepository.findOne(id);
+    public ResponseEntity<CustomProject> getProjectCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomProject : {}", id);
+        CustomProject projectcustom = projectcustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(projectcustom));
     }
 
@@ -124,7 +124,7 @@ public class ProjectCustomResource {
     @DeleteMapping("/projectcustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteProjectCustom(@PathVariable String id) {
-        log.debug("REST request to delete ProjectCustom : {}", id);
+        log.debug("REST request to delete CustomProject : {}", id);
         projectcustomRepository.delete(id);
         projectcustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class ProjectCustomResource {
      */
     @GetMapping("/_search/projectcustoms")
     @Timed
-    public ResponseEntity<List<ProjectCustom>> searchProjectCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomProject>> searchProjectCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of ProjectCustoms for query {}", query);
-        Page<ProjectCustom> page = projectcustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomProject> page = projectcustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/projectcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

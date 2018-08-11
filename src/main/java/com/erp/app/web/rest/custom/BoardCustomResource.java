@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.BoardCustom;
+import com.erp.app.domain.custom.CustomBoard;
 import com.erp.app.repository.custom.BoardCustomRepository;
 import com.erp.app.repository.search.custom.BoardCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class BoardCustomResource {
      */
     @PostMapping("/boardcustoms")
     @Timed
-    public ResponseEntity<BoardCustom> createBoardCustom(@Valid @RequestBody BoardCustom boardcustom) throws URISyntaxException {
-        log.debug("REST request to save BoardCustom : {}", boardcustom);
+    public ResponseEntity<CustomBoard> createBoardCustom(@Valid @RequestBody CustomBoard boardcustom) throws URISyntaxException {
+        log.debug("REST request to save CustomBoard : {}", boardcustom);
         if (boardcustom.getId() != null) {
             throw new BadRequestAlertException("A new boardcustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        BoardCustom result = boardcustomRepository.save(boardcustom);
+        CustomBoard result = boardcustomRepository.save(boardcustom);
         boardcustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/boardcustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class BoardCustomResource {
      */
     @PutMapping("/boardcustoms")
     @Timed
-    public ResponseEntity<BoardCustom> updateBoardCustom(@Valid @RequestBody BoardCustom boardcustom) throws URISyntaxException {
-        log.debug("REST request to update BoardCustom : {}", boardcustom);
+    public ResponseEntity<CustomBoard> updateBoardCustom(@Valid @RequestBody CustomBoard boardcustom) throws URISyntaxException {
+        log.debug("REST request to update CustomBoard : {}", boardcustom);
         if (boardcustom.getId() == null) {
             return createBoardCustom(boardcustom);
         }
-        BoardCustom result = boardcustomRepository.save(boardcustom);
+        CustomBoard result = boardcustomRepository.save(boardcustom);
         boardcustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, boardcustom.getId().toString()))
@@ -94,9 +94,9 @@ public class BoardCustomResource {
      */
     @GetMapping("/boardcustoms")
     @Timed
-    public ResponseEntity<List<BoardCustom>> getAllBoardCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomBoard>> getAllBoardCustoms(Pageable pageable) {
         log.debug("REST request to get a page of BoardCustoms");
-        Page<BoardCustom> page = boardcustomRepository.findAll(pageable);
+        Page<CustomBoard> page = boardcustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/boardcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class BoardCustomResource {
      */
     @GetMapping("/boardcustoms/{id}")
     @Timed
-    public ResponseEntity<BoardCustom> getBoardCustom(@PathVariable String id) {
-        log.debug("REST request to get BoardCustom : {}", id);
-        BoardCustom boardcustom = boardcustomRepository.findOne(id);
+    public ResponseEntity<CustomBoard> getBoardCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomBoard : {}", id);
+        CustomBoard boardcustom = boardcustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(boardcustom));
     }
 
@@ -124,7 +124,7 @@ public class BoardCustomResource {
     @DeleteMapping("/boardcustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteBoardCustom(@PathVariable String id) {
-        log.debug("REST request to delete BoardCustom : {}", id);
+        log.debug("REST request to delete CustomBoard : {}", id);
         boardcustomRepository.delete(id);
         boardcustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class BoardCustomResource {
      */
     @GetMapping("/_search/boardcustoms")
     @Timed
-    public ResponseEntity<List<BoardCustom>> searchBoardCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomBoard>> searchBoardCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of BoardCustoms for query {}", query);
-        Page<BoardCustom> page = boardcustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomBoard> page = boardcustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/boardcustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

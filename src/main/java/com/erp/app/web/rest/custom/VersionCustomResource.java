@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.VersionCustom;
+import com.erp.app.domain.custom.CustomVersion;
 import com.erp.app.repository.custom.VersionCustomRepository;
 import com.erp.app.repository.search.custom.VersionCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class VersionCustomResource {
      */
     @PostMapping("/versioncustoms")
     @Timed
-    public ResponseEntity<VersionCustom> createVersionCustom(@Valid @RequestBody VersionCustom versioncustom) throws URISyntaxException {
-        log.debug("REST request to save VersionCustom : {}", versioncustom);
+    public ResponseEntity<CustomVersion> createVersionCustom(@Valid @RequestBody CustomVersion versioncustom) throws URISyntaxException {
+        log.debug("REST request to save CustomVersion : {}", versioncustom);
         if (versioncustom.getId() != null) {
             throw new BadRequestAlertException("A new versioncustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        VersionCustom result = versioncustomRepository.save(versioncustom);
+        CustomVersion result = versioncustomRepository.save(versioncustom);
         versioncustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/versioncustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class VersionCustomResource {
      */
     @PutMapping("/versioncustoms")
     @Timed
-    public ResponseEntity<VersionCustom> updateVersionCustom(@Valid @RequestBody VersionCustom versioncustom) throws URISyntaxException {
-        log.debug("REST request to update VersionCustom : {}", versioncustom);
+    public ResponseEntity<CustomVersion> updateVersionCustom(@Valid @RequestBody CustomVersion versioncustom) throws URISyntaxException {
+        log.debug("REST request to update CustomVersion : {}", versioncustom);
         if (versioncustom.getId() == null) {
             return createVersionCustom(versioncustom);
         }
-        VersionCustom result = versioncustomRepository.save(versioncustom);
+        CustomVersion result = versioncustomRepository.save(versioncustom);
         versioncustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, versioncustom.getId().toString()))
@@ -94,9 +94,9 @@ public class VersionCustomResource {
      */
     @GetMapping("/versioncustoms")
     @Timed
-    public ResponseEntity<List<VersionCustom>> getAllVersionCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomVersion>> getAllVersionCustoms(Pageable pageable) {
         log.debug("REST request to get a page of VersionCustoms");
-        Page<VersionCustom> page = versioncustomRepository.findAll(pageable);
+        Page<CustomVersion> page = versioncustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/versioncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class VersionCustomResource {
      */
     @GetMapping("/versioncustoms/{id}")
     @Timed
-    public ResponseEntity<VersionCustom> getVersionCustom(@PathVariable String id) {
-        log.debug("REST request to get VersionCustom : {}", id);
-        VersionCustom versioncustom = versioncustomRepository.findOne(id);
+    public ResponseEntity<CustomVersion> getVersionCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomVersion : {}", id);
+        CustomVersion versioncustom = versioncustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(versioncustom));
     }
 
@@ -124,7 +124,7 @@ public class VersionCustomResource {
     @DeleteMapping("/versioncustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteVersionCustom(@PathVariable String id) {
-        log.debug("REST request to delete VersionCustom : {}", id);
+        log.debug("REST request to delete CustomVersion : {}", id);
         versioncustomRepository.delete(id);
         versioncustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class VersionCustomResource {
      */
     @GetMapping("/_search/versioncustoms")
     @Timed
-    public ResponseEntity<List<VersionCustom>> searchVersionCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomVersion>> searchVersionCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of VersionCustoms for query {}", query);
-        Page<VersionCustom> page = versioncustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomVersion> page = versioncustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/versioncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

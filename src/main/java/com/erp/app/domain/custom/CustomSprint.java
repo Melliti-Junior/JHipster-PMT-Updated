@@ -8,7 +8,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class SprintCustom extends Sprint implements Serializable {
+public class CustomSprint extends Sprint implements Serializable {
 
 	/**
 	 *
@@ -17,22 +17,22 @@ public class SprintCustom extends Sprint implements Serializable {
 
     @DBRef
 	@Field("board")
-    private BoardCustom board;
+    private CustomBoard board;
 
-	public SprintCustom(BoardCustom board) {
+	public CustomSprint(CustomBoard board) {
 		super();
 		this.board = board;
     }
 
-	public SprintCustom() {
+	public CustomSprint() {
 		super();
 	}
 
-    public BoardCustom getBoard() {
+    public CustomBoard getBoard() {
         return board;
     }
 
-    public void setBoard(BoardCustom board) {
+    public void setBoard(CustomBoard board) {
         this.board = board;
     }
 }

@@ -1,20 +1,20 @@
 package com.erp.app.domain.custom;
 
-import com.erp.app.domain.Category;
+import com.erp.app.domain.Workflow;
 
 import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class CategoryCustom extends Category implements Serializable {
+public class CustomWorkflow extends Workflow implements Serializable {
 
 	/**
 	 *
 	 */
 	private static final long serialVersionUID = 1L;
 
-    public CategoryCustom() {
-        super();
-    }
+	public CustomWorkflow() {
+		super();
+	}
 
 }

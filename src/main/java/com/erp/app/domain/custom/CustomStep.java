@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 import java.io.Serializable;
 
 @Entity
-public class StepCustom extends Step implements Serializable {
+public class CustomStep extends Step implements Serializable {
 
 	/**
 	 *
@@ -22,29 +22,29 @@ public class StepCustom extends Step implements Serializable {
 
     @DBRef
     @Field("workflow")
-    private WorkflowCustom workflow;
+    private CustomWorkflow workflow;
 
     @DBRef
     @Field("column")
-    private ColumnCustom column;
+    private CustomColumn column;
 
-    public StepCustom(Status status) {
+    public CustomStep(Status status) {
 		super();
 		this.status = status;
     }
 
-    public StepCustom(Status status, WorkflowCustom workflow) {
+    public CustomStep(Status status, CustomWorkflow workflow) {
         this.status = status;
         this.workflow = workflow;
     }
 
-    public StepCustom(Status status, WorkflowCustom workflow, ColumnCustom column) {
+    public CustomStep(Status status, CustomWorkflow workflow, CustomColumn column) {
         this.status = status;
         this.workflow = workflow;
         this.column = column;
     }
 
-    public StepCustom() {
+    public CustomStep() {
 		super();
 	}
 
@@ -56,19 +56,19 @@ public class StepCustom extends Step implements Serializable {
         this.status = status;
     }
 
-    public WorkflowCustom getWorkflow() {
+    public CustomWorkflow getWorkflow() {
         return workflow;
     }
 
-    public void setWorkflow(WorkflowCustom workflow) {
+    public void setWorkflow(CustomWorkflow workflow) {
         this.workflow = workflow;
     }
 
-    public ColumnCustom getColumn() {
+    public CustomColumn getColumn() {
         return column;
     }
 
-    public void setColumn(ColumnCustom column) {
+    public void setColumn(CustomColumn column) {
         this.column = column;
     }
 }

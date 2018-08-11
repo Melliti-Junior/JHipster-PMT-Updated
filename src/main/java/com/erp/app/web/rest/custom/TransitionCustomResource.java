@@ -1,7 +1,7 @@
 package com.erp.app.web.rest.custom;
 
 import com.codahale.metrics.annotation.Timed;
-import com.erp.app.domain.custom.TransitionCustom;
+import com.erp.app.domain.custom.CustomTransition;
 import com.erp.app.repository.custom.TransitionCustomRepository;
 import com.erp.app.repository.search.custom.TransitionCustomSearchRepository;
 import com.erp.app.web.rest.errors.BadRequestAlertException;
@@ -51,12 +51,12 @@ public class TransitionCustomResource {
      */
     @PostMapping("/transitioncustoms")
     @Timed
-    public ResponseEntity<TransitionCustom> createTransitionCustom(@Valid @RequestBody TransitionCustom transitioncustom) throws URISyntaxException {
-        log.debug("REST request to save TransitionCustom : {}", transitioncustom);
+    public ResponseEntity<CustomTransition> createTransitionCustom(@Valid @RequestBody CustomTransition transitioncustom) throws URISyntaxException {
+        log.debug("REST request to save CustomTransition : {}", transitioncustom);
         if (transitioncustom.getId() != null) {
             throw new BadRequestAlertException("A new transitioncustom cannot already have an ID", ENTITY_NAME, "idexists");
         }
-        TransitionCustom result = transitioncustomRepository.save(transitioncustom);
+        CustomTransition result = transitioncustomRepository.save(transitioncustom);
         transitioncustomSearchRepository.save(result);
         return ResponseEntity.created(new URI("/api/custom/transitioncustoms/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
@@ -74,12 +74,12 @@ public class TransitionCustomResource {
      */
     @PutMapping("/transitioncustoms")
     @Timed
-    public ResponseEntity<TransitionCustom> updateTransitionCustom(@Valid @RequestBody TransitionCustom transitioncustom) throws URISyntaxException {
-        log.debug("REST request to update TransitionCustom : {}", transitioncustom);
+    public ResponseEntity<CustomTransition> updateTransitionCustom(@Valid @RequestBody CustomTransition transitioncustom) throws URISyntaxException {
+        log.debug("REST request to update CustomTransition : {}", transitioncustom);
         if (transitioncustom.getId() == null) {
             return createTransitionCustom(transitioncustom);
         }
-        TransitionCustom result = transitioncustomRepository.save(transitioncustom);
+        CustomTransition result = transitioncustomRepository.save(transitioncustom);
         transitioncustomSearchRepository.save(result);
         return ResponseEntity.ok()
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, transitioncustom.getId().toString()))
@@ -94,9 +94,9 @@ public class TransitionCustomResource {
      */
     @GetMapping("/transitioncustoms")
     @Timed
-    public ResponseEntity<List<TransitionCustom>> getAllTransitionCustoms(Pageable pageable) {
+    public ResponseEntity<List<CustomTransition>> getAllTransitionCustoms(Pageable pageable) {
         log.debug("REST request to get a page of TransitionCustoms");
-        Page<TransitionCustom> page = transitioncustomRepository.findAll(pageable);
+        Page<CustomTransition> page = transitioncustomRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(page, "/api/custom/transitioncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }
@@ -109,9 +109,9 @@ public class TransitionCustomResource {
      */
     @GetMapping("/transitioncustoms/{id}")
     @Timed
-    public ResponseEntity<TransitionCustom> getTransitionCustom(@PathVariable String id) {
-        log.debug("REST request to get TransitionCustom : {}", id);
-        TransitionCustom transitioncustom = transitioncustomRepository.findOne(id);
+    public ResponseEntity<CustomTransition> getTransitionCustom(@PathVariable String id) {
+        log.debug("REST request to get CustomTransition : {}", id);
+        CustomTransition transitioncustom = transitioncustomRepository.findOne(id);
         return ResponseUtil.wrapOrNotFound(Optional.ofNullable(transitioncustom));
     }
 
@@ -124,7 +124,7 @@ public class TransitionCustomResource {
     @DeleteMapping("/transitioncustoms/{id}")
     @Timed
     public ResponseEntity<Void> deleteTransitionCustom(@PathVariable String id) {
-        log.debug("REST request to delete TransitionCustom : {}", id);
+        log.debug("REST request to delete CustomTransition : {}", id);
         transitioncustomRepository.delete(id);
         transitioncustomSearchRepository.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id)).build();
@@ -140,9 +140,9 @@ public class TransitionCustomResource {
      */
     @GetMapping("/_search/transitioncustoms")
     @Timed
-    public ResponseEntity<List<TransitionCustom>> searchTransitionCustoms(@RequestParam String query, Pageable pageable) {
+    public ResponseEntity<List<CustomTransition>> searchTransitionCustoms(@RequestParam String query, Pageable pageable) {
         log.debug("REST request to search for a page of TransitionCustoms for query {}", query);
-        Page<TransitionCustom> page = transitioncustomSearchRepository.search(queryStringQuery(query), pageable);
+        Page<CustomTransition> page = transitioncustomSearchRepository.search(queryStringQuery(query), pageable);
         HttpHeaders headers = PaginationUtil.generateSearchPaginationHttpHeaders(query, page, "/api/custom/_search/transitioncustoms");
         return new ResponseEntity<>(page.getContent(), headers, HttpStatus.OK);
     }

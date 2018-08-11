@@ -73,7 +73,7 @@ export class TransitionCustomService {
     }
 
     /**
-     * Convert a returned JSON ObjReturned to TransitionCustom.
+     * Convert a returned JSON ObjReturned to CustomTransition.
      */
     private convertItemFromServer(json: any): TransitionCustom {
 
