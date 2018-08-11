@@ -1,0 +1,280 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>dash-board documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	      <link rel="stylesheet" href="./styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="./" class="navbar-brand">dash-board documentation</a>
+            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+            <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <nav>
+
+    <ul class="list">
+
+        <li class="title">
+            <a href="index.html" data-type="index-link">dash-board documentation</a>
+        </li>
+
+        <li class="divider"></li>
+
+
+        <li class="chapter">
+            <a data-type="chapter-link" href="index.html"><span class="fa fa-home"></span>Getting started</a>
+            <ul class="links">
+                    <li class="link">
+                        <a 
+                            
+                             href="overview.html" 
+                             href="overview.html" 
+                            data-type="chapter-link">
+                            <span class="fa fa-fw fa-th"></span>Overview
+                        </a>
+                    </li>
+                    <li class="link">
+                      <a href="index.html" data-type="chapter-link"><span class="fa fa-file-text-o"></span>README</a>
+                    </li>
+                    <li class="link">
+                        <a href="dependencies.html"
+                            data-type="chapter-link">
+                            <span class="fa fa-fw fa-list"></span>Dependencies
+                        </a>
+                    </li>
+            </ul>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+        <li class="chapter">
+            <a data-type="chapter-link" href="coverage.html"><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
+        </li>
+
+        <li class="divider"></li>
+        <li class="copyright">
+                Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                            <img data-src="images/compodoc-vectorise.svg" class="img-responsive" data-type="compodoc-logo">
+                </a>
+        </li>
+
+    </ul>
+
+</nav>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <nav>
+
+    <ul class="list">
+
+        <li class="title">
+            <a href="index.html" data-type="index-link">dash-board documentation</a>
+        </li>
+
+        <li class="divider"></li>
+
+            <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+
+        <li class="chapter">
+            <a data-type="chapter-link" href="index.html"><span class="fa fa-home"></span>Getting started</a>
+            <ul class="links">
+                    <li class="link">
+                        <a 
+                            
+                             href="overview.html" 
+                             href="overview.html" 
+                            data-type="chapter-link">
+                            <span class="fa fa-fw fa-th"></span>Overview
+                        </a>
+                    </li>
+                    <li class="link">
+                      <a href="index.html" data-type="chapter-link"><span class="fa fa-file-text-o"></span>README</a>
+                    </li>
+                    <li class="link">
+                        <a href="dependencies.html"
+                            data-type="chapter-link">
+                            <span class="fa fa-fw fa-list"></span>Dependencies
+                        </a>
+                    </li>
+            </ul>
+        </li>
+
+
+
+
+
+
+
+
+
+
+
+
+        <li class="chapter">
+            <a data-type="chapter-link" href="coverage.html"><span class="fa fa-fw fa-tasks"></span>Documentation coverage</a>
+        </li>
+
+        <li class="divider"></li>
+        <li class="copyright">
+                Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
+                            <img data-src="images/compodoc-vectorise.svg" class="img-responsive" data-type="compodoc-logo">
+                </a>
+        </li>
+
+    </ul>
+
+</nav>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content getting-started">
+                   <div class="content-data">
+
+<h1 id="dashboard">DashBoard</h1>
+<p>This application was generated using JHipster 4.13.3, you can find documentation and help at <a href="http://www.jhipster.tech/documentation-archive/v4.13.3">http://www.jhipster.tech/documentation-archive/v4.13.3</a>.</p>
+<h2 id="development">Development</h2>
+<p>Before you can build this project, you must install and configure the following dependencies on your machine:</p>
+<ol>
+<li><a href="https://nodejs.org/">Node.js</a>: We use Node to run a development web server and build the project.
+Depending on your system, you can install Node either from source or as a pre-packaged bundle.</li>
+<li><a href="https://yarnpkg.org/">Yarn</a>: We use Yarn to manage Node dependencies.
+Depending on your system, you can install Yarn either from source or as a pre-packaged bundle.</li>
+</ol>
+<p>After installing Node, you should be able to run the following command to install development tools.
+You will only need to run this command when dependencies change in <a href="package.json">package.json</a>.</p>
+<div><pre class="line-numbers"><code class="language-none">yarn install</code></pre></div><p>We use yarn scripts and <a href="https://webpack.github.io/">Webpack</a> as our build system.</p>
+<p>Run the following commands in two separate terminals to create a blissful development experience where your browser
+auto-refreshes when files change on your hard drive.</p>
+<div><pre class="line-numbers"><code class="language-none">./mvnw
+yarn start</code></pre></div><p><a href="https://yarnpkg.org/">Yarn</a> is also used to manage CSS and JavaScript dependencies used in this application. You can upgrade dependencies by
+specifying a newer version in <a href="package.json">package.json</a>. You can also run <code>yarn update</code> and <code>yarn install</code> to manage dependencies.
+Add the <code>help</code> flag on any command to see how you can use it. For example, <code>yarn help update</code>.</p>
+<p>The <code>yarn run</code> command will list all of the scripts available to run for this project.</p>
+<h3 id="service-workers">Service workers</h3>
+<p>Service workers are commented by default, to enable them please uncomment the following code.</p>
+<ul>
+<li>The service worker registering script in index.html</li>
+</ul>
+<div><pre class="line-numbers"><code class="language-html">&lt;script&gt;
+    if (&#39;serviceWorker&#39; in navigator) {
+        navigator.serviceWorker
+        .register(&#39;./sw.js&#39;)
+        .then(function() { console.log(&#39;Service Worker Registered&#39;); });
+    }
+&lt;/script&gt;</code></pre></div><p>Note: workbox creates the respective service worker and dynamically generate the <code>sw.js</code></p>
+<h3 id="managing-dependencies">Managing dependencies</h3>
+<p>For example, to add <a href="http://leafletjs.com/">Leaflet</a> library as a runtime dependency of your application, you would run following command:</p>
+<div><pre class="line-numbers"><code class="language-none">yarn add --exact leaflet</code></pre></div><p>To benefit from TypeScript type definitions from <a href="http://definitelytyped.org/">DefinitelyTyped</a> repository in development, you would run following command:</p>
+<div><pre class="line-numbers"><code class="language-none">yarn add --dev --exact &#64;types/leaflet</code></pre></div><p>Then you would import the JS and CSS files specified in library&#39;s installation instructions so that <a href="https://webpack.github.io/">Webpack</a> knows about them:
+Edit <a href="src/main/webapp/app/vendor.ts">src/main/webapp/app/vendor.ts</a> file:</p>
+<div><pre class="line-numbers"><code class="language-none">import &#39;leaflet/dist/leaflet.js&#39;;</code></pre></div><p>Edit <a href="src/main/webapp/content/css/vendor.css">src/main/webapp/content/css/vendor.css</a> file:</p>
+<div><pre class="line-numbers"><code class="language-none">&#64;import &#39;~leaflet/dist/leaflet.css&#39;;</code></pre></div><p>Note: there are still few other things remaining to do for Leaflet that we won&#39;t detail here.</p>
+<p>For further instructions on how to develop with JHipster, have a look at <a href="http://www.jhipster.tech/documentation-archive/v4.13.3/development/">Using JHipster in development</a>.</p>
+<h3 id="using-angular-cli">Using angular-cli</h3>
+<p>You can also use <a href="https://cli.angular.io/">Angular CLI</a> to generate some custom client code.</p>
+<p>For example, the following command:</p>
+<div><pre class="line-numbers"><code class="language-none">ng generate component my-component</code></pre></div><p>will generate few files:</p>
+<div><pre class="line-numbers"><code class="language-none">create src/main/webapp/app/my-component/my-component.component.html
+create src/main/webapp/app/my-component/my-component.component.ts
+update src/main/webapp/app/app.module.ts</code></pre></div><h2 id="building-for-production">Building for production</h2>
+<p>To optimize the DashBoard application for production, run:</p>
+<div><pre class="line-numbers"><code class="language-none">./mvnw -Pprod clean package</code></pre></div><p>This will concatenate and minify the client CSS and JavaScript files. It will also modify <code>index.html</code> so it references these new files.
+To ensure everything worked, run:</p>
+<div><pre class="line-numbers"><code class="language-none">java -jar target/*.war</code></pre></div><p>Then navigate to <a href="http://localhost:8080">http://localhost:8080</a> in your browser.</p>
+<p>Refer to <a href="http://www.jhipster.tech/documentation-archive/v4.13.3/production/">Using JHipster in production</a> for more details.</p>
+<h2 id="testing">Testing</h2>
+<p>To launch your application&#39;s tests, run:</p>
+<div><pre class="line-numbers"><code class="language-none">./mvnw clean test</code></pre></div><h3 id="client-tests">Client tests</h3>
+<p>Unit tests are run by <a href="http://karma-runner.github.io/">Karma</a> and written with <a href="http://jasmine.github.io/2.0/introduction.html">Jasmine</a>. They&#39;re located in <a href="src/test/javascript/">src/test/javascript/</a> and can be run with:</p>
+<div><pre class="line-numbers"><code class="language-none">yarn test</code></pre></div><p>For more information, refer to the <a href="http://www.jhipster.tech/documentation-archive/v4.13.3/running-tests/">Running tests page</a>.</p>
+<h2 id="using-docker-to-simplify-development-optional-">Using Docker to simplify development (optional)</h2>
+<p>You can use Docker to improve your JHipster development experience. A number of docker-compose configuration are available in the <a href="src/main/docker">src/main/docker</a> folder to launch required third party services.</p>
+<p>For example, to start a mongodb database in a docker container, run:</p>
+<div><pre class="line-numbers"><code class="language-none">docker-compose -f src/main/docker/mongodb.yml up -d</code></pre></div><p>To stop it and remove the container, run:</p>
+<div><pre class="line-numbers"><code class="language-none">docker-compose -f src/main/docker/mongodb.yml down</code></pre></div><p>You can also fully dockerize your application and all the services that it depends on.
+To achieve this, first build a docker image of your app by running:</p>
+<div><pre class="line-numbers"><code class="language-none">./mvnw verify -Pprod dockerfile:build</code></pre></div><p>Then run:</p>
+<div><pre class="line-numbers"><code class="language-none">docker-compose -f src/main/docker/app.yml up -d</code></pre></div><p>For more information refer to <a href="http://www.jhipster.tech/documentation-archive/v4.13.3/docker-compose">Using Docker and Docker-Compose</a>, this page also contains information on the docker-compose sub-generator (<code>jhipster docker-compose</code>), which is able to generate docker configurations for one or several JHipster applications.</p>
+<h2 id="continuous-integration-optional-">Continuous Integration (optional)</h2>
+<p>To configure CI for your project, run the ci-cd sub-generator (<code>jhipster ci-cd</code>), this will let you generate configuration files for a number of Continuous Integration systems. Consult the <a href="http://www.jhipster.tech/documentation-archive/v4.13.3/setting-up-ci/">Setting up Continuous Integration</a> page for more information.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+       <script src="./js/libs/zepto.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+        <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'getting-started';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+        </script>
+
+       <script src="./js/search/search.js"></script>
+       <script src="./js/search/lunr.min.js"></script>
+       <script src="./js/search/search-lunr.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+       <script src="./js/search/search_index.js"></script>
+
+
+    </body>
+</html>
