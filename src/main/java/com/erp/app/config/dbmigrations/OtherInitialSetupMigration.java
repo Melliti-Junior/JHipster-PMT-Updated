@@ -23,7 +23,7 @@ public class OtherInitialSetupMigration {
     @ChangeSet(order = "04", author = "initiator", id = "04-addTypes")
     public void addTypes(MongoTemplate mongoTemplate) {
         IssueType bug = new IssueType();
-        bug.setId("type-1");
+        bug.setId("type001");
         bug.setCode("BUG");
         bug.setName("Bug");
         bug.setIcon("https://image.ibb.co/hnFfvS/Bug.png");
@@ -31,7 +31,7 @@ public class OtherInitialSetupMigration {
         mongoTemplate.save(bug);
 
         IssueType feature = new IssueType();
-        feature.setId("type-2");
+        feature.setId("type002");
         feature.setCode("FTR");
         feature.setName("Feature");
         feature.setIcon("https://image.ibb.co/g5V29n/Feature.png");
@@ -39,7 +39,7 @@ public class OtherInitialSetupMigration {
         mongoTemplate.save(feature);
 
         IssueType improvement = new IssueType();
-        improvement.setId("type-3");
+        improvement.setId("type003");
         improvement.setCode("IMPV");
         improvement.setName("Improvement");
         improvement.setIcon("https://image.ibb.co/bw5DFS/Improvement.png");
@@ -47,7 +47,7 @@ public class OtherInitialSetupMigration {
         mongoTemplate.save(improvement);
 
         IssueType story = new IssueType();
-        story.setId("type-4");
+        story.setId("type004");
         story.setCode("STR");
         story.setName("Story");
         story.setIcon("https://image.ibb.co/jm0fvS/Story.png");
@@ -55,7 +55,7 @@ public class OtherInitialSetupMigration {
         mongoTemplate.save(story);
 
         IssueType sync = new IssueType();
-        sync.setId("type-5");
+        sync.setId("type005");
         sync.setCode("SYNC");
         sync.setName("Synchronization");
         sync.setIcon("https://image.ibb.co/cuxSaS/Synchronization.png");
@@ -63,7 +63,7 @@ public class OtherInitialSetupMigration {
         mongoTemplate.save(sync);
 
         IssueType task = new IssueType();
-        task.setId("type-6");
+        task.setId("type006");
         task.setCode("TSK");
         task.setName("Task");
         task.setIcon("https://image.ibb.co/eyB9pn/Task.png");
@@ -74,21 +74,21 @@ public class OtherInitialSetupMigration {
     @ChangeSet(order = "05", author = "initiator", id = "05-addPriorities")
     public void addPriorities(MongoTemplate mongoTemplate) {
         IssuePriority high = new IssuePriority();
-        high.setId("priority-1");
+        high.setId("priority001");
         high.setCode("1");
         high.setName("High");
         high.setColor("#be3232");
         mongoTemplate.save(high);
 
         IssuePriority medium = new IssuePriority();
-        medium.setId("priority-2");
+        medium.setId("priority002");
         medium.setCode("2");
         medium.setName("Medium");
         medium.setColor("#bc7a21");
         mongoTemplate.save(medium);
 
         IssuePriority low = new IssuePriority();
-        low.setId("priority-3");
+        low.setId("priority003");
         low.setCode("3");
         low.setName("Low");
         low.setColor("#538e20");
@@ -98,21 +98,21 @@ public class OtherInitialSetupMigration {
     @ChangeSet(order = "06", author = "initiator", id = "06-addStatusCategory")
     public void addStatusCategory(MongoTemplate mongoTemplate) {
         Category todo = new Category();
-        todo.setId("category-1");
+        todo.setId("category001");
         todo.setCode("NEW");
         todo.setName("To Do");
         todo.setColor("#da3f0e");
         mongoTemplate.save(todo);
 
         Category doing = new Category();
-        doing.setId("category-2");
+        doing.setId("category002");
         doing.setCode("DOING");
         doing.setName("Doing");
         doing.setColor("#dc9a19");
         mongoTemplate.save(doing);
 
         Category done = new Category();
-        done.setId("category-3");
+        done.setId("category003");
         done.setCode("DONE");
         done.setName("Done");
         done.setColor("#488a08");
@@ -122,35 +122,35 @@ public class OtherInitialSetupMigration {
     @ChangeSet(order = "07", author = "initiator", id = "07-addResolution")
     public void addResolution(MongoTemplate mongoTemplate) {
         Resolution fixed = new Resolution();
-        fixed.setId("resolution-1");
+        fixed.setId("resolution001");
         fixed.setCode("FXD");
         fixed.setName("Fixed");
         fixed.setDescription("The task has been completed, or a response to the support request has been sent.");
         mongoTemplate.save(fixed);
 
         Resolution notfixed = new Resolution();
-        notfixed.setId("resolution-2");
+        notfixed.setId("resolution002");
         notfixed.setCode("NTFX");
         notfixed.setName("Won't Fix");
         notfixed.setDescription("The issue described is one that will never be fixed.");
         mongoTemplate.save(notfixed);
 
         Resolution invalid = new Resolution();
-        invalid.setId("resolution-3");
+        invalid.setId("resolution003");
         invalid.setCode("INVLD");
         invalid.setName("Invalid");
         invalid.setDescription("The issue is not completely described, or is not a valid bug or request.");
         mongoTemplate.save(invalid);
 
         Resolution rejected = new Resolution();
-        rejected.setId("resolution-4");
+        rejected.setId("resolution004");
         rejected.setCode("RJCT");
         rejected.setName("Rejected");
         rejected.setDescription("The request will be rejected.");
         mongoTemplate.save(rejected);
 
         Resolution resolved = new Resolution();
-        resolved.setId("resolution-5");
+        resolved.setId("resolution005");
         resolved.setCode("RSLVD");
         resolved.setName("Resolved");
         resolved.setDescription("The request has been completed and put into action.");
@@ -160,7 +160,7 @@ public class OtherInitialSetupMigration {
     @ChangeSet(order = "08", author = "initiator", id = "08-addWorkflow")
     public void addWorkflow(MongoTemplate mongoTemplate) {
         CustomWorkflow simplified = new CustomWorkflow();
-        simplified.setId("workflow-1");
+        simplified.setId("workflow001");
         simplified.setCode("SMPL");
         simplified.setName("Simplified Workflow");
         simplified.setDescription("Can be edited via the board configuration");
