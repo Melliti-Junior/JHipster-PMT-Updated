@@ -106,7 +106,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                 {
                     label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
                         this.Backlog = false; this.ActiveSprint = true;
-                        this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                        this.LookForRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                     }},
             ];
 
@@ -114,7 +114,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                 {
                     label: 'ActiveSprint', icon: 'fa-columns', command: (onclick) => {
                         this.Backlog = false; this.ActiveSprint = true;
-                        this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                        this.LookForRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                     }},
             ];
 
@@ -122,7 +122,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                 {
                     label: 'KanbanBoard', icon: 'fa-columns', command: (onclick) => {
                         this.KanbanBoard = true;
-                        this.searchRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
+                        this.LookForRelatedColumns(); this.lookForRelatedTransitions(); this.lookForRelatedSteps();
                     }},
             ];
 
@@ -138,7 +138,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                 }
             }
             if (this.columnCustoms) {
-                this.searchRelatedColumns();
+                this.LookForRelatedColumns();
             }
 
             if (this.transitioncustoms) {
@@ -157,12 +157,47 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
         setTimeout(() => {
             this.getBacklogIssues();
             this.getSprintIssues();
-            this.searchRelatedColumns();
+            this.LookForRelatedColumns();
             this.lookForRelatedTransitions();
             this.lookForRelatedSteps();
             this.divClick.nativeElement.click();
         }, 500);
 
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+        this.eventManager.destroy(this.eventSubscriber);
+    }
+
+    getAllIssues() {
+        this.issuecustomSce.getIssueCustoms()
+            .then((issueCustoms) => this.issueCustoms = issueCustoms );
+    }
+
+    getAllSprints() {
+        this.sprintcustomSce.getSprintCustoms()
+            .then((sprintCustoms) => this.sprintCustoms = sprintCustoms );
+    }
+
+    getAllColumns() {
+        this.columncustomSce.getColumnCustoms()
+            .then((columnCustoms) => this.columnCustoms = columnCustoms );
+    }
+
+    getAllStatuses() {
+        this.statusService.getStatusCustoms()
+            .then((statuscustoms) => this.statuscustoms = statuscustoms);
+    }
+
+    getAllTransitions() {
+        this.transitionService.getTransitionCustoms()
+            .then((transitioncustoms) => this.transitioncustoms = transitioncustoms);
+    }
+
+    getAllSteps() {
+        this.stepService.getStepCustoms()
+            .then((stepcustoms) => this.stepcustoms = stepcustoms);
     }
 
     load(id) {
@@ -174,16 +209,11 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
         window.history.back();
     }
 
-    ngOnDestroy() {
-        this.subscription.unsubscribe();
-        this.eventManager.destroy(this.eventSubscriber);
-    }
-
     transition() {
         this.getAllSprints();
         this.getBacklogIssues();
         this.getSprintIssues();
-        this.searchRelatedColumns();
+        this.LookForRelatedColumns();
         this.lookForRelatedTransitions();
         this.lookForRelatedSteps();
         this.activeSprint.isActive = false;
@@ -233,7 +263,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
 
     }
 
-    searchRelatedColumns() {
+    LookForRelatedColumns() {
         this.getBacklogIssues();
         this.getSprintIssues();
         this.relatedColumns = new Array<ColumnCustom>();
@@ -250,36 +280,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
             }
         }
         console.log(this.relatedColumns.length)
-    }
-
-    getAllIssues() {
-        this.issuecustomSce.getIssueCustoms()
-            .then((issueCustoms) => this.issueCustoms = issueCustoms );
-    }
-
-    getAllSprints() {
-        this.sprintcustomSce.getSprintCustoms()
-            .then((sprintCustoms) => this.sprintCustoms = sprintCustoms );
-    }
-
-    getAllColumns() {
-        this.columncustomSce.getColumnCustoms()
-            .then((columnCustoms) => this.columnCustoms = columnCustoms );
-    }
-
-    getAllStatuses() {
-        this.statusService.getStatusCustoms()
-            .then((statuscustoms) => this.statuscustoms = statuscustoms);
-    }
-
-    getAllTransitions() {
-        this.transitionService.getTransitionCustoms()
-            .then((transitioncustoms) => this.transitioncustoms = transitioncustoms);
-    }
-
-    getAllSteps() {
-        this.stepService.getStepCustoms()
-            .then((stepcustoms) => this.stepcustoms = stepcustoms);
     }
 
     lookForRelatedTransitions() {
@@ -461,10 +461,6 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
 
     private onSaveSuccessIssues(result: IssueCustom) {
         this.eventManager.broadcast({ name: 'issuecustomsListModification', content: 'OK'});
-        this.isSaving = false;
-    }
-
-    private onSaveError() {
         this.isSaving = false;
     }
 
@@ -787,12 +783,17 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
         ev.preventDefault();
         // tslint:disable-next-line:prefer-const
         let data = ev.dataTransfer.getData('text');
+
+        console.error(data);
+
         ev.target.appendChild(document.getElementById(data));
 
         let currColDivElt = ev.target.parentElement;
 
         console.log('col');
         let currCol = this.getCurrentColumnByID(currColDivElt.id);
+
+        console.error(currCol.id)
 
         let currentStep: StepCustom;
         for (let step of this.nextPossibleSteps) {
@@ -835,6 +836,18 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
             }
         }
 
+        let count = 0;
+        for (let issue of this.issueCustoms) {
+            for (let step of this.relatedSteps) {
+                if (issue.status.id === step.status.id && step.column.id === currCol.id) {
+                    count = count + 1;
+                }
+            }
+        }
+        console.error(count + " count issues per col")
     }
 
+    private onSaveError() {
+        this.isSaving = false;
+    }
 }

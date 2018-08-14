@@ -60,7 +60,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         this.loadAttributes();
 
         setTimeout(() => {
-            this.searchRelatedColumns();
+            this.lookForRelatedColumns();
             this.lookForRelatedTransitions();
             this.lookForRelatedSteps();
         }, 150);
@@ -96,7 +96,7 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         }
     }
 
-    searchRelatedColumns() {
+    lookForRelatedColumns() {
         this.relatedColumns = new Array<ColumnCustom>();
         for (let col of this.allColumns) {
             if (col.board) {
@@ -114,14 +114,30 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
     }
 
     loadAttributes() {
-        this.columncustomService.getColumnCustoms()
-            .then((allColumns) => this.allColumns = allColumns );
-        this.statusService.getStatusCustoms()
-            .then((allStatuses) => this.allStatuses = allStatuses);
-        this.stepService.getStepCustoms()
-            .then((stepcustoms) => this.stepcustoms = stepcustoms);
+        this.getAllColumns();
+        this.getAllStatuses();
+        this.getAllSteps();
+        this.getAllTransitions();
+    }
+
+    private getAllTransitions() {
         this.transitionService.getTransitionCustoms()
             .then((transitioncustoms) => this.transitioncustoms = transitioncustoms);
+    }
+
+    private getAllSteps() {
+        this.stepService.getStepCustoms()
+            .then((stepcustoms) => this.stepcustoms = stepcustoms);
+    }
+
+    private getAllStatuses() {
+        this.statusService.getStatusCustoms()
+            .then((allStatuses) => this.allStatuses = allStatuses);
+    }
+
+    private getAllColumns() {
+        this.columncustomService.getColumnCustoms()
+            .then((allColumns) => this.allColumns = allColumns);
     }
 
     lookForRelatedTransitions() {
@@ -223,13 +239,13 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
 
         if (ev.target.id === 'unmappedStatus') {
             console.log('unmapped')
-            this.unmapStep(comingStep);
+            this.mapStepToColumn(comingStep, null);
             document.getElementById(data).hidden = true;
         } else {
             let currentColumn = this.findCurrentColumn(ev);
             console.log(' oppaa  coll ' + currentColumn.name)
 
-            this.mapStepToCol(comingStep, currentColumn);
+            this.mapStepToColumn(comingStep, currentColumn);
         }
     }
 
@@ -263,25 +279,18 @@ export class BoardCustomConfigurationComponent implements OnInit, OnDestroy {
         return draggedStep;
     }
 
-    mapStepToCol(step: StepCustom, col: ColumnCustom) {
-        console.log(step.name)
+    mapStepToColumn(step: StepCustom, col: ColumnCustom) {
         step.column = col;
 
         this.isSaving = true;
         this.subscribeToSaveResponseStep(
             this.stepService.update(step));
 
-        console.log('update ' + step.name + ' with col ' + step.column.name);
-    }
-
-    unmapStep(step: StepCustom) {
-        step.column = null;
-
-        this.isSaving = true;
-        this.subscribeToSaveResponseStep(
-            this.stepService.update(step));
-
-        console.log('update ' + step.name + ' with col ' + typeof step.column);
+        if (col !== null) {
+            console.log('update ' + step.name + ' with col ' + step.column.name);
+        } else {
+            console.log('update ' + step.name + ' with col ' + typeof step.column);
+        }
     }
 
     getStepPerColumn(col: ColumnCustom): StepCustom[] {
