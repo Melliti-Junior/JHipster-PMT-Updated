@@ -21,13 +21,6 @@
                 </option>
             </select>
         </div>
-
-        <div *ngIf="columncustom.id" class="form-group">
-            <label class="form-control-label" for="field_board">Board</label>
-            <input type="text" class="form-control" name="board" id="field_board_edit"
-                   [(ngModel)]="columncustom.board.name" readonly/>
-        </div>
-
         <div class="form-group">
             <label class="form-control-label" for="field_code">Code</label>
             <input type="text" class="form-control" name="code" id="field_code"

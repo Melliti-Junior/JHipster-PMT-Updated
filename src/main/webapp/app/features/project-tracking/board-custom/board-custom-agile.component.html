@@ -294,7 +294,7 @@
                                         <div class="colMax" *ngIf="colKanban.max"> Max : {{colKanban.max}} </div>
                                     </div>
                                 </div>
-                                <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)">
+                                <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)" (mouseenter)="verifyColumnCapacity($event)">
 
                                     <div class="status" *ngFor="let step of relatedSteps">
 

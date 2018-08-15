@@ -313,7 +313,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
             if ((this.relatedSteps[index].status.id === status.id)) {
                 found = true;
                 targetStep = this.relatedSteps[index];
-                console.log('target ' + JSON.stringify(targetStep))
+                // console.log('target ' + JSON.stringify(targetStep))
             } else {
                 index = index + 1;
             }
@@ -571,6 +571,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
     dragStartColBoard(ev) {
         ev.dataTransfer.setData('text', ev.target.id);
 
+        console.error('start ' + ev.target.id);
+
         for (let issue of this.issueCustoms) {
             if (issue.id === ev.target.id) {
 
@@ -631,7 +633,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                     }
                 }
             }
-
+/*
             let countIssues = 0;
             for (let iss of this.relatedIssuesPerBoard) {
                 if (iss.status) {
@@ -658,8 +660,8 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                     parent.style.backgroundColor = '#f5f5f5'
                 }
             }
+*/
         }
-
         parent.style.border = '1px solid #888888';
     }
 
@@ -844,7 +846,50 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
                 }
             }
         }
-        console.error(count + " count issues per col")
+        console.error(count + " count issues per col");
+
+        if (currCol.min && count < currCol.min) {
+            console.log('Capacity shortfall by ' + (currCol.min - count) + ' cards')
+            ev.target.style.backgroundColor = 'yellow'
+        } else {
+            if (currCol.max && count > currCol.max) {
+                console.log('Capacity exceeded by ' + (count - currCol.max) + ' cards')
+                ev.target.style.backgroundColor = 'red'
+            } else {
+                ev.target.style.backgroundColor = '#f5f5f5'
+            }
+        }
+    }
+
+    verifyColumnCapacity(ev) {
+
+        let currColDivElt = ev.target.parentElement;
+        let currCol = this.getCurrentColumnByID(currColDivElt.id)
+
+        console.log(currColDivElt);
+        console.log(currCol.id);
+
+        let count = 0;
+        for (let issue of this.issueCustoms) {
+            for (let step of this.relatedSteps) {
+                if (issue.status.id === step.status.id && step.column.id === currCol.id) {
+                    count = count + 1;
+                }
+            }
+        }
+        console.error(count + " count issues per col");
+
+        if (currCol.min && count < currCol.min) {
+            console.log('Capacity shortfall by ' + (currCol.min - count) + ' cards')
+            ev.target.style.backgroundColor = 'yellow'
+        } else {
+            if (currCol.max && count > currCol.max) {
+                console.log('Capacity exceeded by ' + (count - currCol.max) + ' cards')
+                ev.target.style.backgroundColor = 'red'
+            } else {
+                ev.target.style.backgroundColor = '#f5f5f5'
+            }
+        }
     }
 
     private onSaveError() {

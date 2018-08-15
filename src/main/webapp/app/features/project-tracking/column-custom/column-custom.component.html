@@ -61,10 +61,10 @@
                 <!--<td><a [routerLink]="['../columncustoms', column.id ]">{{column.code}}</a></td>-->
                 <td style="font-weight: bold">{{column.code}}</td>
                 <td>{{column.name}}</td>
-                <td *ngIf="column.board.type.toLocaleUpperCase() === 'KANBAN'">{{column.min}}</td>
-                <td *ngIf="column.board.type.toLocaleUpperCase() === 'SCRUM'"><span style="font-weight: bold; color: #888888"> No Min for Scrum </span></td>
-                <td *ngIf="column.board.type.toLocaleUpperCase() === 'KANBAN'">{{column.max}}</td>
-                <td *ngIf="column.board.type.toLocaleUpperCase() === 'SCRUM'"><span style="font-weight: bold; color: #888888"> No Max for Scrum </span></td>
+                <td *ngIf="column.board && column.board.type.toLocaleUpperCase() === 'KANBAN'">{{column.min}}</td>
+                <td *ngIf="column.board && column.board.type.toLocaleUpperCase() === 'SCRUM'"><span style="font-weight: bold; color: #888888"> No Min for Scrum </span></td>
+                <td *ngIf="column.board && column.board.type.toLocaleUpperCase() === 'KANBAN'">{{column.max}}</td>
+                <td *ngIf="column.board && column.board.type.toLocaleUpperCase() === 'SCRUM'"><span style="font-weight: bold; color: #888888"> No Max for Scrum </span></td>
                 <!--<td>{{column.order}}</td>-->
                 <td *ngIf="column.board">{{column.board.name}}</td>
                 <td *ngIf="!column.board">&nbsp;</td>
