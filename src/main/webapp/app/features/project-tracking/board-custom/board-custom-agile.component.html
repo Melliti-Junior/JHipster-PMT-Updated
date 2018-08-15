@@ -290,8 +290,8 @@
                                     <div class="colInfo">
                                         <div class="colName"> {{colKanban.name}} </div>
 
-                                        <div class="colMin" *ngIf="colKanban.min"> Min : {{colKanban.min}} </div>
-                                        <div class="colMax" *ngIf="colKanban.max"> Max : {{colKanban.max}} </div>
+                                        <div class="colMin" *ngIf="colKanban.board.type.toLowerCase() === 'kanban' && colKanban.min"> Min : {{colKanban.min}} </div>
+                                        <div class="colMax" *ngIf="colKanban.board.type.toLowerCase() === 'kanban' && colKanban.max"> Max : {{colKanban.max}} </div>
                                     </div>
                                 </div>
                                 <div class="panel-body-active column-content-active" id="columnkandroppable" (dragover)="allowDropColBoard($event)" (drop)="dropColBoard($event)" (dragleave)="dragleaveColBoard($event)" (mouseenter)="verifyColumnCapacity($event)">

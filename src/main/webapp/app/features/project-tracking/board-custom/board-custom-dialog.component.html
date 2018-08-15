@@ -13,6 +13,22 @@
                    [(ngModel)]="boardcustom.id" readonly />
         </div>
 
+        <!--
+        <div ng-if="">
+            <div *ngIf="boardcustom.project" class="form-group">
+              <label class="form-control-label" for="field_project">Project</label>
+              <select class="form-control" name="project" id="field_project_specified" [(ngModel)]="boardcustom.project.name" (change) = "findProject();">
+                <option  *ngFor="let project of projects" [value]="project.name">{{project.name}}</option>
+              </select>
+            </div>
+            <div *ngIf="!boardcustom.project" class="form-group">
+                <label class="form-control-label" for="field_project">Project</label>
+                <select class="form-control" name="project" id="field_project" [(ngModel)]="projectname" (change) = "findProject();">
+                    <option  *ngFor="let project of projects" [value]="project.name">{{project.name}}</option>
+                </select>
+            </div>
+        </div>
+-->
         <div ng-if="">
             <div class="form-group">
               <label class="form-control-label" for="field_project">Project</label>

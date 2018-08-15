@@ -874,6 +874,7 @@ export class BoardCustomAgileComponent implements OnInit, OnDestroy {
             for (let step of this.relatedSteps) {
                 if (issue.status.id === step.status.id && step.column.id === currCol.id) {
                     count = count + 1;
+                    console.error(issue.summary)
                 }
             }
         }

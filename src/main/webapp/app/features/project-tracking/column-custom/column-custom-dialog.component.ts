@@ -172,9 +172,6 @@ export class ColumnCustomPopupComponent implements OnInit, OnDestroy {
                     .open(ColumnCustomDialogComponent as Component);
             }
         });
-
-        console.log(this.boardParentName)
-
     }
 
     ngOnDestroy() {
